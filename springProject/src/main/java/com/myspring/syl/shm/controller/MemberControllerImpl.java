@@ -24,8 +24,6 @@ public class MemberControllerImpl {
 	public ModelAndView listMembers() {
 		ModelAndView mav = new ModelAndView();
 		
-		System.out.println("deleting Class Test");
-		
 		List<MemberDTO> membersList = memberService.getMemberList();
 		mav.addObject("memList", membersList);
 		mav.setViewName("/shm/adminpage");
