@@ -23,6 +23,7 @@ public class MemberControllerImpl {
 					method = RequestMethod.GET)
 	public ModelAndView listMembers() {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("git test 2 accounts");
 		
 		List<MemberDTO> membersList = memberService.getMemberList();
 		mav.addObject("memList", membersList);
