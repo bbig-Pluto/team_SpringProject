@@ -24,7 +24,8 @@ public class MemberControllerImpl {
 	public ModelAndView listMembers() {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("git test 2 accounts");
-		
+		TestClass test = new TestClass();
+		test.sysoutTest();
 		List<MemberDTO> membersList = memberService.getMemberList();
 		mav.addObject("memList", membersList);
 		mav.setViewName("/shm/adminpage");
