@@ -23,5 +23,5 @@
 		<typeAlias type="com.myspring.syl.lhj.dto.ExerciseDTO" alias="exerciseDTO"></typeAlias>
 		<typeAlias type="com.myspring.syl.lhj.dto.DietDTO" alias="dietDTO"></typeAlias>
 	</typeAliases>
-
+	
 </configuration>

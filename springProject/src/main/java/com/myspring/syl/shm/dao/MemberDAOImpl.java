@@ -28,7 +28,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO checkToLogin(String signin_id, String signin_pwd) {
 		
 		MemberDTO dto = new MemberDTO();
-//		MemberDTO loginCheckResult = new MemberDTO();
 		dto.setId(signin_id);
 		dto.setPwd(signin_pwd);
 		

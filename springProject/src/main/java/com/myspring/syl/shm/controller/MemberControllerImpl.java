@@ -56,31 +56,23 @@ public class MemberControllerImpl {
 		
 		logOnSession = request.getSession();
 		
+		// 최초 세팅은 guest로 강제
 		String logOnWhetherForSession = "guest";
 		setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
 		
 		// 관리자 로그인
 		if(memberDTO.getLoginWhether() == 1) {
-			System.out.println("admin login, id : " + memberDTO.getId());
-			System.out.println("admin login, memberNum : " + memberDTO.getMemberNum());
-			logOnWhetherForSession = "member";
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "redirect:/member/memberslist.do";
 		// 일반회원 로그인
 		} else if (memberDTO.getLoginWhether() == 0) {
-			System.out.println("Nomal member login, id : " + memberDTO.getId());
-			logOnWhetherForSession = "member";
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "/sjs/calendarM";
 		// 로그인 실패.
 		} else if (memberDTO.getLoginWhether() == -1) {
-			System.out.println("login fail");
-			logOnWhetherForSession = "guest";
 			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "/shm/loginfail";
 		} else {
-			System.out.println("login fail else route");
-			logOnWhetherForSession = "guest";
 			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "/shm/loginfail";
 		}

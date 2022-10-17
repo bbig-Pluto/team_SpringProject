@@ -2,9 +2,6 @@ package com.myspring.syl.shm.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,27 +21,27 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDTO getLoginResult(String signin_id, String signin_pwd) {
-		
+
 		MemberDTO dto = new MemberDTO();
-		dto = memberDAO.checkToLogin(signin_id, signin_pwd);
-		
-		// 로그인 성공, 실패 여부부터 분기
-		if ( (dto.getId() != null) || (dto.getId().equals("")) ) {
+
+		try {
+
+			dto = memberDAO.checkToLogin(signin_id, signin_pwd);
+
 			// 로그인 성공(관리자)
-			if (Integer.parseInt(dto.getMemberNum()) >= 900001 
-					&& dto.getMemberClass() >= 1) {
+			if (Integer.parseInt(dto.getMemberNum()) >= 900001 && dto.getMemberClass() >= 1) {
 				dto.setLoginWhether(1);
 
 			// 로그인 성공(일반회원)
-			} else if (Integer.parseInt(dto.getMemberNum()) < 900001 
-					&& dto.getMemberClass() == 0) {
+			} else if (Integer.parseInt(dto.getMemberNum()) < 900001 && dto.getMemberClass() == 0) {
 				dto.setLoginWhether(0);
 			}
-		// 로그인 실패
-		} else {
+
+		} catch (NullPointerException e) {
+			// 쿼리 조회 결과 없음( = 로그인 실패)
+			dto = new MemberDTO();
 			dto.setLoginWhether(-1);
 		}
-
 		return dto;
 	}
 
