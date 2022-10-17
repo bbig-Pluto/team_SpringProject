@@ -32,7 +32,8 @@ public class MemberControllerImpl {
 	
 	@RequestMapping(value = "/member/memberslist.do",
 					method = RequestMethod.GET)
-	public ModelAndView listMembers() {
+	public ModelAndView listMembers(HttpSession logOnSession) {
+		
 		ModelAndView mav = new ModelAndView();
 		List<MemberDTO> membersList = memberService.getMemberList();
 		mav.addObject("memList", membersList);
@@ -56,49 +57,49 @@ public class MemberControllerImpl {
 		logOnSession = request.getSession();
 		
 		String logOnWhetherForSession = "guest";
-		logOnSession.setAttribute("isLogon", logOnWhetherForSession);
-		logOnSession.setAttribute("logOn.id", null);
-		logOnSession.setAttribute("logOn.memberNum", null);
-		logOnSession.setAttribute("logOn.memberClass", null);
+		setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
 		
 		// 관리자 로그인
 		if(memberDTO.getLoginWhether() == 1) {
 			System.out.println("admin login, id : " + memberDTO.getId());
 			System.out.println("admin login, memberNum : " + memberDTO.getMemberNum());
 			logOnWhetherForSession = "member";
-			logOnSession.setAttribute("isLogon", logOnWhetherForSession);
-			logOnSession.setAttribute("logOn.id", memberDTO.getId());
-			logOnSession.setAttribute("logOn.memberNum", memberDTO.getMemberNum());
-			logOnSession.setAttribute("logOn.memberClass", memberDTO.getMemberClass());
-			listMembers();
+			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
+			return "redirect:/member/memberslist.do";
 		// 일반회원 로그인
 		} else if (memberDTO.getLoginWhether() == 0) {
 			System.out.println("Nomal member login, id : " + memberDTO.getId());
 			logOnWhetherForSession = "member";
-			logOnSession.setAttribute("isLogon", logOnWhetherForSession);
-			logOnSession.setAttribute("logOn.id", memberDTO.getId());
-			logOnSession.setAttribute("logOn.memberNum", memberDTO.getMemberNum());
-			logOnSession.setAttribute("logOn.memberClass", memberDTO.getMemberClass());
+			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "/sjs/calendarM";
 		// 로그인 실패
 		} else if (memberDTO.getLoginWhether() == -1) {
 			System.out.println("login fail");
-			logOnSession.setAttribute("isLogon", logOnWhetherForSession);
-			logOnSession.setAttribute("logOn.id", null);
-			logOnSession.setAttribute("logOn.memberNum", null);
-			logOnSession.setAttribute("logOn.memberClass", null);
+			logOnWhetherForSession = "guest";
+			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "/shm/loginfail";
 		} else {
 			System.out.println("login fail else route");
-			logOnSession.setAttribute("isLogon", logOnWhetherForSession);
-			logOnSession.setAttribute("logOn.id", null);
-			logOnSession.setAttribute("logOn.memberNum", null);
-			logOnSession.setAttribute("logOn.memberClass", null);
+			logOnWhetherForSession = "guest";
+			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "/shm/loginfail";
 		}
 		
-		return "/shm/adminpage";
-		
+	}
+	
+	private void setFailSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
+		logOnWhetherForSession = "guest";
+		logOnSession.setAttribute("isLogon", logOnWhetherForSession);
+		logOnSession.setAttribute("logOn.id", null);
+		logOnSession.setAttribute("logOn.memberNum", null);
+		logOnSession.setAttribute("logOn.memberClass", null);
+	}
+	private void setSuccessSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
+		logOnWhetherForSession = "member";
+		logOnSession.setAttribute("isLogon", logOnWhetherForSession);
+		logOnSession.setAttribute("logOn.id", memberDTO.getId());
+		logOnSession.setAttribute("logOn.memberNum", memberDTO.getMemberNum());
+		logOnSession.setAttribute("logOn.memberClass", memberDTO.getMemberClass());
 	}
 
 }
