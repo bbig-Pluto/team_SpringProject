@@ -72,7 +72,7 @@ public class MemberControllerImpl {
 			logOnWhetherForSession = "member";
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
 			return "/sjs/calendarM";
-		// 로그인 실패
+		// 로그인 실패.
 		} else if (memberDTO.getLoginWhether() == -1) {
 			System.out.println("login fail");
 			logOnWhetherForSession = "guest";
