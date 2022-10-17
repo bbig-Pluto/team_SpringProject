@@ -1,4 +1,8 @@
 package com.myspring.syl.lhj.controller;
 
-public class ExerciseController {
+import org.springframework.ui.Model;
+
+public interface ExerciseController {
+	
+	public String selectAllList(Model model);
 }

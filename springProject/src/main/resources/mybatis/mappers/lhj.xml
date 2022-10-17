@@ -3,4 +3,19 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="mapper.lhj">
+
+	<!-- resultMap -->
+	<resultMap id="resultMap" type="exerciseDTO">
+		<result property="seq_Exercise" column="seq_Exercise" />
+		<result property="exercise_Contents" column="exercise_Contents" />
+		<result property="exercise_Time" column="exercise_Time" />
+		<result property="exercise_Today" column="exercise_Today" />
+		<result property="session_UserId" column="session_UserId" />
+	</resultMap>
+
+	<!-- 조회 (DB에서 확인완료)-->
+	<select id="selectAllList" resultType="exerciseDTO">
+		select * from Exercise
+	</select>
+
 </mapper>
