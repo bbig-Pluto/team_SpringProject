@@ -37,17 +37,15 @@
 
 	// exercise_allcheck 전체 체크, 해제
 	function exercise_allcheck() {
-		let exercise_allcheck = document
-				.querySelector("th input[type='checkbox']");
-		exercise_allcheck.addEventListener("change", function(e) {
-			let check = document
-					.querySelectorAll("input[name='exercise_check']");
-			for (let i = 0; i < check.length; i++) {
-				check[i].checked = e.target.checked;
+		let exercise_allcheck = document.querySelector("th input[type='checkbox']"); // 전체체크 버튼
+		exercise_allcheck.addEventListener("change", function(e) { // 전체체크 클릭했을때
+			let one_check = document.querySelectorAll("input[name='exercise_check']");	
+			for (let i = 0; i < one_check.length; i++) {
+				one_check[i].checked = e.target.checked;
 
 				if (exercise_allcheck.checked === true) {
-					check[i].value
-					console.log(check[i].value);
+					one_check[i].value
+					console.log(one_check[i].value);
 				}
 			}
 		})
