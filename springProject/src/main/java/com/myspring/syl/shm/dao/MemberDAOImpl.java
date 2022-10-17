@@ -24,5 +24,17 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return membersList;
 	}
+	
+	public MemberDTO checkToLogin(String signin_id, String signin_pwd) {
+		
+		MemberDTO dto = new MemberDTO();
+//		MemberDTO loginCheckResult = new MemberDTO();
+		dto.setId(signin_id);
+		dto.setPwd(signin_pwd);
+		
+		dto = sqlSession.selectOne("mapper.shm.loginResult", dto);
+		
+		return dto;
+	}
 
 }

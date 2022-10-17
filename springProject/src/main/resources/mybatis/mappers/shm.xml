@@ -10,4 +10,13 @@
 		
 	</select>
 	
+	
+	<select id="loginResult" resultType="memberDTO" parameterType="MemberDTO">
+
+		SELECT id, pwd, memberNum, memberClass 
+		FROM syl_member 
+		WHERE id=#{id} AND pwd=#{pwd}
+		
+	</select>
+	
 </mapper>
