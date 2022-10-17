@@ -23,7 +23,6 @@ public class MemberControllerImpl {
 					method = RequestMethod.GET)
 	public ModelAndView listMembers() {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("eclipse 재설치");
 		List<MemberDTO> membersList = memberService.getMemberList();
 		mav.addObject("memList", membersList);
 		mav.setViewName("/shm/adminpage");
