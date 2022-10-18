@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,9 +18,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.syl.yyk.dto.DiaryDTO;
+import com.myspring.syl.yyk.service.DiaryService;
+
 @Controller
 public class FileUploadController {
 
+	@Autowired
+	DiaryService diaryService;
+	
 	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
 	@RequestMapping(value="/form")
 	public String form() {
@@ -58,7 +65,10 @@ public class FileUploadController {
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		
 		while(fileNames.hasNext()) {
-			String fileName = fileNames.next();
+			String fileName = fileNames.next(); // next로 파일 네임들 중 1.png를 찾음
+			
+//			diaryService.getAddDiary(fileName);
+			
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			String originalFileName = mFile.getOriginalFilename();
 			fileList.add(originalFileName);
@@ -74,6 +84,6 @@ public class FileUploadController {
 			}
 		}
 		
-		return fileList;
+		return fileList; //첨부한 파일 이름이 저장된 fileList를 반환
 	}
 }
