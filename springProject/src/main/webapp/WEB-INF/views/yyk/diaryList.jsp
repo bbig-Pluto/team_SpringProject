@@ -771,7 +771,7 @@ window.onload = function () {
 			<article>
 				<div class="area_wrapper">
 					<div class="calendarWhole">
-						<!-- !!!!!!!!!1!! 다이어리 안에 페이지 넣는 공간!!!!!!!!!!!!!!!! -->
+						<!-- !!!!!!!!!!!! 다이어리 안에 페이지 넣는 공간!!!!!!!!!!!!!!!! -->
 						<div class="diaryWrap">
 							<div class="diaryList_headWrap">
 								<div class="diaryList_text">Diary</div>

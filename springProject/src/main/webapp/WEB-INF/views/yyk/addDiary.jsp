@@ -924,19 +924,19 @@ window.onload = function() {
 				
 				                    <!-- 포스트잇 이미지 -->
 				                    <!-- 업로드 -->
-								<!--<form action="/diary/up.do"  -->
-									<!--	method="post"  -->
-									<!--	enctype="multipart/form-data"  -->
-									<!--	accept-charset="utf-8"> -->
+<!-- 								<form action="/diary/up.do"  -->
+<!-- 										method="post"  -->
+<!-- 										enctype="multipart/form-data"  -->
+<!-- 										accept-charset="utf-8"> -->
 									                    
 									 <div class="postit_container">
-									     <img src="./image/포스트잇(완).png" class="postit" >
-									<%-- <img class="photo" style="width:200px; height:200px;" src="/diary/down.do?fileName=<%= fileName%>"> --%>
+									     <img src="resources/yyk/image/포스트잇(완).png" class="postit" >
+									<img class="photo" style="width:200px; height:200px;" src="resources/yyk/image/맑음.png">
 									    
-									<!-- <input type="file" name="uploadfile"> -->
-									<!-- <input type="submit" value="업로드"> -->
+<!-- 									<input type="file" name="uploadfile"> -->
+<!-- 									<input type="submit" value="업로드"> -->
 									 </div>
-									<!--</form> -->
+<!-- 									</form> -->
 				                </div>
 				
 				
@@ -945,10 +945,10 @@ window.onload = function() {
 				                <div class="left_bottom_wrap">
 				                    <!-- 날씨 -->
 				                    <div class="weather">
-				                        <img src="./image/맑음.png" class="sunny" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-				                        <img src="./image/구름.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-				                        <img src="./image/비.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-				                        <img src="./image/무지개.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+				                        <img src="resources/yyk/image/맑음.png" class="sunny" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+				                        <img src="resources/yyk/image/구름.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+				                        <img src="resources/yyk/image/비.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+				                        <img src="resources/yyk/image/무지개.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
 				                    </div>
 				                    <!-- 기분 -->
 				                    <div class="slidecontainer">
