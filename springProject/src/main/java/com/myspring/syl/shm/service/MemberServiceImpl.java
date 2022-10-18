@@ -1,6 +1,7 @@
 package com.myspring.syl.shm.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,16 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return dto;
 	}
+	
+	public String idFinder(Map idFindKey) {
+		
+		String foundId;
+		foundId = memberDAO.idFinder(idFindKey);
+		
+		return foundId;
+		
+	}
+	
+	
 
 }

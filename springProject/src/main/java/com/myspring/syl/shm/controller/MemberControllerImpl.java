@@ -1,6 +1,9 @@
 package com.myspring.syl.shm.controller;
 
+import java.util.HashMap;
+
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -50,7 +53,7 @@ public class MemberControllerImpl {
 
 	// 관리자 로그인, 회원 정보 리스트 페이지 이동
 	@RequestMapping(value = "/member/memberslist.do", 
-					method = RequestMethod.GET)
+					method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView listMembers(HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView();
@@ -89,7 +92,7 @@ public class MemberControllerImpl {
 			Model model,
 			@RequestParam("signin_id") String signin_id, 
 			@RequestParam("signin_pwd") String signin_pwd) {
-
+		
 		MemberDTO memberDTO = memberService.getLoginResult(signin_id, signin_pwd);
 
 		logOnSession = request.getSession();
@@ -101,7 +104,7 @@ public class MemberControllerImpl {
 		// 관리자 로그인
 		if (memberDTO.getLoginWhether() == 1) {
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
-			return "redirect:/member/memberslist.do";
+			return "forward:/member/memberslist.do";
 			// 일반회원 로그인
 		} else if (memberDTO.getLoginWhether() == 0) {
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
@@ -130,6 +133,36 @@ public class MemberControllerImpl {
 
 		return "redirect:/member/login.do"; // 임시
 //		return "/sjs/calendarM";
+	}
+	
+	@RequestMapping("/member/idFind.do")
+	public String idSearching(
+			Model model,
+			@RequestParam(value = "idFindEmailAdd", required = true) String idFindEmailAdd,
+			@RequestParam(value = "idFindTelNum", required = true) String idFindTelNum
+			) {
+		
+			System.out.println("idFindEmailAdd : " + idFindEmailAdd);
+		
+			idFindEmailAdd = idFindEmailAdd.replaceAll(" ", "");
+			idFindTelNum = idFindTelNum.replaceAll(" ", "");
+			
+			if ( (idFindEmailAdd != null && !(idFindEmailAdd.isEmpty()))
+					&& (idFindTelNum != null && !(idFindTelNum.isEmpty())) ) {
+				
+				Map<String, String> idFindMap = new HashMap<String, String>();
+				idFindMap.put("emailAdd", idFindEmailAdd);
+				idFindMap.put("telNum", idFindTelNum);
+				
+				String foundId = memberService.idFinder(idFindMap);
+				model.addAttribute("foundId", foundId);
+				
+				return "/shm/idfound";
+			} else {
+				return "redirect:/member/rd/idfoundfail";
+			}
+		
+		
 	}
 	
 	private void setFailSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {

@@ -19,4 +19,12 @@
 		
 	</select>
 	
+	<select id="idSearching" resultType="String" parameterType="Hashmap">
+		
+		select id 
+		from syl_member 
+		WHERE emailAdd=#{emailAdd} and telNum=#{telNum}
+		
+	</select>
+	
 </mapper>
