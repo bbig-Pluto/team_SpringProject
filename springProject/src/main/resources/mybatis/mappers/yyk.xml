@@ -3,4 +3,43 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="mapper.yyk">
+
+	<!-- 다이어리 조회 -->
+	<select id="diaryList" resultType="diaryDTO">
+		SELECT d_title, d_content, d_createTime, diaryNum 
+		FROM diary order by d_createTime desc
+	</select>
+	
+	
+	<!-- 다이어리 추가 -->
+	<insert id="addDiary" parameterType="diaryDTO">
+		insert into diary(d_title, d_content, d_createTime, diaryNum, id)
+		values(#{d_title}, #{d_content}, sysdate, seq_diaryNum.nextval, 'yyk')
+	</insert>
+	
+	
+	<!-- 다이어리 수정 -->
+	<insert id="updateDiary" parameterType="diaryDTO">
+		update diary
+		set d_title= #{d_title}, d_content= #{d_content}, d_createTime= sysdate
+		where diaryNum= #{diaryNum}
+	</insert>
+	
+	
+	<!-- 다이어리 삭제 -->
+	<delete id="delDiary" parameterType="diaryDTO">
+		delete from diary
+		where diaryNum= #{diaryNum}
+	</delete>
+	
+	
+	<!-- 다이어리 검색 -->
+	<select id="searchDiary" resultType="diaryDTO">
+		SELECT d_title, d_content, d_createTime, diaryNum, id
+		FROM diary
+		where id = 'yyk'
+		and lower(d_title) Like '%' || lower(#{d_title}) || '%' order by d_createTime desc
+	</select>
+
+
 </mapper>
