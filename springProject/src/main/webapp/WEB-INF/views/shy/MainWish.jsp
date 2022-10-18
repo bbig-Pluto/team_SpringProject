@@ -412,7 +412,7 @@
                     <div class="add_delete">
                     
                     <!-- +(추가) 버튼을 누르면 카테고리 추가 페이지로 이동  -->
-                    <a href="${contextPath }/wishlist//wishAdd.do">
+                    <a href="${contextPath }/insertwishpage">
                         <input onclick="doDisplay()" class="add" type="submit" value="+">
                     </a>
                     

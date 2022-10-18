@@ -9,5 +9,7 @@ public interface WishlistDAO {
 	public List selectWish();
 	
 	public WishlistDTO pickWish(int seqNum);
+	
+	public int insertWish(WishlistDTO wishDTO);
 
 }

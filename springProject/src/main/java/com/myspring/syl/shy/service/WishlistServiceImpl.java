@@ -30,4 +30,12 @@ public class WishlistServiceImpl implements WishlistService {
 		return dto;
 	}
 
+	@Override
+	public int getInsertWish(WishlistDTO wishDTO) {
+
+		int result = wishDAO.insertWish(wishDTO);
+		
+		return result;
+	}
+
 }

@@ -34,4 +34,13 @@ public class WishlistDAOImpl implements WishlistDAO {
 		return dto;
 	}
 
+	@Override
+	public int insertWish(WishlistDTO wishDTO) {
+
+		int result = sqlSession.insert("mapper.shy.insertWishlist", wishDTO);
+		
+		return result;
+	}
+
+
 }

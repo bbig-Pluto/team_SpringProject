@@ -1,5 +1,4 @@
-<%@ page language="java"
-	contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="java.util.*"
     isELIgnored="false"%>
@@ -12,13 +11,13 @@
 %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
@@ -26,19 +25,23 @@
         body {
             font-family: 'Noto Sans KR', sans-serif;
         }
-        		/* 메인 */
+     			/* 메인 */
         .mainT {
+/*             border: 1px solid black; */
             width: 1000px;
             height: 700px;
             position: absolute;
+/*             margin: 100px 5%; */
         }
         .mainLeft{
+/*             border: 1px solid black; */
             width: 500px;
             height: 700px;
             position: absolute;
         }
         
         .mainRight {
+/*             border: 1px solid black; */
             width: 500px;
             height: 770px;
             position: absolute;
@@ -280,7 +283,6 @@
             background-color: rgb(255, 246, 227);
             padding-right: 10px;
             transition: 0.3s;
-            line-height: 35px;
         }
         .price:focus {
             background-color: rgb(255, 253, 244);
@@ -303,7 +305,6 @@
             padding: 10px;
             color:rgb(116, 116, 116);
             transition: 0.3s;
-            overflow-y: auto;
         }
         .link:focus {
             background-color: rgba(255, 253, 244);
@@ -311,25 +312,10 @@
             left: 0;
             width: 270px;
         }
-        .del {
-        	width: 140px;
-        	height: 42px;
-        	background-color: rgb(240, 73, 87);
-        	color: white;
-        	text-align: center;
-        	line-height: 42px;
-            position:absolute;
-            top: 636px;
-            border-radius: 6px;
-            font-weight: 900;
-            font-size: 17px;
-            margin-left: 10px;
-            border-bottom: 3px solid rgb(189, 59, 70);
-        }
         .save {
             margin-top: 60px;
-            margin-left: 170px;
-            width: 240px;
+            margin-left: 115px;
+            width: 200px;
             height: 45px;
             border: none;
             border-radius: 6px;
@@ -344,10 +330,148 @@
             cursor: pointer;
             border-bottom: 3px solid rgb(113, 194, 176);
         }
+        .cetegory_page {
+            font-weight: 900;
+            font-size: 24px;
+            margin-top: 20px;
+            color: rgb(60,60,60);
+            margin-left: 350px;
+        }
+        .ca_title {
+            font-size: 25px;
+            font-weight: 900;
+            margin: 25px auto;
+            margin-top: 10px;
+            text-align: center;
+            border-bottom: 4px solid rgb(118, 173, 173);
+            padding: 15px;
+            width: 260px;
+        }
+        .ca_area {
+            background-color:rgb(250, 241, 215);
+            width: 380px;
+            margin: auto;
+            padding: 20px;
+            height: 215px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        .ca_area::-webkit-scrollbar {
+            border-radius:  5px;
+            height: 200px;
+            width: 5px;
+        }
+        .ca_area::-webkit-scrollbar-track {
+            background-color: 250, 241, 215;
+        }
+        .ca_area::-webkit-scrollbar-thumb {
+            background-color: rgb(212, 198, 177);
+        }
+        .ca_list {
+            background-color:#007e7e;
+            color: white;
+            width: auto;
+            height: 35px;
+            text-align: center;
+            line-height: 30px;
+            margin: 10px 10px;
+            margin-right: 5px;
+        }
+        .ca_list:hover {
+            background-color: rgb(50, 145, 145);
+            cursor: pointer;
+        }
+        .category_null {
+        	font-size: 16px;
+        	color: gray;
+        	text-align: center;
+        	margin-top: 85px;
+        	font-weight: 900;
+        }
+        .add_title {
+            font-size: 25px;
+            font-weight: 900;
+            margin: 5px auto;
+            text-align: center;
+            border-bottom: 4px solid rgb(118, 173, 173);
+            padding: 15px;
+            width: 260px;
+        }
+        .ca_add {
+            background-color:rgb(211, 194, 163);
+            width: 380px;
+            margin: 20px auto;
+            border-radius: 4px;
+            height: 100px;
+            position: absolute;
+            margin-left: 60px;
+        }
+        .add_text {
+            width: 250px;
+            margin: 30px 20px;
+            text-align: center;
+            height: 35px;
+            border: none;
+            transition: 0.2s;
+            outline: none;
+            border-radius: 5px;
+            color:rgb(85, 85, 85);
+            font-size: 16px;
+            font-weight: 900;
+        }
+        .add_text:focus {
+            height: 40px;
+            margin: 27.5px 20px;
+        }
+        .add_text::placeholder {
+            font-size: 14px;
+            color: rgb(189, 189, 189);
+            font-weight: 0px;
+        }
+        .add_btn {
+            float: right;
+            margin-right: 85px;
+            margin-top: 45px;
+            position: relative;
+            background-color: rgb(250, 241, 215);
+            width: 60px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 3px;
+            font-weight: 900;
+            border: none;
+            border-bottom: 3px solid rgb(118, 173, 173);
+            color: rgb(60,60,60);
+            font-weight: 900;
+        }
+        .add_btn:hover {
+            cursor: pointer;
+        }
+        .next {
+            width: 200px;
+            height: 45px;
+            border: none;
+            border-radius: 6px;
+            background-color: rgb(99, 212, 188);
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            position: relative;
+            margin: 45px 150px;
+            border-bottom: 3px solid rgb(95, 175, 158);
+        }
+        .next:hover {
+            background-color: rgb(132, 223, 203);
+            cursor: pointer;
+            border-bottom: 3px solid rgb(113, 194, 176);
+        }
+        #view_page {
+/*             display: none; */
+        }
         a {
         	text-decoration: none;
         }
-        
     </style>
 </head>
 <body>
@@ -372,7 +496,7 @@
                     <!-- 상품 추가 / 삭제 버튼 -->
                     <div class="add_delete">
                     
-                    <!-- +(추가) 버튼을 누르면 카테고리 추가 페이지로 이동  -->
+                    <!-- + (추가) 버튼을 누르면 상품 추가 페이지로 이동  -->
                     <a href="${contextPath }/insertwishpage">
                         <input onclick="doDisplay()" class="add" type="submit" value="+">
                     </a>
@@ -394,7 +518,6 @@
 <%--                     </c:choose> --%>
                     </div>
                     
-                    
                     <!-- 상품 목록 -->
                     <div class="list_area">
                         
@@ -405,15 +528,13 @@
                     	
                     	<c:when test="${!empty wishlist }">
 	                    	<c:forEach var="wish" items="${wishlist }">
-	                    	
-		                    	<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
+	                    		<a href="${contextPath }/wishlist/pickwish.do?seqNum=${ wish.seqNum }">
 			                        <div class="list">
 			                            <div class="list_photo"></div>
 			                            <div class="list_name">${wish.name }</div>
 			                            <input type="hidden" name="seqNum" value="${ wish.seqNum }">
 			                        </div>
 			                    </a>
-		                 
 	                        </c:forEach>
                         </c:when>
                     </c:choose>
@@ -425,71 +546,92 @@
                 </div>
                 
                 <!-- 오른쪽 화면 -->
+                
                 <div class="mainRight">
+                    
+                        
+<!--                     <div id="category_area"> -->
+
+<!--                         <div class="cetegory_page">CATEGORY</div> -->
+                        
+                        
+<!--                         <div class="ca_title">카테고리 선택</div> -->
+                    			
+<!-- 			           	<div class="ca_area"> -->
+<%-- 	                       	<c:choose> --%>
+<%-- 	                            <c:when test="${empty wishList }"> --%>
+<!-- 	                               	<div class="category_null">카테고리를 추가해주세요</div> -->
+<%-- 	                            </c:when> --%>
+<%-- 	                    		<c:when test="${!empty wishList }"> --%>
+<%-- 	                    			<c:forEach var="wish" items="${wishList }"> --%>
+<%-- 				                            <div class="ca_list">${wish.category }</div> --%>
+<%-- 				                    </c:forEach> --%>
+<%-- 				               </c:when> --%>
+<%-- 				            </c:choose> --%>
+<!-- 			            </div> -->
+                        
+<!--                         <div class="add_title">추가하기</div> -->
+                        
+<%--                         <form method="post" action="${contextPath }/wishlist/addWish.do"> --%>
+<!-- 	                        <div class="ca_add"> -->
+<!-- 	                            <input name="category" class="add_text" type="text" placeholder="카테고리명을 입력해주세요"> -->
+<!-- 	                        </div> -->
+<!-- 	                            <input type="submit" class="add_btn" value="추가"> -->
+<!--                         </form> -->
+                            
+<!--                             <input onclick="next()" class="next" type="submit" value="다음"> -->
+<!--                         </div> -->
                     
                     <div id="view_page">
                         
-                        <c:choose>
-                        	<c:when test="${empty wishlist }">
-                        	
-                        	</c:when>
-                        	
-                        		
-                        	<c:when test="${!empty wishlist }">
-<%--                         		<c:forEach var="wish" items="${wishList }"> --%>
-                        		
-                        		<div class="right_title">VIEW</div>
+                        <div class="right_title">VIEW</div>
+                        
+                <form method="get" action="${contextPath }/insertwish">
 
-                        		<form method="post" action="${contextPath }/wishlist/modWish.do">
-			                        <div class="view">
-<!-- 			                            <input name="photo" type="file" class="upload_photo" accept="image/*" required multiple> -->
-			                            <ul>
-			                                <li class="view_photo"></li>
-			                            </ul>
-			                            <div class="photo_add">+</div>
-			                        </div>
-			                    
-			                        <div class="view_info">
-			                            <input name="name" type="text" class="view_name" placeholder="상품 이름을 입력하세요" value="${pickwish.name }">
-			                            
-<!-- 			                            <div class="subname">카테고리</div> -->
-<!-- 			                            <select class="select"> -->
-<!-- 			                                <option value="">선택해주세요</option> -->
-<%-- 			                                			<option value="${wish.category }">${wish.category }</option> --%>
-<!-- 			                            </select><br> -->
-			                            
-			                            <div class="subname">가격</div>
-			                            <input name="price" type="text" class="price" value="${pickwish.price }"><br>
-			                            
-			                            <div class="subname">링크</div>
-<!-- 			                            contenteditable="true"> -->
-			                            <textarea name="link" class="link">
-			                            	${pickwish.link }
-			                            </textarea>
-<%-- 			                            	<a href="${wishlist.link }">${wishlist.link }</a> --%>
-			                            <input type="hidden" name="seqNum" value="${pickwish.seqNum }">
-			                            
-						                <a href="${contextPath }/wishlist/delWish.do?seqNum=${pickwish.seqNum}">
-						                	<div class="del">삭제하기</div>
-						                	<input type="hidden" name="seqNum" value="${pickwish.seqNum }">
-						                </a>
-						                
-						                <input class="save" type="submit" value="수정하기">
-						                
-						                
-                         			</div>
-                        		</form>
+                        <div class="view">
+                            <input type="file" class="upload_photo" accept="image/*" >
+<!--                             required multple -->
+                            <ul>
+                                <li class="view_photo"></li>
+                            </ul>
+                            <div class="photo_add">+</div>
+                        </div>
+                    
+                        <div class="view_info">
+                            <input name="name" type="text" class="view_name" placeholder="상품 이름을 입력하세요">
+                            
+<!--                             <div class="subname">카테고리</div> -->
+<!--                             <select class="select"> -->
 
-<%--                             	</c:forEach> --%>
-                        	</c:when>
-                      	</c:choose>
-                      	
-                	</div>
+<!--                                 <option value="">선택해주세요</option> -->
+<%--                                 <c:choose> --%>
+<%--                                 	<c:when test="${!empty wishList }"> --%>
+<%--                                 		<c:forEach var="wish" items="${wishList }"> --%>
+<%--                                 			<option><c:out value="${wish.category }" /></option> --%>
+<%--                                 		</c:forEach> --%>
+<%--                                 	</c:when> --%>
+<%--                                 </c:choose> --%>
+<!--                             </select><br> -->
+                            
+                            <div class="subname">가격</div>
+                            <input name="price" class="price" type="text" value=""><br>
+                            
+                            <div class="subname">링크</div>
+                            <textarea name="link" class="link"></textarea>
+                            
+                            <input class="save" type="submit" value="저장하기">
+                        </div>
+				   </form>
+                    
+                    </div>
+                        
+                    </div>
+                    
                 </div>
-			</div>
-		</div>
-		
-		</div>
+
+            </div>
+            
+            </div>
 
 </body>
 </html>

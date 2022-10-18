@@ -10,24 +10,24 @@
 	
 	</select>
 	
-	<select id="pickWishlist" resultType="WishlistDTO">
+	<select id="pickWishlist" resultType="wishlistDTO">
 	
 		select * from wishlist
-			where num = #{seqNum}
+			where seqNum = #{seqNum}
 	
 	</select>
 	
-	<insert id="insertWishlist" parameterType="WishlistDTO">
+	<insert id="insertWishlist" parameterType="wishlistDTO">
 	
 		insert into wishlist
-			(num, category, name, photo, price, link)
+			(seqNum, category, name, photo, price, link)
 			
 		values
-			(seq_list.nextcal, #{category}, #{name}, #{photo}, #{price}, #{link})
+			(seq_list.nextval, 'null', #{name}, 'null', #{price}, #{link})
 	
 	</insert>
 	
-	<update id="updateWishlist" parameterType="WishlistDTO">
+	<update id="updateWishlist" parameterType="wishlistDTO">
 	
 		update wishlist
 		
@@ -41,7 +41,7 @@
 	
 	</update>
 	
-	<delete id="deleteWishlist" parameterType="WishlistDTO">
+	<delete id="deleteWishlist" parameterType="wishlistDTO">
 	
 		delete from wishlist
 			where num = #{seqNum}

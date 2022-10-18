@@ -9,5 +9,7 @@ public interface WishlistService {
 	List<WishlistDTO> getWishList();
 	
 	WishlistDTO getPickWish(int seqNum);
+	
+	int getInsertWish(WishlistDTO wishDTO);
 
 }
