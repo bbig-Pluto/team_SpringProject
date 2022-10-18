@@ -34,7 +34,7 @@ request.setCharacterEncoding("UTF-8");
 	<div class="blankArea"></div>
 	<div class="wrapper">
 		일치하는 회원 정보가 없습니다.<br> <a
-			href="${contextPath}/hunminjsp/signin.jsp">로그인 화면으로 돌아가기</a>
+			href="${contextPath}/member/login">로그인 화면으로 돌아가기</a>
 	</div>
 </body>
 </html>

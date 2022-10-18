@@ -56,6 +56,7 @@ request.setCharacterEncoding("UTF-8");
         <div class="acs">
             잘못된 접근입니다.<br>
             <a href="${contextPath}/js/calendarM.jsp" class="re">=> 캘린더로 되돌아가기</a>
+            <a href="${contextPath}/member/login" class="re">=> 로그인페이지 되돌아가기(임시)</a>
         </div>
     </div>
 </body>

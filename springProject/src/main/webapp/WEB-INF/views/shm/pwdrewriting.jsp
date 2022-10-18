@@ -667,8 +667,8 @@ input {
                <a href="${ contextPath }/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
+                  <a href="${ contextPath }/member/rd/mypage" class="headermypage">마이페이지</a>
+                  <a href="${ contextPath }/member/login" class="headerlogin">로그인</a>
                   <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
                </div>
             </nav>
@@ -710,7 +710,7 @@ input {
         </table>
 		</form>
 		<br>
-		<a href="${contextPath}/hunminjsp/signin.jsp">비밀번호 재설정 없이 로그인 페이지</a><br>
+		<a href="${contextPath}/member/login">비밀번호 재설정 없이 로그인 페이지로</a><br>
 	</div>
 
 	<img class="logo" src="/team_Project/photo/logo.png">

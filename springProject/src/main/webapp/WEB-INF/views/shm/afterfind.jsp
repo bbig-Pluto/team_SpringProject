@@ -19,7 +19,7 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	(찾아낸 id 출력) or (비밀번호 재설정 입력박스) or 일치하는 정보가 없습니다.
-    <a href="${contextPath}/hunminjsp/idpwfinder.jsp">아이디/비밀번호 찾기</a><br>
-    <a href="${contextPath}/hunminjsp/signin.jsp">로그인 페이지로</a>
+    <a href="${contextPath}/member/rd/idpwfinder">아이디/비밀번호 찾기</a><br>
+    <a href="${contextPath}/member/login">로그인 페이지로</a>
 </body>
 </html>

@@ -18,6 +18,6 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<h2>회원가입 성공!</h2><br>
-    <a href="${contextPath}/hunminjsp/signin.jsp">로그인 페이지로 이동</a>
+    <a href="${contextPath}/member/login">로그인 페이지로 이동</a>
 </body>
 </html>

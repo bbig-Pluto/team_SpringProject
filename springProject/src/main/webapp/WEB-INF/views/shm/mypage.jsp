@@ -38,7 +38,7 @@
     마이페이지 입니다.<br>
     <a href="${contextPath}/member/deleteaccount.do">회원탈퇴</a><br>
     <a href="${contextPath}/member/logout.do">로그아웃</a><br>
-    <a href="${contextPath}/js/calendarM.jsp">캘린더로 돌아가기</a><br>
+    <a href="${contextPath}/sjs/calendarM.jsp">캘린더로 돌아가기</a><br>
     </div>
 </body>
 </html>

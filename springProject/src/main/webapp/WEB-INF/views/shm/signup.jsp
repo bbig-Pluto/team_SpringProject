@@ -257,7 +257,7 @@
         let firstBackButton = document.querySelector("input[class='jp1Btn1 a']");
             
             firstBackButton.addEventListener("click", function() {
-            	location.href="${contextPath}/hunminjsp/signin.jsp";
+            	location.href="${contextPath}/member/login";
             })
         }
         

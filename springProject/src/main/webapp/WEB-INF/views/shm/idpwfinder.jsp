@@ -820,7 +820,7 @@ header {
         
         <br><br>
         
-        <a href="${contextPath}/hunminjsp/signin.jsp"><button class="linkToLoginPage" type="submit">로그인 페이지로</button></a><br>
+        <a href="${contextPath}/member/login"><button class="linkToLoginPage" type="submit">로그인 페이지로</button></a><br>
     </div>
 
 </div>

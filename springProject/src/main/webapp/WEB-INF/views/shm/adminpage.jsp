@@ -125,10 +125,10 @@ request.setCharacterEncoding("UTF-8");
 	<br>
 	<br>
 	<div class="linkTosignIn">
-		<a href="${contextPath}/hunminjsp/signin.jsp">로그인 페이지 되돌아가기</a><br>
+		<a href="${contextPath}/member/logout.do">로그아웃</a><br>
 	</div>
 	<div class="linkToCalendar">
-		<a href="${contextPath}/js/calendarM.jsp">달력 페이지</a><br>
+		<a href="${contextPath}/sjs/calendarM.jsp">달력 페이지</a><br>
 	</div>
 </body>
 

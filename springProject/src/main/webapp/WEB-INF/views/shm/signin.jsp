@@ -947,7 +947,7 @@ a {
                <a href="${ contextPath }/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
+                  <a href="${ contextPath }/member/rd/mypage" class="headermypage">마이페이지</a>
                   <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
                   <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
                </div>
@@ -989,9 +989,9 @@ a {
 						</form>
 						<div class="linkToOtherPages">
 							<div class="joinbtn">
-								<a href="${contextPath}/hunminjsp/idpwfinder.jsp" type="button"
+								<a href="${contextPath}/member/rd/idpwfinder" type="button"
 									class="sgnbtn1">FORGOT ID/PASSWORD |</a> <a
-									href="${contextPath}/hunminjsp/signup.jsp" type="button"
+									href="${contextPath}/member/rd/signup" type="button"
 									class="sgnbtn2">JOIN</a>
 							</div>
 						</div>
