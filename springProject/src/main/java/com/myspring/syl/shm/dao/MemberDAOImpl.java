@@ -1,7 +1,7 @@
 package com.myspring.syl.shm.dao;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +34,14 @@ public class MemberDAOImpl implements MemberDAO {
 		dto = sqlSession.selectOne("mapper.shm.loginResult", dto);
 		
 		return dto;
+	}
+	
+	@Override
+	public String idFinder(Map idFindKey) {
+		
+		String idFound = sqlSession.selectOne("mapper.shm.idSearching", idFindKey);
+		
+		return idFound;
 	}
 
 }

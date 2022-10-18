@@ -20,7 +20,8 @@ public class MemberDTO {
 	public MemberDTO() {
 
 	}
-
+	
+	
 	public MemberDTO(int loginWhether, String id, String memberNum, int memberClass) {
 		this.loginWhether = loginWhether;
 		this.id = id;
