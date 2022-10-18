@@ -3,4 +3,49 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="mapper.shy">
+
+	<select id="selectWishlist" resultType="WishlistDTO">
+	
+		select * from wishlist
+	
+	</select>
+	
+	<select id="pickWishlist" resultType="WishlistDTO">
+	
+		select * from wishlist
+			where num = #{seqNum}
+	
+	</select>
+	
+	<insert id="insertWishlist" parameterType="WishlistDTO">
+	
+		insert into wishlist
+			(num, category, name, photo, price, link)
+			
+		values
+			(seq_list.nextcal, #{category}, #{name}, #{photo}, #{price}, #{link})
+	
+	</insert>
+	
+	<update id="updateWishlist" parameterType="WishlistDTO">
+	
+		update wishlist
+		
+			set category = #{category},
+				name = #{name},
+				photo = #{photo},
+				price = #{price},
+				link = #{link}
+				
+			where num = #{seqNum}
+	
+	</update>
+	
+	<delete id="deleteWishlist" parameterType="WishlistDTO">
+	
+		delete from wishlist
+			where num = #{seqNum}
+		
+	</delete>
+	
 </mapper>
