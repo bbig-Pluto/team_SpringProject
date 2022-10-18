@@ -20,4 +20,16 @@ public class ExerciseServiceImpl implements ExerciseService{
 		return exercise_List;
 	}
 
+	@Override
+	public int ec_insert(ExerciseDTO exerciseDTO) {
+		int ec_insert = exerciseDAO.ec_insert(exerciseDTO);
+		return ec_insert;
+	}
+
+	@Override
+	public int ec_delete(int[] seq_Exercise) {
+		int ec_delete = exerciseDAO.ec_delete(seq_Exercise);
+		return ec_delete;
+	}
+
 }

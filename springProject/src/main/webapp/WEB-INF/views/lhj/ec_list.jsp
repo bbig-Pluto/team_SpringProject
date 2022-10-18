@@ -10,59 +10,73 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 
-<link href="${path}/resources/css/exercise.css" rel="stylesheet">
+<link href="${path}/resources/lhj/exercise.css" rel="stylesheet">
 <style>
 </style>
 <script>
 	window.onload = function() {
-		// accordion_tab();
-		exercise_button_add();
-		exercise_button_del();
-		exercise_allcheck();
-	}
-	// function accordion_tab() {
-	//     let tab_accordion_tab = document.querySelectorAll(".tab_accordion_tab");
-	//     let tab_accordion_content = document.querySelectorAll(".tab_accordion_content");
-	// for (let i = 0; i < tab_accordion_tab.length; i++) {
-	//     tab_accordion_tab[i].addEventListener("click", function (event) {
-	//         for (let j = 0; j < tab_accordion_content.length; j++) {
-	//             tab_accordion_content[j].style.display = "none";
-	//             tab_accordion_content[i].style.display = "block";
-	//         }
-	//     })
-	//     tab_accordion_tab[i].addEventListener("click", function (event) {
-	//     })
-	// }
-	// }
 
-	// exercise_allcheck 전체 체크, 해제
-	function exercise_allcheck() {
-		let exercise_allcheck = document.querySelector("th input[type='checkbox']"); // 전체체크 버튼
-		exercise_allcheck.addEventListener("change", function(e) { // 전체체크 클릭했을때
-			let one_check = document.querySelectorAll("input[name='exercise_check']");	
+		all_check();
+		button_add();
+		button_del();
+		button_update();
+		one_check();
+	}
+
+	// all_check 전체 체크, 해제
+	function all_check() {
+		let all_check = document.querySelector("th input[type='checkbox']"); // 전체체크버튼
+
+		// 전체 선택이 change 일때
+		all_check.addEventListener("change", function(e) {
+			let one_check = document
+					.querySelectorAll("input[name=seq_Exercise]"); // 하나 클릭
+			// one_check 사이즈 만큼 증가하고
 			for (let i = 0; i < one_check.length; i++) {
+				// one_check[i]가 이벤트 되어 체크된다 
 				one_check[i].checked = e.target.checked;
 
-				if (exercise_allcheck.checked === true) {
+				// if 체크되었다면 one_check의 값을 가져오고
+				if (all_check.checked === true) {
 					one_check[i].value
 					console.log(one_check[i].value);
 				}
 			}
 		})
 	}
-	// exercise_allcheck 전체 체크, 해제 끝
+
+	// 하나 체크
+	function one_check() {
+		let one_check = document.querySelectorAll("input[name='seq_Exercise']"); // 하나 클릭
+		one_check.value;
+		console.log(one_check.value);
+
+		for (let i = 0; i < one_check.length; i++) {
+			one_check[i].addEventListener("click", function(e) {
+				one_check[i].checked = e.target.checked;
+				// 체크된 값 갖고옴
+				if (e.target.checked === true) {
+					one_check[i].value;
+					console.log(e.target.value);
+				}
+			})
+		}
+	}
+
+	// all_check 전체 체크, 해제 끝
 
 	// exercise_add 입력받은 내용 추가
-	function exercise_button_add() {
-		let textadd = document.querySelector(".exercise_button_add");
+	function button_add() {
+		let textadd = document.querySelector(".button_add"); // 추가버튼
 		textadd
 				.addEventListener(
 						"click",
 						function() {
+
 							let exercise_text = document
 									.querySelector(".exercise_text").value;
 							let exercise_tbody = document
-									.querySelector(".exercise_tbody");
+									.querySelector(".exercise_tbody"); // innerHTML 사용 (이 안에 넣겠다)
 							let exercise_time = document
 									.querySelector(".exercise_time").value;
 
@@ -74,33 +88,106 @@
 							if (exercise_text != "" && exercise_tr.length <= 6) {
 								let html = exercise_tbody.innerHTML;
 								html += '<tr class=exercise_tr>';
-								html += '   <td><input type="checkbox" name="exercise_check"></td>';
-								html += '   <td> <b class="exercise_Date">'
-										+ " sysdate : " + '</b> <b>'
+								html += '   <td><input type="checkbox" name="seq_Exercise"></td>';
+								html += '   <td class= "contents_td"> <b class="exercise_Date">'
+										+ " ex)sysdate " + '</b> <br> <b>'
 										+ exercise_text + '</b> </td>';
-								html += '<td>' + exercise_time + '</td>';
+								html += '<td class= "contents_td2">' + exercise_time + '</td>';
 								html += '</tr>';
 								exercise_tbody.innerHTML = html;
+
+								// 추가버튼 누르면 submit으로 타입변환
+								textadd.setAttribute("type", "submit");
+								ec_box.method = "post";
+								ec_box.action = "${path}/exercise/ec_add.do";
+
 							} else if (exercise_tr.length > 6) {
-								confirm("최근 일주일 간의 기록만 입력 가능합니다\n운동 삭제 후 추가 해주세요");
+								alert("최근 일주일 간의 기록만 입력 가능합니다\n운동 삭제 후 추가 해주세요")
 							}
 						})
 	}
 	// exercise_add 입력받은 내용 추가 끝
 
 	// exercise_del 체크된 내용 삭제
-	function exercise_button_del() {
-		let exercise_button_del = document
-				.querySelector(".exercise_button_del");
-		exercise_button_del.addEventListener("click", function() {
-			let exercise_check = document
-					.querySelectorAll("input[name='exercise_check']:checked");
-			for (let i = 0; i < exercise_check.length; i++) {
-				exercise_check[i].parentNode.parentNode.remove("tr");
-			}
+	function button_del() {
+		let button_del = document.querySelector(".button_del"); // 삭제버튼
+		button_del.addEventListener("click", function() {
+			// 			let one_check = document.querySelectorAll("input[name='seq_Exercise']:checked");
+
+			// 아래 remove가 아니고 값을 갖고온 후 액션 보내면 될 듯 후에  주석처리
+
+			// 			for (let i = 0; i < one_check.length; i++) {
+			// 				one_check[i].parentNode.parentNode.remove("tr");
+			// 			}
+
+			button_del.setAttribute("type", "submit");
+			ec_box.method = "post";
+			ec_box.action = "${path}/exercise/ec_del.do";
 		})
 	}
 	// exercise_del 체크된 내용 삭제 끝
+
+	function button_update() {
+		// 수정 버튼을 클릭했을때
+		let button_update = document.querySelector(".button_update");
+		button_update.addEventListener("click",function() {
+							let one_check = document.querySelectorAll("input[name='seq_Exercise']:checked");
+
+							
+							
+// 							for (let i = 0; i < one_check.length; i++) {
+// 								one_check[i].parentNode.parentNode.remove("tr"); // remove로 tr을 지우고 (DB는 살아있음)
+								
+// 							}
+// 							<td class= "contents_td">
+							// 1. td안에다가 input 박스를 그린다.
+
+							
+							// td = 운동내용 안에 input 그리기
+							let contents_td = document.querySelector(".contents_td"); // innerHTML 사용 (이 안에 넣겠다)
+							let html = contents_td.innerHTML;
+							html += '<b><input type="text" name="exercise_Contents" value="exercise_text"></b>'
+							contents_td.innerHTML = html;
+							
+							// td2 = 시간 안에 select박스 그리기
+							let contents_td2 = document.querySelector(".contents_td2");
+							let html_2 = contents_td2.innerHTML;
+							html_2 += '<select class="exercise_time" name="exercise_Time">'
+							html_2 += 	'<option value="">시간</option>'
+							html_2 += 	'<option value="10분">10분</option>'
+							html_2 += 	'<option value="20분">20분</option>'
+							html_2 += 	'<option value="30분">30분</option>'
+							html_2 += 	'<option value="40분">40분</option>'
+							html_2 += 	'<option value="50분">50분</option>'
+							html_2 += 	'<option value="1시간">1시간</option>'
+							html_2 += '</select>'
+							contents_td2.innerHTML = html_2;
+
+							// btn_span = 수정제출 버튼 만들기
+							let btn_span = document.querySelector(".btn_span");
+							let btn_html = btn_span.innerHTML;
+							btn_html += '<input type="submit" class="button_update2" name="seq_Exercise">'
+							btn_span.innerHTML = btn_html;
+							
+							
+// 							let button_update = document.querySelector(".button_update");
+							let button_update2 = document.querySelector(".button_update2"); // 이게 될지 모르겠음
+							console.log("그려짐?", button_update2); // innerhtml 그려지고 난 후 확인
+
+							button_update2.value = button_update.value;
+							console.log(button_update2.value);
+							document.querySelector(".button_update").remove(); // remove로 tr을 지우고 (DB는 살아있음)
+// 							one_check[0].parentNode.parentNode.remove("tr");
+							// 수정에 있는 value값을 제출로 이동
+							// remove하기 전에 제출로 이동시켜야 함
+							// 그러려면 제출이 그려져야 함
+							
+							button_update.setAttribute("type", "submit");
+							ec_box.method = "post";
+							ec_box.action = "${path}/exercise/ec_update.do";
+						})
+
+	}
 </script>
 
 </head>
@@ -108,7 +195,7 @@
 	<header>
 		<div class="wrapper">
 			<h1>
-				<!-- 				<img class="headerLogo" src="./3syl.png"><a href=""></a> -->
+				<!-- <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
 			</h1>
 			<nav>
 				<a href class="headersub">다이어리 소개 |</a> <a href class="headersub">다이어리
@@ -158,23 +245,21 @@
 
 
 
-										<form action="/hj01/test/test.do" method="POST">
+										<form name="ec_box">
 											<table class="exercise_all_table">
 												<thead>
 													<tr>
-														<th><input type="checkbox">
+														<th><input type="checkbox"></th>
 														<th class="exercise_all_checkbox1">운동 전체 선택</th>
-														</th>
 													</tr>
 												</thead>
 												<tbody class="exercise_tbody">
 													<c:forEach var="exercise_list" items="${exercise_list}">
 														<tr class="exercise_tr">
-															<td><input type="checkbox" name="exercise_check"
+															<td><input type="checkbox" name="seq_Exercise"
 																value="${exercise_list.seq_Exercise}"></td>
-															<td><b class="exercise_Date">${exercise_list.exercise_Today}
-																	: </b><b>${exercise_list.exercise_Contents}</b></td>
-															<td>${exercise_list.exercise_Time}</td>
+															<td class="contents_td"><b class="exercise_Date">${exercise_list.exercise_Today}<br></b><b>${exercise_list.exercise_Contents}</b></td>
+															<td class="contents_td2">${exercise_list.exercise_Time}</td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -190,10 +275,11 @@
 													<option value="40분">40분</option>
 													<option value="50분">50분</option>
 													<option value="1시간">1시간</option>
-												</select> <input type="submit" value="운동추가"
-													class="exercise_button_add"></input> <input type="button"
-													value="운동수정" class="exercise_button_update"></input> <input
-													type="button" value="운동삭제" class="exercise_button_del"></input>
+												</select> <input type="button" value="운동추가" class="button_add">
+												<span class="btn_span">
+													<input type="button" value="운동삭제" class="button_del">
+													<input type="button" value="운동수정" class="button_update">
+												</span>
 											</div>
 										</form>
 

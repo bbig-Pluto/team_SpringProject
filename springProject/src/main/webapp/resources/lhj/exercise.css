@@ -645,7 +645,7 @@
             border-radius: 3px;
         }
 
-        .exercise_button_add {
+        .button_add {
             position: relative;
             left: 5px;
             width: 80px;
@@ -657,13 +657,26 @@
 
         }
 
-        .exercise_button_add:hover {
+        .button_add:hover {
             background-color: rgb(20, 133, 110);
         }
 
-        .exercise_button_update {
+        .button_update {
             position: relative;
-            left: 313px;
+            left: 226px;
+            bottom: 405px;
+            width: 80px;
+            height: 35px;
+            background-color: rgb(52, 152, 219);
+            border-radius: 3px;
+            color: white;
+            border: 0px;
+
+        }
+        
+        .button_update2 {
+            position: relative;
+            left: 226px;
             bottom: 405px;
             width: 80px;
             height: 35px;
@@ -674,13 +687,17 @@
 
         }
 
-        .exercise_button_update:hover {
+        .button_update:hover {
+            background-color: rgb(22, 129, 200);
+        }
+        
+        .button_update:hover2 {
             background-color: rgb(22, 129, 200);
         }
 
-        .exercise_button_del {
+        .button_del {
             position: relative;
-            left: 140px;
+            left: 225px;
             bottom: 405px;
             width: 80px;
             height: 35px;
@@ -691,14 +708,14 @@
             height: 35px;
         }
 
-        .exercise_button_del:hover {
+        .button_del:hover {
             background-color: #505050;
 
         }
 
-        .exercise_button_add,
-        .exercise_button_update,
-        .exercise_button_del {
+        .button_add,
+        .button_update,
+        .button_del {
             cursor: pointer;
         }
 

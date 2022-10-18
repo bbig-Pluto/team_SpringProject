@@ -1,18 +1,20 @@
 package com.myspring.syl.lhj.dto;
 
+import java.sql.Date;
+
 public class ExerciseDTO {
 	
-	private String seq_Exercise;
+	private int seq_Exercise;
 	private String exercise_Contents;
 	private String exercise_Time;
-	private String exercise_Today;
+	private Date exercise_Today;
 	private String session_UserId;
 	
 	
-	public String getSeq_Exercise() {
+	public int getSeq_Exercise() {
 		return seq_Exercise;
 	}
-	public void setSeq_Exercise(String seq_Exercise) {
+	public void setSeq_Exercise(int seq_Exercise) {
 		this.seq_Exercise = seq_Exercise;
 	}
 	public String getExercise_Contents() {
@@ -27,10 +29,10 @@ public class ExerciseDTO {
 	public void setExercise_Time(String exercise_Time) {
 		this.exercise_Time = exercise_Time;
 	}
-	public String getExercise_Today() {
+	public Date getExercise_Today() {
 		return exercise_Today;
 	}
-	public void setExercise_Today(String exercise_Today) {
+	public void setExercise_Today(Date exercise_Today) {
 		this.exercise_Today = exercise_Today;
 	}
 	public String getSession_UserId() {

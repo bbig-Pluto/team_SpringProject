@@ -15,7 +15,21 @@
 
 	<!-- 조회 (DB에서 확인완료)-->
 	<select id="selectAllList" resultType="exerciseDTO">
-		select * from Exercise
+		select * from Exercise ORDER BY seq_Exercise
 	</select>
 
+	<!-- 추가 (DB에서 확인완료) -->
+	<insert id="ec_insert" parameterType="exerciseDTO">
+			 insert into exercise(seq_Exercise, exercise_Contents, exercise_Time)
+			 values(seq_Exercise.nextval, #{exercise_Contents}, #{exercise_Time})
+	</insert>
+
+	<!-- 삭제 (DB에서 확인완료) -->
+	<delete id="ec_delete" parameterType="java.util.ArrayList">
+		delete from Exercise
+		where seq_Exercise in
+		<foreach item = "item" collection="array" open="(" separator="," close=")">
+		#{item}
+		</foreach>
+	</delete>
 </mapper>
