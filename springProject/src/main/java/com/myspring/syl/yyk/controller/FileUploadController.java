@@ -23,7 +23,7 @@ public class FileUploadController {
 	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
 	@RequestMapping(value="/form")
 	public String form() {
-		return "uploadForm";
+		return "yyk/uploadForm";
 	}
 	
 	
@@ -31,6 +31,9 @@ public class FileUploadController {
 	public ModelAndView upload(MultipartHttpServletRequest multipartRequest,
 			HttpServletResponse response) throws Exception{
 		multipartRequest.setCharacterEncoding("utf-8");
+		
+		System.out.println("controller upload route");
+		
 		Map map = new HashMap();
 		Enumeration enu=multipartRequest.getParameterNames();
 		
@@ -44,7 +47,7 @@ public class FileUploadController {
 		map.put("fileList", fileList);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
-		mav.setViewName("result");
+		mav.setViewName("yyk/result");
 		
 		return mav;
 	}

@@ -103,6 +103,7 @@ public class DiaryController {
 	
 	
 	
+	
 		// 일기장 추가 페이지로 이동
 		@RequestMapping(value="/addDiaryList", method=RequestMethod.GET)
 		public String addDiaryList(Model model) {
