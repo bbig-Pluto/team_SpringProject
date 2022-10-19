@@ -3,4 +3,267 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="mapper.sdy">
+<!-- 문의 게시판  -->
+	<select id="selectAllMemberList" 
+			resultType="askDTO">
+				
+		 select LEVEL, parent_no,board_no,title,content,ask_classify,ask_secret,ask_pwd,id,write_date,hit,reply_count from ask_board
+					start with parent_no is null
+					connect by prior board_no = parent_no
+					order siblings by board_no desc
+	
+	</select>
+	<!-- 게시글 비밀번호 조회 -->
+	<select id="pwCheck" 
+			resultType="String">
+		select ask_pwd from ask_board
+		where board_no =#{board_no}
+	</select>
+	
+		  <!-- 게시판 조회수 -->
+    <update id="boardHit" parameterType="String">
+    	UPDATE ask_board SET
+    	HIT = HIT+1
+    	WHERE board_no = #{board_no}
+    </update>
+     
+     <!-- 게시판 상세보기 -->
+	<select id="detailContents" parameterType="String"
+			resultType="askDTO">
+				
+		select * from ask_board
+		where board_no = #{board_no} 
+	
+	</select>
+	
+	<!-- 댓글 조회 -->
+	<select id="readReply" parameterType="String" resultType="replyDTO">
+    	select LEVEL, parent_no,board_no,re_no, content, id, reply_date from ask_reply
+    	WHERE board_no = #{board_no}
+		start with parent_no is null
+		connect by prior re_no = parent_no
+		order siblings by re_no desc
+		
+	</select>
+	<!-- 댓글 입력 -->
+	<insert id="writeReply">
+		INSERT INTO ask_reply(
+			board_no
+			, re_no
+			, content
+			, id
+		)
+		VALUES(    #{board_no}
+			, re_no_seq.nextval
+			, #{content}
+			, '손님')
+	</insert>
+	<!-- 해당 게시글 옆 댓글수 표시 -->
+	<update id="updateReplyCount" parameterType="String">
+	update ask_board b
+	set b.reply_count = (select count(re_no) from ask_reply where board_no = #{board_no})
+	where b.board_no = #{board_no}
+</update>
+	
+	<!--글쓰기 -->
+	<insert id="insertContents" parameterType="askDTO">
+		insert into ask_board
+		(board_no,ask_classify,title,content,id,ask_secret,ask_pwd,parent_no)
+	    values(b_no_seq.nextVal,#{ask_classify},#{title},#{content},'test01',#{ask_secret},#{ask_pwd},#{parent_no})
+	</insert>
+	
+	<!--게시판 체크삭제 -->
+	<delete id="deleteChkMember" parameterType="java.util.Map">
+		delete from ask_board
+		where board_no in
+		<foreach item="item" collection="list" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	<!--글삭제 -->
+	<delete id="deleteMember" parameterType="String">
+		delete from ask_board
+		where board_no = #{board_no}
+	</delete>
+	<!--댓글삭제 -->
+	<delete id="deleteReply" parameterType="String">
+		delete from ask_reply
+		where re_no = #{re_no}
+	</delete>
+	<!--글수정 -->
+	 <update id="updateContent" parameterType="askDTO">
+		UPDATE ask_board
+		   SET TITLE    =   #{title},
+		   	   CONTENT  =   #{content},
+		   	   ask_classify =#{ask_classify},
+		   	   ask_pwd =#{ask_pwd},
+		   	   ask_secret =#{ask_secret}
+		 WHERE board_no = #{board_no} 
+	</update>
+	<!--검색 기능 -->
+	 <select id="serchList" parameterType="java.util.HashMap"
+			resultType="AskDTO" >
+				
+			select * from ask_board
+		<where>
+			<if test='ser_name != null and "글제목".equals(ser_name)'>
+				and title LIKE '%'|| #{search}||'%'
+			</if>
+			<if test='ser_name != null and "작성자".equals(ser_name)'>
+				 and id LIKE '%'|| #{search}||'%'
+			</if>
+			<if test='q_head != null and "문의".equals(q_head)'>
+				and ask_classify = '문의'
+			</if>
+			<if test='q_head != null and "재문의".equals(q_head)'>
+				and ask_classify = '재문의'	
+			</if>
+			<if test='q_head != null and "제안".equals(q_head)'>
+				and ask_classify = '제안'
+			</if>
+		</where>
+	</select> 
+	
+		<!-- 체크 시 게시글 삭제 -->
+		<delete id="deleteAskChk" parameterType="java.util.List">
+		delete from ask_board 
+		where board_no in
+		<foreach item="item" collection="list" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+		<!-- 체크 시 댓글삭제 -->
+		<delete id="deleteAskReChk" parameterType="java.util.List">
+		delete from ask_reply
+		where board_no in
+		<foreach item="item" collection="list" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	 <!--페이징 보여주기 한페이지에 -->
+	<select id="pageList" parameterType="askDTO"
+			resultType="askDTO">		
+		 SELECT * FROM (
+				SELECT rownum AS rnum, tmp.* FROM (
+					SELECT * FROM ask_board
+					order by board_no desc
+				) tmp
+			)
+			<![CDATA[WHERE ? <= rnum AND rnum <= ?]]>
+	
+	</select> 
+	<!-- 게시물 총 갯수 -->
+	<select id="getAllPageList" 
+			resultType="AskDTO">
+		SELECT count(*) as cnt FROM ask_board
+	</select>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  공지게시판 -->
+	<select id="selectNoticeList" 
+			resultType="noticeDTO">
+				
+		select * from n_board 
+		order by n_set,board_no desc
+
+	</select>
+	<!-- 게시판 등록 -->
+	<insert id="insertNoticeContents" parameterType="noticeDTO">
+		insert into n_board
+		(board_no,title,content,id,n_set)
+	    values(n_bo_seq.nextVal,#{title},#{content},'test01',#{n_set})
+	</insert>
+		<!--글수정 -->
+	 <update id="updateNoticeContent" parameterType="noticeDTO">
+		UPDATE n_board
+		   SET TITLE    =   #{title},
+		   	   CONTENT  =   #{content},
+		   	   N_SET    =   #{n_set}
+		 WHERE board_no = #{board_no} 
+	</update>
+		  <!-- 게시판 조회수 -->
+    <update id="boardNoticeHit" parameterType="String">
+    	UPDATE n_board SET
+    	HIT = HIT+1
+    	WHERE board_no = #{board_no}
+    </update>
+
+     <!-- 게시판 상세보기-->
+	<select id="detailNoticeContents" parameterType="String"
+			resultType="noticeDTO">
+		select * from n_board
+		where board_no = #{board_no} 
+	</select>
+	<!--글삭제 -->
+	<delete id="deleteNoticeMember" parameterType="String">
+		delete from n_board
+		where board_no = #{board_no}
+	</delete>
+
+		<!--검색 기능 -->
+	 <select id="serchNoticeList" parameterType="String"
+			resultType="noticeDTO" >
+				
+			select * from n_board
+			where title LIKE '%'|| #{title}||'%'
+	
+	</select> 
+	<!-- 체크 시 삭제 -->
+		<delete id="deleteNoticeChk" parameterType="java.util.List">
+		delete from n_board
+		where board_no in
+		<foreach item="item" collection="list" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 큐엔에이 -->
+	<select id="selectAllQaList" 
+			resultType="qaDTO">
+				
+		select * from q_a
+	
+	
+	</select>
+	<!--글쓰기 -->
+	<insert id="insertQaContents" parameterType="qaDTO">
+		insert into q_a
+		(q_no,question,answer)
+	    values(q_no_seq.nextVal,#{question},#{answer})
+	</insert>
+		<!--수정 -->
+	 <update id="updateQaContent" parameterType="qaDTO">
+		UPDATE q_a
+		   SET question    =   #{question},
+		   	   answer  =   #{answer}
+		 WHERE q_no = #{q_no} 
+	</update>
+	<!-- 선택 시 삭제 -->
+		<delete id="deleteQaMember" parameterType="java.util.List">
+		delete from q_a
+		where q_no in
+		<foreach item="item" collection="list" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
 </mapper>

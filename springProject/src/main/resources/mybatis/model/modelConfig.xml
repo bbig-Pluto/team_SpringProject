@@ -22,6 +22,12 @@
 		
 		<typeAlias type="com.myspring.syl.lhj.dto.ExerciseDTO" alias="exerciseDTO"></typeAlias>
 		<typeAlias type="com.myspring.syl.lhj.dto.DietDTO" alias="dietDTO"></typeAlias>
+		
+		<typeAlias type="com.myspring.syl.sdy.dto.AskDTO" alias="askDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.sdy.dto.NoticeDTO" alias="noticeDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.sdy.dto.QaDTO" alias="qaDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.sdy.dto.ReplyDTO" alias="replyDTO"></typeAlias>
+		
 	</typeAliases>
 	
 </configuration>
