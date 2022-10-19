@@ -215,6 +215,28 @@
 		    <artifactId>thumbnailator</artifactId>
 		    <version>0.4.8</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator-annotation-processor -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator-annotation-processor</artifactId>
+		    <version>4.1.0.Final</version>
+		</dependency>
+		
+		<!-- 221020 add -->
+		<!-- API, java.xml.bind module -->
+		<dependency>
+		    <groupId>jakarta.xml.bind</groupId>
+		    <artifactId>jakarta.xml.bind-api</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
+		 
+		<!-- Runtime, com.sun.xml.bind module -->
+		<dependency>
+		    <groupId>org.glassfish.jaxb</groupId>
+		    <artifactId>jaxb-runtime</artifactId>
+		    <version>2.3.2</version>
+		</dependency>
 		        
 	</dependencies>
     <build>
