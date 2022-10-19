@@ -34,7 +34,7 @@ request.setCharacterEncoding("UTF-8");
 <body>
 	<div class="blankArea"></div>
 	<div class="wrapper">
-		입력한 정보와 일치하는 값을 가지는 계정이 없습니다.<br><br>
+		비밀번호 재설정에 실패하였습니다.<br><br>
 		<div class="linkToLoginPage">
 			<a href="${contextPath}/member/rd/idpwfinder">아이디 찾기 / 비밀번호 재설정 페이지로</a><br>
 		</div>

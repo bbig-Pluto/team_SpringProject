@@ -13,4 +13,6 @@ public interface MemberService {
 	public String idFinder(Map idFindKey);
 	public int addMemberSvc(Map signUpMap);
 	public String getEnquiryPwdRewriting(Map ctrlParams);
+	public int exePwdRewriting(Map ctrlParams);
+	
 }

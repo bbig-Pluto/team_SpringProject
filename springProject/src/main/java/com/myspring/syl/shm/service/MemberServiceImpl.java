@@ -69,10 +69,15 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
-	
+	@Override
 	public String getEnquiryPwdRewriting(Map ctrlParams) {
 		String result = memberDAO.enquiryPwdRewriting(ctrlParams);
 		
+		return result;
+	}
+	
+	public int exePwdRewriting(Map ctrlParams) {
+		int result = memberDAO.pwdRewrting(ctrlParams);
 		return result;
 	}
 	

@@ -75,5 +75,12 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 	}
 	
+	// 사용자가 입력한 새로운 비밀번호로 변경 실행
+	public int pwdRewrting(Map memberNumAndNewPwd) {
+		int result = sqlSession.update("mapper.shm.reWritingNewPwd", memberNumAndNewPwd);
+		
+		return result;
+	}
+	
 
 }
