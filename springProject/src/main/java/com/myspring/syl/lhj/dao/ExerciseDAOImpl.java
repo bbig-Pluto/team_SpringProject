@@ -23,7 +23,7 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 
 	@Override
 	public int ec_insert(ExerciseDTO exerciseDTO) {
-//		int ec_insert = sqlSession.selectOne("mapper.lhj.ec_insert" ,exerciseDTO);
+//		int ec_insert = sqlSession.selectOne("mapper.lhj.ec_insert" ,eintxerciseDTO);
 		Integer ec_insert = sqlSession.insert("mapper.lhj.ec_insert" ,exerciseDTO);
 		System.out.println("DAO 실행 ec_insert " + ec_insert);
 		return ec_insert;
@@ -34,5 +34,24 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 		int ec_delete = sqlSession.delete("mapper.lhj.ec_delete", seq_Exercise);
 //		System.out.println("DAO 실행 ec_delete + " + ec_delete);
 		return ec_delete;
+	}
+
+	@Override
+	public int ec_update(ExerciseDTO exerciseDTO) {
+		int ec_update = sqlSession.update("mapper.lhj.ec_update", exerciseDTO);
+		return ec_update;
+	}
+
+	@Override
+	public List<ExerciseDTO> saying() {
+		List<ExerciseDTO> saying = sqlSession.selectList("mapper.lhj.saying");
+		return saying;
+	}
+
+	@Override
+	public String sayingAry(int ary) {
+		String sayingAry = sqlSession.selectOne("mapper.lhj.sayingAry", ary);
+		
+		return sayingAry;
 	}
 }

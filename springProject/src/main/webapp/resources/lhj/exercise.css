@@ -664,7 +664,7 @@
         .button_update {
             position: relative;
             left: 226px;
-            bottom: 405px;
+            bottom: 415px;
             width: 80px;
             height: 35px;
             background-color: rgb(52, 152, 219);
@@ -677,7 +677,7 @@
         .button_update2 {
             position: relative;
             left: 226px;
-            bottom: 405px;
+            bottom: 415px;
             width: 80px;
             height: 35px;
             background-color: rgb(52, 152, 219);
@@ -691,14 +691,14 @@
             background-color: rgb(22, 129, 200);
         }
         
-        .button_update:hover2 {
+        .button_update2:hover {
             background-color: rgb(22, 129, 200);
         }
 
         .button_del {
             position: relative;
             left: 225px;
-            bottom: 405px;
+            bottom: 415px;
             width: 80px;
             height: 35px;
             background-color: #818181;

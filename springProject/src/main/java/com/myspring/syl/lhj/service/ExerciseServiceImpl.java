@@ -32,4 +32,22 @@ public class ExerciseServiceImpl implements ExerciseService{
 		return ec_delete;
 	}
 
+	@Override
+	public int ec_update(ExerciseDTO exerciseDTO) {
+		int ec_update = exerciseDAO.ec_update(exerciseDTO);
+		return ec_update;
+	}
+
+	@Override
+	public List<ExerciseDTO> saying() {
+		List<ExerciseDTO> saying = exerciseDAO.saying();
+		return saying;
+	}
+
+	@Override
+	public String sayingAry(int ary) {
+		String sayingAry = exerciseDAO.sayingAry(ary);
+		return sayingAry;
+	}
+
 }

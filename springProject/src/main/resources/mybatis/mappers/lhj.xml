@@ -4,7 +4,7 @@
  
 <mapper namespace="mapper.lhj">
 
-	<!-- resultMap -->
+	<!-- Exercise resultMap -->
 	<resultMap id="resultMap" type="exerciseDTO">
 		<result property="seq_Exercise" column="seq_Exercise" />
 		<result property="exercise_Contents" column="exercise_Contents" />
@@ -13,6 +13,12 @@
 		<result property="session_UserId" column="session_UserId" />
 	</resultMap>
 
+	<!-- Exercise_saying resultMap -->
+	<resultMap id="resultMap2" type="exerciseDTO">
+		<result property="seq_Exercise_saying" column="seq_Exercise_saying" />
+		<result property="exercise_saying_contents" column="exercise_saying_contents" />
+	</resultMap>
+	
 	<!-- 조회 (DB에서 확인완료)-->
 	<select id="selectAllList" resultType="exerciseDTO">
 		select * from Exercise ORDER BY seq_Exercise
@@ -32,4 +38,28 @@
 		#{item}
 		</foreach>
 	</delete>
+	
+	<!-- 수정 (DB에서 확인완료) -->
+	<update id="ec_update" parameterType="exerciseDTO">
+		update exercise
+		set
+		exercise_Contents=#{exercise_Contents}, exercise_Time=#{exercise_Time}
+		where
+		seq_Exercise = #{seq_Exercise}
+	</update>
+	
+	
+	<!-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ -->
+	
+	<!-- 조회 (DB에서 확인완료)-->
+	<select id="saying" resultType="exerciseDTO">
+		select * from Exercise_saying
+	</select>
+	
+	<select id="sayingAry" resultType="String" parameterType="int">
+		select Exercise_saying_contents 
+		from Exercise_saying
+		where seq_Exercise_saying = #{_parameter} 
+	</select>
+
 </mapper>

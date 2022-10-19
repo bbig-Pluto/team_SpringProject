@@ -13,7 +13,9 @@ public interface ExerciseController {
 
 	public String del(int[] seq_Exercise, Model model);
 
-	public String update(int[] seq_Exercise, Model model);
+	public String update(int[] seq_Exercise, String[] exercise_Contents, String[] exercise_Time, Model model);
 	
+	public void saying(Model model);
 	
+	public String sayingAry();
 }

@@ -12,4 +12,9 @@ public interface ExerciseDAO {
 	
 	public int ec_delete(int[] seq_Exercise);
 	
+	public int ec_update(ExerciseDTO exerciseDTO);
+	
+	public List<ExerciseDTO> saying();
+	
+	public String sayingAry(int sayingAry);
 }
