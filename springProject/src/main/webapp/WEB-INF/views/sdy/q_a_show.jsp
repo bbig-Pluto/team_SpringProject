@@ -448,7 +448,7 @@ main {
 		</div>
 		<div class="m4">|</div>
 		<div class="m5">
-			<a href="/syl/">문의하기</a>
+			<a href="/syl/ask">문의하기</a>
 		</div>
 	</div>
 	<%

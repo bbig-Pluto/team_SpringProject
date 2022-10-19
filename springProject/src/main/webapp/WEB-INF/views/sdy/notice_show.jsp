@@ -379,7 +379,7 @@ function selectAll(selectAll) {
 		</div>
 		<div class="m4">|</div>
 		<div class="m5">
-			<a href="/syl/">문의하기</a>
+			<a href="/syl/ask">문의하기</a>
 		</div>
 	</div>
 	<% Date date = new Date(); SimpleDateFormat sd = new SimpleDateFormat("yyyy년-MM월-dd일(hh시:mm분:ss초) E요일"); 
