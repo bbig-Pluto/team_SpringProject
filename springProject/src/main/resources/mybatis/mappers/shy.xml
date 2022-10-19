@@ -30,21 +30,19 @@
 	<update id="updateWishlist" parameterType="wishlistDTO">
 	
 		update wishlist
-		
-			set category = #{category},
-				name = #{name},
-				photo = #{photo},
-				price = #{price},
-				link = #{link}
-				
-			where num = #{seqNum}
+			set category='a',
+				name=#{name},
+				photo='a',
+				price=#{price},
+				link=#{link}
+			where SEQNUM = #{seqNum}
 	
 	</update>
 	
 	<delete id="deleteWishlist" parameterType="wishlistDTO">
 	
 		delete from wishlist
-			where num = #{seqNum}
+			where seqNum = #{seqNum}
 		
 	</delete>
 	

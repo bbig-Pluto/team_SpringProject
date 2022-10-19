@@ -11,5 +11,9 @@ public interface WishlistDAO {
 	public WishlistDTO pickWish(int seqNum);
 	
 	public int insertWish(WishlistDTO wishDTO);
+	
+	public int updateWish(WishlistDTO wishDTO);
+	
+	public int deleteWish(WishlistDTO wishDTO);
 
 }

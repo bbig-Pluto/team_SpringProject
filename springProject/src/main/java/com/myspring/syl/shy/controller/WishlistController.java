@@ -98,5 +98,52 @@ public class WishlistController {
 		return "/shy/InsertWish";
 	}
 	
+	/* 수정 */
+	@RequestMapping(value="/updatewish",
+					method=RequestMethod.GET)
+	public String updateWish(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam("seqNum") int seqNum,
+			@RequestParam("name") String name,
+			@RequestParam("price") int price,
+			@RequestParam("link") String link
+			) {
+		
+		List<WishlistDTO> list = wishService.getWishList();
+		request.setAttribute("wishlist", list);
+		
+		WishlistDTO wishDTO = new WishlistDTO();
+		
+		wishDTO.setSeqNum(seqNum);
+		wishDTO.setName(name);
+		wishDTO.setPrice(price);
+		wishDTO.setLink(link);
+		
+		int updatewish = wishService.getUpdateWish(wishDTO);
+		request.setAttribute("updatewish", updatewish);
+		
+		return "forward:/pickwish";
+		
+	}
+	
+	/* 삭제 */
+	@RequestMapping(value="/deletewish",
+					method=RequestMethod.GET)
+	public String deleteWish(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam("seqNum") int seqNum
+			) {
+		
+		WishlistDTO wishDTO = new WishlistDTO();
+		
+		wishDTO.setSeqNum(seqNum);
+		
+		int deletewish = wishService.getDeleteWish(wishDTO);
+		
+		return "forward:/mainwish";
+	}
+	
 
 }

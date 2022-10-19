@@ -38,4 +38,21 @@ public class WishlistServiceImpl implements WishlistService {
 		return result;
 	}
 
+	@Override
+	public int getUpdateWish(WishlistDTO wishDTO) {
+		
+		int result = wishDAO.updateWish(wishDTO);
+		
+		return result;
+	}
+	
+	@Override
+	public int getDeleteWish(WishlistDTO wishDTO) {
+		
+		int result = wishDAO.deleteWish(wishDTO);
+		
+		return result;
+	}
+
+
 }

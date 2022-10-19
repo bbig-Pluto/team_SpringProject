@@ -41,6 +41,21 @@ public class WishlistDAOImpl implements WishlistDAO {
 		
 		return result;
 	}
+	
+	public int updateWish(WishlistDTO wishDTO) {
+		
+		int result = sqlSession.update("mapper.shy.updateWishlist", wishDTO);
+		
+		return result;
+	}
+
+	@Override
+	public int deleteWish(WishlistDTO wishDTO) {
+		
+		int result = sqlSession.delete("mapper.shy.deleteWishlist", wishDTO);
+		
+		return result;
+	}
 
 
 }

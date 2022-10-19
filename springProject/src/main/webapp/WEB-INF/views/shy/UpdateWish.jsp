@@ -311,10 +311,10 @@
             left: 0;
             width: 270px;
         }
-        .del {
+        .back {
         	width: 140px;
         	height: 42px;
-        	background-color: rgb(240, 73, 87);
+        	background-color: rgb(187, 187, 187);
         	color: white;
         	text-align: center;
         	line-height: 42px;
@@ -324,7 +324,7 @@
             font-weight: 900;
             font-size: 17px;
             margin-left: 10px;
-            border-bottom: 3px solid rgb(189, 59, 70);
+            border-bottom: 3px solid rgb(134, 134, 134);
         }
         .save {
             margin-top: 60px;
@@ -440,6 +440,7 @@
                         		
                         		<div class="right_title">VIEW</div>
 
+                        		<form method="get" action="${contextPath }/updatewish">
 			                        <div class="view">
 <!-- 			                            <input name="photo" type="file" class="upload_photo" accept="image/*" required multiple> -->
 			                            <ul>
@@ -469,13 +470,10 @@
 			                            <input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 			                            
 						                <a href="${contextPath }/deletewish?seqNum=${pickwish.seqNum}">
-						                	<div class="del">삭제하기</div>
-						                	<input type="hidden" name="seqNum" value="${pickwish.seqNum }">
+						                	<div class="back">취소</div>
 						                </a>
 						                
-						                <a href="${contextPath }/updatewishPage?seqNum=${pickwish.seqNum }">
-							                <input class="save" type="submit" value="수정하기">
-						                </a>
+						                <input class="save" type="submit" value="완료하기">
 						                
 						                
                          			</div>

@@ -11,5 +11,9 @@ public interface WishlistService {
 	WishlistDTO getPickWish(int seqNum);
 	
 	int getInsertWish(WishlistDTO wishDTO);
+	
+	int getUpdateWish(WishlistDTO wishDTO);
+	
+	int getDeleteWish(WishlistDTO wishDTO);
 
 }
