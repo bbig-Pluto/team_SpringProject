@@ -53,7 +53,6 @@ public class MemberServiceImpl implements MemberService {
 		return foundId;
 	}
 	
-	
 	@Override
 	public int addMemberSvc(Map signUpMap) {
 		String signUpId = (String) signUpMap.get("id");
