@@ -216,6 +216,7 @@
 		    <version>0.4.8</version>
 		</dependency>
 		
+		<!-- 221020 add start -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator-annotation-processor -->
 		<dependency>
 		    <groupId>org.hibernate</groupId>
@@ -223,7 +224,6 @@
 		    <version>4.1.0.Final</version>
 		</dependency>
 		
-		<!-- 221020 add -->
 		<!-- API, java.xml.bind module -->
 		<dependency>
 		    <groupId>jakarta.xml.bind</groupId>
@@ -237,7 +237,8 @@
 		    <artifactId>jaxb-runtime</artifactId>
 		    <version>2.3.2</version>
 		</dependency>
-		        
+		<!-- 221020 add end -->
+		
 	</dependencies>
     <build>
         <plugins>
