@@ -17,7 +17,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>위시리스트</title>
+	<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1D4twt.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
@@ -265,8 +266,8 @@
         .select:focus {
             background-color: rgb(255, 253, 244);
         }
-        .price {
-            float: right;
+         .price {
+            /* float: right; */
             width: 168px;
             height: 35px;
             text-align: right;
@@ -274,19 +275,36 @@
             font-size: 18px;
             border: none;
             margin-top: 20px;
-            margin-right: 25px;
             border-radius: 5px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
             outline: none;
             background-color: rgb(255, 246, 227);
             padding-right: 10px;
             transition: 0.3s;
             line-height: 35px;
+            display: inline-block;
+            margin-left: 98px;
         }
         .price:focus {
             background-color: rgb(255, 253, 244);
             transition: 0.3s;
             left: 0;
             width: 180px;
+            margin-left: 86px;
+        }
+        .price_txt {
+            margin-right: 25px;
+        	width: 30px;
+        	height: 37px;
+        	background-color: rgb(255, 246, 227);
+        	font-size: 18px;
+        	float: right;
+        	margin-top: 21px;
+            line-height: 35px;
+            font-weight: 900;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
         .link {
             float: right;
@@ -304,12 +322,16 @@
             color:rgb(116, 116, 116);
             transition: 0.3s;
             overflow-y: auto;
+            word-wrap: break-word;
         }
         .link:focus {
             background-color: rgba(255, 253, 244);
             transition: 0.3s;
             left: 0;
             width: 270px;
+        }
+        .link::-webkit-scrollbar {
+            width: 0px;
         }
         .back {
         	width: 140px;
@@ -459,17 +481,18 @@
 <!-- 			                            </select><br> -->
 			                            
 			                            <div class="subname">가격</div>
-			                            <input name="price" type="text" class="price" value="${pickwish.price }"><br>
+			                            <input name="price" type="text" class="price" value="${pickwish.price }">
+			                            <div class="price_txt">￦</div><br>
 			                            
 			                            <div class="subname">링크</div>
 <!-- 			                            contenteditable="true"> -->
-			                            <textarea name="link" class="link">
-			                            	${pickwish.link }
-			                            </textarea>
+			                            <textarea name="link" class="link" type="text">${pickwish.link }</textarea>
+			                            	
+			                            
 <%-- 			                            	<a href="${wishlist.link }">${wishlist.link }</a> --%>
 			                            <input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 			                            
-						                <a href="${contextPath }/deletewish?seqNum=${pickwish.seqNum}">
+						                <a href="${contextPath }/pickwish?seqNum=${pickwish.seqNum }">
 						                	<div class="back">취소</div>
 						                </a>
 						                

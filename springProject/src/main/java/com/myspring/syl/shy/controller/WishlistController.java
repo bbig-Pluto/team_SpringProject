@@ -98,6 +98,26 @@ public class WishlistController {
 		return "/shy/InsertWish";
 	}
 	
+	/* 수정 화면으로 이동 */
+	@RequestMapping(value="/updatewishpage",
+					method=RequestMethod.GET)
+	public String updateWishPage(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam("seqNum") int seqNum
+			) {
+		
+		List<WishlistDTO> list = wishService.getWishList();
+		request.setAttribute("wishlist", list);
+		
+		WishlistDTO updatepage = wishService.getPickWish(seqNum);
+		request.setAttribute("pickwish", updatepage);
+		
+		return "/shy/UpdateWish";
+		
+				
+	}
+	
 	/* 수정 */
 	@RequestMapping(value="/updatewish",
 					method=RequestMethod.GET)

@@ -17,7 +17,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>위시리스트</title>
+	<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1D4twt.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
@@ -235,6 +236,7 @@
             color:#007e7e;
             padding: 0px 10px;
             outline: none;
+            line-height: 50px;
         }
         .view_name::placeholder {
             color: rgb(194, 194, 194);
@@ -265,8 +267,8 @@
         .select:focus {
             background-color: rgb(255, 253, 244);
         }
-        .price {
-            float: right;
+         .price {
+            /* float: right; */
             width: 168px;
             height: 35px;
             text-align: right;
@@ -274,13 +276,17 @@
             font-size: 18px;
             border: none;
             margin-top: 20px;
-            margin-right: 25px;
             border-radius: 5px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
             outline: none;
             background-color: rgb(255, 246, 227);
             padding-right: 10px;
             transition: 0.3s;
             line-height: 35px;
+            display: inline-block;
+            margin-left: 100px;
+            color:#2d747e;
         }
         .price:focus {
             background-color: rgb(255, 253, 244);
@@ -288,10 +294,23 @@
             left: 0;
             width: 180px;
         }
+        .price_txt {
+            margin-right: 25px;
+        	width: 30px;
+        	height: 35px;
+        	background-color: rgb(255, 246, 227);
+        	font-size: 18px;
+        	float: right;
+            margin-top: 22px;
+            line-height: 35px;
+            font-weight: 900;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
         .link {
             float: right;
             width: 260px;
-            height: 45px;
+            height: 30px;
             margin-top: 20px;
             margin-right: 25px;
             border: none;
@@ -303,13 +322,24 @@
             padding: 10px;
             color:rgb(116, 116, 116);
             transition: 0.3s;
-            overflow-y: auto;
+            overflow: auto;
+            padding-bottom: 30px;
+        }
+        .link::-webkit-scrollbar {
+            width: 0px;
         }
         .link:focus {
             background-color: rgba(255, 253, 244);
             transition: 0.3s;
             left: 0;
             width: 270px;
+        }
+        .link_txt {
+            display: inline-block;
+            width: 240px;
+            /* overflow: auto; */
+            text-align: center;
+            word-wrap: break-word;
         }
         .del {
         	width: 140px;
@@ -327,7 +357,7 @@
             border-bottom: 3px solid rgb(189, 59, 70);
         }
         .save {
-            margin-top: 60px;
+            margin-top: 55px;
             margin-left: 170px;
             width: 240px;
             height: 45px;
@@ -449,7 +479,7 @@
 			                        </div>
 			                    
 			                        <div class="view_info">
-			                            <input name="name" type="text" class="view_name" placeholder="상품 이름을 입력하세요" value="${pickwish.name }">
+			                            <div name="name" class="view_name">${pickwish.name }</div>
 			                            
 <!-- 			                            <div class="subname">카테고리</div> -->
 <!-- 			                            <select class="select"> -->
@@ -458,14 +488,13 @@
 <!-- 			                            </select><br> -->
 			                            
 			                            <div class="subname">가격</div>
-			                            <input name="price" type="text" class="price" value="${pickwish.price }"><br>
+			                            <div name="price" class="price">${pickwish.price }</div>
+			                            <div class="price_txt">￦</div><br>
 			                            
 			                            <div class="subname">링크</div>
-<!-- 			                            contenteditable="true"> -->
-			                            <textarea name="link" class="link">
-			                            	${pickwish.link }
-			                            </textarea>
-<%-- 			                            	<a href="${wishlist.link }">${wishlist.link }</a> --%>
+			                            <div name="link" class="link">
+			                            	<a class="link_txt" href="${pickwish.link }">${pickwish.link}</a>
+			                            </div>
 			                            <input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 			                            
 						                <a href="${contextPath }/deletewish?seqNum=${pickwish.seqNum}">
@@ -473,7 +502,7 @@
 						                	<input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 						                </a>
 						                
-						                <a href="${contextPath }/updatewishPage?seqNum=${pickwish.seqNum }">
+						                <a href="${contextPath }/updatewishpage?seqNum=${pickwish.seqNum }">
 							                <input class="save" type="submit" value="수정하기">
 						                </a>
 						                
