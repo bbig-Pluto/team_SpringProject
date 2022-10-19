@@ -9,4 +9,6 @@ public interface MemberDAO {
 	public List listMembers();
 	public MemberDTO checkToLogin(String signin_id, String signin_pwd);
 	public String idFinder(Map idFindKey);
+	public int addMemberDAO(Map signUpMap);
+	public int idDupleCheck (String signUpId);
 }

@@ -19,14 +19,12 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public List listMembers() {
-		
 		List<MemberDTO> membersList = sqlSession.selectList("mapper.shm.selectAllMemberList");
 		
 		return membersList;
 	}
 	
 	public MemberDTO checkToLogin(String signin_id, String signin_pwd) {
-		
 		MemberDTO dto = new MemberDTO();
 		dto.setId(signin_id);
 		dto.setPwd(signin_pwd);
@@ -38,10 +36,28 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public String idFinder(Map idFindKey) {
-		
 		String idFound = sqlSession.selectOne("mapper.shm.idSearching", idFindKey);
 		
 		return idFound;
 	}
+
+	
+	// 회원가입 전 ID 중복체크
+	@Override
+	public int idDupleCheck (String dupleCheckId) {
+		int idDupleResult = sqlSession.selectOne("mapper.shm.idDupleCheck", dupleCheckId);
+		
+		return idDupleResult;
+	}
+	
+	// 회원가입
+	@Override
+	public int addMemberDAO(Map signUpMap) {
+		int resultOfInsertMember = sqlSession.insert("mapper.shm.addMember", signUpMap);
+		
+		return resultOfInsertMember;
+	}
+	
+	
 
 }

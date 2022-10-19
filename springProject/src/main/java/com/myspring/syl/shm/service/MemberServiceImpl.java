@@ -55,6 +55,32 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
+	private int idDupleCheck(String signUpId) {
+		
+		int result = 1;
+		
+		result = memberDAO.idDupleCheck(signUpId);
+		
+		return result;
+	}
+	
+	
+	@Override
+	public int addMemberSvc(Map signUpMap) {
+		
+		String signUpId = (String) signUpMap.get("id");
+		int result = idDupleCheck(signUpId);
+		
+		int resultOfInsertMember = 0;
+		
+		if( result == 0 ) {
+			return resultOfInsertMember = memberDAO.addMemberDAO(signUpMap);
+		} else {
+			// 중복 ID 존재, 회원가입 실패
+			return resultOfInsertMember;
+		}
+	}
+	
 	
 
 }
