@@ -629,14 +629,13 @@
                         
                         <div class="right_title">VIEW</div>
                         
+                <!-- 상품 추가 -->
                 <form method="get" action="${contextPath }/insertwish">
 
                         <div class="view">
-                            <input type="file" class="upload_photo" accept="image/*" >
+                            <input name="file" type="file" class="upload_photo" accept="image/*" onchange="readURL(this);">
 <!--                             required multple -->
-                            <ul>
-                                <li class="view_photo"></li>
-                            </ul>
+                                <img class="view_photo">
                             <div class="photo_add">+</div>
                         </div>
                     

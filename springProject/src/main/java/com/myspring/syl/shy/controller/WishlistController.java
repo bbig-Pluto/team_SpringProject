@@ -1,5 +1,7 @@
-package com.myspring.syl.shy.controller;
+ package com.myspring.syl.shy.controller;
 
+import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.syl.shy.dto.WishlistDTO;
@@ -58,16 +62,18 @@ public class WishlistController {
 	
 	/* 상품 추가 */
 	@RequestMapping(value="/insertwish",
-					method=RequestMethod.GET)
+					method= {RequestMethod.GET, RequestMethod.POST})
 	public String insertWish(
 			HttpServletRequest request,
 			HttpServletResponse response,
 			Model model,
 			@RequestParam("name") String name,
 			@RequestParam("price") int price,
-			@RequestParam("link") String link
-			
-			) {
+			@RequestParam("link") String link,
+			MultipartHttpServletRequest multipartRequest
+			) throws Exception
+	{
+		
 		WishlistDTO wishDTO = new WishlistDTO();
 		
 		wishDTO.setName(name);
@@ -77,8 +83,15 @@ public class WishlistController {
 		System.out.println("상품명 : "+ wishDTO.getName());
 		
 		int insertwish = wishService.getInsertWish(wishDTO);
-		
 		request.setAttribute("insertwish", insertwish);
+		
+		/* 파일 저장 */
+		String originalFileName = fileProcess(multipartRequest);
+		
+		System.out.println("상품 추가 파일 이름 : " + originalFileName );
+		
+		wishDTO.setPhoto(originalFileName);
+		
 		
 		return "forward:/mainwish";
 	}
@@ -163,6 +176,51 @@ public class WishlistController {
 		int deletewish = wishService.getDeleteWish(wishDTO);
 		
 		return "forward:/mainwish";
+	}
+	
+	/* 파일 저장 위치 지정 */
+	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\imgae_repo";
+	
+	/* 파일 업로드 */
+	private String fileProcess(MultipartHttpServletRequest multipartRequest)throws Exception {
+		
+		/* 첨부 파일 모두 가져오기 */
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		/* 첨부 파일의 이름 가져오기 */
+		String fileName = fileNames.next();
+		System.out.println("fileName : " + fileName);
+		
+		/* 파일 이름에 대한 MultipartFile 객체 가져오기 */
+		MultipartFile mFile = multipartRequest.getFile(fileName);
+		
+		/* 실제 파일 이름 가져오기 */
+		String originalFileName = mFile.getOriginalFilename();
+		System.out.println("originalFileName : " + originalFileName);
+		
+		/* 파일 이름 하나씩 fileList에 저장하기 */
+		File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
+		
+		/* 첨부된 파일이 있는지 체크 */
+		if ( mFile.getSize() != 0) {
+			
+			/* 경로에 파일이 없으면 그 경로에 해당하는 디렉터리 만든 후 파일 생성 */
+			if ( ! file.exists() ) {
+				
+				/* 폴더가 없다면 부모 폴더까지 만듬 */
+				if ( file.getParentFile().mkdirs() ) {
+					file.createNewFile();
+				}
+			}
+			
+			/* 임시로 저장된 multiFile을 실제 파일로 전송 */
+			mFile.transferTo( new File (CURR_IMAGE_REPO_PATH + "\\" + originalFileName) );
+		}
+		
+		/* 실제 파일 return */
+		return originalFileName;
+		
+		
 	}
 	
 
