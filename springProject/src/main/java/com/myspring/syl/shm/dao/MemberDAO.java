@@ -11,4 +11,5 @@ public interface MemberDAO {
 	public String idFinder(Map idFindKey);
 	public int addMemberDAO(Map signUpMap);
 	public int idDupleCheck (String signUpId);
+	public String enquiryPwdRewriting(Map paramsMap);
 }

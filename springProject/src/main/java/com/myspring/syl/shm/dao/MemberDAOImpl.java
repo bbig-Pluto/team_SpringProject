@@ -1,6 +1,7 @@
 package com.myspring.syl.shm.dao;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,6 +25,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return membersList;
 	}
 	
+	// 로그인 체크
 	public MemberDTO checkToLogin(String signin_id, String signin_pwd) {
 		MemberDTO dto = new MemberDTO();
 		dto.setId(signin_id);
@@ -34,6 +36,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return dto;
 	}
 	
+	// 아이디 찾기
 	@Override
 	public String idFinder(Map idFindKey) {
 		String idFound = sqlSession.selectOne("mapper.shm.idSearching", idFindKey);
@@ -54,10 +57,23 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int addMemberDAO(Map signUpMap) {
 		int resultOfInsertMember = sqlSession.insert("mapper.shm.addMember", signUpMap);
-		
 		return resultOfInsertMember;
 	}
 	
+	
+	// 비밀번호 변경 위한 회원조회
+	@Override
+	public String enquiryPwdRewriting(Map paramsMap) {
+		String memberNum = "";
+		
+		try {
+			memberNum = sqlSession.selectOne("mapper.shm.enquiryForPwdRewriting", paramsMap);
+			return memberNum;
+		
+		} catch(NullPointerException e) {
+			return memberNum = "fail";
+		}
+	}
 	
 
 }

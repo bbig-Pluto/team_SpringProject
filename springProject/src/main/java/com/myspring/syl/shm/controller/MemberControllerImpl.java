@@ -255,6 +255,25 @@ public class MemberControllerImpl {
 		
 	}
 	
+	@RequestMapping("/member/pwdRewriteCheck.do")
+	public String pwdRewriteCheck(
+			Model model,
+			@RequestParam( value = "pwdRewriteId" , required = true) String pwdRewriteId,
+			@RequestParam( value = "pwdRewriteTelNum", required = true) String pwdRewriteTelNum
+			) {
+		Map<String, Object> pwdRewritingParam = new HashMap<String, Object>();
+		pwdRewritingParam.put("id", pwdRewriteId);
+		pwdRewritingParam.put("telNum", pwdRewriteTelNum);
+		
+		int enquiryResult = memberService.getEnquiryPwdRewriting(pwdRewritingParam);
+		
+		if(enquiryResult == 1) {
+			
+			return "forward:/shm/pwdrewriting";
+		} else {
+			return "redirect:/shm/pwdrewritingfail";
+		}
+	}
 	
 	
 	private void setFailSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {

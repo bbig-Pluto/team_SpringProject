@@ -1,5 +1,6 @@
 package com.myspring.syl.shm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +23,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDTO getLoginResult(String signin_id, String signin_pwd) {
-
 		MemberDTO dto = new MemberDTO();
-
 		try {
-
 			dto = memberDAO.checkToLogin(signin_id, signin_pwd);
 
 			// 로그인 성공(관리자)
@@ -46,28 +44,18 @@ public class MemberServiceImpl implements MemberService {
 		return dto;
 	}
 	
+	
+	@Override
 	public String idFinder(Map idFindKey) {
-		
 		String foundId;
 		foundId = memberDAO.idFinder(idFindKey);
 		
 		return foundId;
-		
-	}
-	
-	private int idDupleCheck(String signUpId) {
-		
-		int result = 1;
-		
-		result = memberDAO.idDupleCheck(signUpId);
-		
-		return result;
 	}
 	
 	
 	@Override
 	public int addMemberSvc(Map signUpMap) {
-		
 		String signUpId = (String) signUpMap.get("id");
 		int result = idDupleCheck(signUpId);
 		
@@ -82,5 +70,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
+	public int getEnquiryPwdRewriting(Map ctrlParams) {
+		String result = memberDAO.enquiryPwdRewriting(ctrlParams);
+		
+		if( !(result.equals("fail")) ) {
+			return 0; 
+		} else {
+			return 0; 
+		}
+	}
+	
+	
+	private int idDupleCheck(String signUpId) {
+		int result = 1;
+		result = memberDAO.idDupleCheck(signUpId);
+		return result;
+	}
 
 }

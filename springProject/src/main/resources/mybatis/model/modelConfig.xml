@@ -16,9 +16,9 @@
 		<typeAlias type="com.myspring.syl.sdy.dto.QaDTO" alias="qaDTO"></typeAlias>
 		<typeAlias type="com.myspring.syl.sdy.dto.TodoDTO" alias="todoDTO"></typeAlias>
 		
-		<typeAlias type="com.myspring.syl.sjs.dto.CalenderMDTO" alias="calenderMDTO"></typeAlias>
-		<typeAlias type="com.myspring.syl.sjs.dto.CalenderWDTO" alias="calenderWDTO"></typeAlias>
-		<typeAlias type="com.myspring.syl.sjs.dto.CalenderDTO" alias="calenderDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.sjs.dto.CalendarMDTO" alias="calendarMDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.sjs.dto.CalendarWDTO" alias="calendarWDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.sjs.dto.CalendarDTO" alias="calendarDTO"></typeAlias>
 		
 		<typeAlias type="com.myspring.syl.lhj.dto.ExerciseDTO" alias="exerciseDTO"></typeAlias>
 		<typeAlias type="com.myspring.syl.lhj.dto.DietDTO" alias="dietDTO"></typeAlias>

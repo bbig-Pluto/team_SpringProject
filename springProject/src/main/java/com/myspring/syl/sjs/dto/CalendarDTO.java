@@ -1,5 +1,5 @@
 package com.myspring.syl.sjs.dto;
 
-public class CalenderMDTO {
+public class CalendarDTO {
 
 }
