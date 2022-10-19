@@ -127,8 +127,8 @@ h2 {
   }
   .del_p{
             /* 전체100%로 잡고, 위치는 맨위왼쪽끝. 앱솔루트로 고정.*/
-            width: 100%;
-            height: 100%;
+            width: 1200px;
+            height: 925px;
 /*             display: flex; */
             position: absolute;
             left:0;
@@ -142,6 +142,8 @@ h2 {
 
             /* 안보이게 하기 */
             display: none;
+            z-index:2 ; 
+  
   }
   .del{
 
@@ -408,7 +410,7 @@ main {
  	position:relative;
 	top:50px; 
 	left:300px; 
-	z-index: 1;
+ 	z-index:1 ; 
 	
 }
 .mod_re{
@@ -525,22 +527,11 @@ function replyInsert(){
 				<div class="area_wrapper">
 		<h2>문의하기</h2>
 		<div class="box">
-		  <div class="del_p">
-				    <div class="del">
-				        <div class="warn"><strong>삭제하시겠습니까?</strong></div>
-				        <div class="go">
-				            <a href="/syl/ask_del?board_no=${list.board_no }" >확인</a>
-				        </div>
-				        <div class="cancel">
-				            <a href="/syl/detail?board_no=${list.board_no }">취소</a>
-				        </div>
-				    </div>
-			    </div>
-		<%--  <%HttpSession userInfo = request.getSession();
+		  <% 
+		 	HttpSession userInfo = request.getSession();
 			String sessionId = "" + userInfo.getAttribute("logOn.id");
-			
-			if(!sessionId.equals("null")){
-			%>	 --%>
+			%>	 
+		<%-- 	<%if(!sessionId.equals("null")){ %> --%>
 			<div class="view_more">
 				<img src="https://cdn-icons-png.flaticon.com/512/7794/7794501.png">
 			</div>
@@ -616,12 +607,23 @@ function replyInsert(){
 			</c:choose>
 			</c:forEach>
 		</div>
-					<div class="re_writer">본인id</div>
+					<div class="re_writer"><%=sessionId %></div>
 		<form name="replyFrm" class="frm" >
 			<div class="re_title">댓글쓰기</div>
 			<input type="text" name="content" class="re_content_input">
 			<input type="button" value="등록" onclick="replyInsert()" class="reply_btn">
 		</form>
+		  <div class="del_p">
+				    <div class="del">
+				        <div class="warn"><strong>삭제하시겠습니까?</strong></div>
+				        <div class="go">
+				            <a href="/syl/ask_del?board_no=${list.board_no }" >확인</a>
+				        </div>
+				        <div class="cancel">
+				            <a href="/syl/detail?board_no=${list.board_no }">취소</a>
+				        </div>
+				    </div>
+			    </div>
 
 	<form method="post" action="/syl/ask">
 		<input type="submit" value="목록" class="list">

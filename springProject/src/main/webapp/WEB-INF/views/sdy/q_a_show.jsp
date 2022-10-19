@@ -387,16 +387,19 @@ main {
     	
     	function qaMod(){
     		let mod = document.querySelector(".mod");
-    		let chk = document.querySelector(".chk").value;
+    		let chk = document.querySelectorAll(".chk input[type='checkbox']");
     		
-    		mod.addEventListener("click",()=>{
-    		if(chk=='checked'){
+    	for(let i=0;i<chk.length; i++){
+    		if(chk[i].checked){
     			frmMod.action="/syl/qa_mod";
-    			frmMdd.method="get";
+    			frmMod.method="post";
     			frmMod.submit();
     		}
+    		
+    	}
+    		
     	
-    	})
+    
     	}
     	
     	function selectAll(selectAll) {
@@ -466,10 +469,10 @@ main {
 	<div class="chkAll"><input type="checkbox" name="check" onclick="selectAll(this)">전체선택</div>
   <c:forEach var="list" items="${ list}">
 	<div class="add_box">
-  		 <div class="chk" ><input type="checkbox" value="${list.q_no }" name="check" ></div>
+  		 <div class="chk" ><input type="checkbox"  name="check" ></div>
 		<div class='question_p'>
 			<div class='q'>
-				Q.${list.question }
+				Q.${list.question }//${list.q_no }
 			</div>
 		</div>
 		<div class='answer_p'> 
@@ -477,6 +480,7 @@ main {
 				A.${list.answer}
 		</div>
 		</div>
+  		 <input type="hidden" name="q_no" value="${list.q_no }">
 	</div>
 	</c:forEach>
   </form>

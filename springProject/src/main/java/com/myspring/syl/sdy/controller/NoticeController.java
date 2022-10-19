@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,16 +71,22 @@ public class NoticeController extends HttpServlet {
 		public ModelAndView Ninsert(	
 									@RequestParam("title") String title,
 									@RequestParam("content") String content,
-									@RequestParam("n_set") String n_set
+									@RequestParam("n_set") String n_set,
+									HttpServletRequest request
 									) {
-			NoticeDTO noticeDTO= new NoticeDTO();
-			noticeDTO.setContent(content);
-			noticeDTO.setTitle(title);
-			noticeDTO.setN_set(n_set);
+			 HttpSession userInfo = request.getSession();
+				String sessionId = "" + userInfo.getAttribute("logOn.id");
+				System.out.println("글쓰기 아이디: "+sessionId);
+				
+				NoticeDTO noticeDTO= new NoticeDTO();
+				noticeDTO.setContent(content);
+				noticeDTO.setTitle(title);
+				noticeDTO.setN_set(n_set);
+				noticeDTO.setId(sessionId);
 
-			noticeService.getNoticeInsertList(noticeDTO);
-			ModelAndView mav = 	new ModelAndView("redirect:/notice");
-			return mav;
+				noticeService.getNoticeInsertList(noticeDTO);
+				ModelAndView mav = 	new ModelAndView("redirect:/notice");
+				return mav;
 		}
 	//검색기능
 		@RequestMapping(value="/Nsearch",method= {RequestMethod.GET,RequestMethod.POST})

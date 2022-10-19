@@ -56,7 +56,7 @@
 		VALUES(    #{board_no}
 			, re_no_seq.nextval
 			, #{content}
-			, '손님')
+			, #{id})
 	</insert>
 	<!-- 해당 게시글 옆 댓글수 표시 -->
 	<update id="updateReplyCount" parameterType="String">
@@ -69,7 +69,7 @@
 	<insert id="insertContents" parameterType="askDTO">
 		insert into ask_board
 		(board_no,ask_classify,title,content,id,ask_secret,ask_pwd,parent_no)
-	    values(b_no_seq.nextVal,#{ask_classify},#{title},#{content},'test01',#{ask_secret},#{ask_pwd},#{parent_no})
+	    values(b_no_seq.nextVal,#{ask_classify},#{title},#{content},#{id},#{ask_secret},#{ask_pwd},#{parent_no})
 	</insert>
 	
 	<!--게시판 체크삭제 -->
@@ -183,7 +183,7 @@
 	<insert id="insertNoticeContents" parameterType="noticeDTO">
 		insert into n_board
 		(board_no,title,content,id,n_set)
-	    values(n_bo_seq.nextVal,#{title},#{content},'test01',#{n_set})
+	    values(n_bo_seq.nextVal,#{title},#{content},#{id},#{n_set})
 	</insert>
 		<!--글수정 -->
 	 <update id="updateNoticeContent" parameterType="noticeDTO">

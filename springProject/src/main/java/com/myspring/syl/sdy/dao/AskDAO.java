@@ -70,7 +70,7 @@ public class AskDAO {
 //	}
 	//글삭제
 	public void delList(String board_no) {
-		sqlSession.delete("mapper.sdy.deletesdy", board_no);
+		sqlSession.delete("mapper.sdy.deleteMember", board_no);
 	}
 	//댓글삭제
 	public void delReList(String re_no) {

@@ -415,15 +415,22 @@ function selectAll(selectAll) {
 		</c:choose>
 		
 			<td class="u">${list.id }</td>
-	<%-- 		 <c:choose>
-				<c:when test="${list.write_date eq noticeDate }">
-					<td class="w"><fmt:formatDate value="${list.write_date}" pattern="hh:mm"/></td>
-				</c:when>
-				<c:otherwise> --%>
-					<td class="w"><fmt:formatDate value="${list.write_date}" pattern="YYYY-MM-dd"/></td>
-<%-- 				</c:otherwise>
-			</c:choose>  --%>
-					<td class="w">${list.hit}</td>
+			
+				<!-- 시스템에서 현제시간 -->
+					<c:set var="now" value="<%=new java.util.Date()%>" />
+					<c:set var="sysNow"><fmt:formatDate value="${now}" pattern="YYYY-MM-dd" /></c:set> 
+					<!-- 글쓴 시간 -->
+					<c:set var="write_date"><fmt:formatDate value="${list.write_date}" pattern="YYYY-MM-dd"/></c:set> 
+				
+				<c:choose>
+					<c:when test="${ sysNow eq write_date}">
+						<td class="w"><fmt:formatDate value="${list.write_date}" pattern="hh:mm:ss"/></td> 
+					</c:when>
+					<c:otherwise>
+						<td class="w"><fmt:formatDate value="${list.write_date}" pattern="YYYY-MM-dd"/></td> 
+					</c:otherwise>
+				</c:choose>
+			<td class="w">${list.hit}</td>
 		</tr>
 		</c:forEach>
 	</table>

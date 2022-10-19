@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,8 +61,13 @@ public class AskController extends HttpServlet {
 			@RequestParam("content") String content,
 			@RequestParam("ask_secret") String ask_secret,
 			@RequestParam("board_no") String board_no,
-			@RequestParam(value="ask_pwd",required=false) String ask_pwd 
+			@RequestParam(value="ask_pwd",required=false) String ask_pwd ,
+			HttpServletRequest request
 			) {
+		
+		 HttpSession userInfo = request.getSession();
+			String sessionId = "" + userInfo.getAttribute("logOn.id");
+			System.out.println("글쓰기 아이디: "+sessionId);
 		AskDTO askDTO= new AskDTO();
 		System.out.println("parent_no  :  "+board_no);
 		askDTO.setAsk_classify(ask_classify);
@@ -71,6 +77,7 @@ public class AskController extends HttpServlet {
 		askDTO.setAsk_secret(ask_secret);
 		askDTO.setContent(content);
 		askDTO.setTitle(title);
+		askDTO.setId(sessionId);
 		
 		askService.getInsertList(askDTO);
 		ModelAndView mav = 	new ModelAndView("redirect:/ask");
@@ -80,20 +87,27 @@ public class AskController extends HttpServlet {
 	@RequestMapping(value="/reWrite",method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView reWrite() {
 		ModelAndView mav = 	new ModelAndView();
-		mav.setViewName("ask_rewrite");
+		mav.setViewName("/sdy/ask_rewrite");
 		
 		return mav;
 	}
 	//댓글쓰기 
 	@RequestMapping(value="/insertReply",method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView insert(	@ModelAttribute ReplyDTO dto,
+	public ModelAndView insert(	
 								@RequestParam("board_no") String board_no,
-								@RequestParam("content") String content
+								@RequestParam("content") String content,
+								HttpServletRequest request
+								
 								) {
-	System.out.println("댓글 쓰기 진입");
-//		ReplyDTO dto= new ReplyDTO();
-//		dto.setBoard_no(board_no);
-//		dto.setContent(content);
+		 HttpSession userInfo = request.getSession();
+			String sessionId = "" + userInfo.getAttribute("logOn.id");
+			System.out.println("글쓰기 아이디: "+sessionId);
+			
+			ReplyDTO dto = new ReplyDTO();
+		
+			dto.setBoard_no(board_no);
+			dto.setContent(content);
+			dto.setId(sessionId);
 
 		askService.getInsertReply(dto);
 		ModelAndView mav = 	new ModelAndView("redirect:/detail?board_no="+board_no);
@@ -154,7 +168,7 @@ public class AskController extends HttpServlet {
 		System.out.println("del의 board_no : "+board_no);
 		askService.getDelList(board_no);
 		
-		ModelAndView mav = 	new ModelAndView("redirect:/");
+		ModelAndView mav = 	new ModelAndView("redirect:/ask");
 		return mav;
 	}
 	//댓글삭제

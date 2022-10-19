@@ -400,11 +400,17 @@ display:inline-block;
 				<a href="/syl/ask">문의하기</a>
 			</div>
 		</div>
-	
+	<%
+		 HttpSession userInfo = request.getSession();
+		String sessionId = "" + userInfo.getAttribute("logOn.id");
+		System.out.println("글쓰기 아이디: "+sessionId);
+	%>
 
 		<table>
 			<tr>
+			<%-- <%if(!sessionId.equals("null")){ %>   --%>
 				<th class="check"><input type="checkbox" name="check" onclick="selectAll(this)" ></th>
+	<%-- 			<%} %> --%>
 				<th class="no">No.</th>
 				<th class="category">카테고리</th>
 				<th class="title">제목</th>
@@ -415,7 +421,9 @@ display:inline-block;
 	<form name="frm" action="/syl/AdelCheck" method="post">
 		<c:forEach var="list" items="${ list}">
 			<tr class="show">
+		<%-- 	<%if(!sessionId.equals("null")){ %>  --%> 
 				<td class="chk"><input type="checkbox" name="check"value="${list.board_no}"></td>
+	<%-- 			<%} %> --%>
 				<td class="n">${list.board_no}</td>
 				<td class="c">[${list.ask_classify}]</td>
 				 <td class="t">
@@ -464,28 +472,38 @@ display:inline-block;
 				</c:choose>		
 				</td> 
 				<td class="u">${list.id} </td>
-				 <td class="w"><fmt:formatDate value="${list.write_date}" pattern="YYYY-MM-dd"/></td> 
+				
+					<!-- 시스템에서 현제시간 -->
+					<c:set var="now" value="<%=new java.util.Date()%>" />
+					<c:set var="sysNow"><fmt:formatDate value="${now}" pattern="YYYY-MM-dd" /></c:set> 
+					<!-- 글쓴 시간 -->
+					<c:set var="write_date"><fmt:formatDate value="${list.write_date}" pattern="YYYY-MM-dd"/></c:set> 
+				
+				<c:choose>
+					<c:when test="${ sysNow eq write_date}">
+						<td class="w"><fmt:formatDate value="${list.write_date}" pattern="hh:mm:ss"/></td> 
+					</c:when>
+					<c:otherwise>
+						<td class="w"><fmt:formatDate value="${list.write_date}" pattern="YYYY-MM-dd"/></td> 
+					</c:otherwise>
+				</c:choose>
 				 <td class="h">${list.hit}</td>
 	
 			</tr>
 		</c:forEach>
 		
 		</table>
+	<%-- 	<%if(!sessionId.equals("null")){ %>   --%>
 		<input type="submit" value="삭제" class="checkDel_btn">
+<%-- 		<%}%>   --%>
 	</form>
-<%-- 	  <%
-
-		 HttpSession userInfo = request.getSession();
-		String sessionId = "" + userInfo.getAttribute("logOn.id");
-		System.out.println("글쓰기 아이디: "+sessionId);
-		
-		if(!sessionId.equals("null")){ %>  
-	<%}%>   --%>
+ 	<%--   <%if(!sessionId.equals("null")){ %>   --%>
 		<form method="post" action="/syl/write">
 			<div class="btn">
 				<input type="submit" value="글쓰기">
 			</div>
 		</form>
+	<%-- 	<%}%>   --%> 
 		<form method="post" action="/syl/search">
 			<div class="ser">
 			<select name="q_head">
