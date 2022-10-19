@@ -16,5 +16,7 @@ public interface MemberService {
 	public int exePwdRewriting(Map ctrlParams);
 	public int exeDelMemFromAdmin(String memberNum);
 	public MemberDTO getMemberInfoForModify(String memberNum);
+	public int exeModifyMemberInfo(MemberDTO dto);
+	
 	
 }

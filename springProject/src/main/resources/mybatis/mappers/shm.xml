@@ -52,13 +52,10 @@
 	</insert>
 	
 	<select id="enquiryForPwdRewriting" resultType="String" parameterType="Hashmap">
-	
 			select memberNum
 			from syl_member 
 			WHERE id=#{id} and telNum=#{telNum} group by pwd, memberNum
-	
 	</select>
-	
 	
 	<update id="reWritingNewPwd" parameterType="Hashmap">
 		update syl_member set
@@ -77,4 +74,11 @@
 		where memberNum=#{_parameter}
 	</select>
 	
+	<update id="modifyMemInfoFromAdmin" parameterType="MemberDTO">
+		update syl_member SET 
+		telNum=#{telNum}, 
+		nickName=#{nickName}, 
+		emailAdd=#{emailAdd} 
+		where memberNum=#{memberNum}
+	</update>
 </mapper>

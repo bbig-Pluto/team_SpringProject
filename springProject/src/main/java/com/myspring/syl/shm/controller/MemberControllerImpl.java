@@ -181,6 +181,7 @@ public class MemberControllerImpl {
 	@RequestMapping(value = "/member/idFind.do",
 					method = RequestMethod.POST)
 	public String idSearching(
+
 			Model model,
 			@RequestParam(value = "idFindEmailAdd", required = true) String idFindEmailAdd,
 			@RequestParam(value = "idFindTelNum", required = true) String idFindTelNum
@@ -199,13 +200,18 @@ public class MemberControllerImpl {
 				idFindMap.put("telNum", idFindTelNum);
 				
 				String foundId = memberService.idFinder(idFindMap);
-				model.addAttribute("foundId", foundId);
 				
-				return "/shm/idfound";
+				if( !(foundId.isEmpty()) ) {
+					model.addAttribute("foundId", foundId);
+					return "/shm/idfound";
+				} else {
+					// 조회결과 없음
+					return "redirect:/member/rd/idfoundfail";
+				}
 			} else {
+				// 입력칸이 공란, 나중에 자바스크립트로 막기
 				return "redirect:/member/rd/idfoundfail";
 			}
-			
 	}
 	
 	
@@ -277,13 +283,19 @@ public class MemberControllerImpl {
 		pwdRewritingParam.put("id", pwdRewriteId);
 		pwdRewritingParam.put("telNum", pwdRewriteTelNum);
 		
-		
 		String enquiryResult = memberService.getEnquiryPwdRewriting(pwdRewritingParam);
 		
-		if( !(enquiryResult.equals("fail")) ) {
-			pwdRewritingDTO.setMemberNum(enquiryResult);
-			return "redirect:/member/rd/pwdrewriting";
+		if( (pwdRewriteId != null && !(pwdRewriteId.isEmpty()))
+				&& (pwdRewriteTelNum != null && !(pwdRewriteTelNum.isEmpty())) ) {
+			if( !(enquiryResult.equals("fail")) ) {
+				pwdRewritingDTO.setMemberNum(enquiryResult);
+				return "redirect:/member/rd/pwdrewriting";
+			} else {
+				// 조회결과 없음
+				return "redirect:/member/rd/pwdrewritingfail";
+			}
 		} else {
+			// 입력칸이 공란, 나중에 자바스크립트로 막기
 			return "redirect:/member/rd/pwdrewritingfail";
 		}
 	}
@@ -369,24 +381,35 @@ public class MemberControllerImpl {
 	
 	
 	/**
-	 * 
+	 * 관리자가 수정한 회원정보 실제 계정에 반영(update)
 	 * @param model
-
 	 * @param modiNickname
 	 * @param modiEmailAdd
 	 * @param modiTelNum
-	 * @return
+	 * @return viewName
 	 */
-	@RequestMapping(value = "/modifyingMemberInfo.do",
+	@RequestMapping(value = "/member/modifyingMemberInfo.do",
 					method = RequestMethod.GET)
 	public String modifyingMemberInfo(
 			Model model,
 			@RequestParam("nickName") String modiNickname,
 			@RequestParam("emailAdd") String modiEmailAdd,
-			@RequestParam("telNum") String modiTelNum
+			@RequestParam("telNum") String modiTelNum,
+			@RequestParam("memberNum") String modiMemberNum
 			) {
+		MemberDTO dto = new MemberDTO();
+		dto.setNickName(modiNickname);
+		dto.setEmailAdd(modiEmailAdd);
+		dto.setTelNum(modiTelNum);
+		dto.setMemberNum(modiMemberNum);
 		
-		return "";
+		int result = memberService.exeModifyMemberInfo(dto);
+		
+		if(result == 1) {
+			return "redirect:/member/memberslist.do";
+		} else {
+			return "redierct:/member/rd/wrongapproach";
+		}
 	}
 	
 	

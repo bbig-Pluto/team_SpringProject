@@ -97,10 +97,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	public MemberDTO getMemberInfoForModify(String memberNum) {
-		
 		MemberDTO dto = memberDAO.enquireMemberFromAdmin(memberNum);
 		
 		return dto;
+	}
+	
+	public int exeModifyMemberInfo(MemberDTO dto) {
+		int result = memberDAO.updateMemberInfo(dto);
+		return result;
 	}
 	
 }

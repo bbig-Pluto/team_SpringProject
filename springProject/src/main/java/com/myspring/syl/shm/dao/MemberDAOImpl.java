@@ -45,7 +45,6 @@ public class MemberDAOImpl implements MemberDAO {
 		return idFound;
 	}
 
-	
 	// 회원가입 전 ID 중복체크
 	@Override
 	public int idDupleCheck (String dupleCheckId) {
@@ -61,18 +60,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return resultOfInsertMember;
 	}
 	
-	
 	// 비밀번호 변경 위한 회원조회
 	@Override
 	public String enquiryPwdRewriting(Map paramsMap) {
 		String memberNum = "";
-		
-		try {
-			memberNum = sqlSession.selectOne("mapper.shm.enquiryForPwdRewriting", paramsMap);
-			return memberNum;
-		
-		} catch(NullPointerException e) {
+		memberNum = sqlSession.selectOne("mapper.shm.enquiryForPwdRewriting", paramsMap);
+			
+		if (memberNum == null) {
 			return memberNum = "fail";
+		} else {
+			return memberNum;
 		}
 	}
 	
@@ -93,11 +90,18 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	// 관리자 페이지 회원 정보 수정을 위해 회원 DB 조회
+	@Override
 	public MemberDTO enquireMemberFromAdmin(String memberNum) {
 		MemberDTO dto = sqlSession.selectOne("mapper.shm.enquireMemFromAdmin", memberNum);
 		
 		return dto;
 	}
 	
+	// 관리자 페이지 회원 정보 수정 반영
+	@Override
+	public int updateMemberInfo(MemberDTO dto) {
+		int result = sqlSession.update("mapper.shm.modifyMemInfoFromAdmin", dto);
+		return result;
+	}
 
 }

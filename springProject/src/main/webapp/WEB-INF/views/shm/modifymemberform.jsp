@@ -45,19 +45,19 @@
 
 <body>
     <div class="blankArea"></div>
-    <form action="${contextPath}/member/modifyingMemberInfo.do" method="post">
+    <form action="${contextPath}/member/modifyingMemberInfo.do" method="get">
         <table align="center">
             <caption>회원 정보 수정</caption>
             <tbody>
                 <tr>
                     <td class="modCategory">아이디 : &nbsp;</td>
                     <td><input class="forbidModi" type="text" name="id" value="${ memInfo.id }" readonly></td>
-                    <td><a href="${contextPath}/hunminjsp/idpwfinder.jsp">아이디 찾기</a></td>
+                    <td><a href="${contextPath}/member/rd/idpwfinder">아이디 찾기</a></td>
                 </tr>
                 <tr>
                     <td class="modCategory">비밀번호 : &nbsp;</td>
                     <td><input class="forbidModi" type="text" name="pwd" value="${ memInfo.pwd }" readonly></td>
-                    <td><a href="${contextPath}/hunminjsp/idpwfinder.jsp">비밀번호 재설정</a></td>
+                    <td><a href="${contextPath}/member/rd/idpwfinder">비밀번호 재설정</a></td>
                 </tr>
                 <tr>
                     <td class="modCategory">전화번호 : &nbsp;</td>

@@ -15,4 +15,5 @@ public interface MemberDAO {
 	public int pwdRewrting(Map memberNumAndNewPwd);
 	public int delMemFromAdmin(String memberNum);
 	public MemberDTO enquireMemberFromAdmin(String memberNum);
+	public int updateMemberInfo(MemberDTO dto);
 }
