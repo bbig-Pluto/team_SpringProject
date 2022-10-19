@@ -41,7 +41,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public String idFinder(Map idFindKey) {
 		String idFound = sqlSession.selectOne("mapper.shm.idSearching", idFindKey);
-		
 		return idFound;
 	}
 

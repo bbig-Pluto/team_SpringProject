@@ -15,7 +15,7 @@ public interface MemberController {
 	
 	public String leadingJSP(Model model, String uri);
 	
-	public ModelAndView listMembers();
+	public ModelAndView listMembers(HttpServletRequest request);
 	
 	public String loginCheck(
 			HttpServletRequest request, 

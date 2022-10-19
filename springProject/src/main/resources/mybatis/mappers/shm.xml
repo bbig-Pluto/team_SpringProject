@@ -5,9 +5,7 @@
 <mapper namespace="mapper.shm">
 
 	<select id="selectAllMemberList" resultType="memberDTO">
-
 		select * from syl_member
-		
 	</select>
 	
 	
@@ -20,16 +18,14 @@
 	</select>
 	
 	<select id="idSearching" resultType="String" parameterType="Hashmap">
-		
-		select id 
-		from syl_member 
-		WHERE emailAdd=#{emailAdd} and telNum=#{telNum}
-		
+		SELECT nvl(max(id), '0')
+		FROM syl_member 
+		WHERE emailAdd=#{emailAdd} AND telNum=#{telNum}
 	</select>
 	
 	<!-- id 중복체크 -->
 	<select id="idDupleCheck" resultType="int" parameterType="String">
-		SELECT NVL(count(*), 0)FROM (
+		SELECT NVL(count(*), 0) FROM (
 			select count(id) 
 			from syl_member 
 			WHERE id=#{_parameter} group by id
@@ -52,15 +48,15 @@
 	</insert>
 	
 	<select id="enquiryForPwdRewriting" resultType="String" parameterType="Hashmap">
-			select memberNum
-			from syl_member 
-			WHERE id=#{id} and telNum=#{telNum} group by pwd, memberNum
+		select NVL(max(memberNum), '0')
+		from syl_member
+		WHERE id=#{id} and telNum=#{telNum}
 	</select>
 	
 	<update id="reWritingNewPwd" parameterType="Hashmap">
 		update syl_member set
-		 pwd=#{newPwd}
-		 where memberNum=#{memberNum}
+		pwd=#{newPwd}
+		where memberNum=#{memberNum}
 	</update>
 	
 	<delete id="delMemFromAdmin" parameterType="String">
