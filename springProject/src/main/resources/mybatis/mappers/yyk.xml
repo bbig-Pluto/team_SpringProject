@@ -6,15 +6,15 @@
 
 	<!-- 다이어리 조회 -->
 	<select id="diaryList" resultType="diaryDTO">
-		SELECT d_title, d_content, d_createTime, diaryNum 
+		SELECT d_title, d_content, d_fileName, d_createTime, diaryNum 
 		FROM diary order by d_createTime desc
 	</select>
 	
 	
 	<!-- 다이어리 추가 -->
 	<insert id="addDiary" parameterType="diaryDTO">
-		insert into diary(d_title, d_content, d_createTime, diaryNum, id)
-		values(#{d_title}, #{d_content}, sysdate, seq_diaryNum.nextval, 'yyk')
+		insert into diary(d_title, d_content, d_fileName, d_createTime, diaryNum, id)
+		values(#{d_title}, #{d_content}, #{d_fileName}, sysdate, seq_diaryNum.nextval, 'yyk')
 	</insert>
 	
 	
@@ -40,6 +40,27 @@
 		where id = 'yyk'
 		and lower(d_title) Like '%' || lower(#{d_title}) || '%' order by d_createTime desc
 	</select>
+	
+	
+	<!-- 총 게시글 갯수 출력 -->
+<!-- 	<select id="countBoard" resultType="int"> -->
+<!-- 		SELECT COUNT(*) FROM diary -->
+<!-- 	</select> -->
+
+
+	<!-- 페이징 처리 후 게시글 조회 -->
+<!-- 	<select id="selectBoard" resultType="com.myspring.domain.BoardVO"> -->
+<!-- 		SELECT *  -->
+<!-- 		FROM ( -->
+<!-- 				SELECT ROWNUM RN, A.*  -->
+<!-- 				FROM ( -->
+<!-- 						SELECT *  -->
+<!-- 						FROM diary  -->
+<!-- 						ORDER BY d_createTime DESC  -->
+<!-- 					) A -->
+<!-- 			) -->
+<!-- 		WHERE RN BETWEEN #{start} AND #{end} -->
+<!-- 	</select> -->
 
 
 </mapper>

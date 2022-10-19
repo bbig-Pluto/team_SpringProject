@@ -445,6 +445,7 @@ main {
 /* } */
 
 /* label 파일 선택 버튼*/
+
 .labelWrap {
 	border: 1px solid #f7f3f3fe;
 	border-radius: 5px;
@@ -473,8 +474,8 @@ main {
 .photo {
 	position:absolute;
     width: 200px;
-    right: 22%;
-    top: 22%;
+    right: 62px;
+    top: 48px;
 }
 
 /* ////////////////////////////////////////////////////////////////// */
@@ -574,7 +575,7 @@ main {
 	margin-left: 5%;
 /* 	margin-top: 5%; */
 	width: 85%;
-	height: 80%;
+	height: 552px;
 }
 
 /* 제목 */
@@ -954,19 +955,19 @@ footer {
 
 								<!-- 사진 파일 -->
 								<div class="left_top_wrap">
-									<div class="left_top_text">Today's photo</div>
+									<div class="left_top_text">Today's Photo</div>
 									<br>
 
 									<!-- 포스트잇 -->
 									<div class="photo_container">
 										<img src="resources/yyk/image/포스트잇(완).png" class="postit"> 
-										<img class="photo" style="width: 200px; height: 200px;"
-											src="/diary/down.do?fileName=">
+										<img class="photo" style="width: 250px; height: 250px;"
+											src="${contextPath }/download?imageFileName=${param.fileName }">
 									</div>
 								</div>
 
 								<!-- 기분 & 날씨 -->
-								<div class="left_bottom_text">Today's emotion</div>
+								<div class="left_bottom_text">Today's Emotion</div>
 								<div class="left_bottom_wrap">
 									<!-- 날씨 -->
 									<div class="weather">

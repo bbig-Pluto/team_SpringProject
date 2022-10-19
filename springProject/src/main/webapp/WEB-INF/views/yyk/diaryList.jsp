@@ -804,7 +804,8 @@ window.onload = function () {
 											<a href="detailDiary
 													?diaryNum=${list.diaryNum}
 													&title=${list.d_title}
-													&content=${list.d_content }">
+													&content=${list.d_content }
+													&fileName=${list.d_fileName}">
 											${list.d_title }</a>
 										</div>
 										

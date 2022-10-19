@@ -15,7 +15,6 @@ public class DiaryServiceImpl implements DiaryService{
 	DiaryDAO diaryDAO;
 
 	
-	
 	// 일기장 조회
 	@Override
 	public List<DiaryDTO> getDiaryList() {

@@ -35,7 +35,6 @@ function readURL(input){
 
 <h1>파일 업로드 하기</h1>
 
-<!-- <input type="file" name="file"> -->
 
 <form method="post" action="${contextPath }/upload" enctype="multipart/form-data">
 <input type="file" name="file" onchange ="readURL(this);"><br>

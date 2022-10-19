@@ -797,7 +797,7 @@ window.onload = function () {
 								<!-- 검색창 -->
 								<form name="search">
 									<div class="diaryList_search_container">
-										<input type="text" name="d_title" class="diaryList_search_input" placeholder="Search">
+										<input type="text" name="d_title" class="diaryList_search_input" placeholder="Search" autocomplete="off">
 										<input type="submit" class="serBtn" value="">
 									</div>
 								</form>
@@ -807,7 +807,7 @@ window.onload = function () {
 								
 							</div>
 							<div class="addBtn_container">
-				                <input type="button" value="+" class="addBtn" onclick="location.href='/diary/addDiaryList'">
+				                <input type="button" value="+" class="addBtn" onclick="location.href='/syl/addDiaryList'">
 				            </div>
 				            <div class="msg">
 				            	검색 결과 없음

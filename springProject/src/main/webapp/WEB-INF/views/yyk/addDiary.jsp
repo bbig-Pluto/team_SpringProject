@@ -466,11 +466,15 @@ main {
             margin-top: -17px;
             margin-left: 14%;
         }
-        .photo{
+        /* 사진 미리보기*/
+        .preview{
+        }
+        
+        /* 파일 영역 컨테이너 */
+        .file_container {
             position:absolute;
-            width: 200px;
-            right: 25%;
-            top: 26%;
+            top:43px;
+            left:93px;
         }
 
         /* ////////////////////////////////////////////////////////////////// */
@@ -481,7 +485,7 @@ main {
             /* background-color: rgb(247, 242, 226); */
             border-radius: 25px;
             width: 80%;
-            height: 21%;
+            height: 144px;
             margin-left: 14%;
             margin-top: 1%;
         }
@@ -573,7 +577,7 @@ main {
             margin-top: -20px;
             margin-left: 5%;
             width: 85%;
-            height: 80%;
+            height: 552px;
         }
 
         /* 제목 */
@@ -837,11 +841,13 @@ footer {
         }
 </style>
 
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 window.onload = function() {
 	icon_zoomIn();
 	icon_zoomOut();
-	
+// 	readURL(input);
 	
 	
 	// 회원 : 제목 입력 안하고 저장 시 경고창
@@ -858,10 +864,25 @@ window.onload = function() {
 						<% System.out.println("addDiary submit route"); %>
 						add.method = "post";
 						add.action = "/syl/addDiary";
+						add.enctype = "multipart/form-data"
 						add.submit();
 					}
-			})
+	})
+	
+	
+	
 }
+	// 사진 이미지 미리보기
+	function readURL(input){
+		if(input.files && input.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('.preview').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
 
 	// 아이콘 hover시 해당 아이콘 크기 커짐
     function icon_zoomIn(event) {
@@ -914,74 +935,67 @@ window.onload = function() {
 				<div class="area_wrapper">
 					<div class="calendarWhole">
 						<!-- !!!!!!!!!1!! 다이어리 안에 페이지 넣는 공간!!!!!!!!!!!!!!!! -->
-			            <div class="diaryWrap">
-				            <!-- 왼쪽 영역 -->
-				            <div class="left">
-				
-				                <!-- 사진 파일 -->
-				                <div class="left_top_wrap">
-				                    <div class="left_top_text">Today's photo</div><br>
-				
-				                    <!-- 포스트잇 이미지 -->
-				                    <!-- 업로드 -->
-<!-- 								<form action="/diary/up.do"  -->
-<!-- 										method="post"  -->
-<!-- 										enctype="multipart/form-data"  -->
-<!-- 										accept-charset="utf-8"> -->
-									                    
-									 <div class="postit_container">
-									     <img src="resources/yyk/image/포스트잇(완).png" class="postit" >
-									<img class="photo" style="width:200px; height:200px;" src="resources/yyk/image/맑음.png">
-									    
-<!-- 									<input type="file" name="uploadfile"> -->
-<!-- 									<input type="submit" value="업로드"> -->
-									 </div>
-<!-- 									</form> -->
-				                </div>
-				
-				
-				                <!-- 기분 & 날씨 -->
-				                <div class="left_bottom_text">Today' mood</div>
-				                <div class="left_bottom_wrap">
-				                    <!-- 날씨 -->
-				                    <div class="weather">
-				                        <img src="resources/yyk/image/맑음.png" class="sunny" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-				                        <img src="resources/yyk/image/구름.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-				                        <img src="resources/yyk/image/비.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-				                        <img src="resources/yyk/image/무지개.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-				                    </div>
-				                    <!-- 기분 -->
-				                    <div class="slidecontainer">
-				                        <input type="range" min="1" max="5" class="diary_slider">
-				                    </div>
-				                </div>
-				            </div>
-				
-				
-				
-				            <!-- 오른쪽 영역 -->
-				            <div class="right">
-				                <div class="diary">Diary</div>
-				
-				                <div class="right_wrap">
-				                    <form name="add" >
-				                        <!-- 제목 & 제목 입력 창 -->
-				                        <div class="title">제목 </div>
-				                        <input type="text" name="d_title" class="title_input">
-				                        
-				                        <!-- 일기 내용 -->
-				                        <div class="textarea_container">
-				                            <textarea class="notes" name="d_content"></textarea>
-				                        </div>
-				                        <input type="submit" class="diary_submit_btn" value="저장" >
-				                        <input type="button" class="diary_goList_btn" value="목록" onclick="location.href='/syl/diaryList'">
-				                    </form>
-				                </div>
-				
-				            </div>
-
-           				</div> <!-- diaryWrap end -->
-
+						<form name="add" >
+				            <div class="diaryWrap">
+					            <!-- 왼쪽 영역 -->
+					            <div class="left">
+					
+					                <!-- 사진 파일 -->
+					                <div class="left_top_wrap">
+					                    <div class="left_top_text">Today's Photo</div><br>
+					                    <!-- 포스트잇 이미지 -->
+					                    <!-- 업로드 -->
+										<div class="postit_container">
+											<img src="resources/yyk/image/포스트잇(완).png" class="postit" >
+											<div class="file_container">
+												<img class="preview"  width=250 height=250/><br>
+												<input type="file" name="file" onchange ="readURL(this);"><br>
+											</div>
+										</div>
+					                </div>
+					
+					
+					                <!-- 기분 & 날씨 -->
+					                <div class="left_bottom_text">Today's Emotion</div>
+					                <div class="left_bottom_wrap">
+					                    <!-- 날씨 -->
+					                    <div class="weather">
+					                        <img src="resources/yyk/image/맑음.png" class="sunny" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/구름.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/비.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/무지개.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                    </div>
+					                    <!-- 기분 -->
+					                    <div class="slidecontainer">
+					                        <input type="range" min="1" max="5" class="diary_slider">
+					                    </div>
+					                </div>
+					            	</div>
+					
+					
+					
+					            <!-- 오른쪽 영역 -->
+					            <div class="right">
+					                <div class="diary">Diary</div>
+					                <div class="right_wrap">
+					                    
+					                        <!-- 제목 & 제목 입력 창 -->
+					                        <div class="title">제목 </div>
+					                        <input type="text" name="d_title" class="title_input" autocomplete="off">
+					                        
+					                        <!-- 일기 내용 -->
+					                        <div class="textarea_container">
+					                            <textarea class="notes" name="d_content"></textarea>
+					                        </div>
+					                        <input type="submit" class="diary_submit_btn" value="저장" >
+					                        <input type="button" class="diary_goList_btn" value="목록" onclick="location.href='/syl/diaryList'">
+					                   
+					                </div>
+					            </div>
+	           				</div> <!-- diaryWrap end -->
+	           				
+						 </form>
+						 
         			</div> <!-- calendarWhole end -->
 
 
