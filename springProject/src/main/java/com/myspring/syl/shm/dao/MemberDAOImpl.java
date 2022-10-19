@@ -46,7 +46,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int idDupleCheck (String dupleCheckId) {
 		int idDupleResult = sqlSession.selectOne("mapper.shm.idDupleCheck", dupleCheckId);
-		
+		System.out.println("idDupleResult in DAO : " + idDupleResult);
 		return idDupleResult;
 	}
 	

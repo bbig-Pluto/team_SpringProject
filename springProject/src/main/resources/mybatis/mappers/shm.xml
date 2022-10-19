@@ -27,12 +27,16 @@
 		
 	</select>
 	
+	<!-- id 중복체크 -->
 	<select id="idDupleCheck" resultType="int" parameterType="String">
-		select count(*) 
-		from syl_member 
-		WHERE id=#{_parameter} group by id
+		SELECT NVL(count(*), 0)FROM (
+			select count(id) 
+			from syl_member 
+			WHERE id=#{_parameter} group by id
+		)
 	</select>
 	
+	<!-- 회원가입, 일반회원 관리자 분기 포함 -->
 	<insert id="addMember" parameterType="Hashmap">
 	
 		<if test ="memberClass == 0">
