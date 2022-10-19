@@ -12,4 +12,5 @@ public interface MemberDAO {
 	public int addMemberDAO(Map signUpMap);
 	public int idDupleCheck (String signUpId);
 	public String enquiryPwdRewriting(Map paramsMap);
+	public int pwdRewrting(Map memberNumAndNewPwd);
 }

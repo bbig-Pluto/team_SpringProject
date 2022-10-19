@@ -1,7 +1,6 @@
 package com.myspring.syl.shm.controller;
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
 
@@ -98,7 +97,6 @@ public class MemberControllerImpl {
 			mav.setViewName("/shm/wrongapproach");
 			return mav;
 		}
-
 	}
 
 	
@@ -158,7 +156,8 @@ public class MemberControllerImpl {
 	 * @param logOnSession
 	 * @return
 	 */
-	@RequestMapping("/member/logout.do")
+	@RequestMapping(value = "/member/logout.do",
+					method = RequestMethod.POST)
 	public String logout(
 			Model model, 
 			HttpServletRequest request, 
@@ -180,9 +179,9 @@ public class MemberControllerImpl {
 	 * @param idFindTelNum
 	 * @return String viewName
 	 */
-	@RequestMapping("/member/idFind.do")
+	@RequestMapping( value = "/member/idFind.do",
+					method = RequestMethod.POST)
 	public String idSearching(
-
 			Model model,
 			@RequestParam(value = "idFindEmailAdd", required = true) String idFindEmailAdd,
 			@RequestParam(value = "idFindTelNum", required = true) String idFindTelNum
@@ -221,7 +220,8 @@ public class MemberControllerImpl {
 	 * @param addMemMemberClass
 	 * @return String viewName
 	 */
-	@RequestMapping("/member/signup.do")
+	@RequestMapping( value = "/member/signup.do",
+					method = RequestMethod.POST)
 	public String addMember(
 			Model model,
 			@RequestParam(value = "id", required = true) String addMemId,
@@ -257,7 +257,8 @@ public class MemberControllerImpl {
 		
 	}
 	
-	@RequestMapping("/member/pwdRewriteCheck.do")
+	@RequestMapping( value = "/member/pwdRewriteCheck.do",
+					method = RequestMethod.POST)
 	public String pwdRewriteCheck(
 			Model model,
 			@RequestParam( value = "pwdRewriteId" , required = true) String pwdRewriteId,
@@ -272,22 +273,41 @@ public class MemberControllerImpl {
 		
 		if( !(enquiryResult.equals("fail")) ) {
 			pwdRewritingDTO.setMemberNum(enquiryResult);
-			return "redirect:/shm/pwdrewritingsuccess";
+			return "redirect:/member/rd/pwdrewriting";
 		} else {
-			return "redirect:/shm/pwdrewritingfail";
+			return "redirect:/member/rd/pwdrewritingfail";
 		}
 	}
 	
-	@RequestMapping("/member/pwdRewriting.do")
-	public String pwdRewriting() {
+	@RequestMapping( value = "/member/pwdRewriting.do",
+					method = RequestMethod.POST)
+	public String pwdRewriting(
+			Model model,
+			@RequestParam( value = "newPwd" , required = true) String newPwd) {
 		
-		if( (pwdRewritingDTO.getMemberNum()) != null ) {
-			
-			pwdRewritingDTO = null;
-			return "";
-		} else {
-			
+		try {
+			// pwdRewriteCheck.do 에서 DTO에 저장한 memberNum 을 활용
+			if( (pwdRewritingDTO.getMemberNum()) != null ) {
+				Map<String, Object> pwdRewringParams = new HashMap();
+				pwdRewringParams.put("memberNum", (String)pwdRewritingDTO.getMemberNum());
+				pwdRewringParams.put("newPwd", newPwd);
+				
+				int resultPwdRewriting = memberService.exePwdRewriting(pwdRewringParams);
+				
+				if(resultPwdRewriting == 1) {
+					return "/shm/pwdrewritingsuccess";
+				} else {
+					return "/shm/pwdrewritingfail";
+				}
+			} else {
+				// 주소로 직접 접근 차단
+				return "/shm/wrongapproach";
+			}
+		// pwdRewritingDTO = null 일 때의 제출 차단
+		} catch (NullPointerException e) {
 			return "/shm/wrongapproach";
+		} finally {
+			pwdRewritingDTO.setMemberNum(null); // 비밀번호 변경후 memberNum 의 임시저장소 역할을 하던 DTO 초기화
 		}
 	}
 	
