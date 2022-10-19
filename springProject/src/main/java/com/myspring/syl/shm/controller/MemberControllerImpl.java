@@ -27,6 +27,8 @@ public class MemberControllerImpl {
 	@Autowired
 	MemberService memberService;
 
+	@Autowired
+	MemberDTO pwdRewritingDTO;
 
 	/**
 	 * 로그인 페이지 이동
@@ -265,13 +267,27 @@ public class MemberControllerImpl {
 		pwdRewritingParam.put("id", pwdRewriteId);
 		pwdRewritingParam.put("telNum", pwdRewriteTelNum);
 		
-		int enquiryResult = memberService.getEnquiryPwdRewriting(pwdRewritingParam);
 		
-		if(enquiryResult == 1) {
-			
-			return "forward:/shm/pwdrewriting";
+		String enquiryResult = memberService.getEnquiryPwdRewriting(pwdRewritingParam);
+		
+		if( !(enquiryResult.equals("fail")) ) {
+			pwdRewritingDTO.setMemberNum(enquiryResult);
+			return "redirect:/shm/pwdrewritingsuccess";
 		} else {
 			return "redirect:/shm/pwdrewritingfail";
+		}
+	}
+	
+	@RequestMapping("/member/pwdRewriting.do")
+	public String pwdRewriting() {
+		
+		if( (pwdRewritingDTO.getMemberNum()) != null ) {
+			
+			pwdRewritingDTO = null;
+			return "";
+		} else {
+			
+			return "/shm/wrongapproach";
 		}
 	}
 	

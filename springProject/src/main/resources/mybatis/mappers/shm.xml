@@ -55,7 +55,7 @@
 	
 			select memberNum
 			from syl_member 
-			WHERE id=#{} and telNum=#{} group by pwd, memberNum
+			WHERE id=#{_parameter} and telNum=#{_parameter} group by pwd, memberNum
 	
 	</select>
 	

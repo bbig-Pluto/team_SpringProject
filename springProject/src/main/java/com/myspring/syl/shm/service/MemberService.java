@@ -12,5 +12,5 @@ public interface MemberService {
 	MemberDTO getLoginResult(String signin_id, String signin_pwd);
 	public String idFinder(Map idFindKey);
 	public int addMemberSvc(Map signUpMap);
-	public int getEnquiryPwdRewriting(Map param);
+	public String getEnquiryPwdRewriting(Map ctrlParams);
 }

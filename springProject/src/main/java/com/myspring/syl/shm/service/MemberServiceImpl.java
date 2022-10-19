@@ -70,14 +70,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
-	public int getEnquiryPwdRewriting(Map ctrlParams) {
+	public String getEnquiryPwdRewriting(Map ctrlParams) {
 		String result = memberDAO.enquiryPwdRewriting(ctrlParams);
 		
-		if( !(result.equals("fail")) ) {
-			return 0; 
-		} else {
-			return 0; 
-		}
+		return result;
 	}
 	
 	
