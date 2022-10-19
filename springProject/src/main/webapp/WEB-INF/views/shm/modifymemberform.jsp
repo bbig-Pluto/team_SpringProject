@@ -45,7 +45,7 @@
 
 <body>
     <div class="blankArea"></div>
-    <form action="${contextPath}/member/modifyingMember.do" method="post">
+    <form action="${contextPath}/member/modifyingMemberInfo.do" method="post">
         <table align="center">
             <caption>회원 정보 수정</caption>
             <tbody>

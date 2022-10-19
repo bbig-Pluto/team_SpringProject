@@ -66,4 +66,15 @@
 		 where memberNum=#{memberNum}
 	</update>
 	
+	<delete id="delMemFromAdmin" parameterType="String">
+		DELETE syl_member 
+		WHERE memberNum=#{_parameter}
+	</delete>
+	
+	<select id="enquireMemFromAdmin" resultType="memberDTO" parameterType="String">
+		select * 
+		from syl_member 
+		where memberNum=#{_parameter}
+	</select>
+	
 </mapper>

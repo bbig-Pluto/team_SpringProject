@@ -26,6 +26,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	// 로그인 체크
+	@Override
 	public MemberDTO checkToLogin(String signin_id, String signin_pwd) {
 		MemberDTO dto = new MemberDTO();
 		dto.setId(signin_id);
@@ -76,10 +77,26 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	// 사용자가 입력한 새로운 비밀번호로 변경 실행
+	@Override
 	public int pwdRewrting(Map memberNumAndNewPwd) {
 		int result = sqlSession.update("mapper.shm.reWritingNewPwd", memberNumAndNewPwd);
 		
 		return result;
+	}
+	
+	// 관리자 페이지의 회원삭제
+	@Override
+	public int delMemFromAdmin(String memberNum) {
+		int result = sqlSession.delete("mapper.shm.delMemFromAdmin", memberNum);
+		
+		return result;
+	}
+	
+	// 관리자 페이지 회원 정보 수정을 위해 회원 DB 조회
+	public MemberDTO enquireMemberFromAdmin(String memberNum) {
+		MemberDTO dto = sqlSession.selectOne("mapper.shm.enquireMemFromAdmin", memberNum);
+		
+		return dto;
 	}
 	
 

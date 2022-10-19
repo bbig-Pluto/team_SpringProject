@@ -76,16 +76,31 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	@Override
 	public int exePwdRewriting(Map ctrlParams) {
 		int result = memberDAO.pwdRewrting(ctrlParams);
 		return result;
 	}
 	
+	@Override
+	public int exeDelMemFromAdmin(String memberNum) {
+		
+		int result = memberDAO.delMemFromAdmin(memberNum);
+		
+		return result;
+	}
 	
 	private int idDupleCheck(String signUpId) {
 		int result = 1;
 		result = memberDAO.idDupleCheck(signUpId);
 		return result;
 	}
-
+	
+	public MemberDTO getMemberInfoForModify(String memberNum) {
+		
+		MemberDTO dto = memberDAO.enquireMemberFromAdmin(memberNum);
+		
+		return dto;
+	}
+	
 }

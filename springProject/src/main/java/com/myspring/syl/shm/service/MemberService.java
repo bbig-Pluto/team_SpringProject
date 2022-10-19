@@ -14,5 +14,7 @@ public interface MemberService {
 	public int addMemberSvc(Map signUpMap);
 	public String getEnquiryPwdRewriting(Map ctrlParams);
 	public int exePwdRewriting(Map ctrlParams);
+	public int exeDelMemFromAdmin(String memberNum);
+	public MemberDTO getMemberInfoForModify(String memberNum);
 	
 }

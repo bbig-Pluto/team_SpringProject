@@ -40,6 +40,7 @@ public class MemberControllerImpl {
 		return "/shm/signin";
 	}
 	
+	
 	/**
 	 * 단순 페이지 이동 redirect 유도 
 	 * '/member/rd/{uri} -> /shm/*.jsp page'
@@ -60,9 +61,8 @@ public class MemberControllerImpl {
 		System.out.println("leadingJSP");
 		return "/shm/" + uri;
 	}
-	
-	
 
+	
 	/**
 	 * 관리자 로그인 -> 회원정보 리스트 페이지 로드
 	 * 관리자 아닌 케이스의 방어 포함
@@ -98,7 +98,6 @@ public class MemberControllerImpl {
 			return mav;
 		}
 	}
-
 	
 	
 	/**
@@ -147,22 +146,22 @@ public class MemberControllerImpl {
 		}
 
 	}
-
+	
 	
 	/**
 	 * 로그아웃, 동시에 세션 폐기
 	 * @param model
 	 * @param request
 	 * @param logOnSession
-	 * @return
+	 * @return viewName
 	 */
 	@RequestMapping(value = "/member/logout.do",
-					method = RequestMethod.POST)
+					method = RequestMethod.GET)
 	public String logout(
 			Model model, 
 			HttpServletRequest request, 
 			HttpSession logOnSession) {
-
+		System.out.println("/member/logout.do");
 		logOnSession = request.getSession();
 
 		logOnSession.invalidate();
@@ -179,7 +178,7 @@ public class MemberControllerImpl {
 	 * @param idFindTelNum
 	 * @return String viewName
 	 */
-	@RequestMapping( value = "/member/idFind.do",
+	@RequestMapping(value = "/member/idFind.do",
 					method = RequestMethod.POST)
 	public String idSearching(
 			Model model,
@@ -209,6 +208,7 @@ public class MemberControllerImpl {
 			
 	}
 	
+	
 	/**
 	 * 회원가입
 	 * @param model
@@ -220,9 +220,10 @@ public class MemberControllerImpl {
 	 * @param addMemMemberClass
 	 * @return String viewName
 	 */
-	@RequestMapping( value = "/member/signup.do",
+	@RequestMapping(value = "/member/signup.do",
 					method = RequestMethod.POST)
 	public String addMember(
+
 			Model model,
 			@RequestParam(value = "id", required = true) String addMemId,
 			@RequestParam(value = "pwd", required = true) String addMemPwd,
@@ -257,7 +258,15 @@ public class MemberControllerImpl {
 		
 	}
 	
-	@RequestMapping( value = "/member/pwdRewriteCheck.do",
+	
+	/**
+	 * 비밀번호 찾기 에서 사용자 계정 존재 확인
+	 * @param model
+	 * @param pwdRewriteId
+	 * @param pwdRewriteTelNum
+	 * @return viewName
+	 */
+	@RequestMapping(value = "/member/pwdRewriteCheck.do",
 					method = RequestMethod.POST)
 	public String pwdRewriteCheck(
 			Model model,
@@ -279,11 +288,19 @@ public class MemberControllerImpl {
 		}
 	}
 	
-	@RequestMapping( value = "/member/pwdRewriting.do",
+	
+	/**
+	 * 사용자가 입력만 새로운 비밀번호 반영(update)
+	 * @param model
+	 * @param newPwd
+	 * @return viewName
+	 */
+	@RequestMapping(value = "/member/pwdRewriting.do",
 					method = RequestMethod.POST)
 	public String pwdRewriting(
+
 			Model model,
-			@RequestParam( value = "newPwd" , required = true) String newPwd) {
+			@RequestParam(value = "newPwd" , required = true) String newPwd) {
 		
 		try {
 			// pwdRewriteCheck.do 에서 DTO에 저장한 memberNum 을 활용
@@ -312,6 +329,67 @@ public class MemberControllerImpl {
 	}
 	
 	
+	/**
+	 * 관리자의 회원목록에서 회원 삭제
+	 * @param model
+	 * @param memberNum
+	 * @return viewName
+	 */
+	@RequestMapping(value = "/member/delMemberFromAdmin.do",
+					method = RequestMethod.GET)
+	public String delMemFromAdmin(
+
+			Model model,
+			@RequestParam(value = "memberNum", required = true) String memberNum
+			) {
+		int delResult = memberService.exeDelMemFromAdmin(memberNum); 
+		
+		if(delResult == 1) {
+			return "redirect:/member/memberslist.do";
+		} else {
+			return "redirect:/member/rd/wrongapproach";
+		}
+	}
+	
+	
+	/**
+	 * 관리자 페이지에서 정보를 수정할 회원 특정, DB에서 수정할 정보 불러오기
+	 * @return viewName
+	 */
+	@RequestMapping(value = "/member/enquireMemberFromAdmin.do",
+					method = RequestMethod.GET)
+	public String enquireMemberFromAdmin (
+			Model model,
+			@RequestParam("memberNum") String memberNum
+			) {
+		MemberDTO dto = memberService.getMemberInfoForModify(memberNum);
+		model.addAttribute("memInfo", dto);
+		return "/shm/modifymemberform";
+	}
+	
+	
+	/**
+	 * 
+	 * @param model
+
+	 * @param modiNickname
+	 * @param modiEmailAdd
+	 * @param modiTelNum
+	 * @return
+	 */
+	@RequestMapping(value = "/modifyingMemberInfo.do",
+					method = RequestMethod.GET)
+	public String modifyingMemberInfo(
+			Model model,
+			@RequestParam("nickName") String modiNickname,
+			@RequestParam("emailAdd") String modiEmailAdd,
+			@RequestParam("telNum") String modiTelNum
+			) {
+		
+		return "";
+	}
+	
+	
 	private void setFailSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
 		logOnWhetherForSession = "guest";
 		logOnSession.setAttribute("isLogon", logOnWhetherForSession);
@@ -320,6 +398,7 @@ public class MemberControllerImpl {
 		logOnSession.setAttribute("logOn.memberClass", null);
 	}
 
+	
 	private void setSuccessSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
 		logOnWhetherForSession = "member";
 		logOnSession.setAttribute("isLogon", logOnWhetherForSession);

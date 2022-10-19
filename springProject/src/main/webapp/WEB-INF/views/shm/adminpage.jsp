@@ -114,9 +114,9 @@ request.setCharacterEncoding("UTF-8");
 						<td>${ mem.memberClass }</td>
 						<td>${ mem.joinDate }</td>
 						<td><a class="linkToModification"
-							href="${contextPath}/member/inquiremember.do?memberNum=${ mem.memberNum }">수정</a></td>
+							href="${contextPath}/member/enquireMemberFromAdmin.do?memberNum=${ mem.memberNum }">수정</a></td>
 						<td><a class="linkToDelete"
-							href="${contextPath}/member/delMember.do?memberNum=${ mem.memberNum }">삭제</a></td>
+							href="${contextPath}/member/delMemberFromAdmin.do?memberNum=${ mem.memberNum }">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</c:when>
