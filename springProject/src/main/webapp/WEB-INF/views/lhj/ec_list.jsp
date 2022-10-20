@@ -225,6 +225,7 @@
 								}
 								console.log("button_update.addEventListener 종단");
 
+								
 							})
 
 						}
