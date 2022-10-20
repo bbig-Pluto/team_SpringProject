@@ -23,9 +23,39 @@ public class AskService {
 	@Autowired
 	AskDAO askDAO;
 	//전체리스트
-	public List<AskDTO> getMemberList() {
-		return askDAO.selectMember();
+//	public List<AskDTO> getMemberList() {
+//		return askDAO.selectMember();
+//	
+//	}
+	public Map getPagingList(int pageNum, int countPerPage){
 	
+		int start=0, end=0;
+		start = ((pageNum-1) * countPerPage) + 1;
+		end = pageNum * countPerPage;
+		end = start + countPerPage - 1;
+		
+		/*
+		 * 1, 5
+		 * 		start=1, end=5
+		 * 2, 5
+		 * 		start=6, end=10
+		 * 3, 5
+		 * 		start=11, end=15
+		 */
+		
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<AskDTO> list = askDAO.selectMember(map);
+		
+		int count = askDAO.selectListCount();
+		
+		Map map1 = new HashMap();
+		map1.put("list", list);
+		map1.put("count", count);
+		
+		return map1;
 	}
 	//댓글조회
 	public List<ReplyDTO> getReplyList(String board_no) {
@@ -82,10 +112,6 @@ public class AskService {
 	public void getModList(AskDTO askDTO){
 		askDAO.modList(askDTO);
 	}
-//	public List<AskDTO> getPagingList(int pageNum, int countPerPage) {
-//		return askDAO.selectMember(pageNum,countPerPage);
-//		
-//	}
 	//체크시 삭제
 	public void getAskDelChk(List board_no){
 		askDAO.delReChk(board_no);

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.syl.sdy.dao.NoticeDAO;
+import com.myspring.syl.sdy.dto.AskDTO;
 import com.myspring.syl.sdy.dto.NoticeDTO;
 
 
@@ -20,8 +21,34 @@ public class NoticeService {
 	@Autowired
 	NoticeDAO noticeDAO;
 	
-	public List<NoticeDTO> getNoticeList() {
-		return noticeDAO.selectNoticeList();
+	public Map getNoticeList(int pageNum, int countPerPage) {
+		int start=0, end=0;
+		start = ((pageNum-1) * countPerPage) + 1;
+		end = pageNum * countPerPage;
+		end = start + countPerPage - 1;
+		
+		/*
+		 * 1, 5
+		 * 		start=1, end=5
+		 * 2, 5
+		 * 		start=6, end=10
+		 * 3, 5
+		 * 		start=11, end=15
+		 */
+		
+		Map map = new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<NoticeDTO> list = noticeDAO.selectNoticeList(map);
+		
+		int count = noticeDAO.selectNoticeCount();
+		
+		Map map1 = new HashMap();
+		map1.put("list", list);
+		map1.put("count", count);
+		
+		return map1;
 	
 	}
 	//글 등록

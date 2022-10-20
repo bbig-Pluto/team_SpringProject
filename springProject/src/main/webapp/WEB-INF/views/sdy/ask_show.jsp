@@ -404,7 +404,27 @@ display:inline-block;
 		 HttpSession userInfo = request.getSession();
 		String sessionId = "" + userInfo.getAttribute("logOn.id");
 		System.out.println("글쓰기 아이디: "+sessionId);
+		
+		Map map = (Map)request.getAttribute("map");
+
+		int pageNum = (int)map.get("pageNum");
+		int countPerPage = (int)map.get("countPerPage"); // 5
+		int count = (int)map.get("count");	// 22
+		int lastPage = (int)Math.ceil(((double)count / countPerPage));	// 올림;마지막 페이지 번호
+		int section = 4;
+		// lastPage: 22
+		// 현재 페이지: 12
+		// 4개만 보여주고 싶다면(9~12)
+		int sec_position = (int)Math.ceil(((double)pageNum / section));
+		int firstNo = ((sec_position-1) * section) + 1;
+		// ((int)(14 / 10)) * 10
+//	 	int firstNo = 12 - (12 % 4);
+//	 	int firstNo = pageNum - (pageNum % section) + 1;
+//	 	if(firstNo < 1){ firstNo = 1; }
+		int lastNo = firstNo + section - 1;
+		if(lastNo > lastPage){ lastNo = lastPage; }
 	%>
+	<c:set var="lastPage" value="<%= lastPage %>" />
 
 		<table>
 			<tr>
@@ -419,7 +439,7 @@ display:inline-block;
 				<th class="hit">조회수</th>
 			</tr>
 	<form name="frm" action="/syl/AdelCheck" method="post">
-		<c:forEach var="list" items="${ list}">
+		<c:forEach var="list" items="${ map.list}">
 			<tr class="show">
 		<%-- 	<%if(!sessionId.equals("null")){ %>  --%> 
 				<td class="chk"><input type="checkbox" name="check"value="${list.board_no}"></td>
@@ -522,6 +542,28 @@ display:inline-block;
 				 <input type="submit" value="검색">
 			</div>
 		</form> 
+		<c:if test="<%=pageNum == 1%>">
+		<div style="display:inline-block; margin-left:550px; margin-top:50px; color:gray;"> << &nbsp;</div>
+	</c:if>
+	<c:if test="<%=pageNum != 1%>">
+		<a href="/syl/ask?pageNum=<%=pageNum-1 %>&countPerPage=10" style="color:red;font-weight:bold; margin-left:550px; margin-top:50px; color: black; text-decoration: none;"> << </a>&nbsp;
+	</c:if>
+
+	<c:forEach var="i" begin="<%=firstNo %>" end="<%=lastNo %>">
+		<c:if test="${ map.pageNum eq i }">
+			<a href="/syl/ask?pageNum=${i }&countPerPage=10" style="color:red;font-weight:bold; margin-top:50px; color:black; text-decoration: none;">${i }</a>&nbsp;
+		</c:if>
+		<c:if test="${ not (map.pageNum eq i) }">
+			<a href="/syl/ask?pageNum=${i }&countPerPage=10" style="margin-top:50px; color:gray; text-decoration: none;">${i }</a>&nbsp;
+		</c:if>
+	</c:forEach>
+
+	<c:if test="<%=pageNum == lastPage%>">
+		<div style="margin-top:50px; display:inline-block; color:gray; "> >> </div>
+	</c:if>
+	<c:if test="<%=pageNum != lastPage%>">
+		<a href="/syl/ask?pageNum=<%=pageNum+1 %>&countPerPage=10" style="color:red;font-weight:bold; color: black; text-decoration: none;"> >> </a>&nbsp;
+	</c:if>
 				</div>
 
 			</article>

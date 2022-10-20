@@ -2,6 +2,7 @@ package com.myspring.syl.sdy.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,15 @@ public class NoticeDAO {
 	@Autowired
 	SqlSession sqlSession;	
 	//모든 리스트
-	public List<NoticeDTO> selectNoticeList() {
-		List<NoticeDTO> list =sqlSession.selectList("mapper.sdy.selectNoticeList");
+	public List<NoticeDTO> selectNoticeList(Map Map) {
+		List<NoticeDTO> list =sqlSession.selectList("mapper.sdy.selectNoticeList",Map);
 		return list;
 	}
+	//전체 글 개수
+		public int selectNoticeCount() {
+			int result =sqlSession.selectOne("mapper.sdy.getNoticeCount");
+			return result;
+		}
 	//조회수
 	public void boardNoticeHit(String board_no) throws Exception {
 		System.out.println("hit dao진입");
