@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.myspring.syl.lhj.dao.ExerciseDAO;
 import com.myspring.syl.lhj.dto.ExerciseDTO;
+import com.myspring.syl.lhj.dto.InbodyDTO;
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService{
@@ -50,5 +51,27 @@ public class ExerciseServiceImpl implements ExerciseService{
 		return sayingAry;
 	}
 
+
+
 	// 두번째 페이지
+	
+	@Override
+	public List<ExerciseDTO> select_Inbody_Last() {
+		List<ExerciseDTO> select_Inbody_Last = exerciseDAO.select_Inbody_Last();
+		return select_Inbody_Last;
+	}
+	
+
+	@Override
+	public int insert_Inbody(InbodyDTO inbodyDTO) {
+		int insert_Inbody = exerciseDAO.insert_Inbody(inbodyDTO);
+		return insert_Inbody;
+	}
+	
+	@Override
+	public InbodyDTO select_One_Inbody_2() {
+		InbodyDTO select_One_Inbody_2 = exerciseDAO.select_One_Inbody_2();
+		return select_One_Inbody_2;
+	}
+
 }

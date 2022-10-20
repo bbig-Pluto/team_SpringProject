@@ -3,6 +3,7 @@ package com.myspring.syl.lhj.service;
 import java.util.List;
 
 import com.myspring.syl.lhj.dto.ExerciseDTO;
+import com.myspring.syl.lhj.dto.InbodyDTO;
 
 public interface ExerciseService {
 
@@ -20,5 +21,9 @@ public interface ExerciseService {
 	
 	// 두번째 페이지
 	
+	public List<ExerciseDTO> select_Inbody_Last();
 	
+	public int insert_Inbody(InbodyDTO inbodyDTO);
+	
+	public InbodyDTO select_One_Inbody_2();
 }

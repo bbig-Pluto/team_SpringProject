@@ -3,6 +3,7 @@ package com.myspring.syl.lhj.dao;
 import java.util.List;
 
 import com.myspring.syl.lhj.dto.ExerciseDTO;
+import com.myspring.syl.lhj.dto.InbodyDTO;
 
 public interface ExerciseDAO {
 
@@ -20,7 +21,12 @@ public interface ExerciseDAO {
 	
 	// 두번째 페이지
 	
-//	public 
+	public List<ExerciseDTO> select_Inbody_Last();
+			
+	public int insert_Inbody(InbodyDTO inbodyDTO);
+	
+	public InbodyDTO select_One_Inbody_2();
+	
 	
 	
 	

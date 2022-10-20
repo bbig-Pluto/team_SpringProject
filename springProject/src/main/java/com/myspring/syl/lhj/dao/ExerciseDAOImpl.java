@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myspring.syl.lhj.dto.ExerciseDTO;
+import com.myspring.syl.lhj.dto.InbodyDTO;
 
 @Repository
 public class ExerciseDAOImpl implements ExerciseDAO {
@@ -51,6 +52,25 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 		String sayingAry = sqlSession.selectOne("mapper.lhj.sayingAry", ary);
 		return sayingAry;
 	}
+
+//	■■■■■■■■■■■■■■ 2번째 페이지 ■■■■■■■■■■■■■■
 	
+	@Override
+	public List<ExerciseDTO> select_Inbody_Last() {
+		List<ExerciseDTO> select_Inbody_Last = sqlSession.selectList("mapper.lhj.select_Inbody_Last");
+		return select_Inbody_Last;
+	}
+
+	@Override
+	public int insert_Inbody(InbodyDTO inbodyDTO) {
+		int insert_Inbody = sqlSession.insert("mapper.lhj.insert_Inbody", inbodyDTO);
+		return insert_Inbody;
+	}
+	
+	@Override
+	public InbodyDTO select_One_Inbody_2() {
+		InbodyDTO select_One_Inbody_2 = sqlSession.selectOne("mapper.lhj.select_One_Inbody_2");
+		return select_One_Inbody_2;
+	}
 	// 두번째 페이지
 }

@@ -21,4 +21,16 @@ public interface ExerciseController {
 	
 	// 두번째 페이지
 	
+	public String select_Inbody_Last(Model model);
+	
+	public String insert_Inbody(Model model,
+			int InBody_Height,
+			int InBody_Weight,
+			int InBody_Body_Fat,
+			int InBody_Skeletal
+			);
+	
+	
+	public String select_One_Inbody_2(Model model);
+	
 }

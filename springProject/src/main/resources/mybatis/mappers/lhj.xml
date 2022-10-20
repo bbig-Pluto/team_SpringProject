@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="mapper.lhj">
 
 	<!-- Exercise resultMap -->
@@ -15,14 +15,16 @@
 
 	<!-- Exercise_saying resultMap -->
 	<resultMap id="resultMap2" type="exerciseDTO">
-		<result property="seq_Exercise_saying" column="seq_Exercise_saying" />
-		<result property="exercise_saying_contents" column="exercise_saying_contents" />
+		<result property="seq_Exercise_saying"
+			column="seq_Exercise_saying" />
+		<result property="exercise_saying_contents"
+			column="exercise_saying_contents" />
 	</resultMap>
-	
-	
-	
+
+
+
 	<!-- ■■■■■■■■■■■■■■■■■■■ 2 page ■■■■■■■■■■■■■■■■■■■■■ -->
-		
+
 	<resultMap id="resultMap3" type="inbodyDTO">
 		<result property="seq_Inbody" column="seq_Inbody" />
 		<result property="inBody_Height" column="inBody_Height" />
@@ -32,7 +34,7 @@
 		<result property="session_user_id" column="session_user_id" />
 		<result property="inBody_Today" column="inBody_Today" />
 	</resultMap>
-	
+
 	<resultMap id="resultMap4" type="inbodyDTO">
 		<result property="seq_Inbody_2" column="seq_Inbody" />
 		<result property="inBody_Height_2" column="inBody_Height" />
@@ -42,27 +44,29 @@
 		<result property="session_user_id_2" column="session_user_id" />
 		<result property="inBody_Today_2" column="inBody_Today_2" />
 	</resultMap>
-	
-	<!-- 조회 (DB에서 확인완료)-->
+
+	<!-- 조회 (DB에서 확인완료) -->
 	<select id="selectAllList" resultType="exerciseDTO">
-		select * from Exercise ORDER BY seq_Exercise
+		select * from Exercise
+		ORDER BY seq_Exercise
 	</select>
 
 	<!-- 추가 (DB에서 확인완료) -->
 	<insert id="ec_insert" parameterType="exerciseDTO">
-			 insert into exercise(seq_Exercise, exercise_Contents, exercise_Time)
-			 values(seq_Exercise.nextval, #{exercise_Contents}, #{exercise_Time})
+		insert into exercise(seq_Exercise, exercise_Contents, exercise_Time)
+		values(seq_Exercise.nextval, #{exercise_Contents}, #{exercise_Time})
 	</insert>
 
 	<!-- 삭제 (DB에서 확인완료) -->
 	<delete id="ec_delete" parameterType="java.util.ArrayList">
 		delete from Exercise
 		where seq_Exercise in
-		<foreach item = "item" collection="array" open="(" separator="," close=")">
-		#{item}
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
 		</foreach>
 	</delete>
-	
+
 	<!-- 수정 (DB에서 확인완료) -->
 	<update id="ec_update" parameterType="exerciseDTO">
 		update exercise
@@ -71,52 +75,76 @@
 		where
 		seq_Exercise = #{seq_Exercise}
 	</update>
-	
-	
-	<!-- 조회 (DB에서 확인완료)-->
+
+
+	<!-- 조회 (DB에서 확인완료) -->
 	<select id="saying" resultType="exerciseDTO">
 		select * from Exercise_saying
 	</select>
-	
+
+	<!-- 조회 (DB에서 확인완료) -->
 	<select id="sayingAry" resultType="String" parameterType="int">
-		select Exercise_saying_contents 
+		select
+		Exercise_saying_contents
 		from Exercise_saying
-		where seq_Exercise_saying = #{_parameter} 
+		where seq_Exercise_saying = #{_parameter}
 	</select>
 
 
 	<!-- ■■■■■■■■■■■■■■■■■■■ 2 page ■■■■■■■■■■■■■■■■■■■■■ -->
-	
-	<select id="select_Inbody" resultType="inbodyDTO">
-		select * from Exercise_Inbody
+
+	<select id="select_Inbody_Last" resultType="inbodyDTO">
+		SELECT *
+		FROM(
+		SELECT
+		*
+		FROM Exercise_Inbody
+		ORDER BY seq_Inbody DESC)
+		WHERE ROWNUM = 1
 	</select>
 	
-	<select id="select_Inbody_2" resultType="inbodyDTO">
-		select * from Exercise_Inbody
+	<!-- 하나만 입력하고 그 값을 수정할 예정 -->
+	<select id="select_Inbody_list" resultType="inbodyDTO">
+		select * from
+		Exercise_Inbody
 	</select>
 	
-	<!-- 수정 (DB에서 확인완료)  일단보류 일단보류 일단보류 일단보류 일단보류 -->
-<!-- 	<update id="update_Inbody" parameterType="inbody_DTO"> -->
-<!-- 		update Exercise_Inbody -->
-<!-- 		set -->
-<!-- 		inBody_Height=#{inBody_Height}, inBody_Weight=#{inBody_Weight}, inBody_Body_Fat=#{inBody_Body_Fat}, inBody_Skeletal=#{inBody_Skeletal} -->
-<!-- 		where -->
-<!-- 		seq_Inbody = #{seq_Inbody} -->
-<!-- 	</update> -->
-	
+	<!-- 하나만 입력하고 그 값을 수정만 할 예정 -->
+	<select id="select_One_Inbody_2" resultType="inbodyDTO">
+		select * from
+		Exercise_Inbody_2
+	</select>
+
+
 	<!-- 추가 (DB에서 확인완료) -->
 	<insert id="insert_Inbody" parameterType="inbodyDTO">
-			 insert into Exercise_Inbody(seq_Inbody, inBody_Height, inBody_Weight, inBody_Body_Fat, inBody_Skeletal)
-			 values(seq_Inbody.nextval, #{inBody_Height}, #{inBody_Weight}, #{inBody_Body_Fat}, #{inBody_Skeletal})
+		insert into Exercise_Inbody (seq_Inbody, inBody_Height, inBody_Weight, inBody_Body_Fat, inBody_Skeletal)
+		values(seq_Inbody.nextval, #{inBody_Height}, #{inBody_Weight}, #{inBody_Body_Fat},#{inBody_Skeletal})
 	</insert>
-	
+
 	<!-- 수정 (DB에서 확인완료) -->
-	<update id="update_Inbody2" parameterType="inbodyDTO">
-		update Exercise_Inbody_2
-		set
-		inBody_Height_2=#{inBody_Height_2}, inBody_Weight_2=#{inBody_Weight_2}, inBody_Body_Fat_2=#{inBody_Body_Fat_2}, inBody_Skeletal_2=#{inBody_Skeletal_2}
-		where
-		seq_Inbody_2 = #{seq_Inbody_2}
-	</update>
-	
+<!-- 	<update id="update_Inbody2" parameterType="inbodyDTO"> -->
+<!-- 		update -->
+<!-- 		Exercise_Inbody_2 -->
+<!-- 		set -->
+<!-- 		inBody_Height_2=#{inBody_Height_2}, -->
+<!-- 		inBody_Weight_2=#{inBody_Weight_2}, -->
+<!-- 		inBody_Body_Fat_2=#{inBody_Body_Fat_2}, -->
+<!-- 		inBody_Skeletal_2=#{inBody_Skeletal_2} -->
+<!-- 		where -->
+<!-- 		seq_Inbody_2 = -->
+<!-- 		#{seq_Inbody_2} -->
+<!-- 	</update> -->
+
+<!-- 수정 (DB에서 확인완료) 일단보류 일단보류 일단보류 일단보류 일단보류 -->
+<!-- <update id="update_Inbody" parameterType="inbody_DTO"> -->
+<!-- update Exercise_Inbody -->
+<!-- set -->
+<!-- inBody_Height=#{inBody_Height}, inBody_Weight=#{inBody_Weight}, inBody_Body_Fat=#{inBody_Body_Fat}, 
+	inBody_Skeletal=#{inBody_Skeletal} -->
+<!-- where -->
+<!-- seq_Inbody = #{seq_Inbody} -->
+<!-- </update> -->
 </mapper>
+
+
