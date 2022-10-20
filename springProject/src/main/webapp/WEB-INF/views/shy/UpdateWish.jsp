@@ -206,14 +206,14 @@
             list-style: none;
         }
         .view_photo {
-            width: 220px;
-            height: 220px;
-            background-color:#89b5b8;
-            display: inline-block;
-            margin: 20px auto;
-            border-radius: 8px;
-            margin-left: 90px;
-            display: none;
+/*             width: 220px; */
+/*             height: 220px; */
+/*             background-color:#89b5b8; */
+/*             display: inline-block; */
+/*             margin: 20px auto; */
+/*             border-radius: 8px; */
+/*             margin-left: 90px; */
+/*             display: none; */
         }
         .view_info {
             background-color: #89b5b8;
@@ -430,7 +430,8 @@
 	                    	
 		                    	<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
-			                            <div class="list_photo"></div>
+			                            <img class="list_photo"
+			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>
 			                            <input type="hidden" name="seqNum" value="${ wish.seqNum }">
 			                        </div>

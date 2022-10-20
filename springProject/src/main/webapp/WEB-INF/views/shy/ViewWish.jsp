@@ -206,14 +206,13 @@
             list-style: none;
         }
         .view_photo {
-            width: 220px;
-            height: 220px;
-            background-color:#89b5b8;
-            display: inline-block;
-            margin: 20px auto;
-            border-radius: 8px;
-            margin-left: 90px;
-            display: none;
+            width: 230px; 
+            height: 230px; 
+/*             background-color:#89b5b8;  */
+/*             display: inline-block;  */
+            margin: 15px auto; 
+            border-radius: 8px; 
+            margin-left: 110px; 
         }
         .view_info {
             background-color: #89b5b8;
@@ -383,12 +382,12 @@
 <body>
 
     <!-- 메인 -->
-    <main>
+<!--     <main> -->
     
-    <section>
-			<article>
-				<div class="area_wrapper">
-					<div class="calendarWhole">
+<!--     <section> -->
+<!-- 			<article> -->
+<!-- 				<div class="area_wrapper"> -->
+<!-- 					<div class="calendarWhole"> -->
 						<!-- !!!!!!!!!1!! 다이어리 안에 페이지 넣는 공간!!!!!!!!!!!!!!!! -->
 						
         <div class="ex">
@@ -402,7 +401,7 @@
                     <!-- 상품 추가 / 삭제 버튼 -->
                     <div class="add_delete">
                     
-                    <!-- +(추가) 버튼을 누르면 카테고리 추가 페이지로 이동  -->
+                    <!-- + 누르면 상품 추가 페이지로 이동  -->
                     <a href="${contextPath }/insertwishpage">
                         <input onclick="doDisplay()" class="add" type="submit" value="+">
                     </a>
@@ -412,16 +411,17 @@
                     
                     <!-- 상품 카테고리 -->
                     <div class="category">
+						<input class="category_all" type="submit" value="All">
+						
+<%-- 	                    <c:choose> --%>
+<%-- 	                    	<c:when test="${!empty wishList }"> --%>
+<%-- 	                    		<c:forEach var="wish" items="${wishList }"> --%>
+	                    		
+<%-- 			                        <input class="category_submit" type="submit" value="${wish.category }"> --%>
+<%-- 	                        	</c:forEach> --%>
+<%-- 	                        </c:when> --%>
+<%-- 	                    </c:choose> --%>
                     
-		                        <input class="category_all" type="submit" value="All">
-<%--                     <c:choose> --%>
-<%--                     	<c:when test="${!empty wishList }"> --%>
-<%--                     		<c:forEach var="wish" items="${wishList }"> --%>
-                    		
-<%-- 		                        <input class="category_submit" type="submit" value="${wish.category }"> --%>
-<%--                         	</c:forEach> --%>
-<%--                         </c:when> --%>
-<%--                     </c:choose> --%>
                     </div>
                     
                     
@@ -429,6 +429,7 @@
                     <div class="list_area">
                         
                     <c:choose>
+                    
                     	<c:when test="${empty wishlist }">
 							<div class="list_null">상품 목록이 없습니다</div>                    	
                     	</c:when>
@@ -436,9 +437,11 @@
                     	<c:when test="${!empty wishlist }">
 	                    	<c:forEach var="wish" items="${wishlist }">
 	                    	
+	                    		<!-- 상품 클릭시 상세 페이지로 이동 -->
 		                    	<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
-			                            <div class="list_photo"></div>
+			                            <img class="list_photo"
+			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>
 			                            <input type="hidden" name="seqNum" value="${ wish.seqNum }">
 			                        </div>
@@ -449,10 +452,10 @@
                     </c:choose>
                         
                         
-                    </div>
+                    </div>	<!-- END 상품 목록 -->
                     
                     
-                </div>
+                </div>	<!-- END 왼쪽 화면 -->
                 
                 <!-- 오른쪽 화면 -->
                 <div class="mainRight">
@@ -463,63 +466,65 @@
                         	<c:when test="${empty wishlist }">
                         	
                         	</c:when>
-                        	
                         		
                         	<c:when test="${!empty wishlist }">
-<%--                         		<c:forEach var="wish" items="${wishList }"> --%>
                         		
                         		<div class="right_title">VIEW</div>
 
+									<!-- 사진 -->
 			                        <div class="view">
-<!-- 			                            <input name="photo" type="file" class="upload_photo" accept="image/*" required multiple> -->
-			                            <ul>
-			                                <li class="view_photo"></li>
-			                            </ul>
-			                            <div class="photo_add">+</div>
+			                            <img class="view_photo"
+			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${pickwish.photo}">
 			                        </div>
 			                    
+			                    	<!-- 상품 정보박스 -->
 			                        <div class="view_info">
+			                        
+			                        	<!--  상품 이름 -->
 			                            <div name="name" class="view_name">${pickwish.name }</div>
 			                            
+			                            <!-- 카테고리 -->
 <!-- 			                            <div class="subname">카테고리</div> -->
 <!-- 			                            <select class="select"> -->
 <!-- 			                                <option value="">선택해주세요</option> -->
 <%-- 			                                			<option value="${wish.category }">${wish.category }</option> --%>
 <!-- 			                            </select><br> -->
 			                            
+			                            <!-- 상품 가격 -->
 			                            <div class="subname">가격</div>
-			                            <div name="price" class="price">${pickwish.price }</div>
-			                            <div class="price_txt">￦</div><br>
+				                            <div name="price" class="price">${pickwish.price }</div>
+				                            <div class="price_txt">￦</div><br>
 			                            
+			                            <!--  상품 링크 -->
 			                            <div class="subname">링크</div>
-			                            <div name="link" class="link">
-			                            	<a class="link_txt" href="${pickwish.link }">${pickwish.link}</a>
-			                            </div>
+				                            <div name="link" class="link">
+				                            	<a class="link_txt" href="${pickwish.link }">${pickwish.link}</a>
+				                            </div>
+				                            
+				                        <!-- 히든 시퀀스 -->
 			                            <input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 			                            
+			                            <!-- 보고있는 상품 삭제하기 -->
 						                <a href="${contextPath }/deletewish?seqNum=${pickwish.seqNum}">
 						                	<div class="del">삭제하기</div>
 						                	<input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 						                </a>
 						                
+						                <!-- 수정 페이지로 이동 -->
 						                <a href="${contextPath }/updatewishpage?seqNum=${pickwish.seqNum }">
 							                <input class="save" type="submit" value="수정하기">
 						                </a>
 						                
 						                
-                         			</div>
-                        		</form>
+                         			</div>	<!-- END 상품 정보 박스 -->
 
-<%--                             	</c:forEach> --%>
                         	</c:when>
                       	</c:choose>
                       	
                 	</div>
-                </div>
-			</div>
-		</div>
+                </div>	<!-- END 오른쪽 화면 -->
+			</div>	<!-- END mainT -->
+		</div>	<!-- ex -->
 		
-		</div>
-
 </body>
 </html>
