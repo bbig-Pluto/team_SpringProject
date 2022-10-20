@@ -922,6 +922,7 @@
 
 
                                                 <form>
+                                                    <span>날짜</span>
                                                     <table border="1">
                                                         <thead>
                                                             <tr>

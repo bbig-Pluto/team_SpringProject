@@ -50,4 +50,5 @@ public class ExerciseServiceImpl implements ExerciseService{
 		return sayingAry;
 	}
 
+	// 두번째 페이지
 }
