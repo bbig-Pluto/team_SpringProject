@@ -208,12 +208,28 @@
         .view_photo {
             width: 220px;
             height: 220px;
-			background-color:#89b5b8;
             display: inline-block;
             margin: 20px auto;
             border-radius: 8px;
             margin-left: 115px;
 /*             display: none; */
+        }
+        .del_photo {
+        	float: right;
+        	margin-top: 110px;
+        	font-weight: 900;
+        	font-size: 30px;
+        	background-color: lightgray;
+        	color: gray;
+        	width: 50px;
+        	text-align: center;
+/*          	padding: 5px; */
+        	border-radius: 5px;
+        	margin-right: 30px;
+        	padding-bottom: 5px;
+        }
+        .del_photo:hover {
+        	cursor: pointer;
         }
         .view_info {
             background-color: #89b5b8;
@@ -403,6 +419,8 @@
 				
 				let photo = document.querySelector(".view_photo");
 				photo.style.display = "block";
+			} else if(! input.files $$ input.files[0]) {
+				
 			}
 		}
     </script>
@@ -504,6 +522,7 @@
 
 						<!-- 이미지 업로드 -->
                         <div class="view">
+                        	<div class="del_photo">x</div>
                             <input name="photo" type="file" class="upload_photo" accept="image/*" onchange="readURL(this);">
                                 <img class="view_photo"
                                 	src="${contextPath }/donwloadwishphoto?imageFileName=${pickwish.photo}">
