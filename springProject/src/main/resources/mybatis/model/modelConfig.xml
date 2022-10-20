@@ -22,7 +22,7 @@
 		
 		<typeAlias type="com.myspring.syl.lhj.dto.DietDTO" alias="dietDTO"></typeAlias>
 		<typeAlias type="com.myspring.syl.lhj.dto.ExerciseDTO" alias="exerciseDTO"></typeAlias>
-		<typeAlias type="com.myspring.syl.lhj.dto.ExerciseDTO" alias="InbodyDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.lhj.dto.ExerciseDTO" alias="inbodyDTO"></typeAlias>
 		
 		<typeAlias type="com.myspring.syl.sdy.dto.AskDTO" alias="askDTO"></typeAlias>
 		<typeAlias type="com.myspring.syl.sdy.dto.NoticeDTO" alias="noticeDTO"></typeAlias>
