@@ -27,12 +27,23 @@ public class MyPageController {
 	 * @return
 	 */
 	@RequestMapping("/member/mypage")
-	public String myPageLoad(
+	public String myPageEntrance(
 			HttpServletRequest request,
 			HttpSession logOnSession,
-			Model model) {
+			Model model,
+			@RequestParam("myPageEnterPwd") String pwd
+			) {
+		logOnSession = request.getSession();
+		String isLogon = "" + logOnSession.getAttribute("isLogon");
+		
+		// 비밀번호 입력을 하고 들어오는지 검열
+		if( !("member".equals(isLogon)) ) {
+			return "redirect:/member/login";
+		} else {
+			return "/shm/mypage";
+		}
+		
 		// 닉네임 보여줄 곳에 쓸 nickName binding
-		return "";
 	}
 	
 	/**
