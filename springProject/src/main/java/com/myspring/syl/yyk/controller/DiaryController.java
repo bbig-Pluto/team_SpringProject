@@ -49,6 +49,8 @@ public class DiaryController {
 		System.out.println(">>> addDiary controller route");
 		System.out.println("addDiary : title : " + diaryDTO.getD_title());
 		System.out.println("addDiary : content : " + diaryDTO.getD_content());
+		System.out.println("addDiary : weather : " + diaryDTO.getD_weather());
+		System.out.println("addDiary : weather : " + diaryDTO.getD_emotion());
 		
 		//file
 		String originalFileName = fileProcess(multipartRequest);

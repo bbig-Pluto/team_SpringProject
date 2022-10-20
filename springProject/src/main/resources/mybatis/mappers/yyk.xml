@@ -6,15 +6,15 @@
 
 	<!-- 다이어리 조회 -->
 	<select id="diaryList" resultType="diaryDTO">
-		SELECT d_title, d_content, d_fileName, d_createTime, diaryNum 
+		SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum 
 		FROM diary order by d_createTime desc
 	</select>
 	
 	
 	<!-- 다이어리 추가 -->
 	<insert id="addDiary" parameterType="diaryDTO">
-		insert into diary(d_title, d_content, d_fileName, d_createTime, diaryNum, id)
-		values(#{d_title}, #{d_content}, #{d_fileName}, sysdate, seq_diaryNum.nextval, 'yyk')
+		insert into diary(d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum, id)
+		values(#{d_title}, #{d_content}, #{d_fileName}, #{d_weather}, #{d_emotion}, sysdate, seq_diaryNum.nextval, 'yyk')
 	</insert>
 	
 	

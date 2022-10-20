@@ -805,7 +805,9 @@ window.onload = function () {
 													?diaryNum=${list.diaryNum}
 													&title=${list.d_title}
 													&content=${list.d_content }
-													&fileName=${list.d_fileName}">
+													&fileName=${list.d_fileName}
+													&weather=${list.d_weather}
+													&emotion=${list.d_emotion}">
 											${list.d_title }</a>
 										</div>
 										

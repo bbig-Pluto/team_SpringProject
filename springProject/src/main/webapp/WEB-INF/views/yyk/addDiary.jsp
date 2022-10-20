@@ -510,7 +510,7 @@ main {
         }
 
         /* 날씨 맑음 아이콘 */
-        .sunny {
+        #sunny {
             margin-left: 6%;
         }
 
@@ -839,6 +839,7 @@ footer {
             border-radius: 0px 80px 80px 0px;
             background-color: #d8cbf1;
         }
+        
 </style>
 
 
@@ -847,31 +848,66 @@ footer {
 window.onload = function() {
 	icon_zoomIn();
 	icon_zoomOut();
-// 	readURL(input);
+	icon();
+	change_slide();
 	
-	
+	// 일기장 제목 여부 확인
 	// 회원 : 제목 입력 안하고 저장 시 경고창
 	// 비회원 : 저장 시 로그인 경고 문구
 	document.querySelector('input[type="submit"]').addEventListener("click", function(e) {
 		// form type이 submit이라 써줌
 			e.preventDefault();
-			
-				let title = document.querySelector('input[name="d_title"]').value;
-				title = title.trim();
-				if(title == '' || title.length == 0 ) {
-						alert("제목을 입력해주세요");
-					} else {
-						<% System.out.println("addDiary submit route"); %>
-						add.method = "post";
-						add.action = "/syl/addDiary";
-						add.enctype = "multipart/form-data"
-						add.submit();
-					}
+			let title = document.querySelector('input[name="d_title"]').value;
+			title = title.trim();
+			if(title == '' || title.length == 0 ) {
+				alert("제목을 입력해주세요");
+			} else {
+				<% System.out.println("addDiary submit route"); %>
+				add.method = "post";
+				add.action = "/syl/addDiary";
+				add.enctype = "multipart/form-data"
+				add.submit();
+			}
 	})
-	
-	
-	
+
 }
+
+
+	//아이콘 클릭 시 아이콘 value 저장
+	function icon(){
+	    let icons = document.querySelectorAll(".icon");
+			for(let i=0; i<icons.length; i++){
+				icons[i].addEventListener("click", function(){
+					icons[i].style.width = 60 + 'px';
+					icons[i].style.height = "60px";
+	
+	                // 클릭 시 클릭 된 아이콘 정보 잡음
+// 	                let weather = document.querySelector("#weather");
+// 	                weather.value = i;
+// 	                console.log("value : " + weather.value);
+
+					// 아이콘 클릭 시
+					// input(weather) 잡아서 
+					// 각 icon들의 value 값 뽑기
+					// icon의 value값 input(weather) value에 넣어주기
+	                let weather = document.querySelector("#weather");
+	                weather.value = icons[i].getAttribute("value");  
+	                console.log("weather.value : " + weather.value);
+	            })
+			}
+	}
+
+	// 기분 슬라이더 바 
+	function change_slide(){
+            document.querySelector(".slidecontainer .diary_slider").addEventListener("input", function(event){
+                _value = event.target.value;
+
+                slider_value = _value;
+                console.log("slider_value : " + slider_value);
+            })
+        }
+	
+	
 	// 사진 이미지 미리보기
 	function readURL(input){
 		if(input.files && input.files[0]){
@@ -882,7 +918,6 @@ window.onload = function() {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-
 
 	// 아이콘 hover시 해당 아이콘 크기 커짐
     function icon_zoomIn(event) {
@@ -900,6 +935,7 @@ window.onload = function() {
             event.target.style.transition = "all 0.1s";
         }
     }
+    
 
 
 </script>
@@ -934,6 +970,7 @@ window.onload = function() {
 			<article>
 				<div class="area_wrapper">
 					<div class="calendarWhole">
+					
 						<!-- !!!!!!!!!1!! 다이어리 안에 페이지 넣는 공간!!!!!!!!!!!!!!!! -->
 						<form name="add" >
 				            <div class="diaryWrap">
@@ -948,7 +985,7 @@ window.onload = function() {
 										<div class="postit_container">
 											<img src="resources/yyk/image/포스트잇(완).png" class="postit" >
 											<div class="file_container">
-												<img class="preview"  width=250 height=250/><br>
+												<img class="preview" width=250 height=250/><br>
 												<input type="file" name="file" onchange ="readURL(this);"><br>
 											</div>
 										</div>
@@ -958,17 +995,25 @@ window.onload = function() {
 					                <!-- 기분 & 날씨 -->
 					                <div class="left_bottom_text">Today's Emotion</div>
 					                <div class="left_bottom_wrap">
+					                
 					                    <!-- 날씨 -->
 					                    <div class="weather">
-					                        <img src="resources/yyk/image/맑음.png" class="sunny" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-					                        <img src="resources/yyk/image/구름.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-					                        <img src="resources/yyk/image/비.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-					                        <img src="resources/yyk/image/무지개.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/맑음.png" class="icon" id="sunny" value="sunny"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/구름.png" class="icon" value="cloud"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/비.png" class="icon" value="rain"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/무지개.png" class="icon" value="rainbow"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
 					                    </div>
+					                    <input type="hidden" name="d_weather" id="weather" value="">
+					                    
 					                    <!-- 기분 -->
 					                    <div class="slidecontainer">
-					                        <input type="range" min="1" max="5" class="diary_slider">
+					                        <input type="range" min="1" max="5" class="diary_slider" name="d_emotion" value="">
 					                    </div>
+					                    
 					                </div>
 					            	</div>
 					

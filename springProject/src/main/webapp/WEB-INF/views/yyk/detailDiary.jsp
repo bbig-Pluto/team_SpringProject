@@ -511,7 +511,7 @@ main {
 }
 
 /* 날씨 맑음 아이콘 */
-.sunny {
+#sunny {
 	margin-left: 6%;
 }
 
@@ -862,7 +862,8 @@ footer {
 	window.onload = function() {
 		icon_zoomIn();
 		icon_zoomOut();
-		
+		icon();
+		weatherSelector();
 		
 		// 하나의 form에서 기능을 두개 쓰기 위해 자바스크립트로 클릭 이벤트 줌
 		// 수정 버튼
@@ -899,6 +900,43 @@ footer {
 			}, 10); // 0.01초
 			
 		})
+}
+	
+	//아이콘 클릭 시 아이콘 value 저장
+	function icon(){
+	    let icons = document.querySelectorAll(".icon");
+			for(let i=0; i<icons.length; i++){
+
+				icons[i].addEventListener("click", function(){
+					icons[i].style.width = 60 + 'px';
+					icons[i].style.height = "60px";
+
+	                // 클릭 시 클릭 된 아이콘 정보 잡음
+// 	                let weather = document.querySelector("#weather");
+// 	                weather.value = i;
+// 	                console.log("value : " + weather.value);
+					
+
+					// 아이콘 클릭 시
+					// input(weather) 잡아서 
+					// 각 icon들의 value 값 뽑기
+					// icon의 value값 input(weather) value에 넣어주기
+	                let weather = document.querySelector("#weather");
+	                weather.value = icons[i].getAttribute("value");  
+	                console.log("weather.value : " + weather.value);
+	            })
+			}
+	}
+	
+	// 슬라이더 바 
+	let weatherSelector = function() { 
+		for(let i = 0; i < document.querySelectorAll(".icon").length; i++) {
+			if (document.querySelectorAll(".icon")[i].getAttribute("value") == "${ param.weather }" ) {
+				console.log("weather Catch" + "${param.weather}");
+				document.querySelectorAll(".icon")[i].style.width = 60 + 'px';
+				document.querySelectorAll(".icon")[i].style.height = "60px";
+			}
+		}
 	}
 	
 	// 아이콘 hover시 해당 아이콘 크기 커짐
@@ -917,6 +955,8 @@ footer {
             event.target.style.transition = "all 0.1s";
         }
     }
+    
+
 </script>
 
 </head>
@@ -971,14 +1011,20 @@ footer {
 								<div class="left_bottom_wrap">
 									<!-- 날씨 -->
 									<div class="weather">
-										<img src="resources/yyk/image/맑음.png" class="sunny" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)"> 
-										<img src="resources/yyk/image/구름.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)"> 
-										<img src="resources/yyk/image/비.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)"> 
-										<img src="resources/yyk/image/무지개.png" onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-									</div>
+					                        <img src="resources/yyk/image/맑음.png" class="icon" id="sunny" value="sunny"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/구름.png" class="icon" value="cloud"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/비.png" class="icon" value="rain"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                        <img src="resources/yyk/image/무지개.png" class="icon" value="rainbow"
+					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+					                    </div>
+					                    <input type="hidden" name="d_weather" id="weather" value="${param.weather }">
+					                    
 									<!-- 기분 -->
 									<div class="slidecontainer">
-										<input type="range" min="1" max="5" class="diary_slider">
+										<input type="range" min="1" max="5" class="diary_slider" value="${ param.emotion }">
 									</div>
 								</div>
 							</div>

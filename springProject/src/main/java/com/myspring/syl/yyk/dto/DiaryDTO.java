@@ -7,6 +7,8 @@ public class DiaryDTO {
 	String d_title;
 	String d_content;
 	String d_fileName;
+	String d_weather;
+	String d_emotion;
 	Date d_createTime;
 	int diaryNum;
 	String id;
@@ -35,6 +37,18 @@ public class DiaryDTO {
 	}
 	public void setD_fileName(String d_fileName) {
 		this.d_fileName = d_fileName;
+	}
+	public String getD_weather() {
+		return d_weather;
+	}
+	public void setD_weather(String d_weather) {
+		this.d_weather = d_weather;
+	}
+	public String getD_emotion() {
+		return d_emotion;
+	}
+	public void setD_emotion(String d_emotion) {
+		this.d_emotion = d_emotion;
 	}
 	public Date getD_createTime() {
 		return d_createTime;
