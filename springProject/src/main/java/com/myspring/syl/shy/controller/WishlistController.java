@@ -43,7 +43,7 @@ public class WishlistController {
 	
 	/* 상세 페이지 */
 	@RequestMapping(value="/pickwish",
-					method=RequestMethod.GET)
+					method= {RequestMethod.GET, RequestMethod.POST})
 	public String pickWish(
 			HttpServletRequest request,
 			HttpServletResponse response,
@@ -68,9 +68,8 @@ public class WishlistController {
 			HttpServletResponse response,
 			@RequestParam("name") String name,
 			@RequestParam("price") int price,
-			@RequestParam("link") String link
-//			,@RequestParam("photo") MultipartFile file
-			,MultipartHttpServletRequest multipartRequest
+			@RequestParam("link") String link,
+			MultipartHttpServletRequest multipartRequest
 			) throws Exception {
 		/* 파일 저장 */
 		String originalFileName = fileProcess(multipartRequest);
@@ -98,8 +97,7 @@ public class WishlistController {
 					method= {RequestMethod.GET, RequestMethod.POST})
 	public String insertWishPage(
 			HttpServletRequest request,
-			HttpServletResponse response,
-			Model model
+			HttpServletResponse response
 			) {
 		
 		List<WishlistDTO> list = wishService.getWishList();
@@ -130,15 +128,21 @@ public class WishlistController {
 	
 	/* 수정 */
 	@RequestMapping(value="/updatewish",
-					method=RequestMethod.GET)
+					method= {RequestMethod.GET, RequestMethod.POST})
 	public String updateWish(
 			HttpServletRequest request,
 			HttpServletResponse response,
 			@RequestParam("seqNum") int seqNum,
 			@RequestParam("name") String name,
 			@RequestParam("price") int price,
-			@RequestParam("link") String link
-			) {
+			@RequestParam("link") String link,
+			MultipartHttpServletRequest multipartRequest
+			) throws Exception {
+		
+		/* 파일 저장 */
+		String originalFileName = fileProcess(multipartRequest);
+		
+		System.out.println("수정된 이미지 이름 : " + originalFileName );
 		
 		List<WishlistDTO> list = wishService.getWishList();
 		request.setAttribute("wishlist", list);
@@ -147,6 +151,7 @@ public class WishlistController {
 		
 		wishDTO.setSeqNum(seqNum);
 		wishDTO.setName(name);
+		wishDTO.setPhoto(originalFileName);
 		wishDTO.setPrice(price);
 		wishDTO.setLink(link);
 		

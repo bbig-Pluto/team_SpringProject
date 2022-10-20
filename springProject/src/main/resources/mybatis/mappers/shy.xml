@@ -32,7 +32,7 @@
 		update wishlist
 			set category='a',
 				name=#{name},
-				photo='a',
+				photo=#{photo},
 				price=#{price},
 				link=#{link}
 			where SEQNUM = #{seqNum}

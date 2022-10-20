@@ -206,13 +206,13 @@
             list-style: none;
         }
         .view_photo {
-/*             width: 220px; */
-/*             height: 220px; */
-/*             background-color:#89b5b8; */
-/*             display: inline-block; */
-/*             margin: 20px auto; */
-/*             border-radius: 8px; */
-/*             margin-left: 90px; */
+            width: 220px;
+            height: 220px;
+			background-color:#89b5b8;
+            display: inline-block;
+            margin: 20px auto;
+            border-radius: 8px;
+            margin-left: 115px;
 /*             display: none; */
         }
         .view_info {
@@ -371,6 +371,42 @@
         }
         
     </style>
+    
+    <script>
+	    window.onload = function() {
+	        upload();
+	    }
+	    
+	    /* 파일 업로드 버튼 대체 */
+	    function upload() {
+	        
+	        let up = document.querySelector(".upload_photo");
+	        let add = document.querySelector(".photo_add");
+	        
+	        add.addEventListener("click", ()=> up.click());
+	//         up.addEventListener("change", getImageFiles);
+	//         up.addEventListener("change", readURL(up));
+	        up.addEventListener("change", ()=> up.click());
+	    }
+	
+		/* 이미지 미리보기 */
+		function readURL(input) {
+			
+			if(input.files && input.files[0]) {
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+	//					$('.view_photo').attr('src', e.target.result);
+					document.querySelector('.view_photo').setAttribute('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+				
+				let photo = document.querySelector(".view_photo");
+				photo.style.display = "block";
+			}
+		}
+    </script>
+    
 </head>
 <body>
 
@@ -463,14 +499,16 @@
                         		
                         		<div class="right_title">VIEW</div>
 
-                        		<form method="get" action="${contextPath }/updatewish">
-			                        <div class="view">
-<!-- 			                            <input name="photo" type="file" class="upload_photo" accept="image/*" required multiple> -->
-			                            <ul>
-			                                <li class="view_photo"></li>
-			                            </ul>
-			                            <div class="photo_add">+</div>
-			                        </div>
+                <!-- 상품 추가 -->
+                <form method="post" action="${contextPath }/updatewish" enctype="multipart/form-data">
+
+						<!-- 이미지 업로드 -->
+                        <div class="view">
+                            <input name="photo" type="file" class="upload_photo" accept="image/*" onchange="readURL(this);">
+                                <img class="view_photo"
+                                	src="${contextPath }/donwloadwishphoto?imageFileName=${pickwish.photo}">
+                            <div class="photo_add">+</div>
+                        </div>
 			                    
 			                        <div class="view_info">
 			                            <input name="name" type="text" class="view_name" placeholder="상품 이름을 입력하세요" value="${pickwish.name }">

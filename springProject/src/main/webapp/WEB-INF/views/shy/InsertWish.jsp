@@ -151,6 +151,14 @@
             border-radius: 10px;
             margin: 0px;
         }
+        .null_photo {
+        	width: 120px;
+        	height: 120px;
+        	background-color: rgb(221, 221, 221);
+        	border-radius: 10px;
+        	margin: 0px;
+        	display: none;
+        }
         .list_name {
             font-weight: 900;
             text-align: center;
@@ -588,6 +596,7 @@
 	                    	<c:forEach var="wish" items="${wishlist }">
 	                    		<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
+				                        <div class="null_photo"></div>
 			                            <img class="list_photo"
 			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>
@@ -651,7 +660,6 @@
 						<!-- 이미지 업로드 -->
                         <div class="view">
                             <input name="photo" type="file" class="upload_photo" accept="image/*" onchange="readURL(this);">
-<!--                             required multple -->
                                 <img class="view_photo">
                             <div class="photo_add">+</div>
                         </div>
