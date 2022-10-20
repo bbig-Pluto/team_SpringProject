@@ -178,6 +178,7 @@
             overflow-x: auto;
             background-color: rgb(255, 255, 255);
             border-radius: 8px;
+            overflow: hidden;
         }
         .view::-webkit-scrollbar {
             width: 0px;
@@ -195,8 +196,16 @@
             border-radius: 5px;
             color: #71989b;
             margin: 105px auto;
-            background-color:rgb(243, 243, 243);
+            background-color:rgb(240, 240, 240);
             text-align: center;
+            
+/*             background-color: rgb(230, 230, 230); */
+/*             margin: 65px 185px; */
+/*             padding: 20px; */
+/*             width: 40px; */
+/*             height: 40px; */
+/*             border-radius: 50px; */
+/*             border: 3px dotted lightgray; */
         }
         .photo_add:hover {
             cursor: pointer;
@@ -206,13 +215,35 @@
             list-style: none;
         }
         .view_photo {
-            width: 220px;
-            height: 220px;
+            width: 230px;
+            height: 230px;
             display: inline-block;
-            margin: 20px auto;
+            margin: 15px auto;
             border-radius: 8px;
             margin-left: 115px;
 /*             display: none; */
+			cursor: pointer;
+        }
+        .mod_photo {
+            position: absolute;
+            background-color:rgba(223, 223, 223, 0.151);
+            font-size: 60px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.842);
+            width: 230px;
+            height: 230px;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 230px;
+/*             display: none; */
+            cursor: pointer;
+            margin-left: 115px;
+            margin-top: 15px;
+/* 			border: 1px solid red; */
+			z-index: 1;
+        }
+        .view_photo:hover + .mod_photo {
+            display: block;
         }
         .del_photo {
         	float: right;
@@ -282,7 +313,7 @@
         .select:focus {
             background-color: rgb(255, 253, 244);
         }
-         .price {
+        .price {
             /* float: right; */
             width: 168px;
             height: 35px;
@@ -398,8 +429,10 @@
 	        
 	        let up = document.querySelector(".upload_photo");
 	        let add = document.querySelector(".photo_add");
+	        let mPhoto = document.querySelector(".mod_photo");
 	        
-	        add.addEventListener("click", ()=> up.click());
+// 	        add.addEventListener("click", ()=> up.click());
+	        mPhoto.addEventListener("click", ()=> up.click());
 	//         up.addEventListener("change", getImageFiles);
 	//         up.addEventListener("change", readURL(up));
 	        up.addEventListener("change", ()=> up.click());
@@ -419,8 +452,9 @@
 				
 				let photo = document.querySelector(".view_photo");
 				photo.style.display = "block";
-			} else if(! input.files $$ input.files[0]) {
 				
+				let add = document.querySelector(".photo_add");
+// 				add.style.display = "none";
 			}
 		}
     </script>
@@ -524,9 +558,11 @@
                         <div class="view">
                         	<div class="del_photo">x</div>
                             <input name="photo" type="file" class="upload_photo" accept="image/*" onchange="readURL(this);">
+                                <div class="mod_photo">+</div>
                                 <img class="view_photo"
                                 	src="${contextPath }/donwloadwishphoto?imageFileName=${pickwish.photo}">
-                            <div class="photo_add">+</div>
+<!--                             	<div class="photo_add">+</div> -->
+<!-- 									<img class="photo_add" src="https://ifh.cc/g/jJbzdb.png"> -->
                         </div>
 			                    
 			                        <div class="view_info">

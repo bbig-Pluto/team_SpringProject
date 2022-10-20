@@ -7,6 +7,7 @@
 	<select id="selectWishlist" resultType="wishlistDTO">
 	
 		select * from wishlist
+		ORDER BY seqNum desc
 	
 	</select>
 	
