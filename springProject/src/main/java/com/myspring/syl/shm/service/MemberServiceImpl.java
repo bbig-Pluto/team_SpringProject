@@ -1,16 +1,18 @@
 package com.myspring.syl.shm.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.syl.shm.dao.MemberDAO;
 import com.myspring.syl.shm.dto.MemberDTO;
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
@@ -43,7 +45,6 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return dto;
 	}
-	
 	
 	@Override
 	public String idFinder(Map idFindKey) {
@@ -103,6 +104,32 @@ public class MemberServiceImpl implements MemberService {
 	
 	public int exeModifyMemberInfo(MemberDTO dto) {
 		int result = memberDAO.updateMemberInfo(dto);
+		return result;
+	}
+	
+	public int exeDeleteAccountSelf(String memberNum) {
+		int resultAccountInfoDel = memberDAO.deleteAccountInfo(memberNum);
+		int resultDiaryDel = memberDAO.deleteDiaryContents(memberNum);
+		int resultExerciseDel = memberDAO.deleteExerciseContents(memberNum);
+//		int resultWishListDel = memberDAO.deleteWishListContents(memberNum);
+//		
+//		int total = resultAccountDel + resultDiaryDel + resultExerciseDel + resultWishListDel;
+		System.out.println("exeDeleteAccountSelf total : " 
+				+ (resultAccountInfoDel + resultDiaryDel + resultExerciseDel));
+		
+		return resultAccountInfoDel;
+//		return total;
+	}
+	
+	public MemberDTO getMemberInfo(String memberNum) {
+		MemberDTO dto = memberDAO.memberInfoForModify(memberNum);
+		
+		return dto;
+	}
+	
+	
+	public int exeModifyInfoSelf(MemberDTO dto) {
+		int result = memberDAO.modifyMemberInfoSelf(dto);
 		return result;
 	}
 	

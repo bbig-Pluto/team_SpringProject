@@ -19,6 +19,7 @@ public class SessionController {
 	
 	@Autowired
 	MemberService memberService;
+
 	
 	/**
 	 * 로그인 실행, 회원 유무 검증 성공 -> member 부여 실패 -> guest 부여

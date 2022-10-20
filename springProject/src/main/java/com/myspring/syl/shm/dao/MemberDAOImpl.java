@@ -1,11 +1,11 @@
 package com.myspring.syl.shm.dao;
 
 import java.util.List;
-
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.syl.shm.dto.MemberDTO;
@@ -102,5 +102,48 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.update("mapper.shm.modifyMemInfoFromAdmin", dto);
 		return result;
 	}
-
+	
+	// 마이페이지 직접 회원탈퇴
+	@Override
+	public int deleteAccountInfo(String memberNum) throws DataAccessException {
+		int result = sqlSession.delete("mapper.shm.delAccountInfoSelf", memberNum);
+		return result;
+	}
+	
+	// 마이페이지 다이어리 정보 초기화
+	@Override
+	public int deleteDiaryContents(String memberNum) throws DataAccessException {
+		int result = sqlSession.delete("mapper.shm.deleteDiaryContents", "test01");
+		return result;
+	}
+	
+	// 마이페이지 운동 정보 초기화
+	@Override
+	public int deleteExerciseContents(String memberNum) throws DataAccessException {
+		int result = sqlSession.delete("mapper.shm.deleteExerciseContents", "test01");
+		return result;
+	}
+	
+	// 마이페이지 위시리스트 정보 초기화
+//	@Override
+//	public int deleteWishListContents(String memberNum) throws DataAccessException {
+//		int result = sqlSession.delete("mapper.shm.deleteWishListContents", "test01");
+//		return result;
+//	}
+	
+	// 마이페이지에서 로그인 한 회원의 정보 다시 가져오기
+	@Override
+	public MemberDTO memberInfoForModify(String memberNum) {
+		MemberDTO dto = sqlSession.selectOne("mapper.shm.memberInfoForModify", memberNum);
+		
+		return dto;
+	}
+	
+	// 마이페이지에서 입력한 회원정보 수정 데이터 반영
+	public int modifyMemberInfoSelf(MemberDTO dto) {
+		int result = sqlSession.update("mapper.shm.modifyMemberInfoSelf", dto);
+		
+		return result;
+	}
+	
 }
