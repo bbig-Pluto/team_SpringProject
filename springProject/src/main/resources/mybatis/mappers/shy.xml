@@ -23,7 +23,7 @@
 			(seqNum, category, name, photo, price, link)
 			
 		values
-			(seq_list.nextval, 'null', #{name}, 'null', #{price}, #{link})
+			(seq_list.nextval, 'null', #{name}, #{photo}, #{price}, #{link})
 	
 	</insert>
 	

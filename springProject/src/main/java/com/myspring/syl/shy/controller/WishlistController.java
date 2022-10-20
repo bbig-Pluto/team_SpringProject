@@ -28,7 +28,7 @@ public class WishlistController {
 	
 	/* 전체 조회 */
 	@RequestMapping(value="/mainwish",
-					method=RequestMethod.GET)
+					method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listWish() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -66,32 +66,29 @@ public class WishlistController {
 	public String insertWish(
 			HttpServletRequest request,
 			HttpServletResponse response,
-			Model model,
 			@RequestParam("name") String name,
 			@RequestParam("price") int price,
-			@RequestParam("link") String link,
-			MultipartHttpServletRequest multipartRequest
-			) throws Exception
-	{
+			@RequestParam("link") String link
+//			,@RequestParam("photo") MultipartFile file
+			,MultipartHttpServletRequest multipartRequest
+			) throws Exception {
+		/* 파일 저장 */
+		String originalFileName = fileProcess(multipartRequest);
 		
+		System.out.println("상품 추가 파일 이름 : " + originalFileName );
+		
+		/* insert 정보 저장 */
 		WishlistDTO wishDTO = new WishlistDTO();
 		
 		wishDTO.setName(name);
 		wishDTO.setPrice(price);
+		wishDTO.setPhoto(originalFileName);
 		wishDTO.setLink(link);
 		
 		System.out.println("상품명 : "+ wishDTO.getName());
 		
 		int insertwish = wishService.getInsertWish(wishDTO);
 		request.setAttribute("insertwish", insertwish);
-		
-		/* 파일 저장 */
-		String originalFileName = fileProcess(multipartRequest);
-		
-		System.out.println("상품 추가 파일 이름 : " + originalFileName );
-		
-		wishDTO.setPhoto(originalFileName);
-		
 		
 		return "forward:/mainwish";
 	}
@@ -179,7 +176,7 @@ public class WishlistController {
 	}
 	
 	/* 파일 저장 위치 지정 */
-	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\imgae_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
 	
 	/* 파일 업로드 */
 	private String fileProcess(MultipartHttpServletRequest multipartRequest)throws Exception {

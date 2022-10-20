@@ -209,13 +209,13 @@
             list-style: none;
         }
         .view_photo {
-            width: 220px;
-            height: 220px;
-            background-color:#89b5b8;
+            width: 230px;
+            height: 230px;
+/*             background-color:#89b5b8; */
             display: inline-block;
-            margin: 20px auto;
+            margin: 15px auto;
             border-radius: 8px;
-            margin-left: 90px;
+            margin-left: 110px;
             display: none;
         }
         .view_info {
@@ -501,20 +501,35 @@
             upload();
         }
         
-        function getImageFiles(e) {
-            let files = e.currentTarget.files;
-            console.log(typeof files, files);
-        }
-        
+        /* 파일 업로드 버튼 대체 */
         function upload() {
             
             let up = document.querySelector(".upload_photo");
             let add = document.querySelector(".photo_add");
             
             add.addEventListener("click", ()=> up.click());
-            up.addEventListener("change", getImageFiles);
-            
+//             up.addEventListener("change", getImageFiles);
+//             up.addEventListener("change", readURL(up));
+            up.addEventListener("change", ()=> up.click());
         }
+
+		/* 이미지 미리보기 */
+		function readURL(input) {
+			
+			if(input.files && input.files[0]) {
+				var reader = new FileReader();
+				
+				reader.onload = function(e) {
+// 					$('.view_photo').attr('src', e.target.result);
+					document.querySelector('.view_photo').setAttribute('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+				
+				let photo = document.querySelector(".view_photo");
+				photo.style.display = "block";
+			}
+		}
+        
     </script>
 </head>
 <body>
@@ -573,7 +588,8 @@
 	                    	<c:forEach var="wish" items="${wishlist }">
 	                    		<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
-			                            <div class="list_photo"></div>
+			                            <img class="list_photo"
+			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>
 			                            <input type="hidden" name="seqNum" value="${ wish.seqNum }">
 			                        </div>
@@ -630,18 +646,21 @@
                         <div class="right_title">VIEW</div>
                         
                 <!-- 상품 추가 -->
-                <form method="get" action="${contextPath }/insertwish">
+                <form method="post" action="${contextPath }/insertwish" enctype="multipart/form-data">
 
+						<!-- 이미지 업로드 -->
                         <div class="view">
-                            <input name="file" type="file" class="upload_photo" accept="image/*" onchange="readURL(this);">
+                            <input name="photo" type="file" class="upload_photo" accept="image/*" onchange="readURL(this);">
 <!--                             required multple -->
                                 <img class="view_photo">
                             <div class="photo_add">+</div>
                         </div>
                     
+                    	<!-- 상품 이름 -->
                         <div class="view_info">
                             <input name="name" type="text" class="view_name" placeholder="상품 이름을 입력하세요">
                             
+                        <!-- 카테고리 선택 -->
 <!--                             <div class="subname">카테고리</div> -->
 <!--                             <select class="select"> -->
 
@@ -655,10 +674,12 @@
 <%--                                 </c:choose> --%>
 <!--                             </select><br> -->
                             
+                            <!-- 상품 가격 -->
                             <div class="subname">가격</div>
-                            <input name="price" class="price" type="text">
-                            <div class="price_txt">￦</div><br>
+	                            <input name="price" class="price" type="text">
+	                            <div class="price_txt">￦</div><br>
                             
+                            <!-- 상품 링크 -->
                             <div class="subname">링크</div>
                             <textarea name="link" class="link" type="text"></textarea>
                             

@@ -444,7 +444,8 @@
 	                    	<c:forEach var="wish" items="${wishlist }">
 	                    		<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
-			                            <div class="list_photo"></div>
+			                            <img class="list_photo"
+			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>
 			                            <input type="hidden" name="seqNum" value="${ wish.seqNum }">
 			                        </div>
