@@ -18,4 +18,7 @@ public interface ExerciseController {
 	public void saying(Model model);
 	
 	public String sayingAry();
+	
+	// 두번째 페이지
+	
 }

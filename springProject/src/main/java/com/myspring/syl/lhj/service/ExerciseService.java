@@ -17,4 +17,8 @@ public interface ExerciseService {
 	public List<ExerciseDTO> saying();
 	
 	public String sayingAry(int sayingAry);
+	
+	// 두번째 페이지
+	
+	
 }

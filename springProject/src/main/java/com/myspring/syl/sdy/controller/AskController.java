@@ -3,6 +3,7 @@ package com.myspring.syl.sdy.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,15 +36,39 @@ public class AskController extends HttpServlet {
 	
 	
 	//전체 리스트 보여주는 페이지
-	@RequestMapping(value="/ask",method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView listMembers() {
-		ModelAndView mav = 	new ModelAndView();
-		
-		List<AskDTO> list = askService.getMemberList();
-		mav.addObject("list",list);
-		mav.setViewName("/sdy/ask_show");
-		return mav;
-	}
+		@RequestMapping(value="/ask",method= {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView listMembers(HttpServletRequest request) {
+			ModelAndView mav = 	new ModelAndView();
+			
+			int pageNum = 1;		// 현재 페이지
+			int countPerPage = 10;	// 한 페이지당 보여줄 글 개수
+			
+			String str_pageNum = request.getParameter("pageNum");
+			String str_countPerPage = request.getParameter("countPerPage");
+			if(str_pageNum != null) {
+				pageNum = Integer.parseInt(str_pageNum);
+			}
+			if(str_countPerPage != null) {
+				countPerPage = Integer.parseInt(str_countPerPage);
+			}
+			
+			try {
+				pageNum = Integer.parseInt(str_pageNum);
+			} catch (NumberFormatException nfe) {}
+			
+			try {
+				countPerPage = Integer.parseInt(str_countPerPage);
+			} catch (NumberFormatException nfe) {
+			}
+			
+			Map map = askService.getPagingList(pageNum, countPerPage);
+			map.put("pageNum", pageNum);
+			map.put("countPerPage", countPerPage);
+			
+			mav.addObject("map",map);
+			mav.setViewName("/sdy/ask_show");
+			return mav;
+		}
 
 	//글쓰기페이지로 보냄
 	@RequestMapping(value="/write",method= {RequestMethod.GET,RequestMethod.POST})

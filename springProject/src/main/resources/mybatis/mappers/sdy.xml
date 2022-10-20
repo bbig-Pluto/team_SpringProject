@@ -4,14 +4,26 @@
  
 <mapper namespace="mapper.sdy">
 <!-- 문의 게시판  -->
-	<select id="selectAllMemberList" 
-			resultType="askDTO">
-				
-		 select LEVEL, parent_no,board_no,title,content,ask_classify,ask_secret,ask_pwd,id,write_date,hit,reply_count from ask_board
+<select id="selectAllMemberList" parameterType="java.util.Map"
+			resultType="askDTO">		
+		 SELECT * FROM (
+				SELECT rownum AS rnum, tmp.* FROM (
+					select LEVEL, parent_no,board_no,title,content,ask_classify,ask_secret,ask_pwd,id,write_date,hit,reply_count from ask_board
 					start with parent_no is null
 					connect by prior board_no = parent_no
 					order siblings by board_no desc
+				) tmp
+			)
+			<![CDATA[WHERE #{start} <= rnum AND rnum <= #{end}]]>
 	
+	</select>
+	<!-- 게시물 총 갯수 -->
+	<select id="getAllPageList" 
+			resultType="int">
+		SELECT count(*) as cnt FROM ask_board
+		start with parent_no is null
+		connect by prior board_no = parent_no
+		order siblings by board_no desc
 	</select>
 	<!-- 게시글 비밀번호 조회 -->
 	<select id="pwCheck" 
@@ -141,23 +153,6 @@
 		</foreach>
 	</delete>
 	
-	 <!--페이징 보여주기 한페이지에 -->
-	<select id="pageList" parameterType="askDTO"
-			resultType="askDTO">		
-		 SELECT * FROM (
-				SELECT rownum AS rnum, tmp.* FROM (
-					SELECT * FROM ask_board
-					order by board_no desc
-				) tmp
-			)
-			<![CDATA[WHERE ? <= rnum AND rnum <= ?]]>
-	
-	</select> 
-	<!-- 게시물 총 갯수 -->
-	<select id="getAllPageList" 
-			resultType="AskDTO">
-		SELECT count(*) as cnt FROM ask_board
-	</select>
 	
 
 
@@ -172,12 +167,21 @@
 
 
 <!--  공지게시판 -->
-	<select id="selectNoticeList" 
-			resultType="noticeDTO">
-				
-		select * from n_board 
-		order by n_set,board_no desc
-
+	<select id="selectNoticeList" parameterType="java.util.Map"
+			resultType="noticeDTO">		
+		 SELECT * FROM (
+				SELECT rownum AS rnum, tmp.* FROM (
+					select * from n_board
+					order by n_set,board_no desc
+				) tmp
+			)
+			<![CDATA[WHERE #{start} <= rnum AND rnum <= #{end}]]>
+	
+	</select>
+	<!-- 게시물 총 갯수 -->
+	<select id="getNoticeCount" 
+			resultType="int">
+		SELECT count(*) as cnt FROM n_board
 	</select>
 	<!-- 게시판 등록 -->
 	<insert id="insertNoticeContents" parameterType="noticeDTO">

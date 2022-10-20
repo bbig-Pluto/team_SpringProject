@@ -77,4 +77,37 @@
 		emailAdd=#{emailAdd} 
 		where memberNum=#{memberNum}
 	</update>
+	
+	<delete id="delAccountInfoSelf" parameterType="String">
+		DELETE syl_member WHERE memberNum=#{_parameter}
+	</delete>
+	
+	<delete id="deleteDiaryContents" parameterType="String">
+<!-- 		DELETE Diary WHERE memberNum=#{_parameter} -->
+		DELETE delCtntTest1 WHERE id=#{_parameter}
+	</delete>
+	
+	<delete id="deleteExerciseContents" parameterType="String">
+<!-- 		DELETE Exercise WHERE memberNum=#{_parameter} -->
+		ELETE delCtntTest2 WHERE id=#{_parameter}
+	</delete>
+	
+	<delete id="deleteWishListContents" parameterType="String">
+<!-- 		DELETE wishlist WHERE memberNum=#{_parameter} -->
+		ELETE delCtntTest2 WHERE id=#{_parameter}
+	</delete>
+	
+	<select id="memberInfoForModify" resultType="memberDTO" parameterType="String">
+		select id, pwd, nickName, emailAdd, telNum, joinDate 
+		from syl_member 
+		where memberNum=#{_parameter}
+	</select>
+	
+	<update id="modifyMemberInfoSelf" parameterType="MemberDTO">
+		update syl_member SET 
+		nickName=#{nickName}, 
+		emailAdd=#{emailAdd},
+		telNum=#{telNum}
+		where memberNum=#{memberNum}
+	</update>
 </mapper>

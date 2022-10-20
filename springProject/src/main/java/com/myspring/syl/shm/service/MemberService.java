@@ -3,9 +3,12 @@ package com.myspring.syl.shm.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.myspring.syl.shm.dto.MemberDTO;
 
-
+@Transactional(propagation=Propagation.REQUIRED)
 public interface MemberService {
 	
 	List<MemberDTO> getMemberList();
@@ -17,6 +20,8 @@ public interface MemberService {
 	public int exeDelMemFromAdmin(String memberNum);
 	public MemberDTO getMemberInfoForModify(String memberNum);
 	public int exeModifyMemberInfo(MemberDTO dto);
-	
+	public int exeDeleteAccountSelf(String memberNum);
+	public MemberDTO getMemberInfo(String memberNum);
+	public int exeModifyInfoSelf(MemberDTO dto);
 	
 }

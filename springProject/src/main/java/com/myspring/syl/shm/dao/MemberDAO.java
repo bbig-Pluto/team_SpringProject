@@ -16,4 +16,10 @@ public interface MemberDAO {
 	public int delMemFromAdmin(String memberNum);
 	public MemberDTO enquireMemberFromAdmin(String memberNum);
 	public int updateMemberInfo(MemberDTO dto);
+	public int deleteAccountInfo(String memberNum);
+	public int deleteDiaryContents(String memberNum);
+	public int deleteExerciseContents(String memberNum);
+//	public int deleteWishListContents(String memberNum);
+	public MemberDTO memberInfoForModify(String memberNum);
+	public int modifyMemberInfoSelf(MemberDTO dto);
 }

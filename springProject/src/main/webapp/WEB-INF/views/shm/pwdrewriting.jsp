@@ -22,20 +22,20 @@ request.setCharacterEncoding("UTF-8");
 		let secondInputBox = document.querySelector("input[name='doubleCheckForPwdInput']");
 
 		document.querySelector("input[type='submit']").addEventListener("click", function(e) {
-					if (!(firstInputBox.value) || !(secondInputBox.value)) {
-						e.preventDefault();
-						alert("재설정할 비밀번호를 입력해주세요.");
-					} else {
-						if (firstInputBox.value == secondInputBox.value) {
-							// submit 실행
-						} else {
-							firstInputBox.value = '';
-							secondInputBox.value = '';
-							e.preventDefault();
-							alert("비밀번호 입력란 두 곳의 값이 일치하지 않습니다.");
-						}
-					}
-				})
+			if (!(firstInputBox.value) || !(secondInputBox.value)) {
+				e.preventDefault();
+				alert("재설정할 비밀번호를 입력해주세요.");
+			} else {
+				if (firstInputBox.value == secondInputBox.value) {
+					// submit 실행
+				} else {
+					firstInputBox.value = '';
+					secondInputBox.value = '';
+					e.preventDefault();
+					alert("비밀번호 입력란 두 곳의 값이 일치하지 않습니다.");
+				}
+			}
+		})
 	}
 </script>
 

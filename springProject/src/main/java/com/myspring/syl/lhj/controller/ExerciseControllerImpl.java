@@ -108,6 +108,14 @@ public class ExerciseControllerImpl implements ExerciseController {
 		selectAllList(model); // 리스트만 있는 메소드
 		return "lhj/ec_list";
 	}
-
-
+	
+	// 두번째 페이지
+	
+	@RequestMapping(value = "/test/ec_list.do", method = RequestMethod.GET)
+	public String test() {
+		
+		return "lhj/ec_Inbody";
+	}
+	
+	
 }
