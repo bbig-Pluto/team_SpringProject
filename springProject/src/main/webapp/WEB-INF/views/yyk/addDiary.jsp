@@ -503,7 +503,7 @@ main {
         .weather img {
             width: 50px;
             height: 50px;
-            margin-top: 5%;
+            margin-top: 4%;
             /*margin-right: 4%;
             margin-bottom: 5%; */
             padding: 2%;
@@ -877,9 +877,9 @@ window.onload = function() {
 	function icon(){
 	    let icons = document.querySelectorAll(".icon");
 			for(let i=0; i<icons.length; i++){
-				icons[i].addEventListener("click", function(){
-					icons[i].style.width = 60 + 'px';
-					icons[i].style.height = "60px";
+				icons[i].addEventListener("click", function(e){
+					e.target.style.width = 60 + 'px';
+					e.target.style.height = "60px";
 	
 	                // 클릭 시 클릭 된 아이콘 정보 잡음
 // 	                let weather = document.querySelector("#weather");

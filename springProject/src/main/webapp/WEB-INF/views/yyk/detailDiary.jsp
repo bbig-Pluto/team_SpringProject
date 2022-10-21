@@ -879,6 +879,7 @@ footer {
 				console.log("수정버튼 루트")
 				modORdel.method = "post";
 				modORdel.action = "/syl/updateDiary"; // 프로젝트명/url패턴(서블릿)/서블릿의
+				modORdel.enctype = "multipart/form-data"
 				modORdel.submit();
 			}
 		})
@@ -893,6 +894,7 @@ footer {
 						console.log("modBtn.addEventListener");
 						modORdel.method = "post";
 						modORdel.action = "/syl/delDiary";
+						modORdel.enctype = "multipart/form-data"
 						modORdel.submit();
 				} else {
 					// confirm이 확인/취소 기능 알아서 해줌
@@ -907,9 +909,9 @@ footer {
 	    let icons = document.querySelectorAll(".icon");
 			for(let i=0; i<icons.length; i++){
 
-				icons[i].addEventListener("click", function(){
-					icons[i].style.width = 60 + 'px';
-					icons[i].style.height = "60px";
+				icons[i].addEventListener("click", function(e){
+					e.target.style.width = 60 + 'px';
+					e.target.style.height = "60px";
 
 	                // 클릭 시 클릭 된 아이콘 정보 잡음
 // 	                let weather = document.querySelector("#weather");
@@ -1024,7 +1026,7 @@ footer {
 					                    
 									<!-- 기분 -->
 									<div class="slidecontainer">
-										<input type="range" min="1" max="5" class="diary_slider" value="${ param.emotion }">
+										<input type="range" min="1" max="5" class="diary_slider" name="d_emotion" value="${ param.emotion }">
 									</div>
 								</div>
 							</div>

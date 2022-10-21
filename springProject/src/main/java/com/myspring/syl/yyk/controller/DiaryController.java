@@ -72,6 +72,9 @@ public class DiaryController {
 		System.out.println(">>> updateDiary controller route");
 		System.out.println("updateDiary : title : " + diaryDTO.getD_title());
 		System.out.println("updateDiary : content : " + diaryDTO.getD_content());
+//		System.out.println("updateDiary : fileName : " + diaryDTO.getD_fileName());
+//		System.out.println("updateDiary : weather : " + diaryDTO.getD_weather());
+//		System.out.println("updateDiary : emotion : " + diaryDTO.getD_emotion());
 		
 		int result = diaryService.getUpdateDiary(diaryDTO);
 		System.out.println("controller : update된 행 개수 : " + result);
