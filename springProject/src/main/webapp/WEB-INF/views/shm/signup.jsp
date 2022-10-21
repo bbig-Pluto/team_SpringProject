@@ -17,10 +17,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-Up Page</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         window.onload = function () {
-
             init();
             bind();
         }
@@ -87,38 +86,16 @@
             //  ================== 약관동의(termsOfService) 체크박스 제어 end ===================
             	
             //  ================== 회원가입 id 중복확인 start===================
-            	
-            	
-//             	document.querySelector(".idDupleCheck").addEventListener("click", function() {
-//             	let inputId = document.querySelector("input[name='id']").value.split(' ').join(''); 
-//             		console.log(inputId);
-//             		idDupleAjax(inputId);
-//             	fetch("http://127.0.0.1:8080/team_Project/member/idDupleCheck.do?inputId=")
-//     				.then( response => response.text() )
-//     					.then( text => { document.querySelector('.idDupleMsg').innerHTML = text; } )
-            	
-//             	})
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            	
-            //  ================== 회원가입 id 중복확인 end=====================
+            
 
-            // =================== 회원가입 버튼 클릭 start ===================
-            document.querySelector('input[type="submit"]').addEventListener("click",function (e) {
-                        console.log("sbmBtnClicked");
+            $(function() {
+                $("#submitBtn").click(function(e) {
 
                         e.preventDefault();
+                        // submit 다시 실행시키는 분기는 ajax 의 response 의 결과에 따라 결정
 
-                        let signUpInputBoxes = document
-                            .querySelectorAll("#signUpForm .mandatoryInfo input[type=text]");
-                        let signUpPwdBox = document
-                            .querySelector("#signUpForm .mandatoryInfo input[type=password]");
+                        let signUpInputBoxes = document.querySelectorAll("#signUpForm .mandatoryInfo input[type=text]");
+                        let signUpPwdBox = document.querySelector("#signUpForm .mandatoryInfo input[type=password]");
                         let signUpMandatoryCount = 0;
 
                         // 가입정보 필수 입력 사항 체크
@@ -137,18 +114,44 @@
                             // }
                         }
 
-                        if (signUpMandatoryCount == 0) { // 가입 필수 입력 여부 필터링
+                    if (signUpMandatoryCount == 0) { // 가입 필수 입력 여부 필터링
                             if (document.querySelector("#select").checked) {
                                 console.log("관리자 추가");
-                                signUpForm.method = "post";
-                                signUpForm.action = "${contextPath}/member/signup.do";
-                                signUpForm.submit();
+                                let signup = { id : document.querySelector("input[name='id']").value,
+                                    pwd : document.querySelector("input[name='pwd']").value,
+                                    nickName : document.querySelector("input[name='nickName']").value,
+                                    emailAdd : document.querySelector("input[name='emailAdd']").value,
+                                    telNum : document.querySelector("input[name='telNum']").value,
+                                    memberClass : document.querySelector("input[name='memberClass']").value}
+                                console.log(document.querySelector("input[name='memberClass']").value);
+                                $.ajax({
+                                    type: "post",
+                                    url: "${contextPath}/ajaxconn/signup.do",
+                                    contentType: "application/json",
+                                    data: JSON.stringify(signup),
+                                    success: function(data, textStauts){
+                                        alert(textStauts);
+                                    }
+                                })
                             } else if (document.querySelector("#select2").checked) {
                                 console.log("일반회원 추가");
                                 document.querySelector('input[name="memberClass"]').value = 0;
-                                signUpForm.method = "post";
-                                signUpForm.action = "${contextPath}/member/signup.do";
-                                signUpForm.submit();
+                                let signup = { id : document.querySelector("input[name='id']").value,
+                                    pwd : document.querySelector("input[name='pwd']").value,
+                                    nickName : document.querySelector("input[name='nickName']").value,
+                                    emailAdd : document.querySelector("input[name='emailAdd']").value,
+                                    telNum : document.querySelector("input[name='telNum']").value,
+                                    memberClass : document.querySelector("input[name='memberClass']").value}
+                                console.log(document.querySelector("input[name='memberClass']").value);
+                                $.ajax({
+                                    type: "post",
+                                    url: "${contextPath}/ajaxconn/signup.do",
+                                    contentType: "application/json",
+                                    data: JSON.stringify(signup),
+                                    success: function(data, textStauts){
+                                        alert(textStauts);
+                                    }
+                                })
                                 // nextbtn2();
                             } else if (!(document.querySelector("#select2").checked)
                                 && !(document.querySelector("#select").checked)) {
@@ -157,7 +160,81 @@
                         } else {
                             alert("필수(*) 가입정보를 입력해주세요.");
                         }
-                    })
+                })
+
+            })
+
+            //         let signup = { id : document.querySelector("input[name='id']").value,
+            //                         pwd : document.querySelector("input[name='pwd']").value,
+            //                         nickName : document.querySelector("input[name='nickName']").value,
+            //                         emailAdd : document.querySelector("input[name='emailAdd']").value,
+            //                         telNum : document.querySelector("input[name='telNum']").value,
+            //                         memberClass : document.querySelector("input[name='memberClass']").value}
+            //         console.log(document.querySelector("input[name='memberClass']").value);
+            //         $.ajax({
+            //             type: "post",
+            //             url: "${contextPath}/ajaxconn/signup.do",
+            //             contentType: "application/json",
+            //             data: JSON.stringify(signup),
+            //             success: function(data, textStauts){
+            //                 alert(textStauts);
+            //             }
+            //         });
+            //     });
+            // });
+            	
+            	
+            //  ================== 회원가입 id 중복확인 end=====================
+
+            // =================== 회원가입 버튼 클릭 start ===================
+            // document.querySelector('input[type="submit"]').addEventListener("click",function (e) {
+            //             console.log("sbmBtnClicked");
+
+            //             e.preventDefault();
+
+            //             let signUpInputBoxes = document
+            //                 .querySelectorAll("#signUpForm .mandatoryInfo input[type=text]");
+            //             let signUpPwdBox = document
+            //                 .querySelector("#signUpForm .mandatoryInfo input[type=password]");
+            //             let signUpMandatoryCount = 0;
+
+            //             // 가입정보 필수 입력 사항 체크
+            //             for (let i = 0; i < signUpInputBoxes.length; i++) {
+            //                 // 공백 제거
+            //                 signUpInputBoxes[i].value = signUpInputBoxes[i].value
+            //                     .split(' ').join('');
+            //                 // signUpPwdBox = signUpPwdBox.value.split(' ').join(''); // 비밀번호 공백제거, value 말고 다른 방법으로
+
+            //                 if (((signUpInputBoxes[i].value) == '')
+            //                     || ((signUpInputBoxes[i].value) == null)) {
+            //                     signUpMandatoryCount++;
+            //                 }
+            //                 // if (((signUpPwdBox.value) == '') || ((signUpPwdBox.value) == null)) { // 비밀번호 공백제거, value 말고 다른 방법으로
+            //                 //     signUpMandatoryCount++;
+            //                 // }
+            //             }
+
+            //             if (signUpMandatoryCount == 0) { // 가입 필수 입력 여부 필터링
+            //                 if (document.querySelector("#select").checked) {
+            //                     console.log("관리자 추가");
+            //                     signUpForm.method = "post";
+            //                     signUpForm.action = "${contextPath}/ajaxConn/signup.do";
+            //                     signUpForm.submit();
+            //                 } else if (document.querySelector("#select2").checked) {
+            //                     console.log("일반회원 추가");
+            //                     document.querySelector('input[name="memberClass"]').value = 0;
+            //                     signUpForm.method = "post";
+            //                     signUpForm.action = "${contextPath}/ajaxConn/signup.do";
+            //                     signUpForm.submit();
+            //                     // nextbtn2();
+            //                 } else if (!(document.querySelector("#select2").checked)
+            //                     && !(document.querySelector("#select").checked)) {
+            //                     alert("가입형태를 선택해주세요.(관리자 또는 일반회원)");
+            //                 }
+            //             } else {
+            //                 alert("필수(*) 가입정보를 입력해주세요.");
+            //             }
+            //         })
             // =================== 회원가입 버튼 클릭 end ===================
 
             function joinbtn() {
@@ -1244,11 +1321,8 @@
 						name="signUpForm" method="post" --%> -->
                         <div>
                             <div class="r_title">아이디*</div>
-<!--                             <div class="idDupleMsg"></div> -->
                             <div class="r_id mandatoryInfo">
                                 <input type="text" name="id" placeholder="최대 20글자" maxlength="20">
-<!--                                 <button class="idDupleCheck">중복확인</button> -->
-                                <!-- minlength 적용이 안 됨-->
                             </div>
                         </div>
                         <div>
@@ -1288,9 +1362,8 @@
                                 type="radio" id="select2" name="position" checked="checked"><label
                                 for="select2">일반회원</label> <input type="hidden" name="auth" value="">
                         </div>
-                        <input class="jp1Btn3 a" type="button" value="뒤로가기"> <input class="jp1Btn3 b" type="submit"
-                            value="다음">
-                        <!-- <input type="hidden" name="command" value="addMember"> -->
+                        <input class="jp1Btn3 a" type="button" value="뒤로가기"> <input id="submitBtn" class="jp1Btn3 b" type="button"
+                            value="다음"></button>
                     </form>
 
                     <img class="setyou" src="20220819_015209.png">

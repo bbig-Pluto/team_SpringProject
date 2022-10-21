@@ -60,53 +60,5 @@ public class MemberControllerImpl {
 		return "/shm/" + uri;
 	}
 
-	/**
-	 * 회원가입
-	 * 
-	 * @param model
-	 * @param addMemId
-	 * @param addMemPwd
-	 * @param addMemNickname
-	 * @param addMememailAdd
-	 * @param addMemtelNum
-	 * @param addMemMemberClass
-	 * @return String viewName
-	 */
-	@RequestMapping(value = "/member/signup.do", 
-					method = RequestMethod.POST)
-	public String addMember(
-			Model model, 
-			@RequestParam(value = "id", required = true) String addMemId,
-			@RequestParam(value = "pwd", required = true) String addMemPwd,
-			@RequestParam(value = "nickName", required = true) String addMemNickname,
-			@RequestParam(value = "emailAdd", required = true) String addMememailAdd,
-			@RequestParam(value = "telNum", required = true) String addMemtelNum,
-			@RequestParam(value = "memberClass", required = true) Integer addMemMemberClass) {
-
-		Map<String, Object> getParamSignUp = new HashMap<String, Object>();
-
-		getParamSignUp.put("id", addMemId);
-		getParamSignUp.put("pwd", addMemPwd);
-		getParamSignUp.put("nickName", addMemNickname);
-		getParamSignUp.put("emailAdd", addMememailAdd);
-		getParamSignUp.put("telNum", addMemtelNum);
-		getParamSignUp.put("memberClass", addMemMemberClass);
-
-		int addMemberWhether = memberService.addMemberSvc(getParamSignUp);
-
-		// map 순회출력
-//		for(String key : getParamSignUp.keySet() ) {
-//			System.out.println(key + ", " + getParamSignUp.get(key));
-//		}
-
-		if (addMemberWhether == 1) {
-			// 회원가입 성공
-			return "redirect:/member/rd/sucesssignup";
-			// 회원가입 실패(특히, 중복 ID)
-		} else {
-			return "redirect:/member/rd/failsignup";
-		}
-
-	}
 
 }
