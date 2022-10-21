@@ -27,13 +27,6 @@ public class AjaxConnController {
 	public ResponseEntity addMember(
 			Model model,
 			@RequestBody MemberDTO dto) {
-		System.out.println("/ajaxconn/signup.do 진입");
-		System.out.println("/ajaxconn/signup.do, dto.getId() : " + dto.getId());
-		System.out.println("/ajaxconn/signup.do, dto.getPwd() : " + dto.getPwd());
-		System.out.println("/ajaxconn/signup.do, dto.getNickName() : " + dto.getNickName());
-		System.out.println("/ajaxconn/signup.do, dto.getEmailAdd() : " + dto.getEmailAdd());
-		System.out.println("/ajaxconn/signup.do, dto.getTelNum() : " + dto.getTelNum());
-		System.out.println("/ajaxconn/signup.do, dto.getMemberClass() : " + dto.getMemberClass());
 		
 		Map<String, Object> getParamSignUp = new HashMap<String, Object>();
 
@@ -56,10 +49,9 @@ public class AjaxConnController {
 			System.out.println("회원가입 성공 route");
 			
 			String successMessage = "";
-			successMessage += "<script>";		
-			successMessage += " alert('회원가입 성공');";
-			successMessage += " location.href='/syl/member/login';";
-			successMessage += "</script>";
+			successMessage += "alert('회원가입 성공');";
+			successMessage += " location.href='/syl/member/login'";
+			System.out.println("회원가입 성공 route, " + successMessage);
 			
 			return new ResponseEntity (successMessage, responseHeaders, HttpStatus.CREATED);
 		// 회원가입 실패(특히 중복 ID)
@@ -67,11 +59,10 @@ public class AjaxConnController {
 			System.out.println("회원가입 실패 route");
 			
 			String failMessage = ""; 
-			failMessage += "<script>";		
-			failMessage += " alert('중복되는 회원 ID가 존재합니다');";
-//			failMessage += " location.href='/syl/member/login';";
+			failMessage += "alert('중복되는 회원 ID가 존재합니다');";
 			failMessage += " document.querySelector('input[name=\"id\"]').focus();";
-			failMessage += "</script>";
+			System.out.println("회원가입 실패 route, " + failMessage);
+			
 			return new ResponseEntity (failMessage, responseHeaders, HttpStatus.CREATED);
 		}
 		

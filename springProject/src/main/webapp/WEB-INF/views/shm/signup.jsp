@@ -129,8 +129,8 @@
                                     url: "${contextPath}/ajaxconn/signup.do",
                                     contentType: "application/json",
                                     data: JSON.stringify(signup),
-                                    success: function(data, textStauts){
-                                        alert(textStauts);
+                                    success: function(data, textStatus){
+                                        eval(data);
                                     }
                                 })
                             } else if (document.querySelector("#select2").checked) {
@@ -148,11 +148,10 @@
                                     url: "${contextPath}/ajaxconn/signup.do",
                                     contentType: "application/json",
                                     data: JSON.stringify(signup),
-                                    success: function(data, textStauts){
-                                        alert(textStauts);
+                                    success: function(data, textStatus){
+                                        eval(data); 
                                     }
                                 })
-                                // nextbtn2();
                             } else if (!(document.querySelector("#select2").checked)
                                 && !(document.querySelector("#select").checked)) {
                                 alert("가입형태를 선택해주세요.(관리자 또는 일반회원)");
