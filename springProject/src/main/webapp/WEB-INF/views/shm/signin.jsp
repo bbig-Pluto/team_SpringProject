@@ -900,7 +900,6 @@ a {
 
 		$(function() {
             $("#lockShape").click(function(e) {
-				console.log("$('#lockShape'.click 실행")
 		    	let signin = { id : document.querySelector("input[name='signin_id']").value,
 		            pwd : document.querySelector("input[name='signin_pwd']").value}
 		        $.ajax({

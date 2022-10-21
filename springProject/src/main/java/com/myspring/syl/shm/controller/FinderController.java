@@ -86,6 +86,7 @@ public class FinderController {
 		pwdRewritingParam.put("id", pwdRewriteId);
 		pwdRewritingParam.put("telNum", pwdRewriteTelNum);
 
+		// memberNum 을 반환
 		String enquiryResult = memberService.getEnquiryPwdRewriting(pwdRewritingParam);
 
 		if ((pwdRewriteId != null && !(pwdRewriteId.isEmpty()))
