@@ -2,6 +2,8 @@ package com.myspring.syl.lhj.dto;
 
 public class InbodyDTO {
 	
+	public InbodyDTO(){};
+	
 	private int seq_Inbody;
 	private int inBody_Height;	
 	private int inBody_Weight;
@@ -49,41 +51,52 @@ public class InbodyDTO {
 	
 	// =======================================================
 	private int seq_Inbody_2;
-	private int inBody_Height_2;	
-	private int inBody_Weight_2;
-	private int inBody_Body_Fat_2;
-	private int inBody_Skeletal_2;
+	private int inbody_Height_2;	
+	private int inbody_Weight_2;
+	private int inbody_Body_Fat_2;
+	private int inbody_Skeletal_2;
 	private int session_user_id_2;
 
+	public InbodyDTO(int seq_Inbody_2, int inbody_Height_2, int inbody_Weight_2, int inbody_Body_Fat_2, int inbody_Skeletal_2) {
+		this.seq_Inbody_2 = seq_Inbody_2;
+		this.inbody_Height_2 = inbody_Height_2;
+		this.inbody_Weight_2 = inbody_Weight_2;
+		this.inbody_Body_Fat_2 = inbody_Body_Fat_2;
+		this.inbody_Skeletal_2 = inbody_Skeletal_2;
+		
+	};
+	
+	
+	
 	public int getSeq_Inbody_2() {
 		return seq_Inbody_2;
 	}
 	public void setSeq_Inbody_2(int seq_Inbody_2) {
 		this.seq_Inbody_2 = seq_Inbody_2;
 	}
-	public int getInBody_Height_2() {
-		return inBody_Height_2;
+	public int getInbody_Height_2() {
+		return inbody_Height_2;
 	}
-	public void setInBody_Height_2(int inBody_Height_2) {
-		this.inBody_Height_2 = inBody_Height_2;
+	public void setInbody_Height_2(int inbody_Height_2) {
+		this.inbody_Height_2 = inbody_Height_2;
 	}
-	public int getInBody_Weight_2() {
-		return inBody_Weight_2;
+	public int getInbody_Weight_2() {
+		return inbody_Weight_2;
 	}
-	public void setInBody_Weight_2(int inBody_Weight_2) {
-		this.inBody_Weight_2 = inBody_Weight_2;
+	public void setInbody_Weight_2(int inbody_Weight_2) {
+		this.inbody_Weight_2 = inbody_Weight_2;
 	}
-	public int getInBody_Body_Fat_2() {
-		return inBody_Body_Fat_2;
+	public int getInbody_Body_Fat_2() {
+		return inbody_Body_Fat_2;
 	}
-	public void setInBody_Body_Fat_2(int inBody_Body_Fat_2) {
-		this.inBody_Body_Fat_2 = inBody_Body_Fat_2;
+	public void setInbody_Body_Fat_2(int inbody_Body_Fat_2) {
+		this.inbody_Body_Fat_2 = inbody_Body_Fat_2;
 	}
-	public int getInBody_Skeletal_2() {
-		return inBody_Skeletal_2;
+	public int getInbody_Skeletal_2() {
+		return inbody_Skeletal_2;
 	}
-	public void setInBody_Skeletal_2(int inBody_Skeletal_2) {
-		this.inBody_Skeletal_2 = inBody_Skeletal_2;
+	public void setInbody_Skeletal_2(int inbody_Skeletal_2) {
+		this.inbody_Skeletal_2 = inbody_Skeletal_2;
 	}
 	public int getSession_user_id_2() {
 		return session_user_id_2;
@@ -91,7 +104,8 @@ public class InbodyDTO {
 	public void setSession_user_id_2(int session_user_id_2) {
 		this.session_user_id_2 = session_user_id_2;
 	}
-	
+
+
 }
 
 

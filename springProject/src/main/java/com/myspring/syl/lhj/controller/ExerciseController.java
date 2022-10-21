@@ -20,7 +20,7 @@ public interface ExerciseController {
 	public String sayingAry();
 	
 	// 두번째 페이지
-	
+	public void Inbody_List(Model model);
 	public String select_Inbody_Last(Model model);
 	
 	public String insert_Inbody(Model model,
@@ -31,6 +31,15 @@ public interface ExerciseController {
 			);
 	
 	
-	public String select_One_Inbody_2(Model model);
+	public void select_One_Inbody_2(Model model);
+	
+	public String update_Inbody2(Model model,
+			int seq_Inbody_2,
+			int inBody_Height_2,
+			int inBody_Weight_2,
+			int inBody_Body_Fat_2,
+			int inBody_Skeletal_2);
+	
+	public void select_Inbody_list(Model model);
 	
 }

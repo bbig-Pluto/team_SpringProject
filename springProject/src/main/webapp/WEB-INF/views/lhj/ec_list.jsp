@@ -115,7 +115,7 @@
 									console.log("for count : " + count);
 								}
 								if (count === 0) {
-									alert("수정할 값을 선택해주세요");
+									alert("삭제할 값을 선택해주세요");
 									console.log("count true : ", count);
 								} else if (count >= 1) {
 									console.log("count else : ", count);

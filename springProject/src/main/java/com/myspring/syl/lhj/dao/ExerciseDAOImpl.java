@@ -56,8 +56,8 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 //	■■■■■■■■■■■■■■ 2번째 페이지 ■■■■■■■■■■■■■■
 	
 	@Override
-	public List<ExerciseDTO> select_Inbody_Last() {
-		List<ExerciseDTO> select_Inbody_Last = sqlSession.selectList("mapper.lhj.select_Inbody_Last");
+	public List<InbodyDTO> select_Inbody_Last() {
+		List<InbodyDTO> select_Inbody_Last = sqlSession.selectList("mapper.lhj.select_Inbody_Last");
 		return select_Inbody_Last;
 	}
 
@@ -73,4 +73,16 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 		return select_One_Inbody_2;
 	}
 	// 두번째 페이지
+
+	@Override
+	public List<InbodyDTO> select_Inbody_list() {
+		List<InbodyDTO> select_Inbody_list = sqlSession.selectList("mapper.lhj.select_Inbody_list");
+		return select_Inbody_list;
+	}
+
+	@Override
+	public int update_Inbody2(InbodyDTO inbodyDTO) {
+		int update_Inbody2 = sqlSession.update("mapper.lhj.update_Inbody2", inbodyDTO);
+		return update_Inbody2;
+	}
 }

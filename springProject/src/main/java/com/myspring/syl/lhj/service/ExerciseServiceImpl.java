@@ -56,8 +56,8 @@ public class ExerciseServiceImpl implements ExerciseService{
 	// 두번째 페이지
 	
 	@Override
-	public List<ExerciseDTO> select_Inbody_Last() {
-		List<ExerciseDTO> select_Inbody_Last = exerciseDAO.select_Inbody_Last();
+	public List<InbodyDTO> select_Inbody_Last() {
+		List<InbodyDTO> select_Inbody_Last = exerciseDAO.select_Inbody_Last();
 		return select_Inbody_Last;
 	}
 	
@@ -72,6 +72,18 @@ public class ExerciseServiceImpl implements ExerciseService{
 	public InbodyDTO select_One_Inbody_2() {
 		InbodyDTO select_One_Inbody_2 = exerciseDAO.select_One_Inbody_2();
 		return select_One_Inbody_2;
+	}
+
+	@Override
+	public List<InbodyDTO> select_Inbody_list() {
+		List<InbodyDTO> select_Inbody_list = exerciseDAO.select_Inbody_list();
+		return select_Inbody_list;
+	}
+
+	@Override
+	public int update_Inbody2(InbodyDTO inbodyDTO) {
+		int update_Inbody2 = exerciseDAO.update_Inbody2(inbodyDTO);
+		return update_Inbody2;
 	}
 
 }

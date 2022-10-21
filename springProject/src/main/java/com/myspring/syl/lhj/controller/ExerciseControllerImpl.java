@@ -27,7 +27,8 @@ public class ExerciseControllerImpl implements ExerciseController {
 	@Autowired
 	ExerciseService exerciseservice;
 
-	// 맵핑 없는 메소드
+	// 명언 테이블 리스트 (사용안하는 중)
+	// 후에 int로 받고 쿼리수정해서 size로 사용
 	@Override
 	public void saying(Model model) {
 		logger.info("■■■ 컨트롤러 saying 메소드 실행 ■■■");
@@ -36,7 +37,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 		model.addAttribute("saying", saying);
 	}
 	
-	// 맵핑 없는 메소드
+	// 명언 테이블
 	@Override
 	public String sayingAry() {
 		logger.info("■■■ 컨트롤러 test sayingAry 메소드 실행 ■■■");
@@ -51,7 +52,32 @@ public class ExerciseControllerImpl implements ExerciseController {
 
 		return sayingAry;
 	}
+	
 
+	// 현재 제중량 테이블
+	@Override
+	public void Inbody_List(Model model) {
+		logger.info("■■■ 컨트롤러 Inbody_List 메소드 실행 ■■■");
+		
+		List<InbodyDTO> select_Inbody_Last = exerciseservice.select_Inbody_Last();
+		model.addAttribute("select_Inbody_Last", select_Inbody_Last);
+		
+	}
+	
+	// 목표 체중량 테이블
+	public void select_One_Inbody_2(Model model) {
+		InbodyDTO select_One_Inbody_2 = exerciseservice.select_One_Inbody_2();
+		model.addAttribute("select_One_Inbody_2", select_One_Inbody_2);
+	}
+
+	// 나의 기록일지 테이블 list로 출력만
+	@Override
+	public void select_Inbody_list(Model model) {
+		
+		List<InbodyDTO> select_Inbody_list = exerciseservice.select_Inbody_list();
+		model.addAttribute("select_Inbody_list", select_Inbody_list);
+	}
+	
 	@Override
 	@RequestMapping(value = "/ec_list.do", method = RequestMethod.GET)
 	public String selectAllList(Model model) {
@@ -113,25 +139,21 @@ public class ExerciseControllerImpl implements ExerciseController {
 	
 	// ■■■■■■■■■■■■■■ 두번째 페이지 ■■■■■■■■■■■■■■■
 	
-	
-//	public String test() {
-		
-//		return 
-//	}
-
 	@Override
 	@RequestMapping(value = "/inbody/ec_list.do", method = RequestMethod.GET)
 	public String select_Inbody_Last(Model model) {
 		logger.info("■■■ 컨트롤러 select_Inbody 메소드 실행 ■■■");
 		
-		List<ExerciseDTO> select_Inbody_Last = exerciseservice.select_Inbody_Last();
+		List<InbodyDTO> select_Inbody_Last = exerciseservice.select_Inbody_Last();
 		model.addAttribute("select_Inbody_Last", select_Inbody_Last);
-		select_One_Inbody_2(model);
+		
+		select_One_Inbody_2(model); // 목표체중량 테이블
+		select_Inbody_list(model); // 나의 기록일지 테이블
 		return "lhj/ec_Inbody";
 	}
 	
 	@Override
-	@RequestMapping(value = "/inbody/update.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/inbody/ insert.do", method = RequestMethod.POST)
 	public String insert_Inbody(Model model,
 								@RequestParam("inBody_Height") int inBody_Height,
 								@RequestParam("inBody_Weight") int inBody_Weight,
@@ -152,19 +174,33 @@ public class ExerciseControllerImpl implements ExerciseController {
 		select_Inbody_Last(model);
 		return "lhj/ec_Inbody";
 	}
-	
-	
-	
-	// 후에 수정버튼 확인 활성화 시키는거 마련하면 이 맵핑도 쓸모가 있겠지..
+
+
+
+	// 목표 체중량 테이블 수정
 	@Override
-	@RequestMapping(value = "/inbody/onelist.do", method = RequestMethod.POST)
-	public String select_One_Inbody_2(Model model) {
+	@RequestMapping(value = "/inbody/update.do", method = RequestMethod.POST)
+	public String update_Inbody2(Model model,
+									  @RequestParam("seq_Inbody_2") int seq_Inbody_2,
+									  @RequestParam("inbody_Height_2") int inbody_Height_2,
+									  @RequestParam("inbody_Weight_2") int inbody_Weight_2,
+									  @RequestParam("inbody_Body_Fat_2") int inbody_Body_Fat_2,
+									  @RequestParam("inbody_Skeletal_2") int inbody_Skeletal_2) {
 		
-		InbodyDTO select_One_Inbody_2 = exerciseservice.select_One_Inbody_2();
-		model.addAttribute("select_One_Inbody_2", select_One_Inbody_2);
+		System.out.println("get name : " + seq_Inbody_2 + ' ' + inbody_Height_2 + ' ' + inbody_Weight_2 + ' ' + inbody_Body_Fat_2 + ' ' + inbody_Skeletal_2);
 		
+		InbodyDTO inbodyDTO = new InbodyDTO(seq_Inbody_2, inbody_Height_2, inbody_Weight_2, inbody_Body_Fat_2, inbody_Skeletal_2);
+
+		System.out.println("dto set name : " + inbodyDTO.getSeq_Inbody_2());
+		
+		int update_Inbody2 = exerciseservice.update_Inbody2(inbodyDTO);
+		System.out.println(" 컨트롤러 update_Inbody2 실행 " + update_Inbody2);
+		
+		Inbody_List(model); // 현재 체중량 테이블
+		select_One_Inbody_2(model); // 목표 체중량 테이블
+		select_Inbody_list(model); // 나의 기록일지 테이블
 		return "lhj/ec_Inbody";
 	}
-	
+
 	
 }

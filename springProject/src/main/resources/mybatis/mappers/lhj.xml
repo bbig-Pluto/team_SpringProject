@@ -5,7 +5,7 @@
 <mapper namespace="mapper.lhj">
 
 	<!-- Exercise resultMap -->
-	<resultMap id="resultMap" type="exerciseDTO">
+	<resultMap id="exerciseMap" type="exerciseDTO">
 		<result property="seq_Exercise" column="seq_Exercise" />
 		<result property="exercise_Contents" column="exercise_Contents" />
 		<result property="exercise_Time" column="exercise_Time" />
@@ -14,18 +14,14 @@
 	</resultMap>
 
 	<!-- Exercise_saying resultMap -->
-	<resultMap id="resultMap2" type="exerciseDTO">
+	<resultMap id="exerciseMap2" type="exerciseDTO">
 		<result property="seq_Exercise_saying"
 			column="seq_Exercise_saying" />
 		<result property="exercise_saying_contents"
 			column="exercise_saying_contents" />
 	</resultMap>
 
-
-
-	<!-- ■■■■■■■■■■■■■■■■■■■ 2 page ■■■■■■■■■■■■■■■■■■■■■ -->
-
-	<resultMap id="resultMap3" type="inbodyDTO">
+	<resultMap id="inbodyMap" type="inbodyDTO">
 		<result property="seq_Inbody" column="seq_Inbody" />
 		<result property="inBody_Height" column="inBody_Height" />
 		<result property="inBody_Weight" column="inBody_Weight" />
@@ -35,7 +31,7 @@
 		<result property="inBody_Today" column="inBody_Today" />
 	</resultMap>
 
-	<resultMap id="resultMap4" type="inbodyDTO">
+	<resultMap id="inbodyMap2" type="inbodyDTO">
 		<result property="seq_Inbody_2" column="seq_Inbody" />
 		<result property="inBody_Height_2" column="inBody_Height" />
 		<result property="inBody_Weight_2" column="inBody_Weight" />
@@ -44,6 +40,75 @@
 		<result property="session_user_id_2" column="session_user_id" />
 		<result property="inBody_Today_2" column="inBody_Today_2" />
 	</resultMap>
+
+
+	<!-- ■■■■■■■■■■■■■■■■■■■ 2차 프로젝트 이동 ■■■■■■■■■■■■■■■■■■■■■ -->
+	
+	<!-- 시퀀스 마지막 값 들고옴 -->
+	<select id="seq" resultType="int">
+		SELECT seq_diet_diary 
+		FROM(
+	    	SELECT 
+	       		*
+	    	FROM Diet_diary
+	    	ORDER BY seq_diet_diary DESC)
+		WHERE ROWNUM = 1
+	</select>
+		
+	<!-- 추가 1page -->
+	<insert id ="diet_insert" parameterType="DietDTO">
+		INSERT INTO Diet_diary (seq_Diet_diary, session_user_id_hj, Diet_diary_type)
+		VALUES (seq_diet_diary.nextval, #{session_user_id_hj}, #{diet_diary_type})
+	</insert>
+	
+	<!-- 추가 1page -->
+	<insert id ="diet_insert_menu" parameterType="DietDTO">
+	insert into Diet_diary_Menu
+	(seq_diet_diary_menu, diet_diary_menu, diet_diary_menu_calorie, diet_diary_menu_sum, seq_diet_diary)
+	values (seq_diet_diary_menu.nextval, #{diet_diary_menu}, #{diet_diary_menu_calorie}, #{diet_diary_menu_sum}, #{seq_diet_diary})
+	</insert>
+	
+	<!-- 조회 2page-->
+	<select id="diet_list" resultType="dietDTO">
+		SELECT * FROM Diet_diary
+	</select>
+	
+	<!-- 조회 2page-->
+	<select id="diet_menu_list" resultType="dietDTO">
+		SELECT * FROM Diet_diary_Menu
+	</select>
+
+	<!-- 조회 2page -->
+	<select id="diet_list_Last" resultType="dietDTO">
+		SELECT * 
+		FROM(
+		    SELECT 
+		       	*
+		    FROM Diet_diary_Menu
+		    ORDER BY seq_diet_diary_menu DESC)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<!-- 수정 2page -->
+	<update id="diet_menu_update" parameterType="dietDTO">
+		update Diet_diary_Menu
+		set
+		diet_diary_menu = #{diet_diary_menu}, diet_diary_menu_calorie=#{diet_diary_menu_calorie}, diet_diary_menu_sum=#{diet_diary_menu_sum}
+		WHERE
+		seq_diet_diary = #{seq_diet_diary}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="diet_menu_delete" parameterType="int">
+		delete from Diet_diary_Menu
+		WHERE
+		seq_diet_diary_menu = #{seq_diet_diary_menu}
+	 </delete>
+	 
+	 
+	 
+	 
+	<!-- ■■■■■■■■■■■■■■■■■■■ 1 page ■■■■■■■■■■■■■■■■■■■■■ -->
 
 	<!-- 조회 (DB에서 확인완료) -->
 	<select id="selectAllList" resultType="exerciseDTO">
@@ -115,7 +180,6 @@
 		Exercise_Inbody_2
 	</select>
 
-
 	<!-- 추가 (DB에서 확인완료) -->
 	<insert id="insert_Inbody" parameterType="inbodyDTO">
 		insert into Exercise_Inbody (seq_Inbody, inBody_Height, inBody_Weight, inBody_Body_Fat, inBody_Skeletal)
@@ -123,28 +187,17 @@
 	</insert>
 
 	<!-- 수정 (DB에서 확인완료) -->
-<!-- 	<update id="update_Inbody2" parameterType="inbodyDTO"> -->
-<!-- 		update -->
-<!-- 		Exercise_Inbody_2 -->
-<!-- 		set -->
-<!-- 		inBody_Height_2=#{inBody_Height_2}, -->
-<!-- 		inBody_Weight_2=#{inBody_Weight_2}, -->
-<!-- 		inBody_Body_Fat_2=#{inBody_Body_Fat_2}, -->
-<!-- 		inBody_Skeletal_2=#{inBody_Skeletal_2} -->
-<!-- 		where -->
-<!-- 		seq_Inbody_2 = -->
-<!-- 		#{seq_Inbody_2} -->
-<!-- 	</update> -->
+	<update id="update_Inbody2" parameterType="inbodyDTO">
+		update Exercise_Inbody_2 set
+		inbody_Height_2=#{inbody_Height_2},
+		inbody_Weight_2=#{inbody_Weight_2},
+		inbody_Body_Fat_2=#{inbody_Body_Fat_2},
+		inbody_Skeletal_2=#{inbody_Skeletal_2}
+		where
+		seq_Inbody_2 = #{seq_Inbody_2}
+	</update>
 
-<!-- 수정 (DB에서 확인완료) 일단보류 일단보류 일단보류 일단보류 일단보류 -->
-<!-- <update id="update_Inbody" parameterType="inbody_DTO"> -->
-<!-- update Exercise_Inbody -->
-<!-- set -->
-<!-- inBody_Height=#{inBody_Height}, inBody_Weight=#{inBody_Weight}, inBody_Body_Fat=#{inBody_Body_Fat}, 
-	inBody_Skeletal=#{inBody_Skeletal} -->
-<!-- where -->
-<!-- seq_Inbody = #{seq_Inbody} -->
-<!-- </update> -->
+
 </mapper>
 
 

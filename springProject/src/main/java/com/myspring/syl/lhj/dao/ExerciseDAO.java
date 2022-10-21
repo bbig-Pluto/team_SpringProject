@@ -21,13 +21,13 @@ public interface ExerciseDAO {
 	
 	// 두번째 페이지
 	
-	public List<ExerciseDTO> select_Inbody_Last();
+	public List<InbodyDTO> select_Inbody_Last();
 			
 	public int insert_Inbody(InbodyDTO inbodyDTO);
 	
 	public InbodyDTO select_One_Inbody_2();
 	
+	public List<InbodyDTO> select_Inbody_list();
 	
-	
-	
+	public int update_Inbody2(InbodyDTO inbodyDTO);
 }
