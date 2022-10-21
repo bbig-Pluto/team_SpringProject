@@ -98,6 +98,7 @@ public class SessionController {
 	}
 
 	private void setSuccessSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
+
 		logOnWhetherForSession = "member";
 		logOnSession.setAttribute("isLogon", logOnWhetherForSession);
 		logOnSession.setAttribute("logOn.id", memberDTO.getId());

@@ -16,8 +16,9 @@ request.setCharacterEncoding("UTF-8");
 <title>마이페이지 비밀번호 입력</title>
 </head>
 <body>
+	<p>본인 확인을 위한 계정 비밀번호를 입력해주세요</p>
 	<form action="${ contextPath }/member/mypage" method="post">
-		<input type="password" name="myPageEnterPwd"> &nbsp;
+		비밀번호 : <input type="password" name="myPageEnterPwd"> &nbsp;
 		<input type="submit" value="제출">
 	</form>
 </body>
