@@ -21,8 +21,13 @@
 	<!-- 다이어리 수정 -->
 	<insert id="updateDiary" parameterType="diaryDTO">
 		update diary
-		set d_title= #{d_title}, d_content= #{d_content}, d_createTime= sysdate
+		set d_title= #{d_title}, d_content= #{d_content}
+		<if test = "d_fileName != '' and d_fileName != null">
+			,d_fileName= #{d_fileName}
+		</if>
+		, d_weather= #{d_weather}, d_emotion=#{d_emotion}, d_createTime= sysdate
 		where diaryNum= #{diaryNum}
+		
 	</insert>
 	
 	
@@ -42,25 +47,6 @@
 	</select>
 	
 	
-	<!-- 총 게시글 갯수 출력 -->
-<!-- 	<select id="countBoard" resultType="int"> -->
-<!-- 		SELECT COUNT(*) FROM diary -->
-<!-- 	</select> -->
-
-
-	<!-- 페이징 처리 후 게시글 조회 -->
-<!-- 	<select id="selectBoard" resultType="com.myspring.domain.BoardVO"> -->
-<!-- 		SELECT *  -->
-<!-- 		FROM ( -->
-<!-- 				SELECT ROWNUM RN, A.*  -->
-<!-- 				FROM ( -->
-<!-- 						SELECT *  -->
-<!-- 						FROM diary  -->
-<!-- 						ORDER BY d_createTime DESC  -->
-<!-- 					) A -->
-<!-- 			) -->
-<!-- 		WHERE RN BETWEEN #{start} AND #{end} -->
-<!-- 	</select> -->
 
 
 </mapper>

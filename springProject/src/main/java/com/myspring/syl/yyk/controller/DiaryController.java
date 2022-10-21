@@ -67,14 +67,20 @@ public class DiaryController {
 	@RequestMapping(value="/updateDiary", method = {RequestMethod.GET, RequestMethod.POST})
 	public String updateDiary(Model model,
 							// 입력 받은 값 알아서 저장해줌
-							@ModelAttribute("diaryDTO") DiaryDTO diaryDTO) {
+							@ModelAttribute("diaryDTO") DiaryDTO diaryDTO,
+							MultipartHttpServletRequest multipartRequest) throws Exception {
 		
 		System.out.println(">>> updateDiary controller route");
 		System.out.println("updateDiary : title : " + diaryDTO.getD_title());
 		System.out.println("updateDiary : content : " + diaryDTO.getD_content());
-//		System.out.println("updateDiary : fileName : " + diaryDTO.getD_fileName());
-//		System.out.println("updateDiary : weather : " + diaryDTO.getD_weather());
-//		System.out.println("updateDiary : emotion : " + diaryDTO.getD_emotion());
+		System.out.println("updateDiary : weather : " + diaryDTO.getD_weather());
+		System.out.println("updateDiary : emotion : " + diaryDTO.getD_emotion());
+		
+		//file
+		String originalFileName = fileProcess(multipartRequest);
+		System.out.println("addDiary : 파일 이름 : [" + originalFileName +"]");
+				
+		diaryDTO.setD_fileName(originalFileName);
 		
 		int result = diaryService.getUpdateDiary(diaryDTO);
 		System.out.println("controller : update된 행 개수 : " + result);

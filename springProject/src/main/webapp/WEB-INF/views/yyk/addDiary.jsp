@@ -846,8 +846,6 @@ footer {
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 window.onload = function() {
-	icon_zoomIn();
-	icon_zoomOut();
 	icon();
 	change_slide();
 	
@@ -873,19 +871,29 @@ window.onload = function() {
 }
 
 
-	//아이콘 클릭 시 아이콘 value 저장
 	function icon(){
+		
 	    let icons = document.querySelectorAll(".icon");
+	    
 			for(let i=0; i<icons.length; i++){
 				icons[i].addEventListener("click", function(e){
-					e.target.style.width = 60 + 'px';
-					e.target.style.height = "60px";
-	
-	                // 클릭 시 클릭 된 아이콘 정보 잡음
-// 	                let weather = document.querySelector("#weather");
-// 	                weather.value = i;
-// 	                console.log("value : " + weather.value);
-
+					let icons = document.querySelectorAll(".icon");
+						for(let j=0; j<icons.length; j++){
+							// 아이콘 크기 작게
+							icons[j].style.width = "50px"; 
+							icons[j].style.height = "50px"; 
+							icons[j].style.filter = "none";
+							icons[j].style.zIndex = 0;
+							icons[j].style.transition = "all 0.1s";
+						}
+			        // 아이콘 크기 크게
+						e.target.style.width = "65px"; 
+						e.target.style.height = "65px"; 
+						e.target.style.filter = "drop-shadow(6px 4px 5px #c3c3c3)";
+						e.target.style.zIndex = 1;
+			            e.target.style.transition = "all 0.1s";
+			            console.log("아이콘 크게")
+			            
 					// 아이콘 클릭 시
 					// input(weather) 잡아서 
 					// 각 icon들의 value 값 뽑기
@@ -905,21 +913,21 @@ window.onload = function() {
                 slider_value = _value;
                 console.log("slider_value : " + slider_value);
             })
-        }
-	
+     }
 	
 	// 사진 이미지 미리보기
 	function readURL(input){
 		if(input.files && input.files[0]){
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$('.preview').attr('src', e.target.result);
+// 				$('.preview').attr('src', e.target.result);
+				document.querySelector(".preview").setAttribute('src', e.target.result);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
 
-	// 아이콘 hover시 해당 아이콘 크기 커짐
+	// onmouseenter일 때 워래 크기에서 1.3배 키워줌
     function icon_zoomIn(event) {
         if(event){
             event.target.style.transform = "scale(1.2)"; // 크기 1.2배 키워주기
@@ -927,7 +935,8 @@ window.onload = function() {
             event.target.style.transition = "all 0.1s"; // 커지는 데 0.1초
         }
     }
-    
+	
+    // onmouseleave일 때 원래 크기로 돌아옴
     function icon_zoomOut(event) {
         if(event){
             event.target.style.transform = "scale(1)"; 
@@ -1138,7 +1147,7 @@ window.onload = function() {
 			</div>
 		</div>
 
-		</div>
+<!-- 		</div> -->
 
 	</footer>
 </body>

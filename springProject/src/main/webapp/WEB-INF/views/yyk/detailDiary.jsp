@@ -23,6 +23,7 @@
 <title>전체 문의 게시판 부분</title>
 <style>
 /* 헤더 */
+
 header {
 	margin-bottom: 20px;
 }
@@ -459,7 +460,7 @@ main {
 	margin-left: 7%;
 }
 /* 오늘의 사진 포스트잇 */
-.photo_container {
+.postit_container {
 	position: relative;
 	/*             border: 1px solid black; */
 }
@@ -471,7 +472,7 @@ main {
     margin-left: 14%;
         }
 
-.photo {
+.preview {
 	position:absolute;
     width: 200px;
     right: 62px;
@@ -858,11 +859,11 @@ footer {
         }
 </style>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	window.onload = function() {
-		icon_zoomIn();
-		icon_zoomOut();
 		icon();
+		change_slide();
 		weatherSelector();
 		
 		// 하나의 form에서 기능을 두개 쓰기 위해 자바스크립트로 클릭 이벤트 줌
@@ -884,7 +885,7 @@ footer {
 			}
 		})
 		
-// 		// 삭제 버튼
+ 		// 삭제 버튼
 		document.querySelector(".diary_delete_btn").addEventListener("click", function(e) {
 			e.preventDefault();
 			
@@ -900,25 +901,33 @@ footer {
 					// confirm이 확인/취소 기능 알아서 해줌
 				}
 			}, 10); // 0.01초
-			
 		})
 }
 	
 	//아이콘 클릭 시 아이콘 value 저장
 	function icon(){
+		
 	    let icons = document.querySelectorAll(".icon");
+	    
 			for(let i=0; i<icons.length; i++){
-
 				icons[i].addEventListener("click", function(e){
-					e.target.style.width = 60 + 'px';
-					e.target.style.height = "60px";
-
-	                // 클릭 시 클릭 된 아이콘 정보 잡음
-// 	                let weather = document.querySelector("#weather");
-// 	                weather.value = i;
-// 	                console.log("value : " + weather.value);
-					
-
+					let icons = document.querySelectorAll(".icon");
+						for(let j=0; j<icons.length; j++){
+							// 아이콘 크기 작게
+							icons[j].style.width = "50px"; 
+							icons[j].style.height = "50px"; 
+							icons[j].style.filter = "none";
+							icons[j].style.zIndex = 0;
+							icons[j].style.transition = "all 0.1s";
+						}
+			        // 아이콘 크기 크게
+ 					e.target.style.width = "65px"; 
+ 					e.target.style.height = "65px"; 
+ 					e.target.style.filter = "drop-shadow(6px 4px 5px #c3c3c3)"; // (그림자 수평거리, 수직거리, 반경, 색상)
+ 					e.target.style.zIndex = 1;
+ 		            e.target.style.transition = "all 0.1s";
+ 		            console.log("아이콘 크게")
+			            
 					// 아이콘 클릭 시
 					// input(weather) 잡아서 
 					// 각 icon들의 value 값 뽑기
@@ -930,31 +939,56 @@ footer {
 			}
 	}
 	
-	// 슬라이더 바 
-	let weatherSelector = function() { 
+	// 기분 슬라이더 바 
+	function change_slide(){
+            document.querySelector(".slidecontainer .diary_slider").addEventListener("input", function(event){
+                _value = event.target.value;
+
+                slider_value = _value;
+                console.log("slider_value : " + slider_value);
+            })
+     }
+	
+	// 저장된 날씨 조회 css
+	function weatherSelector() { 
 		for(let i = 0; i < document.querySelectorAll(".icon").length; i++) {
 			if (document.querySelectorAll(".icon")[i].getAttribute("value") == "${ param.weather }" ) {
-				console.log("weather Catch" + "${param.weather}");
-				document.querySelectorAll(".icon")[i].style.width = 60 + 'px';
+				console.log("weather :::" + "${param.weather}");
+				document.querySelectorAll(".icon")[i].style.width = "60px";
 				document.querySelectorAll(".icon")[i].style.height = "60px";
+				document.querySelectorAll(".icon")[i].style.filter = "drop-shadow(6px 4px 5px #c3c3c3)";
 			}
 		}
 	}
 	
-	// 아이콘 hover시 해당 아이콘 크기 커짐
+	// 사진 이미지 미리보기
+	function readURL(input){
+		if(input.files && input.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e) {
+// 				$('.preview').attr('src', e.target.result);
+				document.querySelector(".preview").setAttribute('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	
+	// onmouseenter일 때 워래 크기에서 1.3배 키워줌
     function icon_zoomIn(event) {
         if(event){
-            event.target.style.transform = "scale(1.2)"; // 크기 1.2배 키워주기
+            event.target.style.transform = "scale(1.3)"; // 크기 1.3배 키워주기
             event.target.style.zIndex = 1;
             event.target.style.transition = "all 0.1s"; // 커지는 데 0.1초
         }
     }
     
+	 // onmouseleave일 때 원래 크기로 돌아옴
     function icon_zoomOut(event) {
         if(event){
-            event.target.style.transform = "scale(1)"; 
+            event.target.style.transform = "scale(1)";  // 1 = 100% 	1.3 = 130% 확대
             event.target.style.zIndex = 0;
             event.target.style.transition = "all 0.1s";
+            console.log("onmouseleave")
         }
     }
     
@@ -990,82 +1024,87 @@ footer {
 				<div class="area_wrapper">
 					<div class="calendarWhole">
 						<!-- !!!!!!!!!1!! 다이어리 안에 페이지 넣는 공간!!!!!!!!!!!!!!!! -->
-						<div class="diaryWrap">
-
-							<!-- 왼쪽 영역 -->
-							<div class="d_add_left">
-
-								<!-- 사진 파일 -->
-								<div class="left_top_wrap">
-									<div class="left_top_text">Today's Photo</div>
-									<br>
-
-									<!-- 포스트잇 -->
-									<div class="photo_container">
-										<img src="resources/yyk/image/포스트잇(완).png" class="postit"> 
-										<img class="photo" style="width: 250px; height: 250px;"
-											src="${contextPath }/download?imageFileName=${param.fileName }">
-									</div>
-								</div>
-
-								<!-- 기분 & 날씨 -->
-								<div class="left_bottom_text">Today's Emotion</div>
-								<div class="left_bottom_wrap">
-									<!-- 날씨 -->
-									<div class="weather">
-					                        <img src="resources/yyk/image/맑음.png" class="icon" id="sunny" value="sunny"
-					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-					                        <img src="resources/yyk/image/구름.png" class="icon" value="cloud"
-					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-					                        <img src="resources/yyk/image/비.png" class="icon" value="rain"
-					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-					                        <img src="resources/yyk/image/무지개.png" class="icon" value="rainbow"
-					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
-					                    </div>
-					                    <input type="hidden" name="d_weather" id="weather" value="${param.weather }">
-					                    
-									<!-- 기분 -->
-									<div class="slidecontainer">
-										<input type="range" min="1" max="5" class="diary_slider" name="d_emotion" value="${ param.emotion }">
-									</div>
-								</div>
-							</div>
-
-							
-							<!-- 오른쪽 영역 -->
-							<div class="right">
-								<div class="diary">Diary</div>
-
-
-								<div class="right_wrap">
-									<!-- 수정하고 수정버튼 누르면 데이터 저장 -->
-									<!-- 삭제 누르면 데이터 사라지고 목록으로 가게 할거임 -->
-									<!-- 수정 & 삭제  -->
-									<form name="modORdel" id="modORdel">
-										<!-- 제목 & 제목 입력 창 -->
-										<div class="title">제목</div>
-										<input type="text" name="d_title" class="title_input" value="${param.title } ">
-										<!-- 일기 내용 -->
-										<div class="textarea_container">
-											<textarea class="notes" name="d_content">${param.content }</textarea>
+						<form name="modORdel" id="modORdel">
+							<div class="diaryWrap">
+	
+								<!-- 왼쪽 영역 -->
+								<div class="d_add_left">
+	
+									<!-- 사진 파일 -->
+									<div class="left_top_wrap">
+										<div class="left_top_text">Today's Photo</div>
+										<br>
+	
+										<!-- 포스트잇 -->
+										<div class="postit_container">
+											<img src="resources/yyk/image/포스트잇(완).png" class="postit"> 
+											<img class="preview" style="width: 250px; height: 250px;"
+												src="${contextPath }/download?imageFileName=${param.fileName }">
+											<input type="file" name="file" onchange ="readURL(this);">
 										</div>
-
-										<input type="submit" class="diary_modify_btn" value="수정">
-										<input type="submit" class="diary_delete_btn" value="삭제">
-										<input type="button" class="diary_goList_btn" value="목록"
-											onclick="location.href='/syl/diaryList'">
-
-										<!-- 필요한 값을 확보하고 diary2에 같이 넘겨줘야 함 -->
-										<input type="hidden" name="diaryNum" value="${param.diaryNum }">
-										<!-- <input type="hidden" name="command" value="updateDiary2"> -->
-									</form>
+									</div>
+	
+									<!-- 기분 & 날씨 -->
+									<div class="left_bottom_text">Today's Emotion</div>
+									<div class="left_bottom_wrap">
+										<!-- 날씨 -->
+										<div class="weather">
+						                        <img src="resources/yyk/image/맑음.png" class="icon" id="sunny" value="sunny"
+						                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+						                        <img src="resources/yyk/image/구름.png" class="icon" value="cloud"
+						                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+						                        <img src="resources/yyk/image/비.png" class="icon" value="rain"
+						                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+						                        <img src="resources/yyk/image/무지개.png" class="icon" value="rainbow"
+						                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
+						                    </div>
+						                    <input type="hidden" name="d_weather" id="weather" value="${param.weather }">
+						                    
+										<!-- 기분 -->
+										<div class="slidecontainer">
+											<input type="range" min="1" max="5" class="diary_slider" name="d_emotion" value="${ param.emotion }">
+										</div>
+									</div>
 								</div>
+	
+								
+								<!-- 오른쪽 영역 -->
+								<div class="right">
+									<div class="diary">Diary</div>
+									<div class="right_wrap">
+										<!-- 수정하고 수정버튼 누르면 데이터 저장 -->
+										<!-- 삭제 누르면 데이터 사라지고 목록으로 가게 할거임 -->
+										<!-- 수정 & 삭제  -->
+										
+											<!-- 제목 & 제목 입력 창 -->
+											<div class="title">제목</div>
+											<input type="text" name="d_title" class="title_input" value="${param.title } ">
+											<!-- 일기 내용 -->
+											<div class="textarea_container">
+												<textarea class="notes" name="d_content">${param.content }</textarea>
+											</div>
+	
+											<input type="submit" class="diary_modify_btn" value="수정">
+											<input type="submit" class="diary_delete_btn" value="삭제">
+											<input type="button" class="diary_goList_btn" value="목록"
+												onclick="location.href='/syl/diaryList'">
+	
+											<!-- 필요한 값을 확보하고 diary2에 같이 넘겨줘야 함 -->
+											<input type="hidden" name="diaryNum" value="${param.diaryNum }">
+											<!-- <input type="hidden" name="command" value="updateDiary2"> -->
+										
+									 </div>
+					            </div>
+	           				</div> <!-- diaryWrap end -->
+	           				
+						 </form>
+						 
+        			</div> <!-- calendarWhole end -->
 
 
 
-							</div>
-						</div>
-					</div>
+
+
 
 					<!-- 위쪽 반원 -->
 					<div class="calendarLT"></div>

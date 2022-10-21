@@ -18,5 +18,4 @@ public interface DiaryService {
 	
 	List<DiaryDTO> getSearchDiary(DiaryDTO diaryDTO);
 	
-//	List<DiaryDTO> getPageList(int pageNum, int countPerPage);
 }
