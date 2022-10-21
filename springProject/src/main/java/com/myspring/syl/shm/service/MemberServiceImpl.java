@@ -127,10 +127,13 @@ public class MemberServiceImpl implements MemberService {
 		return dto;
 	}
 	
-	
 	public int exeModifyInfoSelf(MemberDTO dto) {
 		int result = memberDAO.modifyMemberInfoSelf(dto);
 		return result;
 	}
 	
+	public int getQueryResultForMyPage(MemberDTO dto) {
+		int result = memberDAO.queryResultForMyPage(dto);
+		return result;
+	}
 }

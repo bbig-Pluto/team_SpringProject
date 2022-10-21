@@ -110,4 +110,14 @@
 		telNum=#{telNum}
 		where memberNum=#{memberNum}
 	</update>
+	
+	<select id="queryResultForMyPage" resultType="int" parameterType="MemberDTO">
+		SELECT NVL(count(pwd), 0) FROM (
+			select pwd, memberNum
+			from syl_member 
+			WHERE memberNum = #{ memberNum } and pwd = #{ pwd } 
+			group by pwd, memberNum
+		)
+	</select>
+	
 </mapper>

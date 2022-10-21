@@ -22,4 +22,5 @@ public interface MemberDAO {
 //	public int deleteWishListContents(String memberNum);
 	public MemberDTO memberInfoForModify(String memberNum);
 	public int modifyMemberInfoSelf(MemberDTO dto);
+	public int queryResultForMyPage(MemberDTO dto);
 }

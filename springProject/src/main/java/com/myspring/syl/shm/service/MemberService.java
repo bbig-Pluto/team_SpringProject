@@ -23,5 +23,6 @@ public interface MemberService {
 	public int exeDeleteAccountSelf(String memberNum);
 	public MemberDTO getMemberInfo(String memberNum);
 	public int exeModifyInfoSelf(MemberDTO dto);
+	public int getQueryResultForMyPage(MemberDTO dto);
 	
 }

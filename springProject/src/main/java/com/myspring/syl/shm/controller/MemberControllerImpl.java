@@ -48,7 +48,7 @@ public class MemberControllerImpl {
 	 * @return String viewName
 	 */
 	@RequestMapping(value = "/member/rd/{uri}", 
-					method = RequestMethod.GET)
+					method = {RequestMethod.GET, RequestMethod.POST})
 	public String leadingJSP(
 			@PathVariable("uri") String uri, Model model) {
 

@@ -894,6 +894,20 @@ a {
 </style>
 
 <script>
+
+	window.onload = function() {
+
+		<%
+		HttpSession logOnSession = request.getSession();
+
+		if(logOnSession.isNew()){ // 처음 접속이라서 세션이 없다면 만들어주고서 페이지 로드
+		}	
+		if( ((""+logOnSession.getAttribute("isLogon")).equals("guest")) 
+				|| (logOnSession.getAttribute("isLogon") == null) ) { // 다른 곳에서 세션은 만들고 들어온 비회원
+		
+	%>
+		
+	}
 	// 로그인 실패 -> 자물쇠 흔들리는 기능 구현
 	
 <%-- 		<% HttpSession loginSession = request.getSession(); --%>
@@ -920,18 +934,12 @@ a {
 <%-- 		%> --%>
 // 		})
 
+
+
 	</script>
 </head>
 
-<%
-	HttpSession logOnSession = request.getSession();
 
-	if(logOnSession.isNew()){ // 처음 접속이라서 세션이 없다면 만들어주고서 페이지 로드
-	}	
-	if( ((""+logOnSession.getAttribute("isLogon")).equals("guest")) 
-			|| (logOnSession.getAttribute("isLogon") == null) ) { // 다른 곳에서 세션은 만들고 들어온 비회원
-	
-%>
 
 <body>
 	<header>
@@ -947,7 +955,7 @@ a {
                <a href="${ contextPath }/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="${ contextPath }/member/rd/mypage" class="headermypage">마이페이지</a>
+                  <a id="myPageLink" href="#" class="headermypage">마이페이지</a>
                   <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
                   <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
                </div>

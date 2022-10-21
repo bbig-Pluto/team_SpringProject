@@ -88,8 +88,8 @@ public class SessionController {
 //		return "/sjs/calendarM";
 	}
 	
-	
 	private void setFailSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
+
 		logOnWhetherForSession = "guest";
 		logOnSession.setAttribute("isLogon", logOnWhetherForSession);
 		logOnSession.setAttribute("logOn.id", null);

@@ -146,4 +146,8 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 	
+	public int queryResultForMyPage(MemberDTO dto) {
+		int result = sqlSession.selectOne("mapper.shm.queryResultForMyPage", dto);
+		return result;
+	}
 }

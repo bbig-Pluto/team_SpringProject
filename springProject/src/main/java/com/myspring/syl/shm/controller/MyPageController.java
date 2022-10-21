@@ -35,15 +35,26 @@ public class MyPageController {
 			) {
 		logOnSession = request.getSession();
 		String isLogon = "" + logOnSession.getAttribute("isLogon");
+		String memberNum = "" + logOnSession.getAttribute("logOn.memberNum");
+		System.out.println("myPageEntrance method, pwd : " + pwd);
+		System.out.println("myPageEntrance method, Session memberNum : " + memberNum);
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setPwd(pwd);
+		dto.setMemberNum(memberNum);
+		
+		int queryResult = memberService.getQueryResultForMyPage(dto);
 		
 		// 비밀번호 입력을 하고 들어오는지 검열
 		if( !("member".equals(isLogon)) ) {
 			return "redirect:/member/login";
 		} else {
-			return "/shm/mypage";
+			if (queryResult == 1) {
+				return "forward:/member/rd/mypage";
+			} else {
+				return "redirect:/member/rd/wrongapproach";
+			}
 		}
-		
-		// 닉네임 보여줄 곳에 쓸 nickName binding
 	}
 	
 	/**
