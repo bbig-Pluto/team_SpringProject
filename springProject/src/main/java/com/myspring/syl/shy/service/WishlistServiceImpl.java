@@ -54,5 +54,15 @@ public class WishlistServiceImpl implements WishlistService {
 		return result;
 	}
 
+	@Override
+	public WishlistDTO getSelCategory(String category) {
+		
+		WishlistDTO dto = new WishlistDTO();
+		
+		dto = wishDAO.selCategory(category);
+		
+		return dto;
+	}
+
 
 }

@@ -57,5 +57,17 @@ public class WishlistDAOImpl implements WishlistDAO {
 		return result;
 	}
 
+	@Override
+	public WishlistDTO selCategory(String category) {
+		
+		WishlistDTO dto = new WishlistDTO();
+		
+		dto.setCategory(category);
+		
+		dto = sqlSession.selectOne("mapper.shy.selectCategory", category);
+		
+		return dto;
+	}
+
 
 }
