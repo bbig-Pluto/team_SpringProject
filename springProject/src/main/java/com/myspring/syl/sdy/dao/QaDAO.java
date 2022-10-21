@@ -29,6 +29,7 @@ public class QaDAO {
 	}
 	//체크 선택시 삭제
 	public void delQaContents(List q_no) {
+		System.out.println("q_no 다오에서"+q_no);
 		sqlSession.delete("mapper.sdy.deleteQaMember",q_no);		
 		}
 	}

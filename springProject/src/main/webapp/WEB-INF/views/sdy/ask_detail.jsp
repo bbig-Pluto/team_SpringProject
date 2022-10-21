@@ -395,6 +395,17 @@ main {
 /* 	margin-top:20px; */
 	margin-left:290px;
 }
+.re_mod_title{
+/* 	margin-top:20px; */
+	margin-left:290px;
+	text-decoration: underline;
+	font-style:italic;
+	
+}
+.re_title_mod{
+/* 	margin-top:20px; */
+	margin-left:290px;
+}
 .re_content_input{
 	width:703px;
 	height:70px;
@@ -402,7 +413,30 @@ main {
 	position:relative;
 }
 .reply_btn{
+	margin-top:10px;
 	margin-left:960px;
+	
+}
+.reply_mod_btn{
+	margin-top:10px;
+	margin-left:960px;
+	
+}
+.reply_re_btn{
+	margin-top:10px;
+	
+}
+.mod_cancel_btn{
+	margin-left:920px;
+	margin-top:10px;
+	
+}
+.re_cancel_btn{
+	margin-left:920px;
+	margin-top:10px;
+	
+}
+.reply_regi_btn{
 	margin-top:10px;
 	
 }
@@ -417,6 +451,10 @@ main {
 	margin-left:590px;
 	font-size:13px;
 	color: black;
+	display:inline-block;
+	cursor: pointer;
+	text-decoration: underline;
+
 }
 .del_re{
 	font-size:13px;
@@ -425,6 +463,15 @@ main {
 .re_re{
 	font-size:13px;
 	color: black;
+	display:inline-block;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.re_mod_box{
+	display:none;
+}
+.re_re_box{
+	display:none;
 }
 
 </style>
@@ -435,6 +482,10 @@ window.onload=()=>{
  close();  
  showdel();
  modaldel();
+ reMod();
+ modCancel();
+ reRe();
+ reReCancel();
 
 }
 
@@ -495,6 +546,103 @@ function replyInsert(){
 		replyFrm.submit();
 		
 }
+//댓글 수정하기
+function replyModGo(){
+	let reply_mod_btn = document.querySelector(".reply_mod_btn");
+	
+		
+		replyMod.method="post";
+		replyMod.action="/syl/ask_reMod_write?board_no=${list.board_no}";
+		replyMod.submit();
+		
+}
+//답댓글달기
+function replyDelGO(){
+	//form안에 name이 content인걸 컨트롤러에서 받아오지못해서 자스에서 value값으로 get방식으로 보내줌
+	let content = document.querySelector(".re_content_input").value;
+	replyRe.method="post";
+	replyRe.action="/syl/insertReply?board_no=${list.board_no}";
+	replyRe.submit();
+		
+}
+
+//댓글 수정 클릭시 수정 박스
+function reMod(){
+	let re_re_box = document.querySelector(".re_re_box");
+	let re_mod = document.querySelectorAll(".mod_re");
+	let mod_box = document.querySelector(".re_mod_box");
+	let re_box = document.querySelector(".re_box");
+	
+	for(let i=0;i<re_mod.length;i++){
+		re_mod[i].addEventListener("click",(e)=>{
+			//해당 re_mod의 데이터속성값을 가져와서 
+		let re_no = e.target.dataset.re_no;
+			if(mod_box.style.display="none"){
+				re_box.style.display="none"
+				//hidden value에 넣어줌
+				document.getElementById('re_no_hidden').value = re_no;
+				mod_box.style.display="block"
+			}
+			if(re_re_box.style.display="block"){
+			re_re_box.style.display="none"
+		    }
+	})
+		
+	}
+}
+//댓글 답댓쓰기 클릭시 답댓글 박스 
+function reRe(){
+	let re_re = document.querySelectorAll(".re_re");
+	let re_re_box = document.querySelector(".re_re_box");
+	let re_box = document.querySelector(".re_box");
+	let mod_box = document.querySelector(".re_mod_box");
+	
+	for(let i=0;i<re_re.length;i++){
+		re_re[i].addEventListener("click",(e)=>{
+			//해당 re_re의 데이터속성값을 가져와서 
+			let re_no = e.target.dataset.re_re_no;
+			console.log("reno",re_no);
+			if(re_re_box.style.display="none"){
+				re_box.style.display="none"
+				document.getElementById('re_re_no_hidden').value = re_no;
+				re_re_box.style.display="block"	
+			}
+			if(mod_box.style.display="block"){
+				mod_box.style.display="none"
+			}
+	})
+		
+	}
+}
+//댓글 수정 취소버튼 클릭시 댓글쓰기 박스로
+function modCancel(){
+	let mod_box = document.querySelector(".re_mod_box");
+	let re_box = document.querySelector(".re_box");
+	let reply_cancel_btn = document.querySelector(".mod_cancel_btn");
+	
+	reply_cancel_btn.addEventListener("click",()=>{
+		if(re_box.style.display="none"){
+			re_box.style.display="block"
+			mod_box.style.display="none"
+		}
+		})
+	
+}
+//댓글 대댓글 취소버튼 클릭시 댓글쓰기 박스로
+function reReCancel(){
+	let mod_box = document.querySelector(".re_re_box");
+	let re_box = document.querySelector(".re_box");
+	let reply_cancel_btn = document.querySelector(".re_cancel_btn");
+	
+	reply_cancel_btn.addEventListener("click",()=>{
+		if(re_box.style.display="none"){
+			re_box.style.display="block"
+			mod_box.style.display="none"
+		}
+		})
+	
+}
+
 
 
 
@@ -540,21 +688,6 @@ function replyInsert(){
 		            <div class="close">
             			<button type="button" style="height:15px; width: 15px; font-size: 10px; padding: 0; background-color:lightgray;">X</button>
    					 </div>
-			 <%--   <%
-			   HttpSession testSession = request.getSession();
-			   testSession.setAttribute("ask_classify",ask_classify); 
-			   testSession.setAttribute("board_no",board_no); 
-			   testSession.setAttribute("title",title); 
-/* 			   request.setAttribute("id",id);  */
-			   testSession.setAttribute("content",content); 
-			   testSession.setAttribute("title",title); 
-			   testSession.setAttribute("ask_secret",ask_secret); 
-			   System.out.println("수정전 설정한 값 :"+ask_secret );
-			   testSession.setAttribute("ask_pwd",ask_pwd); 
-			   
-		
-	
-			   %> --%>
 			  <%--  <%if(id.equals(sessionId) || "admin01".equals(sessionId)){ %>	 --%>
 		        <a href="/syl/ask_mod?board_no=${list.board_no }" class="mod">수정하기</a><br>
 		        <br>
@@ -582,37 +715,76 @@ function replyInsert(){
 		</div>
 		<div class="reBox">
 		<c:forEach var="reply" items="${ReplyList }">
+		<!-- 시스템에서 현제시간 -->
+					<c:set var="now" value="<%=new java.util.Date()%>" />
+					<c:set var="sysNow"><fmt:formatDate value="${now}" pattern="YYYY-MM-dd" /></c:set> 
+					<!-- 뎃글쓴 시간 -->
+					<c:set var="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></c:set> 
+				
 			<c:choose>
 				<c:when test="${empty reply.parent_no }">
 					<div class="re_inbox">
-						<div class="re_id">${reply.id}</div>
-						<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
+						<div class="re_id" >${reply.id}</div>
+						<c:choose>
+							<c:when test="${ sysNow eq re_date}">
+								<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="hh:mm:ss"/></div> 
+							</c:when>
+							<c:otherwise>
+								<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
+							</c:otherwise>
+					   </c:choose>
 						<div class="re_content">${reply.content}</div>
-						<a href="" class="mod_re">수정</a>
+						<div class="mod_re" data-re_no="${reply.re_no }">수정</div>
 						<a href="/syl/ask_reply_del?re_no=${reply.re_no }&board_no=${param.board_no }" class="del_re">삭제</a>
-						<a href="" class="re_re">답글쓰기</a>
+						<div class="re_re" data-re_re_no="${reply.re_no }">답글쓰기</div>
 					</div>
 				</c:when>
 				<c:otherwise>
-					<div class="re_inbox" style="padding:padding-left:${list.level *10}px;">
-					ㄴ
-						<div class="re_id">${reply.id}</div>
-						<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
-						<div class="re_content">${reply.content}</div>
-						<a href="" class="mod_re">수정</a>
+					<div class="re_inbox">
+						<div class="re_id" style="padding-left:${reply.level *10}px;">ㄴ${reply.id}</div>
+						<c:choose>
+							<c:when test="${ sysNow eq re_date}">
+								<div class="re_date" ><fmt:formatDate value="${reply.reply_date}" pattern="hh:mm:ss"/></div> 
+							</c:when>
+							<c:otherwise>
+								<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
+							</c:otherwise>
+					   </c:choose>
+						<div class="re_content" style="padding-left:${(reply.level *10)+15}px;">${reply.content}</div>
+						<div class="mod_re" data-re_no="${reply.re_no }">수정</div>
 						<a href="/syl/ask_reply_del?re_no=${reply.re_no }&board_no=${param.board_no }" class="del_re">삭제</a>
-						<a href="" class="re_re">답글쓰기</a>
+						<div class="re_re" data-re_re_no="${reply.re_no }">답글쓰기</div>
 					</div>
 				</c:otherwise>
 			</c:choose>
 			</c:forEach>
 		</div>
 					<div class="re_writer"><%=sessionId %></div>
-		<form name="replyFrm" class="frm" >
-			<div class="re_title">댓글쓰기</div>
-			<input type="text" name="content" class="re_content_input">
-			<input type="button" value="등록" onclick="replyInsert()" class="reply_btn">
-		</form>
+		<div class="re_box">
+			<form name="replyFrm" class="frm" >
+				<div class="re_title">댓글쓰기</div>
+				<input type="text" name="content" class="re_content_input">
+				<input type="button" value="등록" onclick="replyInsert()" class="reply_mod_btn">
+			</form>
+		</div>
+		<div class="re_mod_box">
+			<form name="replyMod" class="frm" >
+				<div class="re_mod_title">댓글수정 중</div>
+				<input type="text" name="content" class="re_content_input">
+				<input type="button" value="취소" class="mod_cancel_btn">
+				<input type="button" value="등록" onclick="replyModGo()" class="reply_regi_btn">
+				<input type="hidden"  name="re_no" value="" id="re_no_hidden">
+			</form>
+		</div>
+		<div class="re_re_box">
+			<form name="replyRe" class="frm" >
+				<div class="re_mod_title">답댓글 쓰기</div>
+				<input type="text" name="content" class="re_content_input">
+				<input type="button" value="취소" class="re_cancel_btn">
+				<input type="button" value="등록" onclick="replyDelGO()" class="reply_re_btn">
+				<input type="hidden"  name="re_no" value="" id="re_re_no_hidden">
+			</form>
+		</div>
 		  <div class="del_p">
 				    <div class="del">
 				        <div class="warn"><strong>삭제하시겠습니까?</strong></div>

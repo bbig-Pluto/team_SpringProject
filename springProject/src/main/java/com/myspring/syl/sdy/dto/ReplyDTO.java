@@ -9,6 +9,7 @@ public class ReplyDTO {
 	private String id;
 	private String parent_no;
 	private Date reply_date;
+	private String level;
 	
 	
 	public String getBoard_no() {
@@ -46,5 +47,11 @@ public class ReplyDTO {
 	}
 	public void setParent_no(String parent_no) {
 		this.parent_no = parent_no;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
 	}
 }

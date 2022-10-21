@@ -121,11 +121,11 @@ public class NoticeController extends HttpServlet {
 					ModelAndView mav = 	new ModelAndView();
 					List<NoticeDTO> list = noticeService.getSearchNoticeList(search);
 					mav.addObject("list",list);
-					mav.setViewName("sdy/notice_show");
+					mav.setViewName("/sdy/notice_show");
 					return mav;
 				}else {
 					
-					ModelAndView mav = 	new ModelAndView("redirect:/notice");
+					ModelAndView mav = 	new ModelAndView("rediret:/notice");
 					
 					return mav;
 				}

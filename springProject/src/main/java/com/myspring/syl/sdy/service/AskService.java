@@ -27,8 +27,38 @@ public class AskService {
 //		return askDAO.selectMember();
 //	
 //	}
-	public Map getPagingList(int pageNum, int countPerPage){
-	
+//	public Map getPagingList(int pageNum, int countPerPage){
+//	
+//		int start=0, end=0;
+//		start = ((pageNum-1) * countPerPage) + 1;
+//		end = pageNum * countPerPage;
+//		end = start + countPerPage - 1;
+//		
+//		/*
+//		 * 1, 5
+//		 * 		start=1, end=5
+//		 * 2, 5
+//		 * 		start=6, end=10
+//		 * 3, 5
+//		 * 		start=11, end=15
+//		 */
+//		
+//		Map map = new HashMap();
+//		map.put("start", start);
+//		map.put("end", end);
+//		
+//		List<AskDTO> list = askDAO.selectMember(map);
+//		
+//		int count = askDAO.selectListCount();
+//		
+//		Map map1 = new HashMap();
+//		map1.put("list", list);
+//		map1.put("count", count);
+//		
+//		return map1;
+//	}
+	//검색,전체리스트
+	public Map getSearchList(int pageNum, int countPerPage,String ser_name,String q_head,String search) {
 		int start=0, end=0;
 		start = ((pageNum-1) * countPerPage) + 1;
 		end = pageNum * countPerPage;
@@ -46,16 +76,23 @@ public class AskService {
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("ser_name", ser_name);
+		map.put("q_head", q_head);
+		map.put("search", search);
 		
-		List<AskDTO> list = askDAO.selectMember(map);
+		List<AskDTO> list = askDAO.searchList(map);
 		
-		int count = askDAO.selectListCount();
+			int count = askDAO.selectListCount(map);
+			
+			Map map1 = new HashMap();
+			map1.put("list", list);
+			map1.put("count", count);
+			
+			return map1;
 		
-		Map map1 = new HashMap();
-		map1.put("list", list);
-		map1.put("count", count);
 		
-		return map1;
+		
+		
 	}
 	//댓글조회
 	public List<ReplyDTO> getReplyList(String board_no) {
@@ -94,10 +131,6 @@ public class AskService {
 		return askDAO.detailContents(board_no);
 		
 	}
-	public List<AskDTO> getSearchList(HashMap<String,String> hashMap) {
-		return askDAO.searchList(hashMap);
-		
-	}
 	//글삭제
 	public void getDelList(String board_no) {
 		askDAO.delList(board_no);
@@ -111,6 +144,10 @@ public class AskService {
 	//글수정
 	public void getModList(AskDTO askDTO){
 		askDAO.modList(askDTO);
+	}
+	//댓글수정
+	public void getReplyModList(ReplyDTO replyDTO){
+		askDAO.modReplyList(replyDTO);
 	}
 	//체크시 삭제
 	public void getAskDelChk(List board_no){

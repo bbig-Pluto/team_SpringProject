@@ -18,15 +18,20 @@ public class AskDAO {
 	
 	@Autowired
 	SqlSession sqlSession;
-	//리스트 출력
-	public List<AskDTO> selectMember(Map Map) {
-		List<AskDTO> list =sqlSession.selectList("mapper.sdy.selectAllMemberList",Map);
-		return list;
-	}
-	//전체 글 개수
-	public int selectListCount() {
-		int result =sqlSession.selectOne("mapper.sdy.getAllPageList");
+//	//리스트 출력
+//	public List<AskDTO> selectMember(Map Map) {
+//		List<AskDTO> list =sqlSession.selectList("mapper.sdy.selectAllMemberList",Map);
+//		return list;
+//	}
+	//전체,검색 글 개수
+	public int selectListCount(Map map) {
+		int result =sqlSession.selectOne("mapper.sdy.getAllPageList",map);
 		return result;
+	}
+	//검색,리스트 출력
+	public List<AskDTO> searchList(Map map) {
+		List<AskDTO> list =sqlSession.selectList("mapper.sdy.serchList",map);
+		return list;
 	}
 	//조회수
 	public void boardHit(String board_no) throws Exception {
@@ -63,11 +68,6 @@ public class AskDAO {
 		System.out.println("출력: "+askDTO.getAsk_classify());
 		sqlSession.insert("mapper.sdy.insertContents",askDTO);
 	}
-	//검색
-	public List<AskDTO> searchList(HashMap<String,String> hashMap) {
-		List<AskDTO> list =sqlSession.selectList("mapper.sdy.serchList",hashMap);
-		return list;
-	}
 	//글삭제
 	public void delList(String board_no) {
 		sqlSession.delete("mapper.sdy.deleteMember", board_no);
@@ -79,6 +79,10 @@ public class AskDAO {
 	//글수정
 	public void modList(AskDTO askDTO) {
 		sqlSession.update("mapper.sdy.updateContent", askDTO);
+	}
+	//댓글수정
+	public void modReplyList(ReplyDTO replyDTO) {
+		sqlSession.update("mapper.sdy.updateReply", replyDTO);
 	}
 	//체크 선택시 게시글 삭제
 	public void delAskChk(List board_no) {

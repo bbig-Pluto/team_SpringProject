@@ -11,6 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style>
 /*Q&A*/
 h2 {
@@ -79,7 +80,7 @@ table th {
 table td {
 	text-align: center;
 	border-bottom: 1px solid #8a8989b4;
-    padding: 7px;
+    padding: 5px;
 }
 table .no {
 	width: 40px;
@@ -129,6 +130,7 @@ table .check {
 .ser {
 	margin-top: 50px;
 	margin-left: 370px;
+	margin-bottom:50px;
 }
 
 .ser select {
@@ -338,8 +340,13 @@ display:inline-block;
 }
 .re_count{
 	display:inline-block;
-	color:red;
 	margin-left:10px;
+	width:30px;
+	border-radius:5px;
+	border:1px solid #8a8989b4;
+	font-size:15px;
+	padding-top:2px;
+	color:gray;
 }
 .checkDel_btn{
 	margin-left:130px;
@@ -352,12 +359,36 @@ display:inline-block;
  function selectAll(selectAll) {
 	  const checkboxes 
 	       = document.getElementsByName('check');
-	  let allCheck =document.querySelector(".check")
 	  checkboxes.forEach((checkbox) => {
 	    checkbox.checked = selectAll.checked;
 
 	  })
 	}
+  //전체선택 박스 해제
+ function checkSelectAll()  {
+	  // 전체 체크박스
+	  const checkboxes 
+	    = document.querySelectorAll('input[name="check"]');
+	  // 선택된 체크박스
+	  const checked 
+	    = document.querySelectorAll('input[name="check"]:checked');
+	  // select all 체크박스
+	  const selectAll 
+	    = document.querySelector('input[name="checkAll"]');
+	  
+	  if(checkboxes.length === checked.length)  {
+	    selectAll.checked = true;
+	  }else {
+	    selectAll.checked = false;
+	  }
+
+}
+ 
+ function classifyValue(e){
+	 const value = e.value;
+	 
+	 document.getElementById("result").href = "/syl/ask?pageNum=lastPage&";
+ }
 </script> 
 </head>
 <body>
@@ -386,6 +417,7 @@ display:inline-block;
 			<article>
 
 				<div class="area_wrapper">
+	<script src="https://kit.fontawesome.com/b23dc5bb63.js" crossorigin="anonymous"></script>
 		<h2>문의하기</h2>
 		<div class="menu">
 			<div class="m1">
@@ -429,11 +461,12 @@ display:inline-block;
 		<table>
 			<tr>
 			<%-- <%if(!sessionId.equals("null")){ %>   --%>
-				<th class="check"><input type="checkbox" name="check" onclick="selectAll(this)" ></th>
+				<th class="check"><input type="checkbox" name="checkAll" onclick="selectAll(this)"></th>
 	<%-- 			<%} %> --%>
 				<th class="no">No.</th>
 				<th class="category">카테고리</th>
-				<th class="title">제목</th>
+				<th class="title" colspan="2">제목</th>
+				<th class="reply_count"></th>
 				<th class="nic">작성자</th>
 				<th class="date">작성일</th>
 				<th class="hit">조회수</th>
@@ -442,55 +475,39 @@ display:inline-block;
 		<c:forEach var="list" items="${ map.list}">
 			<tr class="show">
 		<%-- 	<%if(!sessionId.equals("null")){ %>  --%> 
-				<td class="chk"><input type="checkbox" name="check"value="${list.board_no}"></td>
+				<td class="chk"><input type="checkbox" name="check"value="${list.board_no}" onclick="checkSelectAll()"></td>
 	<%-- 			<%} %> --%>
 				<td class="n">${list.board_no}</td>
 				<td class="c">[${list.ask_classify}]</td>
-				 <td class="t">
+				 <td class="t" colspan="2">
 				<c:choose>
 					<c:when test="${not empty list.parent_no }">
 						<c:choose>
 							<c:when test="${'secret' eq list.ask_secret }">
-								<c:if test="${list.reply_count != 0 }">
-									<div class="reicon" style="padding-left:${list.level *10}px;">ㄴ</div><a href="/syl/ask_pwd?board_no=${list.board_no }">${list.title }<img src="https://cdn-icons-png.flaticon.com/512/152/152462.png" style="width:13px; height:13px;"></a><div class="re_count">[${list.reply_count}]</div>
-								</c:if>
-								<c:if test="${list.reply_count == 0 }">
-									<div class="reicon" style="padding-left:${list.level *10}px;">ㄴ</div><a href="/syl/ask_pwd?board_no=${list.board_no }">${list.title }&nbsp<img src="https://cdn-icons-png.flaticon.com/512/152/152462.png" style="width:13px; height:13px;"></a>
-								</c:if>
+									<div class="reicon" style="padding-left:${list.level*10}px;">ㄴ</div><a href="/syl/ask_pwd?board_no=${list.board_no }">${list.title }&nbsp<img src="https://cdn-icons-png.flaticon.com/512/152/152462.png" style="width:13px; height:13px;"></a>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${list.reply_count != 0 }">
-									<div class="reicon" style="padding-left:${list.level *10}px;">ㄴ</div><a href="/syl/detail?board_no=${list.board_no}">${list.title }</a><div class="re_count">[${list.reply_count}]</div>
-								</c:if>
-								<c:if test="${list.reply_count == 0 }">
-									<div class="reicon" style="padding-left:${list.level *10}px;">ㄴ</div><a href="/syl/detail?board_no=${list.board_no}">${list.title }</a>
-								</c:if>
-								
+									<div class="reicon" style="padding-left:${list.level*10}px;">ㄴ</div><a href="/syl/detail?board_no=${list.board_no}">${list.title }</a>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${'secret' eq list.ask_secret }">
-								<c:if test="${list.reply_count != 0 }">
-									<a href="/syl/ask_pwd?board_no=${list.board_no }">${list.title }<img src="https://cdn-icons-png.flaticon.com/512/152/152462.png" style="width:13px; height:13px;"></a><div class="re_count">[${list.reply_count}]</div>
-								</c:if>
-								<c:if test="${list.reply_count == 0 }">
 									<a href="/syl/ask_pwd?board_no=${list.board_no }">${list.title }&nbsp<img src="https://cdn-icons-png.flaticon.com/512/152/152462.png" style="width:13px; height:13px;"></a>
-								</c:if>
 							</c:when>
 							<c:otherwise>
-								<c:if test="${list.reply_count != 0 }">
-								<a href="/syl/detail?board_no=${list.board_no}">${list.title }</a><div class="re_count">[${list.reply_count}]</div>
-								</c:if>
-								<c:if test="${list.reply_count == 0 }">
 									<a href="/syl/detail?board_no=${list.board_no}">${list.title }</a>
-								</c:if>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>
 				</c:choose>		
 				</td> 
+				<td class="reply_count">
+					<c:if test="${list.reply_count != 0 }">
+						<div class="re_count">${list.reply_count}</div>
+					</c:if>
+				</td>
 				<td class="u">${list.id} </td>
 				
 					<!-- 시스템에서 현제시간 -->
@@ -524,45 +541,45 @@ display:inline-block;
 			</div>
 		</form>
 	<%-- 	<%}%>   --%> 
-		<form method="post" action="/syl/search">
+		<form method="post" action="/syl/ask">
 			<div class="ser">
-			<select name="q_head">
+			<select name="q_head" onchange="classifyValue(this)">
 					<option value="중분류" selected>중분류</option>
 					<option value="문의">문의</option>
 					<option value="재문의">재문의</option>
 					<option value="제안">제안</option>
 				</select>  
 		
-				<select name="ser_name">
+				<select name="ser_name" onchange="selectValue(this)">
 					<option value="소분류" selected>소분류</option>
 					<option value="글제목" name="title">글제목</option>
 					<option value="작성자" name="nick_name">작성자</option>
 				</select> 
-				<input type="text" name="search">
+				<input type="text" name="search" >
 				 <input type="submit" value="검색">
 			</div>
 		</form> 
 		<c:if test="<%=pageNum == 1%>">
-		<div style="display:inline-block; margin-left:550px; margin-top:50px; color:gray;"> << &nbsp;</div>
+		<div style="display:inline-block; margin-left:550px; color:gray;"> << &nbsp;</div>
 	</c:if>
 	<c:if test="<%=pageNum != 1%>">
-		<a href="/syl/ask?pageNum=<%=pageNum-1 %>&countPerPage=10" style="color:red;font-weight:bold; margin-left:550px; margin-top:50px; color: black; text-decoration: none;"> << </a>&nbsp;
+		<a href="/syl/ask?pageNum=1" style="color:red;font-weight:bold; margin-left:550px;  color: black; text-decoration: none;"> << </a>&nbsp;
 	</c:if>
 
 	<c:forEach var="i" begin="<%=firstNo %>" end="<%=lastNo %>">
 		<c:if test="${ map.pageNum eq i }">
-			<a href="/syl/ask?pageNum=${i }&countPerPage=10" style="color:red;font-weight:bold; margin-top:50px; color:black; text-decoration: none;">${i }</a>&nbsp;
+			<a href="/syl/ask?pageNum=${i }" style="color:red;font-weight:bold;  color:black; text-decoration: none;">${i }</a>&nbsp;
 		</c:if>
 		<c:if test="${ not (map.pageNum eq i) }">
-			<a href="/syl/ask?pageNum=${i }&countPerPage=10" style="margin-top:50px; color:gray; text-decoration: none;">${i }</a>&nbsp;
+			<a href="/syl/ask?pageNum=${i }" style="color:gray; text-decoration: none;">${i }</a>&nbsp;
 		</c:if>
 	</c:forEach>
 
 	<c:if test="<%=pageNum == lastPage%>">
-		<div style="margin-top:50px; display:inline-block; color:gray; "> >> </div>
+		<div style=" display:inline-block; color:gray; "> >> </div>
 	</c:if>
 	<c:if test="<%=pageNum != lastPage%>">
-		<a href="/syl/ask?pageNum=<%=pageNum+1 %>&countPerPage=10" style="color:red;font-weight:bold; color: black; text-decoration: none;"> >> </a>&nbsp;
+		<a href="/syl/ask?pageNum=<%=lastPage %>" style="color:red;font-weight:bold; color: black; text-decoration: none; " id="result" > >> </a>&nbsp;
 	</c:if>
 				</div>
 

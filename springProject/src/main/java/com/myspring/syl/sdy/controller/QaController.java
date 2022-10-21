@@ -65,7 +65,7 @@ public class QaController extends HttpServlet {
 				@ModelAttribute QaDTO qaDTO,
 				@RequestParam("q_no") String q_no,
 				@RequestParam("answer") String answer,
-				@RequestParam("qusetion") String qusetion
+				@RequestParam("question") String question
 				) {
 			qaService.getQaModList(qaDTO);
 			
@@ -77,12 +77,13 @@ public class QaController extends HttpServlet {
 		public ModelAndView mod(
 				@RequestParam("q_no") String q_no,
 				@RequestParam("answer") String answer,
-				@RequestParam("qusetion") String qusetion	
+				@RequestParam("question") String question	
 				) throws Exception {
-			ModelAndView mav = 	new ModelAndView("forward:/q_a_writer.jsp");
+				ModelAndView mav = 	new ModelAndView();
+				mav.setViewName("/sdy/q_a_rewrite");
 			
 			
-			return mav;
+				return mav;
 		}
 		//체크 시 삭제 
 				@RequestMapping(value="/qa_delCheck",method= {RequestMethod.GET,RequestMethod.POST})

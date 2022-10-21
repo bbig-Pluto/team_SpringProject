@@ -331,6 +331,25 @@ main {
 </style>
 
 <script>
+//전체선택 박스 해제
+function checkSelectAll()  {
+	  // 전체 체크박스
+	  const checkboxes 
+	    = document.querySelectorAll('input[name="check"]');
+	  // 선택된 체크박스
+	  const checked 
+	    = document.querySelectorAll('input[name="check"]:checked');
+	  // select all 체크박스
+	  const selectAll 
+	    = document.querySelector('input[name="checkAll"]');
+	  
+	  if(checkboxes.length === checked.length)  {
+	    selectAll.checked = true;
+	  }else {
+	    selectAll.checked = false;
+	  }
+
+}
 
 function selectAll(selectAll) {
 	  const checkboxes 
@@ -388,7 +407,7 @@ function selectAll(selectAll) {
 	<form action="/syl/NdelCheck" method="post">
 	<table>
 		<tr>
-			<th class="check"><input type="checkbox"  name="check" onclick="selectAll(this)"></th>
+			<th class="check"><input type="checkbox"  name="checkAll" onclick="selectAll(this)"></th>
 			<th class="no">No.</th>
 			<th class="title">제목</th>
 			<th class="nic">작성자</th>
@@ -421,7 +440,7 @@ function selectAll(selectAll) {
 	<c:set var="lastPage" value="<%= lastPage %>" />
 		<c:forEach var="list" items="${ map.list}">
 		<tr class="show">
-				<td class="chk"><input type="checkbox" name="check" value="${list.board_no }"></td>
+				<td class="chk"><input type="checkbox" name="check" value="${list.board_no }" onclick="checkSelectAll()"></td>
 		<c:choose>
 			<c:when test="${list.n_set eq '공지'}">
 				<td class="n"><strong>[${list.n_set }]</strong></td>

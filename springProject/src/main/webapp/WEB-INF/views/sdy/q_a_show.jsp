@@ -137,15 +137,16 @@ form{
 	width:60px;
 	height:25px;
 	background-color:#lightgray;
+	margin-left: 220px;
 	
 }
 .mod{
 	display:inline-block;
 	margin-top:30px;
-	margin-bottom:10px;
+	margin-bottom:5px;
 	width:60px;
 	height:25px;
-	margin-left:870px;
+	margin-left:700px;
 	background-color:#lightgray;
 }
 .chk{
@@ -364,42 +365,55 @@ main {
        
         } 
        
-       function showdel(){
-    	    let del=document.querySelector(".del");
-    	    let pa=document.querySelector(".del_p");
-    	    del.addEventListener("click",()=>{
-    	        if(pa.style.display="none"){
-    	            pa.style.display="block";
-    	        }else{
-    	        	pa.style.display="block";
-    	        }
-    	    })
-    	}
-
-    	function modaldel(){
-    	   let cancel=document.querySelector(".del .cancel")
-    	   let pa=document.querySelector(".del_p")
-    	   cancel.addEventListener("click",()=>{
-    	        pa.style.display="none";
-    	   })
-    	   
-    	}
-    	
-    	function qaMod(){
-    		let mod = document.querySelector(".mod");
-    		let chk = document.querySelectorAll(".chk input[type='checkbox']");
-    		
-    	for(let i=0;i<chk.length; i++){
-    		if(chk[i].checked){
-    			frmMod.action="/syl/qa_mod";
-    			frmMod.method="post";
-    			frmMod.submit();
-    		}
-    		
-    	}
-    		
     	
     
+    	function qaMod(){
+    		let mod = document.querySelectorAll(".mod");
+    		
+    		
+    	for(let i=0;i<mod.length; i++){
+    		mod[i].addEventListener("click",(e)=>{
+    			
+    			
+    			let data_a= e.target.dataset.a;
+    			let data_q= e.target.dataset.q;
+    			let data_no= e.target.dataset.no;
+    			
+    			console.log("data_a"+data_a);
+    			console.log("data_q"+data_q);
+    			console.log("data_no"+data_no);
+    			
+    			frmMod.querySelector(".hidden_a").value= data_a
+    			frmMod.querySelector(".hidden_q").value = data_q
+    			frmMod.querySelector(".hidden_no").value= data_no
+    			
+    			frmMod.method="post";
+    			frmMod.action="/syl/qa_mod";
+    			frmMod.submit();
+    		 })
+    		
+    	}
+    
+    	}
+    	
+    	 //전체선택 박스 해제
+    	 function checkSelectAll()  {
+    		  // 전체 체크박스
+    		  const checkboxes 
+    		    = document.querySelectorAll('input[name="check"]');
+    		  // 선택된 체크박스
+    		  const checked 
+    		    = document.querySelectorAll('input[name="check"]:checked');
+    		  // select all 체크박스
+    		  const selectAll 
+    		    = document.querySelector('input[name="checkAll"]');
+    		  
+    		  if(checkboxes.length === checked.length)  {
+    		    selectAll.checked = true;
+    		  }else {
+    		    selectAll.checked = false;
+    		  }
+
     	}
     	
     	function selectAll(selectAll) {
@@ -459,20 +473,20 @@ main {
 	String sessionId = "" + userInfo.getAttribute("logOn.id");
 	
 %>
-	<%-- <% if("admin01".equals(sessionId)){%> --%>
-	<form name="frmMod">
-	  	<input type="button" value="수정" class="mod" onclick="qaMod()"> 
-	</form>
-  <form action="/syl/qa_delCheck" method="post">
-  	<input type="submit" value="삭제" class="del">
-<%--   <%} %> --%>
-	<div class="chkAll"><input type="checkbox" name="check" onclick="selectAll(this)">전체선택</div>
+	 <% if("admin01".equals(sessionId)){%> 
+	
+   <form action="/syl/qa_delCheck" method="post"> 
+	<div class="chkAll"><input type="checkbox" name="checkAll" onclick="selectAll(this)">전체선택</div>
+  <%} %>
   <c:forEach var="list" items="${ list}">
 	<div class="add_box">
-  		 <div class="chk" ><input type="checkbox"  name="check" ></div>
+	<% if("admin01".equals(sessionId)){%> 
+  		 <div class="chk" ><input type="checkbox"  name="check" value="${list.q_no }" onclick="checkSelectAll()"></div>
+		  	<input type="button" class="mod" value="수정" data-a="${list.answer}" data-q="${list.question }" data-no="${list.q_no }"> 
+  		 <%} %>
 		<div class='question_p'>
 			<div class='q'>
-				Q.${list.question }//${list.q_no }
+				Q.${list.question }
 			</div>
 		</div>
 		<div class='answer_p'> 
@@ -483,12 +497,20 @@ main {
   		 <input type="hidden" name="q_no" value="${list.q_no }">
 	</div>
 	</c:forEach>
-  </form>
- <%--  <%if(sessionId.equals("admin01")) {%> --%>
+	<%if(sessionId.equals("admin01")) {%> 
+	<input type="submit" value="삭제" class="del" class="del_btn">
+	 <%} %> 
+  </form> 
+	<form name="frmMod" >
+		  	<input type="hidden" name="answer"  class="hidden_a"> 
+		  	<input type="hidden" name="question"  class="hidden_q" > 
+		  	<input type="hidden" name="q_no"  class="hidden_no"> 
+		</form>
+ <%if(sessionId.equals("admin01")) {%> 
   <form action="/syl/Qwrite" method="post">
 <input type="submit" value="글쓰기" class="write_btn">
   </form>
-<%--   <%} %> --%>
+  <%} %> 
 										</div>
 			</article>
 		</section>

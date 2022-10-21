@@ -4,7 +4,7 @@
  
 <mapper namespace="mapper.sdy">
 <!-- 문의 게시판  -->
-<select id="selectAllMemberList" parameterType="java.util.Map"
+<!-- <select id="selectAllMemberList" parameterType="java.util.Map"
 			resultType="askDTO">		
 		 SELECT * FROM (
 				SELECT rownum AS rnum, tmp.* FROM (
@@ -16,15 +16,8 @@
 			)
 			<![CDATA[WHERE #{start} <= rnum AND rnum <= #{end}]]>
 	
-	</select>
-	<!-- 게시물 총 갯수 -->
-	<select id="getAllPageList" 
-			resultType="int">
-		SELECT count(*) as cnt FROM ask_board
-		start with parent_no is null
-		connect by prior board_no = parent_no
-		order siblings by board_no desc
-	</select>
+	</select> -->
+	
 	<!-- 게시글 비밀번호 조회 -->
 	<select id="pwCheck" 
 			resultType="String">
@@ -58,17 +51,19 @@
 		
 	</select>
 	<!-- 댓글 입력 -->
-	<insert id="writeReply">
+	<insert id="writeReply" parameterType="replyDTO">
 		INSERT INTO ask_reply(
 			board_no
 			, re_no
 			, content
 			, id
+			,parent_no
 		)
-		VALUES(    #{board_no}
+		VALUES( #{board_no}
 			, re_no_seq.nextval
 			, #{content}
-			, #{id})
+			, #{id}
+			, #{parent_no})
 	</insert>
 	<!-- 해당 게시글 옆 댓글수 표시 -->
 	<update id="updateReplyCount" parameterType="String">
@@ -102,7 +97,7 @@
 		delete from ask_reply
 		where re_no = #{re_no}
 	</delete>
-	<!--글수정 -->
+		<!--글수정 -->
 	 <update id="updateContent" parameterType="askDTO">
 		UPDATE ask_board
 		   SET TITLE    =   #{title},
@@ -112,11 +107,18 @@
 		   	   ask_secret =#{ask_secret}
 		 WHERE board_no = #{board_no} 
 	</update>
-	<!--검색 기능 -->
-	 <select id="serchList" parameterType="java.util.HashMap"
+	<!--댓글수정 -->
+	 <update id="updateReply" parameterType="replyDTO">
+		UPDATE ask_reply
+		   SET CONTENT  = #{content}
+		 WHERE re_no = #{re_no} 
+	</update>
+	<!--검색,리스트출력 기능 -->
+	 <select id="serchList" parameterType="java.util.Map"
 			resultType="AskDTO" >
-				
-			select * from ask_board
+			 SELECT * FROM (
+				SELECT rownum AS rnum, tmp.* FROM (
+				select LEVEL, parent_no,board_no,title,content,ask_classify,ask_secret,ask_pwd,id,write_date,hit,reply_count FROM ask_board
 		<where>
 			<if test='ser_name != null and "글제목".equals(ser_name)'>
 				and title LIKE '%'|| #{search}||'%'
@@ -134,7 +136,38 @@
 				and ask_classify = '제안'
 			</if>
 		</where>
+					start with parent_no is null
+					connect by prior board_no = parent_no
+					order siblings by board_no desc
+				) tmp
+			)
+			<![CDATA[WHERE #{start} <= rnum AND rnum <= #{end}]]>
 	</select> 
+	<!-- 게시물,검색 총 갯수 -->
+	<select id="getAllPageList" parameterType="java.util.Map"
+			resultType="int">
+		SELECT count(*) as cnt FROM ask_board
+		<where>
+			<if test='ser_name != null and "글제목".equals(ser_name)'>
+				and title LIKE '%'|| #{search}||'%'
+			</if>
+			<if test='ser_name != null and "작성자".equals(ser_name)'>
+				 and id LIKE '%'|| #{search}||'%'
+			</if>
+			<if test='q_head != null and "문의".equals(q_head)'>
+				and ask_classify = '문의'
+			</if>
+			<if test='q_head != null and "재문의".equals(q_head)'>
+				and ask_classify = '재문의'	
+			</if>
+			<if test='q_head != null and "제안".equals(q_head)'>
+				and ask_classify = '제안'
+			</if>
+		</where>
+		start with parent_no is null
+		connect by prior board_no = parent_no
+		order siblings by board_no desc
+	</select>
 	
 		<!-- 체크 시 게시글 삭제 -->
 		<delete id="deleteAskChk" parameterType="java.util.List">

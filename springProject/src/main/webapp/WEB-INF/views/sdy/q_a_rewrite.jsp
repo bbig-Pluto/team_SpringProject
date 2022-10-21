@@ -283,6 +283,7 @@ main {
 		
 	})
  }
+ 
 </script>
 	
 
@@ -312,23 +313,23 @@ main {
 		<section>
 			<article>
 				<div class="area_wrapper">
-	<form name="frm" method="post" action="/syl/Qinsert">
+	<form name="frm" method="post" action="/syl/qa_mod_write">
 		<h2>Q&A</h2>
 		<div class="box">
 			<div class="question_p">
 				<div class="q">Q.</div>
-				<input type="text" name="question">
+				<input type="text" name="question" value="${param.question}">
 			</div>
 			<div class="answer_p">
 				<div class="a">A.</div>
-				<textarea name="answer"></textarea>
+				<textarea name="answer"> ${param.answer}</textarea>
 			</div>
 
 		</div>
 		<div>
 			<input type="button"  value="목록" class="list_btn" onclick="sendList()">
 			<input type="submit" name="resi" value="등록" class="resi_btn">
-			<input type="hidden" name="board_no" value="${list.board_no }">
+			<input type="hidden" name="q_no" value="${param.q_no }">
 		</div>
 	</form>
 											</div>

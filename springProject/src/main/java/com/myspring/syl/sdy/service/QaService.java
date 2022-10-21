@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 import com.myspring.syl.sdy.dao.QaDAO;
 import com.myspring.syl.sdy.dto.QaDTO;
 
-
-
-
 @Service
 public class QaService {
 
@@ -38,6 +35,8 @@ public class QaService {
 
 	//체크시 삭제
 	public void getQaDelList(List q_no){
+		System.out.println("q_no 서비스에서  "+q_no);
+
 		qaDAO.delQaContents(q_no);
 	}
 	

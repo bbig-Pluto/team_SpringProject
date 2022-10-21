@@ -26,6 +26,7 @@ import com.myspring.syl.sdy.service.AskService;
 
 
 
+
 /**
  * Servlet implementation class AskServlet
  */
@@ -37,7 +38,10 @@ public class AskController extends HttpServlet {
 	
 	//전체 리스트 보여주는 페이지
 		@RequestMapping(value="/ask",method= {RequestMethod.GET,RequestMethod.POST})
-		public ModelAndView listMembers(HttpServletRequest request) {
+		public ModelAndView listMembers(HttpServletRequest request,
+				@RequestParam(value="ser_name",required=false ) String ser_name,
+				@RequestParam(value="q_head",required=false) String q_head,
+				@RequestParam(value="search",required=false) String search) {
 			ModelAndView mav = 	new ModelAndView();
 			
 			int pageNum = 1;		// 현재 페이지
@@ -60,16 +64,56 @@ public class AskController extends HttpServlet {
 				countPerPage = Integer.parseInt(str_countPerPage);
 			} catch (NumberFormatException nfe) {
 			}
-			
-			Map map = askService.getPagingList(pageNum, countPerPage);
-			map.put("pageNum", pageNum);
-			map.put("countPerPage", countPerPage);
-			
-			mav.addObject("map",map);
+//			if((q_head!=null || ser_name !=null )&& search!=null) {
+				System.out.println("검색 컨트롤 진입");
+				Map map = askService.getSearchList(pageNum, countPerPage,ser_name,q_head,search);
+				map.put("pageNum", pageNum);
+				map.put("countPerPage", countPerPage);
+				map.put("q_head", q_head);
+				map.put("ser_name", ser_name);
+				map.put("search", search);
+				
+				mav.addObject("map",map);
+//			}else {
+//				System.out.println("리스트 컨트롤 진입");
+//				Map map = askService.getPagingList(pageNum, countPerPage);
+//				map.put("pageNum", pageNum);
+//				map.put("countPerPage", countPerPage);
+//				
+//				mav.addObject("map",map);
+//			}
 			mav.setViewName("/sdy/ask_show");
 			return mav;
 		}
 
+//		//검색기능
+//		@RequestMapping(value="/search",method= {RequestMethod.GET,RequestMethod.POST})
+//		public ModelAndView listSelect(@ModelAttribute Map map,
+//				@RequestParam("ser_name") String ser_name,
+//				@RequestParam("q_head") String q_head,
+//				@RequestParam("search") String search
+//				) {
+//			
+//			System.out.println("/search/select 메소드 진입");
+//			System.out.println("q_head : "+q_head);
+//			
+//			map.put("q_head", q_head);
+//			map.put("ser_name", ser_name);
+//			map.put("search", search);
+//			
+//			
+//			
+//			
+//			ModelAndView mav = 	new ModelAndView();
+//			List<AskDTO> list = askService.getSearchList(map);
+//			mav.addObject("list",list);
+//			mav.setViewName("/sdy/ask_show");
+//			
+//			return mav;
+//			
+//			
+//			
+//		}
 	//글쓰기페이지로 보냄
 	@RequestMapping(value="/write",method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView wirte() {
@@ -121,16 +165,21 @@ public class AskController extends HttpServlet {
 	public ModelAndView insert(	
 								@RequestParam("board_no") String board_no,
 								@RequestParam("content") String content,
+								@RequestParam(value="re_no",required=false ) String re_no,
 								HttpServletRequest request
 								
 								) {
 		 HttpSession userInfo = request.getSession();
 			String sessionId = "" + userInfo.getAttribute("logOn.id");
 			System.out.println("글쓰기 아이디: "+sessionId);
+			System.out.println("댓글 파람 content: "+content);
+			System.out.println("댓글 파람 re_no: "+re_no);
+			System.out.println("댓글 파람 board_no: "+board_no);
 			
 			ReplyDTO dto = new ReplyDTO();
 		
 			dto.setBoard_no(board_no);
+			dto.setParent_no(re_no);
 			dto.setContent(content);
 			dto.setId(sessionId);
 
@@ -141,6 +190,7 @@ public class AskController extends HttpServlet {
 	//상세페이지
 	@RequestMapping(value="/detail",method= {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView detail(@RequestParam("board_no") String board_no) throws Exception {
+		
 		ModelAndView mav = 	new ModelAndView();
 		System.out.println("board_no: "+ board_no);
 		
@@ -239,6 +289,21 @@ public class AskController extends HttpServlet {
 		ModelAndView mav = 	new ModelAndView("redirect:/detail?board_no="+board_no);
 		return mav;
 	}
+	//댓글수정하기
+	@RequestMapping(value="/ask_reMod_write",method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView ModReply(
+			@ModelAttribute ReplyDTO replyDTO,
+			@RequestParam("content") String content,
+			@RequestParam("re_no") String re_no,
+			@RequestParam("board_no") String board_no
+			) {
+		System.out.println("댓글수정 파람 board_no: "+board_no);
+		System.out.println("댓글수정 파람 re_no: "+re_no);
+		askService.getReplyModList(replyDTO);
+		
+		ModelAndView mav = 	new ModelAndView("forward:/detail");
+		return mav;
+	}
 	
 	//비밀번호 비교
 	@RequestMapping(value="/ask_check",method= {RequestMethod.GET,RequestMethod.POST})
@@ -258,34 +323,6 @@ public class AskController extends HttpServlet {
 		
 	}
 	
-	//검색기능
-	@RequestMapping(value="/search",method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView listSelect(@ModelAttribute HashMap<String,String> hashMap,
-									@RequestParam("ser_name") String ser_name,
-									@RequestParam("q_head") String q_head,
-									@RequestParam("search") String search
-			) {
-		
-		System.out.println("/search/select 메소드 진입");
-		System.out.println("q_head : "+q_head);
-			
-				hashMap.put("q_head", q_head);
-				hashMap.put("ser_name", ser_name);
-				hashMap.put("search", search);
-				
-				
-				ModelAndView mav = 	new ModelAndView();
-				
-				
-				List<AskDTO> list = askService.getSearchList(hashMap);
-				mav.addObject("list",list);
-				mav.setViewName("/sdy/ask_show");
-				
-				return mav;
-
-	
-
-		}
 
 
 	
