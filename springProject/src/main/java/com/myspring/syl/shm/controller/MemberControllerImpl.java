@@ -59,6 +59,27 @@ public class MemberControllerImpl {
 		System.out.println("leadingJSP");
 		return "/shm/" + uri;
 	}
+	
+	/**
+	 * 로그아웃, 동시에 세션 폐기
+	 * 
+	 * @param model
+	 * @param request
+	 * @param logOnSession
+	 * @return viewName
+	 */
+	@RequestMapping(value = "/member/logout.do", 
+					method = {RequestMethod.POST, RequestMethod.GET})
+	public String logout(
+			Model model, 
+			HttpServletRequest request, 
+			HttpSession logOnSession) {
+		logOnSession = request.getSession();
+		logOnSession.invalidate();
+
+		return "redirect:/member/login"; // 임시
+//		return "/sjs/calendarM";
+	}
 
 
 }

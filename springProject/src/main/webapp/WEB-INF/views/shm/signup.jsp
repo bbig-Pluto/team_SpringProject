@@ -92,7 +92,6 @@
                 $("#submitBtn").click(function(e) {
 
                         e.preventDefault();
-                        // submit 다시 실행시키는 분기는 ajax 의 response 의 결과에 따라 결정
 
                         let signUpInputBoxes = document.querySelectorAll("#signUpForm .mandatoryInfo input[type=text]");
                         let signUpPwdBox = document.querySelector("#signUpForm .mandatoryInfo input[type=password]");
@@ -123,7 +122,6 @@
                                     emailAdd : document.querySelector("input[name='emailAdd']").value,
                                     telNum : document.querySelector("input[name='telNum']").value,
                                     memberClass : document.querySelector("input[name='memberClass']").value}
-                                console.log(document.querySelector("input[name='memberClass']").value);
                                 $.ajax({
                                     type: "post",
                                     url: "${contextPath}/ajaxconn/signup.do",
@@ -142,7 +140,6 @@
                                     emailAdd : document.querySelector("input[name='emailAdd']").value,
                                     telNum : document.querySelector("input[name='telNum']").value,
                                     memberClass : document.querySelector("input[name='memberClass']").value}
-                                console.log(document.querySelector("input[name='memberClass']").value);
                                 $.ajax({
                                     type: "post",
                                     url: "${contextPath}/ajaxconn/signup.do",
@@ -1362,7 +1359,7 @@
                                 for="select2">일반회원</label> <input type="hidden" name="auth" value="">
                         </div>
                         <input class="jp1Btn3 a" type="button" value="뒤로가기"> <input id="submitBtn" class="jp1Btn3 b" type="button"
-                            value="다음"></button>
+                            value="다음">
                     </form>
 
                     <img class="setyou" src="20220819_015209.png">

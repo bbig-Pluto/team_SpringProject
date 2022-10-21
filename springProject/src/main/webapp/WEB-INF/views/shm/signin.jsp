@@ -893,21 +893,39 @@ a {
 }
 </style>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 
 	window.onload = function() {
 
-		<%
+		$(function() {
+            $("#lockShape").click(function(e) {
+				console.log("$('#lockShape'.click 실행")
+		    	let signin = { id : document.querySelector("input[name='signin_id']").value,
+		            pwd : document.querySelector("input[name='signin_pwd']").value}
+		        $.ajax({
+		            type: "post",
+		            url: "${contextPath}/member/login.do",
+		            contentType: "application/json",
+		            data: JSON.stringify(signin),
+		            success: function(data, textStatus){
+		                eval(data);
+            		}
+        		})
+            })
+		})
+	
+	<%
 		HttpSession logOnSession = request.getSession();
 
 		if(logOnSession.isNew()){ // 처음 접속이라서 세션이 없다면 만들어주고서 페이지 로드
+			logOnSession.setAttribute("isLogon", "guest"); 
 		}	
 		if( ((""+logOnSession.getAttribute("isLogon")).equals("guest")) 
 				|| (logOnSession.getAttribute("isLogon") == null) ) { // 다른 곳에서 세션은 만들고 들어온 비회원
 		
 	%>
-		
-	}
+				
 	// 로그인 실패 -> 자물쇠 흔들리는 기능 구현
 	
 <%-- 		<% HttpSession loginSession = request.getSession(); --%>
@@ -934,9 +952,9 @@ a {
 <%-- 		%> --%>
 // 		})
 
-
-
-	</script>
+	
+	}
+</script>
 </head>
 
 
@@ -984,7 +1002,7 @@ a {
 							</div>
 							<!-- 자물쇠 구현 -->
 							<div class="lockShapeArea">
-								<input type="submit" class="lockShape" value="Login">
+								<input type="button" id="lockShape" class="lockShape" value="Login">
 								<div class="lockShapeT"></div>
 								<div class="lockShapeR"></div>
 								<div class="lockShapeC1"></div>

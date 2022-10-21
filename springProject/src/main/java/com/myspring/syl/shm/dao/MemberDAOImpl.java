@@ -33,7 +33,6 @@ public class MemberDAOImpl implements MemberDAO {
 		dto.setPwd(signin_pwd);
 		
 		dto = sqlSession.selectOne("mapper.shm.loginResult", dto);
-		
 		return dto;
 	}
 	

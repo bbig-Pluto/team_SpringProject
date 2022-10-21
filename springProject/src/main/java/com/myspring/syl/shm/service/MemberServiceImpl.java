@@ -28,9 +28,9 @@ public class MemberServiceImpl implements MemberService {
 		MemberDTO dto = new MemberDTO();
 		try {
 			dto = memberDAO.checkToLogin(signin_id, signin_pwd);
-
 			// 로그인 성공(관리자)
 			if (Integer.parseInt(dto.getMemberNum()) >= 900001 && dto.getMemberClass() >= 1) {
+				System.out.println();
 				dto.setLoginWhether(1);
 
 			// 로그인 성공(일반회원)

@@ -1,19 +1,25 @@
 package com.myspring.syl.shm.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.myspring.syl.shm.dto.MemberDTO;
 import com.myspring.syl.shm.service.MemberService;
 
-@Controller
+@RestController
 @RequestMapping
 public class SessionController {
 	
@@ -33,61 +39,64 @@ public class SessionController {
 	 */
 	@RequestMapping(value = "/member/login.do", 
 					method = RequestMethod.POST)
-	public String loginCheck(
+	public ResponseEntity loginCheck(
 			HttpServletRequest request, 
 			HttpSession logOnSession, 
 			Model model,
-			@RequestParam("signin_id") String signin_id, 
-			@RequestParam("signin_pwd") String signin_pwd) {
-		MemberDTO memberDTO = memberService.getLoginResult(signin_id, signin_pwd);
-
+			@RequestBody MemberDTO dto) {
 		logOnSession = request.getSession();
-
-		// 최초 세팅은 guest로 강제
-		String logOnWhetherForSession = "guest";
-		setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		String signin_id = dto.getId();
+		String signin_pwd = dto.getPwd();
+		
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO = memberService.getLoginResult(signin_id, signin_pwd);
+		
+		logOnSession = request.getSession();
+		String logOnWhetherForSession = "";
 
 		// 관리자 로그인
 		if (memberDTO.getLoginWhether() == 1) {
+			logOnWhetherForSession = "member";
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
-			return "forward:/member/memberslist.do";
-			// 일반회원 로그인
+			String successRes = "location.href='/syl/member/memberslist.do'";
+			
+			return new ResponseEntity (successRes, responseHeaders, HttpStatus.CREATED);
+			
+		// 일반회원 로그인
 		} else if (memberDTO.getLoginWhether() == 0) {
+			logOnWhetherForSession = "member";
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
-			return "/sjs/calendarM";
-			// 로그인 실패
+			String successRes = "location.href='/syl/sjs/calendarM'";
+			
+			return new ResponseEntity (successRes, responseHeaders, HttpStatus.CREATED);
+			
+		// 로그인 실패
 		} else if (memberDTO.getLoginWhether() == -1) {
+			logOnWhetherForSession = "guest";
 			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
-			return "/shm/loginfail";
+			String failRes = ""; 
+			failRes += "alert('일치하는 정보의 회원이 없습니다.');";
+			failRes += " document.querySelector(\"input[name='signin_id']\").focus()";
+			
+			return new ResponseEntity (failRes, responseHeaders, HttpStatus.CREATED);
+			
 		} else {
+			logOnWhetherForSession = "guest";
 			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
-			return "/shm/loginfail";
+			String failRes = ""; 
+			failRes += "alert('알 수 없는 에러가 발생했습니다. \n해당 에러가 계속될 경우 이메일로 문의해주세요.');";
+			failRes += " document.querySelector(\"input[name='signin_id']\").focus()";
+			
+			return new ResponseEntity (failRes, responseHeaders, HttpStatus.CREATED);
 		}
 
 	}
 	
-	/**
-	 * 로그아웃, 동시에 세션 폐기
-	 * 
-	 * @param model
-	 * @param request
-	 * @param logOnSession
-	 * @return viewName
-	 */
-	@RequestMapping(value = "/member/logout.do", 
-					method = RequestMethod.GET)
-	public String logout(
-			Model model, 
-			HttpServletRequest request, 
-			HttpSession logOnSession) {
-		logOnSession = request.getSession();
 
-		logOnSession.invalidate();
-
-		return "redirect:/member/login.do"; // 임시
-//		return "/sjs/calendarM";
-	}
-	
 	private void setFailSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
 
 		logOnWhetherForSession = "guest";
