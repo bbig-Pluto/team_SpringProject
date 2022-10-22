@@ -200,7 +200,7 @@
 
 
 <!--  공지게시판 -->
-	<select id="selectNoticeList" parameterType="java.util.Map"
+<!-- 	<select id="selectNoticeList" parameterType="java.util.Map"
 			resultType="noticeDTO">		
 		 SELECT * FROM (
 				SELECT rownum AS rnum, tmp.* FROM (
@@ -210,12 +210,33 @@
 			)
 			<![CDATA[WHERE #{start} <= rnum AND rnum <= #{end}]]>
 	
-	</select>
-	<!-- 게시물 총 갯수 -->
-	<select id="getNoticeCount" 
+	</select> -->
+	<!-- 게시물,검색 총 갯수 -->
+	<select id="getNoticeCount" parameterType="java.util.Map"
 			resultType="int">
 		SELECT count(*) as cnt FROM n_board
+		<where>
+			<if test="ser_name != null and '글제목'.equals(ser_name)">
+				title LIKE '%'|| #{search}||'%'
+			</if>
+		</where>
 	</select>
+		<!--검색,전체리스트 -->
+	 <select id="serchNoticeList" parameterType="java.util.Map"
+			resultType="noticeDTO" >
+			 SELECT * FROM (
+				SELECT rownum AS rnum, tmp.* FROM (
+					select * from n_board
+					<where>
+						<if test="ser_name != null and '글제목'.equals(ser_name)">
+						 title LIKE '%'|| #{search}||'%'
+						</if>
+					</where>
+					order by n_set,board_no desc
+				) tmp
+			)
+			<![CDATA[WHERE #{start} <= rnum AND rnum <= #{end}]]>
+	</select> 
 	<!-- 게시판 등록 -->
 	<insert id="insertNoticeContents" parameterType="noticeDTO">
 		insert into n_board
@@ -249,14 +270,6 @@
 		where board_no = #{board_no}
 	</delete>
 
-		<!--검색 기능 -->
-	 <select id="serchNoticeList" parameterType="String"
-			resultType="noticeDTO" >
-				
-			select * from n_board
-			where title LIKE '%'|| #{title}||'%'
-	
-	</select> 
 	<!-- 체크 시 삭제 -->
 		<delete id="deleteNoticeChk" parameterType="java.util.List">
 		delete from n_board
