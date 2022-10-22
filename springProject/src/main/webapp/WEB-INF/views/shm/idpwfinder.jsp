@@ -18,9 +18,45 @@ request.setCharacterEncoding("UTF-8");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아이디 찾기 / 비밀번호 재설정</title>
 	
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script>
 		window.onload = function() {
 			
+			$(function() {
+				$("#idFindBtn").click(function(e) {
+					console.log("idFindBtn click 실행")
+					let idFind = { emailAdd : document.querySelector("input[name='idFindEmailAdd']").value,
+						telNum : document.querySelector("input[name='idFindTelNum']").value}
+					$.ajax({
+						type: "post",
+						url: "${contextPath}/member/idFind.do",
+						contentType: "application/json",
+						data: JSON.stringify(idFind),
+						success: function(data, textStatus){
+							eval(data);
+						}
+					})
+				})
+			})
+
+
+			$(function() {
+				$("#pwdRewrting").click(function(e) {
+					console.log("pwdRewrting click 실행")
+					let pwdRewrting = { id : document.querySelector("input[name='pwdRewriteId']").value,
+						telNum : document.querySelector("input[name='pwdRewriteTelNum']").value}
+					$.ajax({
+						type: "post",
+						url: "${contextPath}/member/pwdRewriteCheck.do",
+						contentType: "application/json",
+						data: JSON.stringify(pwdRewrting),
+						success: function(data, textStatus){
+							eval(data);
+						}
+					})
+				})
+			})
+
 			<% HttpSession logOnSession = request.getSession(); %>
 			
 			document.querySelector("#myPageLink").addEventListener("click", function(e) {
@@ -802,7 +838,7 @@ request.setCharacterEncoding("UTF-8");
                     <div class="lockSLL"></div>
                     <div class="lockSRL"></div>
                     <div class="lockSs"></div>
-                    <input class="lockShape" type="submit" value="GO">
+                    <input id="idFindBtn" class="lockShape" type="button" value="GO">
                 </div>
         </form>
         <br><br>
@@ -829,7 +865,7 @@ request.setCharacterEncoding("UTF-8");
                     <div class="lockSLL"></div>
                     <div class="lockSRL"></div>
                     <div class="lockSs"></div>
-                    <input class="lockShape" type="submit" value="GO">
+                    <input id="pwdRewrting" class="lockShape" type="button" value="GO">
                 </div>
         </form>
         
