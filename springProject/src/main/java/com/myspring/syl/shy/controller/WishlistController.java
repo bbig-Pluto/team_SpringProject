@@ -1,6 +1,7 @@
  package com.myspring.syl.shy.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +48,7 @@ public class WishlistController {
 			HttpServletRequest request,
 			HttpServletResponse response,
 			@RequestParam("seqNum") int seqNum
+//			,@RequestParam("category") String category
 			) {
 		
 		List<WishlistDTO> list = wishService.getWishList();
@@ -55,6 +56,17 @@ public class WishlistController {
 		
 		WishlistDTO pickwish = wishService.getPickWish(seqNum);
 		request.setAttribute("pickwish", pickwish);
+		
+//		String viewphoto = pickwish.getPhoto();
+//		
+//		if(viewphoto = "") {
+//			PrintWriter out = response.getWriter();
+//			out.println("<script> document.querySelector('.view_photo').style.display='none';</script>");
+//			out.flush();
+//		}
+		
+//		WishlistDTO selcategory = wishService.getSelCategory(category);
+//		request.setAttribute("selcategory", selcategory);
 		
 		return "/shy/ViewWish";
 		
@@ -66,6 +78,7 @@ public class WishlistController {
 	public String insertWish(
 			HttpServletRequest request,
 			HttpServletResponse response,
+			@RequestParam("category") String category,
 			@RequestParam("name") String name,
 			@RequestParam("price") int price,
 			@RequestParam("link") String link,
@@ -79,15 +92,20 @@ public class WishlistController {
 		/* insert 정보 저장 */
 		WishlistDTO wishDTO = new WishlistDTO();
 		
+		wishDTO.setCategory(category);
 		wishDTO.setName(name);
 		wishDTO.setPrice(price);
 		wishDTO.setPhoto(originalFileName);
 		wishDTO.setLink(link);
 		
+		System.out.println("카테고리 : " + wishDTO.getCategory());
 		System.out.println("상품명 : "+ wishDTO.getName());
 		
 		int insertwish = wishService.getInsertWish(wishDTO);
 		request.setAttribute("insertwish", insertwish);
+		
+//		WishlistDTO selcategory = wishService.getSelCategory(category);
+//		request.setAttribute("selcategory", selcategory);
 		
 		return "forward:/mainwish";
 	}
@@ -133,6 +151,7 @@ public class WishlistController {
 			HttpServletRequest request,
 			HttpServletResponse response,
 			@RequestParam("seqNum") int seqNum,
+			@RequestParam("category") String category,
 			@RequestParam("name") String name,
 			@RequestParam("price") int price,
 			@RequestParam("link") String link,
@@ -150,6 +169,7 @@ public class WishlistController {
 		WishlistDTO wishDTO = new WishlistDTO();
 		
 		wishDTO.setSeqNum(seqNum);
+		wishDTO.setCategory(category);
 		wishDTO.setName(name);
 		wishDTO.setPhoto(originalFileName);
 		wishDTO.setPrice(price);

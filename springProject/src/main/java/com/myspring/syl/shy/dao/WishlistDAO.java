@@ -15,5 +15,7 @@ public interface WishlistDAO {
 	public int updateWish(WishlistDTO wishDTO);
 	
 	public int deleteWish(WishlistDTO wishDTO);
+	
+	public WishlistDTO selCategory(String category);
 
 }

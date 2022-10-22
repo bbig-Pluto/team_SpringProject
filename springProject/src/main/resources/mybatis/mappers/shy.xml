@@ -24,14 +24,14 @@
 			(seqNum, category, name, photo, price, link)
 			
 		values
-			(seq_list.nextval, 'null', #{name}, #{photo}, #{price}, #{link})
+			(seq_list.nextval, #{category}, #{name}, #{photo}, #{price}, #{link})
 	
 	</insert>
 	
 	<update id="updateWishlist" parameterType="wishlistDTO">
 	
 		update wishlist
-			set category='a',
+			set category=#{category},
 				name=#{name},
 				photo=#{photo},
 				price=#{price},
@@ -46,5 +46,11 @@
 			where seqNum = #{seqNum}
 		
 	</delete>
+	
+	<select id="selectCategory" parameterType="wishlistDTO">
+	
+		SELECT DISTINCT category FROM wishlist
+	
+	</select>
 	
 </mapper>

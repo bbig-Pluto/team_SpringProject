@@ -96,17 +96,20 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	@Override
 	public MemberDTO getMemberInfoForModify(String memberNum) {
 		MemberDTO dto = memberDAO.enquireMemberFromAdmin(memberNum);
 		
 		return dto;
 	}
 	
+	@Override
 	public int exeModifyMemberInfo(MemberDTO dto) {
 		int result = memberDAO.updateMemberInfo(dto);
 		return result;
 	}
 	
+	@Override
 	public int exeDeleteAccountSelf(String memberNum) {
 		int resultAccountInfoDel = memberDAO.deleteAccountInfo(memberNum);
 		int resultDiaryDel = memberDAO.deleteDiaryContents(memberNum);
@@ -121,17 +124,20 @@ public class MemberServiceImpl implements MemberService {
 //		return total;
 	}
 	
+	@Override
 	public MemberDTO getMemberInfo(String memberNum) {
 		MemberDTO dto = memberDAO.memberInfoForModify(memberNum);
 		
 		return dto;
 	}
 	
+	@Override
 	public int exeModifyInfoSelf(MemberDTO dto) {
 		int result = memberDAO.modifyMemberInfoSelf(dto);
 		return result;
 	}
 	
+	@Override
 	public int getQueryResultForMyPage(MemberDTO dto) {
 		int result = memberDAO.queryResultForMyPage(dto);
 		return result;

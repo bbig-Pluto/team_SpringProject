@@ -81,5 +81,14 @@ public class MemberControllerImpl {
 //		return "/sjs/calendarM";
 	}
 
+	@RequestMapping(value = "/member/idFoundBinder", 
+					method = RequestMethod.GET)
+			public String idFoundPage(
+					Model model,
+					@RequestParam String id) {
+				model.addAttribute("foundId", id);
+			return "forward:/member/rd/idfound";
+		}
+
 
 }
