@@ -30,7 +30,10 @@ public class NoticeController extends HttpServlet {
 	
 	//전체 리스트 보여주는 페이지
 	@RequestMapping(value="/notice",method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView listMembers(HttpServletRequest request) {
+	public ModelAndView listMembers(HttpServletRequest request,
+			@RequestParam(value="ser_name",required=false ) String ser_name,
+			@RequestParam(value="search",required=false ) String search
+			) {
 		ModelAndView mav = 	new ModelAndView();
 		
 		int pageNum = 1;		// 현재 페이지
@@ -54,12 +57,15 @@ public class NoticeController extends HttpServlet {
 		} catch (NumberFormatException nfe) {
 		}
 		
-		Map map = noticeService.getNoticeList(pageNum, countPerPage);
+		Map map = noticeService.getSearchNoticeList(pageNum, countPerPage, search,ser_name);
 		map.put("pageNum", pageNum);
 		map.put("countPerPage", countPerPage);
+		map.put("ser_name", ser_name);
+		map.put("search", search);
 		
 		mav.addObject("map",map);
 		mav.setViewName("/sdy/notice_show");
+		
 		return mav;
 	}
 	
@@ -112,25 +118,25 @@ public class NoticeController extends HttpServlet {
 				ModelAndView mav = 	new ModelAndView("redirect:/notice");
 				return mav;
 		}
-	//검색기능
-		@RequestMapping(value="/Nsearch",method= {RequestMethod.GET,RequestMethod.POST})
-		public ModelAndView listSelect(	@RequestParam("ser_name") String ser_name,
-										@RequestParam("search") String search
-				) {
-				if("글제목".equals(ser_name)) {
-					ModelAndView mav = 	new ModelAndView();
-					List<NoticeDTO> list = noticeService.getSearchNoticeList(search);
-					mav.addObject("list",list);
-					mav.setViewName("/sdy/notice_show");
-					return mav;
-				}else {
-					
-					ModelAndView mav = 	new ModelAndView("rediret:/notice");
-					
-					return mav;
-				}
-
-			}
+//	//검색기능
+//		@RequestMapping(value="/Nsearch",method= {RequestMethod.GET,RequestMethod.POST})
+//		public ModelAndView listSelect(	@RequestParam("ser_name") String ser_name,
+//										@RequestParam("search") String search
+//				) {
+//				if("글제목".equals(ser_name)) {
+//					ModelAndView mav = 	new ModelAndView();
+//					List<NoticeDTO> list = noticeService.getSearchNoticeList(search);
+//					mav.addObject("list",list);
+//					mav.setViewName("/sdy/notice_show");
+//					return mav;
+//				}else {
+//					
+//					ModelAndView mav = 	new ModelAndView("rediret:/notice");
+//					
+//					return mav;
+//				}
+//
+//			}
 		
 		//글삭제
 		@RequestMapping(value="/Ndel",method= {RequestMethod.GET,RequestMethod.POST})

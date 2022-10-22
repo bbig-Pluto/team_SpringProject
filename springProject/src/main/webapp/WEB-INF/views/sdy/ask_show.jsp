@@ -337,6 +337,8 @@ main {
 }
 .reicon{
 display:inline-block;
+vertical-align:top; 
+font-size:10px;
 }
 .re_count{
 	display:inline-block;
@@ -384,11 +386,12 @@ display:inline-block;
 
 }
  
- function classifyValue(e){
-	 const value = e.value;
-	 
-	 document.getElementById("result").href = "/syl/ask?pageNum=lastPage&";
- }
+/*  function PageNumber(){
+	 let PageNumber =document.querySelector("#PageNumber");
+	 PageNumber.addEventListener("click",()=>{
+	 	document.getElementById("PageNumber").href = "/syl/ask?pageNum=${map.pageNum}";
+	 })
+ } */
 </script> 
 </head>
 <body>
@@ -417,7 +420,6 @@ display:inline-block;
 			<article>
 
 				<div class="area_wrapper">
-	<script src="https://kit.fontawesome.com/b23dc5bb63.js" crossorigin="anonymous"></script>
 		<h2>문의하기</h2>
 		<div class="menu">
 			<div class="m1">
@@ -484,10 +486,10 @@ display:inline-block;
 					<c:when test="${not empty list.parent_no }">
 						<c:choose>
 							<c:when test="${'secret' eq list.ask_secret }">
-									<div class="reicon" style="padding-left:${list.level*10}px;">ㄴ</div><a href="/syl/ask_pwd?board_no=${list.board_no }">${list.title }&nbsp<img src="https://cdn-icons-png.flaticon.com/512/152/152462.png" style="width:13px; height:13px;"></a>
+									<div class="reicon" style="padding-left:${list.level*10}px;"><i class="fa-solid fa-turn-down-right"></i></div><a href="/syl/ask_pwd?board_no=${list.board_no }">&nbsp${list.title }&nbsp<img src="https://cdn-icons-png.flaticon.com/512/152/152462.png" style="width:13px; height:13px;"></a>
 							</c:when>
 							<c:otherwise>
-									<div class="reicon" style="padding-left:${list.level*10}px;">ㄴ</div><a href="/syl/detail?board_no=${list.board_no}">${list.title }</a>
+									<div class="reicon" style="padding-left:${list.level*10}px;">↳</div><a href="/syl/detail?board_no=${list.board_no}">&nbsp${list.title }</a>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
@@ -563,15 +565,15 @@ display:inline-block;
 		<div style="display:inline-block; margin-left:550px; color:gray;"> << &nbsp;</div>
 	</c:if>
 	<c:if test="<%=pageNum != 1%>">
-		<a href="/syl/ask?pageNum=1" style="color:red;font-weight:bold; margin-left:550px;  color: black; text-decoration: none;"> << </a>&nbsp;
+		<a href="/syl/ask?pageNum=1&ser_name=${ map.ser_name}&q_head=${map.q_head }&search=${map.search }" style="color:red;font-weight:bold; margin-left:550px;  color: black; text-decoration: none;"> << </a>&nbsp;
 	</c:if>
 
 	<c:forEach var="i" begin="<%=firstNo %>" end="<%=lastNo %>">
 		<c:if test="${ map.pageNum eq i }">
-			<a href="/syl/ask?pageNum=${i }" style="color:red;font-weight:bold;  color:black; text-decoration: none;">${i }</a>&nbsp;
+			<a href="/syl/ask?pageNum=${i }&ser_name=${ map.ser_name}&q_head=${map.q_head }&search=${map.search }" style="color:red;font-weight:bold;  color:black; text-decoration: none;" id="PageNumber">${i }</a>&nbsp;
 		</c:if>
 		<c:if test="${ not (map.pageNum eq i) }">
-			<a href="/syl/ask?pageNum=${i }" style="color:gray; text-decoration: none;">${i }</a>&nbsp;
+			<a href="/syl/ask?pageNum=${i }&ser_name=${map.ser_name}&q_head=${map.q_head }&search=${map.search }" style="color:gray; text-decoration: none;" id="PageNumber">${i }</a>&nbsp;
 		</c:if>
 	</c:forEach>
 
@@ -579,7 +581,7 @@ display:inline-block;
 		<div style=" display:inline-block; color:gray; "> >> </div>
 	</c:if>
 	<c:if test="<%=pageNum != lastPage%>">
-		<a href="/syl/ask?pageNum=<%=lastPage %>" style="color:red;font-weight:bold; color: black; text-decoration: none; " id="result" > >> </a>&nbsp;
+		<a href="/syl/ask?pageNum=<%=lastPage %>&ser_name=${ map.ser_name}&q_head=${map.q_head }&search=${map.search }" style="color:red;font-weight:bold; color: black; text-decoration: none; " id="result" > >> </a>&nbsp;
 	</c:if>
 				</div>
 

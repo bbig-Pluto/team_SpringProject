@@ -482,7 +482,7 @@ function selectAll(selectAll) {
 		</div>
 	</form>
 <%-- 	<%} %> --%>
-	<form method="post" action="/syl/Nsearch">
+	<form method="post" action="/syl/notice">
 	<div class="ser">
 		 <select name="ser_name">
 			<option value="분류" selected>분류</option>
@@ -496,15 +496,15 @@ function selectAll(selectAll) {
 		<div style="display:inline-block; margin-left:550px; margin-top:50px; color:gray;"> << &nbsp;</div>
 	</c:if>
 	<c:if test="<%=pageNum != 1%>">
-		<a href="/syl/notice?pageNum=<%=pageNum-1 %>&countPerPage=10" style="color:red;font-weight:bold; margin-left:550px; margin-top:50px; color: black; text-decoration: none;"> << </a>&nbsp;
+		<a href="/syl/notice?pageNum=<%=pageNum-1 %>&countPerPage=10&ser_name=${map.ser_name}&search=${map.search}" style="color:red;font-weight:bold; margin-left:550px; margin-top:50px; color: black; text-decoration: none;"> << </a>&nbsp;
 	</c:if>
 
 	<c:forEach var="i" begin="<%=firstNo %>" end="<%=lastNo %>">
 		<c:if test="${ map.pageNum eq i }">
-			<a href="/syl/notice?pageNum=${i }&countPerPage=10" style="color:red;font-weight:bold; margin-top:50px; color:black; text-decoration: none;">${i }</a>&nbsp;
+			<a href="/syl/notice?pageNum=${i }&countPerPage=10&ser_name=${map.ser_name}&search=${map.search}" style="color:red;font-weight:bold; margin-top:50px; color:black; text-decoration: none;">${i }</a>&nbsp;
 		</c:if>
 		<c:if test="${ not (map.pageNum eq i) }">
-			<a href="/syl/notice?pageNum=${i }&countPerPage=10" style="margin-top:50px; color:gray; text-decoration: none;">${i }</a>&nbsp;
+			<a href="/syl/notice?pageNum=${i }&countPerPage=10&ser_name=${map.ser_name}&search=${map.search}" style="margin-top:50px; color:gray; text-decoration: none;">${i }</a>&nbsp;
 		</c:if>
 	</c:forEach>
 
@@ -512,7 +512,7 @@ function selectAll(selectAll) {
 		<div style="margin-top:50px; display:inline-block; color:gray; "> >> </div>
 	</c:if>
 	<c:if test="<%=pageNum != lastPage%>">
-		<a href="/syl/notice?pageNum=<%=pageNum+1 %>&countPerPage=10" style="color:red;font-weight:bold; color: black; text-decoration: none;"> >> </a>&nbsp;
+		<a href="/syl/notice?pageNum=<%=pageNum+1 %>&countPerPage=10&ser_name=${map.ser_name}&search=${map.search}" style="color:red;font-weight:bold; color: black; text-decoration: none;"> >> </a>&nbsp;
 	</c:if>
 									</div>
 			</article>

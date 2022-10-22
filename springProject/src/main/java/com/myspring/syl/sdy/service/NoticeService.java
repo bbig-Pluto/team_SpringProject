@@ -21,7 +21,54 @@ public class NoticeService {
 	@Autowired
 	NoticeDAO noticeDAO;
 	
-	public Map getNoticeList(int pageNum, int countPerPage) {
+//	public Map getNoticeList(int pageNum, int countPerPage) {
+//		int start=0, end=0;
+//		start = ((pageNum-1) * countPerPage) + 1;
+//		end = pageNum * countPerPage;
+//		end = start + countPerPage - 1;
+//		
+//		/*
+//		 * 1, 5
+//		 * 		start=1, end=5
+//		 * 2, 5
+//		 * 		start=6, end=10
+//		 * 3, 5
+//		 * 		start=11, end=15
+//		 */
+//		
+//		Map map = new HashMap();
+//		map.put("start", start);
+//		map.put("end", end);
+//		
+//		List<NoticeDTO> list = noticeDAO.selectNoticeList(map);
+//		
+//		int count = noticeDAO.selectNoticeCount();
+//		
+//		Map map1 = new HashMap();
+//		map1.put("list", list);
+//		map1.put("count", count);
+//		
+//		return map1;
+//	
+//	}
+	//글 등록
+	public void getNoticeInsertList(NoticeDTO noticeDTO) {
+		noticeDAO.insertNoticeContents(noticeDTO);	
+	}
+	@Transactional(isolation = Isolation.READ_COMMITTED)
+	public NoticeDTO getDetailContents(String board_no) {
+			try {
+				noticeDAO.boardNoticeHit(board_no);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return noticeDAO.NoticeDtailList(board_no);
+		
+	}
+	//글검색,전체 리스트
+	public Map getSearchNoticeList(int pageNum, int countPerPage,String search,String ser_name) {
+		
 		int start=0, end=0;
 		start = ((pageNum-1) * countPerPage) + 1;
 		end = pageNum * countPerPage;
@@ -39,35 +86,18 @@ public class NoticeService {
 		Map map = new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("ser_name", ser_name);
+		map.put("search", search);
 		
-		List<NoticeDTO> list = noticeDAO.selectNoticeList(map);
+		List<NoticeDTO> list = noticeDAO.searchNoticeList(map);
 		
-		int count = noticeDAO.selectNoticeCount();
-		
-		Map map1 = new HashMap();
-		map1.put("list", list);
-		map1.put("count", count);
-		
+			int count = noticeDAO.selectNoticeCount(map);
+			
+			Map map1 = new HashMap();
+			map1.put("list", list);
+			map1.put("count", count);
+			
 		return map1;
-	
-	}
-	//글 등록
-	public void getNoticeInsertList(NoticeDTO noticeDTO) {
-		noticeDAO.insertNoticeContents(noticeDTO);	
-	}
-	@Transactional(isolation = Isolation.READ_COMMITTED)
-	public NoticeDTO getDetailContents(String board_no) {
-			try {
-				noticeDAO.boardNoticeHit(board_no);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		return noticeDAO.NoticeDtailList(board_no);
-		
-	}
-	public List<NoticeDTO> getSearchNoticeList(String title) {
-		return noticeDAO.searchNoticeList(title);
 		
 	}
 	//글삭제

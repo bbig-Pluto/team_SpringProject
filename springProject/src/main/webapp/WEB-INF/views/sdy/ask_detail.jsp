@@ -381,6 +381,7 @@ main {
 .re_id{
 	display:inline-block;
 	margin-top:5px;
+	
 }
 .re_date{
 	display:inline-block;
@@ -472,6 +473,11 @@ main {
 }
 .re_re_box{
 	display:none;
+}
+.reicon{
+display:inline-block;
+vertical-align:top; 
+font-size:10px;
 }
 
 </style>
@@ -741,7 +747,7 @@ function reReCancel(){
 				</c:when>
 				<c:otherwise>
 					<div class="re_inbox">
-						<div class="re_id" style="padding-left:${reply.level *10}px;">ㄴ${reply.id}</div>
+						<div class="re_id" style="padding-left:${reply.level *10}px;"><div class="reicon">↳</div>&nbsp${reply.id}</div>
 						<c:choose>
 							<c:when test="${ sysNow eq re_date}">
 								<div class="re_date" ><fmt:formatDate value="${reply.reply_date}" pattern="hh:mm:ss"/></div> 

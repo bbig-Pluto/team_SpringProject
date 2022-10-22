@@ -16,14 +16,14 @@ public class NoticeDAO {
 	
 	@Autowired
 	SqlSession sqlSession;	
-	//모든 리스트
-	public List<NoticeDTO> selectNoticeList(Map Map) {
-		List<NoticeDTO> list =sqlSession.selectList("mapper.sdy.selectNoticeList",Map);
-		return list;
-	}
+//	//모든 리스트
+//	public List<NoticeDTO> selectNoticeList(Map Map) {
+//		List<NoticeDTO> list =sqlSession.selectList("mapper.sdy.selectNoticeList",Map);
+//		return list;
+//	}
 	//전체 글 개수
-		public int selectNoticeCount() {
-			int result =sqlSession.selectOne("mapper.sdy.getNoticeCount");
+		public int selectNoticeCount(Map map) {
+			int result =sqlSession.selectOne("mapper.sdy.getNoticeCount",map);
 			return result;
 		}
 	//조회수
@@ -36,9 +36,9 @@ public class NoticeDAO {
 		NoticeDTO noticeDTO =sqlSession.selectOne("mapper.sdy.detailNoticeContents",board_no);
 		return noticeDTO;
 	}
-	//검색
-	public List<NoticeDTO> searchNoticeList(String title) {
-		List<NoticeDTO> list =sqlSession.selectList("mapper.sdy.serchNoticeList",title);
+	//검색,리스트 출력 
+	public List<NoticeDTO> searchNoticeList(Map map) {
+		List<NoticeDTO> list =sqlSession.selectList("mapper.sdy.serchNoticeList",map);
 		return list;
 	}
 	//글 등록
