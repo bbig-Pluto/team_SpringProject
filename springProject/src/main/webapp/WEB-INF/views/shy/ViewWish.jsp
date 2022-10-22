@@ -705,6 +705,54 @@
         a {
         	text-decoration: none;
         }
+        .notice {
+            background-color: rgba(255, 242, 206, 0.733);
+            position: absolute;
+            z-index: 1;
+            top: 300px;
+            left: 360px;
+            width: 250px;
+            height: 110px;
+            /* border: 2px solid rgb(167, 192, 187); */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .notice_name {
+            font-weight: 900;
+            margin-bottom: 5px;
+            color:#056e6e;
+        }
+        .notice_cancle {
+            width: 90px;
+            background-color: rgb(236, 228, 198);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            margin-top: 20px;
+            font-weight: 900;
+            margin-right: 10px;
+            color: rgb(78, 78, 78);
+            font-size: 15px;
+        }
+        .notice_cancle:hover {
+            cursor: pointer;
+        }
+        .notice_delete {
+            width: 90px;
+            background-color:rgb(255, 111, 111);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            font-weight: 900;
+            margin-left: 10px;
+            color: white;
+            font-size: 15px;
+        }
+        .notice_delete:hover {
+            cursor: pointer;
+        }
         
                 		/* 포스트잇 */
         .post1{
@@ -791,6 +839,25 @@
             background-color: #d8cbf1;
         }
     </style>
+    <script>
+    
+	    window.onload = function() {
+	        notice();
+	        dellist();
+	    }
+
+			function notice() {
+		        
+		        let ntc = document.querySelector(".notice");
+		        let del = document.querySelector(".del");
+		        let can = document.querySelector(".notice_cancle");
+		
+		        del.addEventListener("click", ()=> ntc.style.display = "block");
+		        can.addEventListener("click", ()=> ntc.style.display = "none");
+		        
+		    }
+			
+    </script>
 </head>
 <body>
 
@@ -928,10 +995,10 @@
 			                            <input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 			                            
 			                            <!-- 보고있는 상품 삭제하기 -->
-						                <a href="${contextPath }/deletewish?seqNum=${pickwish.seqNum}">
+<%-- 						                <a href="${contextPath }/deletewish?seqNum=${pickwish.seqNum}"> --%>
 						                	<div class="del">삭제하기</div>
 						                	<input type="hidden" name="seqNum" value="${pickwish.seqNum }">
-						                </a>
+<!-- 						                </a> -->
 						                
 						                <!-- 수정 페이지로 이동 -->
 						                <a href="${contextPath }/updatewishpage?seqNum=${pickwish.seqNum }">
@@ -947,6 +1014,20 @@
                       	</div>
                 	</div>
                 </div>	<!-- END 오른쪽 화면 -->
+                
+		                	<!-- 삭제 팝업 -->
+		                    <div class="notice">
+		                    
+		                    <div class="notice_name">${pickwish.name }</div>삭제하시겠습니까?<br>
+		                    	<input class="notice_cancle" type="button" value="취소">
+		                    	
+		                    <a href="${contextPath }/deletewish?seqNum=${pickwish.seqNum}">
+		                    	<input type="hidden" name="seqNum" value="${pickwish.seqNum }">
+		                    	<input class="notice_delete" type="submit" value="삭제">
+		                    </a>
+                    
+                </div>
+                
 			</div>	<!-- END mainT -->
 		</div>	<!-- ex -->
 		

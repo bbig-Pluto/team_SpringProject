@@ -463,6 +463,15 @@
             cursor: pointer;
             color:rgb(116, 116, 116);
         }
+        .del_chb {
+            float: left;
+            /* margin: 5px 5px; */
+            zoom: 1.8;
+            accent-color: rgb(0, 105, 79);
+            /* accent-color: rgb(255, 176, 200); */
+            position: absolute;
+            display: none;
+        }
         .list_photo {
             width: 120px;
             height: 120px;
@@ -774,6 +783,7 @@
     <script>
         window.onload = function() {
             upload();
+            dellist();
         }
         
         function getImageFiles(e) {
@@ -789,6 +799,14 @@
             add.addEventListener("click", ()=> up.click());
             up.addEventListener("change", getImageFiles);
             
+        }
+        
+        function dellist() {
+
+            let del = document.querySelector(".delete");
+            let list = document.querySelector(".del_chb");
+
+            del.addEventListener("click", ()=> list.style.display = "block");
         }
     </script>
 </head>
@@ -822,7 +840,7 @@
                         <input onclick="doDisplay()" class="add" type="submit" value="+">
                     </a>
                     
-                        <img class="delete" src="https://ifh.cc/g/2K5tVb.png">
+<!--                         <img class="delete" src="https://ifh.cc/g/2K5tVb.png"> -->
                     </div>
                     
                     <!-- 상품 카테고리 -->
@@ -858,6 +876,7 @@
 	                    	<c:forEach var="wish" items="${wishlist }">
 	                    		<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
+			                        	<input class="del_chb" type="checkbox">
 			                            <img class="list_photo"
 			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>
