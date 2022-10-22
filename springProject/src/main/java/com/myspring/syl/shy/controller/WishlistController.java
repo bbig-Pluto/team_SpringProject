@@ -29,7 +29,8 @@ public class WishlistController {
 	/* 전체 조회 */
 	@RequestMapping(value="/mainwish",
 					method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listWish() {
+	public ModelAndView listWish(
+			) {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -48,7 +49,6 @@ public class WishlistController {
 			HttpServletRequest request,
 			HttpServletResponse response,
 			@RequestParam("seqNum") int seqNum
-//			,@RequestParam("category") String category
 			) {
 		
 		List<WishlistDTO> list = wishService.getWishList();
@@ -56,17 +56,6 @@ public class WishlistController {
 		
 		WishlistDTO pickwish = wishService.getPickWish(seqNum);
 		request.setAttribute("pickwish", pickwish);
-		
-//		String viewphoto = pickwish.getPhoto();
-//		
-//		if(viewphoto = "") {
-//			PrintWriter out = response.getWriter();
-//			out.println("<script> document.querySelector('.view_photo').style.display='none';</script>");
-//			out.flush();
-//		}
-		
-//		WishlistDTO selcategory = wishService.getSelCategory(category);
-//		request.setAttribute("selcategory", selcategory);
 		
 		return "/shy/ViewWish";
 		
@@ -103,9 +92,6 @@ public class WishlistController {
 		
 		int insertwish = wishService.getInsertWish(wishDTO);
 		request.setAttribute("insertwish", insertwish);
-		
-//		WishlistDTO selcategory = wishService.getSelCategory(category);
-//		request.setAttribute("selcategory", selcategory);
 		
 		return "forward:/mainwish";
 	}
@@ -243,6 +229,21 @@ public class WishlistController {
 		return originalFileName;
 		
 		
+	}
+	
+	/* 카테고리 조회 */
+	@RequestMapping(value="/searchcategory",
+					method= {RequestMethod.GET, RequestMethod.POST})
+	public String searchCategory(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam("category") String category
+			) {
+		
+		List<WishlistDTO> search = wishService.getSearchCategory(category);
+		request.setAttribute("search", search);
+		
+		return "/shy/CategoryWish";
 	}
 	
 

@@ -64,5 +64,13 @@ public class WishlistServiceImpl implements WishlistService {
 		return dto;
 	}
 
+	@Override
+	public List<WishlistDTO> getSearchCategory(String category) {
+		
+		List<WishlistDTO> list = wishDAO.searchCategory(category);
+		
+		return list;
+	}
+
 
 }

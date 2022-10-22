@@ -17,5 +17,7 @@ public interface WishlistService {
 	int getDeleteWish(WishlistDTO wishDTO);
 	
 	WishlistDTO getSelCategory(String category);
-
+	
+	List<WishlistDTO> getSearchCategory(String category);
+	
 }

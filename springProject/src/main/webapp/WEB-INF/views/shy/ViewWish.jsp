@@ -84,7 +84,21 @@
 			/* 배경색상3 */
 			background-color: #c2e3e5;
 		}
-		
+		/* 하좌측 반원 위 공백 */
+		.calendarLB0 {
+			width: 505px;
+			height: 145px;
+			position: absolute;
+			left: 110px;
+			top: 750px;
+			border: 3px solid white;
+			border-radius: 50% 50% 0 0;
+			border-bottom: 0px solid rgba(255, 255, 255, 0);
+			border-right: 0px solid rgba(255, 255, 255, 0);
+			border-left: 0px solid rgba(255, 255, 255, 0);
+			z-index: 3;
+			background-color: white;
+		}
 		/* 하좌측 반원 */
 		.calendarLB1 {
 			width: 505px;
@@ -347,7 +361,7 @@
         }
         .add_delete {
             float: right;
-            margin: 10px 18px;
+            margin: 0px 18px;
         }
         .delete {
             width: 35px;
@@ -372,7 +386,7 @@
         }
         .category {
             margin: 5px 25px;
-            height: 80px;
+            height: 84px;
             overflow: auto;
             width: 475px;
         }
@@ -391,7 +405,7 @@
             font-weight: 700;
             border: none;
             border-radius: 30px;
-            height: 26px;
+            height: 30px;
             line-height: 26px;
             margin-bottom: 5px;
         }
@@ -401,28 +415,30 @@
         }
         .category_submit {
             margin-right: 8px;
-            color: rgb(255, 254, 230);
-            color: white;
             font-weight: 700;
             border: none;
             border-radius: 30px;
-            height: 30px;
+            height: 32px;
             line-height: 26px;
             margin-bottom: 10px;
+            font-weight: 900;
             font-size: 13px;
-            background-color: rgb(101, 191, 194);
             padding: 0px 20px;
             font-family: 'Nanum Gothic', sans-serif;
+            background-color: rgb(255, 254, 230);
+            color: rgb(84, 180, 172);
+            border: 2.5px solid rgb(84, 180, 172);
         }
         .category_submit:hover {
             cursor: pointer;
-            background-color: rgba(101, 191, 194, 0.507);
+            background-color: rgb(255, 255, 255);
         }
         .list_area {
             margin: 30px 20px;
             overflow-y: auto;
-            height: 500px;
+            height: 530px;
             width: 480px;
+            padding-bottom: 100px;
         }
         .list_area::-webkit-scrollbar {
             background-color: white;
@@ -733,7 +749,6 @@
 
             border-radius: 0px 80px 80px 0px;
             background-color: #fffabb;
-                       border: 1px solid rgb(219, 219, 219);
             border-left: none;
         }
         .post2.It4 {
@@ -749,7 +764,7 @@
             top: 300px;
             left: -30px;
 			width: 80px;
-            border-radius: 80px 80px 80px 80px;
+            border-radius: 0px 80px 80px 0px;
             background-color: #c2e3e5;
             }
         .post2.It6 {
@@ -794,7 +809,9 @@
                 <!-- 왼쪽 화면 -->
                 <div class="mainLeft">
                     
+                    <a href="${contextPath }/mainwish">
                     <div class="title">WISH LIST</div>
+                    </a>
                     
                     <!-- 상품 추가 / 삭제 버튼 -->
                     <div class="add_delete">
@@ -809,26 +826,23 @@
                     
                     <!-- 상품 카테고리 -->
                     <div class="category">
-						<input class="category_all" type="submit" value="All">
-						
-<%-- 	                    <c:choose> --%>
-<%-- 	                    	<c:when test="${!empty selcategory }"> --%>
-<%-- 	                    		<c:forEach var="cate" items="${selcategory }"> --%>
-<%-- 			                        <input name="category" class="category_submit" type="submit" value="${cate }"> --%>
-										<input class="category_submit" type="submit" value="가전제품">
-										<input class="category_submit" type="submit" value="건강">
-										<input class="category_submit" type="submit" value="도서">
-										<input class="category_submit" type="submit" value="문화생활">
-										<input class="category_submit" type="submit" value="미용">
-										<input class="category_submit" type="submit" value="생활용품">
-										<input class="category_submit" type="submit" value="음식">
-										<input class="category_submit" type="submit" value="전자기기">
-										<input class="category_submit" type="submit" value="패션">
-										<input class="category_submit" type="submit" value="기타">
-<%-- 	                        	</c:forEach> --%>
-<%-- 	                        </c:when> --%>
-<%-- 	                    </c:choose> --%>
                     
+						<form method="post" action="${contextPath }/searchcategory">
+                    		<a href="${contextPath }/mainwish">
+		                    	<input class="category_all" type="button" value="All">
+		                    </a>
+							<input name="category" class="category_submit" type="submit" value="가전제품">
+							<input name="category" class="category_submit" type="submit" value="건강">
+							<input name="category" class="category_submit" type="submit" value="도서">
+							<input name="category" class="category_submit" type="submit" value="문화생활">
+							<input name="category" class="category_submit" type="submit" value="미용">
+							<input name="category" class="category_submit" type="submit" value="생활용품">
+							<input name="category" class="category_submit" type="submit" value="음식">
+							<input name="category" class="category_submit" type="submit" value="전자기기">
+							<input name="category" class="category_submit" type="submit" value="패션">
+							<input name="category" class="category_submit" type="submit" value="기타">
+						</form>
+						
                     </div>
                     
                     
@@ -941,6 +955,7 @@
 					<div class="calendarRT"></div>
 
 					<!-- 아래쪽 좌측 반원 -->
+					<div class="calendarLB0"></div>
 					<div class="calendarLB1"></div>
 					<div class="calendarLB2"></div>
 					<!-- <div class="calendarLB3"></div> -->

@@ -850,18 +850,18 @@
                     <div class="list_area">
                         
                     <c:choose>
-                    	<c:when test="${empty wishlist }">
+                    	<c:when test="${empty search }">
 							<div class="list_null">상품 목록이 없습니다</div>                    	
                     	</c:when>
                     	
-                    	<c:when test="${!empty wishlist }">
-	                    	<c:forEach var="wish" items="${wishlist }">
-	                    		<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
+                    	<c:when test="${!empty search }">
+	                    	<c:forEach var="sear" items="${search }">
+	                    		<a href="${contextPath }/pickwish?seqNum=${ sear.seqNum }">
 			                        <div class="list">
 			                            <img class="list_photo"
-			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
-			                            <div class="list_name">${wish.name }</div>
-			                            <input type="hidden" name="seqNum" value="${ wish.seqNum }">
+			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${sear.photo}">
+			                            <div class="list_name">${sear.name }</div>
+			                            <input type="hidden" name="seqNum" value="${ sear.seqNum }">
 			                        </div>
 			                    </a>
 	                        </c:forEach>
