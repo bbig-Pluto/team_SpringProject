@@ -683,6 +683,7 @@
             font-size: 17px;
             margin-left: 10px;
             border-bottom: 3px solid rgb(189, 59, 70);
+            cursor: pointer;
         }
         .save {
             margin-top: 45px;

@@ -554,7 +554,7 @@
             display: none;
             cursor: pointer;
             z-index: 1;
-            top: 90px;
+            top: 75px;
             left: 140px;
         }
         .view_photo:hover ~ .mod_photo {
@@ -844,6 +844,71 @@
         a {
         	text-decoration: none;
         }
+        .image_notice {
+            background-color: rgba(255, 242, 206, 0.733);
+            position: absolute;
+            z-index: 1;
+            top: 300px;
+            left: 360px;
+            width: 250px;
+            height: 110px;
+            /* border: 2px solid rgb(167, 192, 187); */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .image_name {
+            font-weight: 900;
+            margin-top: 10px;
+            color: rgb(60, 60, 60);
+        }
+        .image_confirm {
+            width: 90px;
+            background-color: rgb(99, 212, 188);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            font-weight: 900;
+            margin-left: 10px;
+            color: white;
+            font-size: 15px;
+            margin-top: 25px;
+            cursor: pointer;
+        }
+        .name_notice {
+            background-color: rgba(255, 242, 206, 0.733);
+            position: absolute;
+            z-index: 1;
+            top: 300px;
+            left: 360px;
+            width: 250px;
+            height: 110px;
+            /* border: 2px solid rgb(167, 192, 187); */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .name_name {
+            font-weight: 900;
+            margin-top: 10px;
+            color: rgb(60, 60, 60);
+        }
+        .name_confirm {
+            width: 90px;
+            background-color: rgb(99, 212, 188);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            font-weight: 900;
+            margin-left: 10px;
+            color: white;
+            font-size: 15px;
+            margin-top: 25px;
+            cursor: pointer;
+        }
+        
         		/* 포스트잇 */
         .post1{
             width: 60px;
@@ -932,6 +997,38 @@
 	<script>
         window.onload = function() {
             upload();
+            
+            document.querySelector('input[name="save"]').addEventListener("click", function(e) {
+            	e.preventDefault();
+            	
+            	let name = document.querySelector('input[name="name"]').value;
+            	name = name.trim();
+            	
+            	let image = document.querySelector('input[name="photo"]').value;
+            	image = image.trim();
+            	
+            	let imgntc = document.querySelector(".image_notice");
+            		let imgcf = document.querySelector(".image_confirm");
+            	let namentc = document.querySelector(".name_notice");
+            		let namecf = document.querySelector(".name_confirm");
+            	
+            	if(name == '' || name.length == 0) {
+            		namentc.style.display = "block";
+            		namecf.addEventListener("click", ()=> namentc.style.display = "none");
+            		
+            	} else if(image == '' || image.length == 0) {
+            		imgntc.style.display = "block";
+            		imgcf.addEventListener("click", ()=> imgntc.style.display = "none");
+            		
+            	} else {
+            		<% System.out.println("InsertWish Submit Route"); %>
+            		insert.method = "post";
+            		insert.action = "/syl/insertwish";
+            		insert.enctype = "multipart/form-data"
+            		insert.submit();
+            	}
+            })
+            
         }
         
         /* 파일 업로드 버튼 대체 */
@@ -962,6 +1059,7 @@
 				
 				let photo = document.querySelector(".view_photo");
 				photo.style.display = "block";
+				
 			}
 		}
         
@@ -1091,7 +1189,7 @@
                         <div class="right_title">VIEW</div>
                         
                 <!-- 상품 추가 -->
-                <form method="post" action="${contextPath }/insertwish" enctype="multipart/form-data">
+                <form name="insert">
 
 						<!-- 이미지 업로드 -->
                         <div class="view">
@@ -1137,13 +1235,26 @@
                             <div class="subname">링크</div>
                             <textarea name="link" class="link" type="text"></textarea>
                             
-                            <input class="save" type="submit" value="저장하기">
+                            <input name="save" class="save" type="submit" value="저장하기">
                         </div>
 				   </form>
                     
                     </div>
                         
                     </div>
+                    
+			                <!-- 이미지 팝업 -->
+			                <div class="image_notice">
+			                    <div class="image_name">상품 이미지를 등록해주세요</div>
+			                    <input class="image_confirm" type="button" value="확인">
+			                </div>
+			
+			                <!-- 상품명 팝업 -->
+			                <div class="name_notice">
+			                    <div class="name_name">상품명을 입력해주세요</div>
+			                    <input class="name_confirm" type="button" value="확인">
+			                </div>
+                    
                     
                 </div>
 

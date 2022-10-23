@@ -554,7 +554,7 @@
             display: none;
             cursor: pointer;
             z-index: 1;
-            top: 90px;
+            top: 75px;
             left: 140px;
         }
         .view_photo:hover ~ .mod_photo {
@@ -715,6 +715,7 @@
             font-size: 17px;
             margin-left: 10px;
             border-bottom: 3px solid rgb(134, 134, 134);
+            cursor: pointer;
         }
         .save {
             margin-top: 35px;
@@ -736,6 +737,168 @@
         }
         a {
         	text-decoration: none;
+        }
+        .notice {
+            background-color: rgba(255, 242, 206, 0.733);
+            position: absolute;
+            z-index: 1;
+            top: 300px;
+            left: 360px;
+            width: 250px;
+            height: 110px;
+            /* border: 2px solid rgb(167, 192, 187); */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .notice_name {
+            font-weight: 900;
+            margin-top: 10px;
+            color: rgb(60, 60, 60);
+        }
+        .notice_cancle {
+            width: 90px;
+            background-color: rgb(236, 228, 198);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            margin-top: 15px;
+            font-weight: 900;
+            margin-right: 10px;
+            color: rgb(78, 78, 78);
+            font-size: 15px;
+        }
+        .notice_cancle:hover {
+            cursor: pointer;
+        }
+        .notice_delete {
+            width: 90px;
+            background-color: rgb(99, 212, 188);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            font-weight: 900;
+            margin-left: 10px;
+            color: white;
+            font-size: 15px;
+        }
+        .notice_delete:hover {
+            cursor: pointer;
+        }
+        .notice_name2 {
+            font-weight: 900;
+            margin-top: 5px;
+            color: rgb(60, 60, 60);
+        }
+        .notice2 {
+            background-color: rgba(255, 242, 206, 0.733);
+            position: absolute;
+            z-index: 1;
+            top: 300px;
+            left: 360px;
+            width: 250px;
+            height: 110px;
+            /* border: 2px solid rgb(167, 192, 187); */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .notice_sub {
+        	color: rgb(66, 97, 94);
+        	margin-top: 8px;
+        	font-size: 13px;
+        	font-weight: 900;
+        }
+        .notice_exit {
+            width: 90px;
+            background-color: rgb(236, 228, 198);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            margin-top: 20px;
+            font-weight: 900;
+            margin-right: 10px;
+            color: rgb(78, 78, 78);
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .notice_confirm {
+            width: 90px;
+            background-color: rgb(99, 212, 188);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            font-weight: 900;
+            margin-left: 10px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .image_notice {
+            background-color: rgba(255, 242, 206, 0.733);
+            position: absolute;
+            z-index: 1;
+            top: 300px;
+            left: 360px;
+            width: 250px;
+            height: 110px;
+            /* border: 2px solid rgb(167, 192, 187); */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .image_name {
+            font-weight: 900;
+            margin-top: 10px;
+            color: rgb(60, 60, 60);
+        }
+        .image_confirm {
+            width: 90px;
+            background-color: rgb(99, 212, 188);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            font-weight: 900;
+            margin-left: 10px;
+            color: white;
+            font-size: 15px;
+            margin-top: 25px;
+            cursor: pointer;
+        }
+        .name_notice {
+            background-color: rgba(255, 242, 206, 0.733);
+            position: absolute;
+            z-index: 1;
+            top: 300px;
+            left: 360px;
+            width: 250px;
+            height: 110px;
+            /* border: 2px solid rgb(167, 192, 187); */
+            border-radius: 10px;
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        .name_name {
+            font-weight: 900;
+            margin-top: 10px;
+            color: rgb(60, 60, 60);
+        }
+        .name_confirm {
+            width: 90px;
+            background-color: rgb(99, 212, 188);
+            border-radius: 3px;
+            border: none;
+            height: 35px;
+            font-weight: 900;
+            margin-left: 10px;
+            color: white;
+            font-size: 15px;
+            margin-top: 25px;
+            cursor: pointer;
         }
         
                 		/* 포스트잇 */
@@ -827,6 +990,39 @@
     <script>
 	    window.onload = function() {
 	        upload();
+	        notice();
+	        dellist();
+	        
+            document.querySelector('input[name="save"]').addEventListener("click", function(e) {
+            	e.preventDefault();
+            	
+            	let name = document.querySelector('input[name="name"]').value;
+            	name = name.trim();
+            	
+            	let image = document.querySelector('input[name="photo"]').value;
+            	image = image.trim();
+            	
+            	let imgntc = document.querySelector(".image_notice");
+            		let imgcf = document.querySelector(".image_confirm");
+            	let namentc = document.querySelector(".name_notice");
+            		let namecf = document.querySelector(".name_confirm");
+            	
+            	if(name == '' || name.length == 0) {
+            		namentc.style.display = "block";
+            		namecf.addEventListener("click", ()=> namentc.style.display = "none");
+            		
+            	} else if(image == '' || image.length == 0) {
+            		imgntc.style.display = "block";
+            		imgcf.addEventListener("click", ()=> imgntc.style.display = "none");
+            		
+            	} else {
+            		<% System.out.println("InsertWish Submit Route"); %>
+            		update.method = "post";
+            		update.action = "/syl/updatewish";
+            		update.enctype = "multipart/form-data"
+            		update.submit();
+            	}
+            })
 	    }
 	    
 	    /* 파일 업로드 버튼 대체 */
@@ -846,6 +1042,8 @@
 		/* 이미지 미리보기 */
 		function readURL(input) {
 			
+			let image = document.querySelector('input[name="photo"]').value;
+			
 			if(input.files && input.files[0]) {
 				var reader = new FileReader();
 				
@@ -857,11 +1055,37 @@
 				
 				let photo = document.querySelector(".view_photo");
 				photo.style.display = "block";
+
+			} else if(image != '' || image.length != 0) {
+
+				update.method = "post";
+				update.action = "/syl/updatewish";
+				update.enctype = "multipart/form-data"
+				update.submit();
 				
-				let add = document.querySelector(".photo_add");
-// 				add.style.display = "none";
 			}
 		}
+
+		function notice() {
+		        
+			let ntc = document.querySelector(".notice");
+			let save = document.querySelector(".save");
+			let can = document.querySelector(".notice_cancle");
+			let real = document.querySelector(".real_update");
+			let nd = document.querySelector(".notice_delete");
+			let back = document.querySelector(".back");
+			let ntc2 = document.querySelector(".notice2");
+			let exit = document.querySelector(".notice_exit");
+			
+			back.addEventListener("click", ()=> ntc2.style.display = "block");
+			exit.addEventListener("click", ()=> ntc2.style.display = "none");
+			
+			nd.addEventListener("click", ()=> real.click());
+			
+			save.addEventListener("click", ()=> ntc.style.display = "block");
+			can.addEventListener("click", ()=> ntc.style.display = "none");
+		        
+		 }
     </script>
     
 </head>
@@ -966,7 +1190,7 @@
                         		<div class="right_title">VIEW</div>
 
                 <!-- 상품 추가 -->
-                <form method="post" action="${contextPath }/updatewish" enctype="multipart/form-data">
+                <form name="update" method="post" action="${contextPath }/updatewish" enctype="multipart/form-data">
 
 						<!-- 이미지 업로드 -->
                         <div class="view">
@@ -1010,15 +1234,16 @@
 <%-- 			                            	<a href="${wishlist.link }">${wishlist.link }</a> --%>
 			                            <input type="hidden" name="seqNum" value="${pickwish.seqNum }">
 			                            
-						                <a href="${contextPath }/pickwish?seqNum=${pickwish.seqNum }">
-						                	<div class="back">취소</div>
-						                </a>
+						                <div class="back">취소</div>
 						                
-						                <input class="save" type="submit" value="완료하기">
+						                <input class="real_update" style="display: none;" type="submit">
+						                <input class="save" type="button" value="완료하기">
 						                
 						                
                          			</div>
+		                    
                         		</form>
+		                    
 
 <%--                             	</c:forEach> --%>
                         	</c:when>
@@ -1026,6 +1251,40 @@
                       	
                 	</div>
                 </div>
+	
+			                		    <!-- 수정 팝업 -->
+					                    <div class="notice">
+					                    
+					                    <div class="notice_name">수정을 완료하시겠습니까?</div><br>
+					                    	<input class="notice_cancle" type="button" value="취소">
+					                    	
+					                    	<input class="notice_delete" type="button" value="확인">
+					                    </div>
+					                    
+					                    <!-- 수정 취소 팝업 -->
+					                    <div class="notice2">
+					                    
+					                    <div class="notice_name2">수정을 취소하시겠습니까?</div>
+					                    <div class="notice_sub">수정중인 내용을 잃게됩니다</div>
+					                    	<input class="notice_exit" type="button" value="닫기">
+					                    	
+					                    	<a href="${contextPath }/pickwish?seqNum=${pickwish.seqNum }">
+					                    	<input class="notice_confirm" type="button" value="확인">
+					                    	</a>
+					                    </div>
+					                    
+								        <!-- 이미지 팝업 -->
+						                <div class="image_notice">
+						                    <div class="image_name">상품 이미지를 등록해주세요</div>
+						                    <input class="image_confirm" type="button" value="확인">
+						                </div>
+						
+						                <!-- 상품명 팝업 -->
+						                <div class="name_notice">
+						                    <div class="name_name">상품명을 입력해주세요</div>
+						                    <input class="name_confirm" type="button" value="확인">
+						                </div>
+                
 			</div>
 		</div>
 		
@@ -1088,7 +1347,6 @@
 				</div>
 			</article>
 		</section>
-	
 	</main>
 
 </body>

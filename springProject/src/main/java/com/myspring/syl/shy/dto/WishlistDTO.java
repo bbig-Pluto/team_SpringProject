@@ -5,7 +5,7 @@ public class WishlistDTO {
 	private String category;
 	private String name;
 	private String photo;
-	private int price;
+	private String price;
 	private String link;
 	private int seqNum;
 	
@@ -13,7 +13,7 @@ public class WishlistDTO {
 		
 	}
 	
-	public WishlistDTO(int seqNum, String category, String name, String photo, int price, String link) {
+	public WishlistDTO(int seqNum, String category, String name, String photo, String price, String link) {
 		this.seqNum = seqNum;
 		this.category = category;
 		this.name = name;
@@ -40,10 +40,10 @@ public class WishlistDTO {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-	public int getPrice() {
+	public String getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 	public String getLink() {

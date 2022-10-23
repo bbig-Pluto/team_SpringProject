@@ -69,7 +69,7 @@ public class WishlistController {
 			HttpServletResponse response,
 			@RequestParam("category") String category,
 			@RequestParam("name") String name,
-			@RequestParam("price") int price,
+			@RequestParam("price") String price,
 			@RequestParam("link") String link,
 			MultipartHttpServletRequest multipartRequest
 			) throws Exception {
@@ -81,11 +81,22 @@ public class WishlistController {
 		/* insert 정보 저장 */
 		WishlistDTO wishDTO = new WishlistDTO();
 		
+		
 		wishDTO.setCategory(category);
 		wishDTO.setName(name);
-		wishDTO.setPrice(price);
 		wishDTO.setPhoto(originalFileName);
-		wishDTO.setLink(link);
+		
+		if(price == "" || price.length() == 0) {
+			wishDTO.setPrice("");
+		} else {
+			wishDTO.setPrice(price);
+		}
+		
+		if(link == "" || link.length() == 0) {
+			wishDTO.setLink("");
+		} else {
+			wishDTO.setLink(link);
+		}
 		
 		System.out.println("카테고리 : " + wishDTO.getCategory());
 		System.out.println("상품명 : "+ wishDTO.getName());
@@ -139,7 +150,7 @@ public class WishlistController {
 			@RequestParam("seqNum") int seqNum,
 			@RequestParam("category") String category,
 			@RequestParam("name") String name,
-			@RequestParam("price") int price,
+			@RequestParam("price") String price,
 			@RequestParam("link") String link,
 			MultipartHttpServletRequest multipartRequest
 			) throws Exception {
@@ -158,8 +169,18 @@ public class WishlistController {
 		wishDTO.setCategory(category);
 		wishDTO.setName(name);
 		wishDTO.setPhoto(originalFileName);
-		wishDTO.setPrice(price);
-		wishDTO.setLink(link);
+		
+		if(price == "" || price.length() == 0) {
+			wishDTO.setPrice("");
+		} else {
+			wishDTO.setPrice(price);
+		}
+		
+		if(link == "" || link.length() == 0) {
+			wishDTO.setLink("");
+		} else {
+			wishDTO.setLink(link);
+		}
 		
 		int updatewish = wishService.getUpdateWish(wishDTO);
 		request.setAttribute("updatewish", updatewish);
