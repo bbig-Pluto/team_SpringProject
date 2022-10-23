@@ -1,7 +1,11 @@
 package com.myspring.syl.shm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.myspring.syl.shm.dao.MemberDAO;
@@ -124,4 +129,115 @@ public class AjaxConnController {
 		
 		return new ResponseEntity (response, responseHeaders, HttpStatus.CREATED);
 	}
+	
+	@RequestMapping("/member/mypage")
+	public ResponseEntity myPageEntrance(
+			HttpServletRequest request,
+			HttpSession logOnSession,
+			@RequestBody HashMap hasedPwd) {
+		
+		String inputtedPwd = (String)hasedPwd.get("pwd");
+		
+		logOnSession = request.getSession();
+		String isLogon = "" + logOnSession.getAttribute("isLogon");
+		String memberNum = "" + logOnSession.getAttribute("logOn.memberNum");
+		
+		System.out.println("myPageEntrance method, pwd : " + inputtedPwd);
+		System.out.println("myPageEntrance method, Session memberNum : " + memberNum);
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setPwd(inputtedPwd);
+		dto.setMemberNum(memberNum);
+		
+		int queryResult = memberService.getQueryResultForMyPage(dto);
+		
+		String response = "";
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		// 비밀번호 입력을 하고 들어오는지 검열
+		if( !("member".equals(isLogon)) ) {
+			response += "location.href='/syl/member/login'";
+		} else {
+			// 계정 비밀번호 일치, 비밀번호 입력 팝업창을 닫고 mypage 로 이동 
+			if (queryResult == 1) {
+				response += "window.opener.location.href='/syl/member/rd/mypage';";
+				response += " window.close();";
+			// 계정 비밀번호 불일치, alret 출력
+			} else {
+				response += "alert('로그인 계정과 일치하지 않는 비밀번호 입니다.');";
+			}
+		}
+		return new ResponseEntity (response, responseHeaders, HttpStatus.CREATED);
+	}
+	
+	/*
+	// 마이페이지 회원수정 누르면 DB에서 가져온 data들을 ajax 로 전시
+	@RequestMapping("/member/getMemberInfo.do")
+	public ResponseEntity loadMemberInfo(
+			HttpServletRequest request, 
+			Model model,
+			@RequestBody HashMap hasedMemberNum) {
+		String inputtedMemberNum = String.valueOf((Integer)hasedMemberNum.get("memberNum"));
+		MemberDTO dto = memberService.getMemberInfo(inputtedMemberNum);
+		
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String joinDate = fmt.format(dto.getJoinDate());
+		
+		System.out.println("/member/getMemberInfo.do, dto.getEmailAdd() : " + dto.getEmailAdd());
+		
+		String response = "";
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		response += " document.querySelector('#inputModifyingInfoSelf').innerHTML = ";
+		response += " 		<table align=\"center\">\r\n"
+				+ "            <caption>회원 정보 수정</caption>\r\n"
+				+ "            <tbody>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">아이디 : &nbsp;</td>\r\n"
+				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"id\" value= '" + dto.getId() + "' readonly></td>\r\n"
+				+ "                    <td><a href=\"${contextPath}/member/rd/idpwfinder\">아이디 찾기</a></td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">비밀번호 : &nbsp;</td>\r\n"
+				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"pwd\" value='" + dto.getPwd() + "' readonly></td>\r\n"
+				+ "                    <td><a href=\"${contextPath}/member/rd/idpwfinder\">비밀번호 재설정</a></td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">전화번호 : &nbsp;</td>\r\n"
+				+ "                    <td><input type=\"text\" name=\"telNum\" value='" + dto.getTelNum() + "'></td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">닉네임 : &nbsp;</td>\r\n"
+				+ "                    <td><input type=\"text\" name=\"nickName\" value='" + dto.getNickName() + "'></td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">이메일 : &nbsp;</td>\r\n"
+				+ "                    <td><input type=\"text\" name=\"emailAdd\" value='" + dto.getEmailAdd() + "'></td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">회원번호 : &nbsp;</td>\r\n"
+				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"memberNum\" value='" + String.valueOf(dto.getMemberNum()) + "' readonly>\r\n"
+				+ "                    </td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">관리등급 : &nbsp;</td>\r\n"
+				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"memberClass\" value='" + String.valueOf(dto.getMemberClass()) + "' readonly></td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td class=\"modCategory\">가입일 : &nbsp;</td>\r\n"
+				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"joinDate\" value='" + joinDate + "' readonly>\r\n"
+				+ "                    </td>\r\n"
+				+ "                </tr>\r\n"
+				+ "                <tr>\r\n"
+				+ "                    <td></td>\r\n"
+				+ "                    <td colspan=\"1\"><input type=\"submit\" value=\"완료\">&nbsp;&nbsp;<input type=\"reset\" value=\"다시입력\"></td>\r\n"
+				+ "                </tr>\r\n"
+				+ "            </tbody>\r\n"
+				+ "        </table>\r\n";
+		
+		return new ResponseEntity (response, responseHeaders, HttpStatus.CREATED);
+	}
+	*/
 }

@@ -963,7 +963,7 @@ a {
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
             </h1>
             <nav>
                <a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
@@ -991,7 +991,7 @@ a {
 						<!-- <div class="wrapper"> -->
 
 						<div class="tag">
-							<img class="syl2" src="/team_Project/photo/def.png">
+							<img class="syl2" src="/syl/photo/def.png">
 						</div>
 						<form action="${contextPath}/member/login.do" method="post">
 							<div class="text">
@@ -1020,7 +1020,7 @@ a {
 									class="sgnbtn2">JOIN</a>
 							</div>
 						</div>
-						<img class="logo" src="/team_Project/photo/logo2.png">
+						<img class="logo" src="/syl/photo/logo2.png">
 						<div>
 							<div class="lockPack2">
 								<!-- 다이어리 여닫이-똑딱이 -->
@@ -1065,8 +1065,8 @@ a {
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<img class="left_logo1" src="/team_Project/photo/logo2.png"> <img
-					class="left_logo2" src="/team_Project/photo/3syl2.png">
+				<img class="left_logo1" src="/syl/photo/logo2.png"> <img
+					class="left_logo2" src="/syl/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">

@@ -20,44 +20,6 @@ public class MyPageController {
 	MemberService memberService;
 	
 	/**
-	 * 마이페이지 불러올 때 전시할 데이터들 바인딩 & 포워딩
-	 * @param request
-	 * @param logOnSession
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/member/mypage")
-	public String myPageEntrance(
-			HttpServletRequest request,
-			HttpSession logOnSession,
-			Model model,
-			@RequestParam("myPageEnterPwd") String pwd
-			) {
-		logOnSession = request.getSession();
-		String isLogon = "" + logOnSession.getAttribute("isLogon");
-		String memberNum = "" + logOnSession.getAttribute("logOn.memberNum");
-		System.out.println("myPageEntrance method, pwd : " + pwd);
-		System.out.println("myPageEntrance method, Session memberNum : " + memberNum);
-		
-		MemberDTO dto = new MemberDTO();
-		dto.setPwd(pwd);
-		dto.setMemberNum(memberNum);
-		
-		int queryResult = memberService.getQueryResultForMyPage(dto);
-		
-		// 비밀번호 입력을 하고 들어오는지 검열
-		if( !("member".equals(isLogon)) ) {
-			return "redirect:/member/login";
-		} else {
-			if (queryResult == 1) {
-				return "forward:/member/rd/mypage";
-			} else {
-				return "redirect:/member/rd/wrongapproach";
-			}
-		}
-	}
-	
-	/**
 	 * 마이페이지 회원탈퇴
 	 * 회원정보 delete & 게시판 제외한 콘텐츠들 일괄 delete
 	 * @param request

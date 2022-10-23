@@ -658,7 +658,7 @@ input {
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+               <a href="${ contextPath }/sjs/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
             </h1>
             <nav>
                <a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
@@ -683,7 +683,7 @@ input {
 					<!-- 다이어리 로그인 메인틀 -->
 					<div class="lpgmain">
 						<div class="tag">
-							<img class="syl" src="/team_Project/photo/def.png">
+							<img class="syl" src="/syl/photo/def.png">
 						</div>
 
 
@@ -713,7 +713,7 @@ input {
 		<a href="${contextPath}/member/login">비밀번호 재설정 없이 로그인 페이지로</a><br>
 	</div>
 
-	<img class="logo" src="/team_Project/photo/logo.png">
+	<img class="logo" src="/syl/photo/logo.png">
 
 </div>
 <!-- 3개의 대각선 -->
@@ -769,8 +769,8 @@ input {
 <footer class="footer_all">
     <div>
         <div class="left_logo">
-            <img class="left_logo1" src="/team_Project/photo/logo2.png"> <img
-                class="left_logo2" src="/team_Project/photo/3syl2.png">
+            <img class="left_logo1" src="/syl/photo/logo2.png"> <img
+                class="left_logo2" src="/syl/photo/3syl2.png">
         </div>
         <div class="rc2">
             We ONLY contact to email during office(9-6 KTS) hours for

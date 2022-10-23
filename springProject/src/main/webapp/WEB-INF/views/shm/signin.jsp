@@ -964,7 +964,7 @@ a {
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+               <a href="${ contextPath }/sjs/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
             </h1>
             <nav>
                <a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
@@ -972,11 +972,7 @@ a {
                <a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
                <a href="${ contextPath }/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
-               <div class="lgnbtn">
-                  <a id="myPageLink" href="#" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-                  <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
-               </div>
+
             </nav>
          </div>
       </header>
@@ -992,7 +988,7 @@ a {
 						<!-- <div class="wrapper"> -->
 
 						<div class="tag">
-							<img class="syl2" src="/team_Project/photo/def.png">
+							<img class="syl2" src="/syl/photo/def.png">
 						</div>
 						<form action="${contextPath}/member/login.do" method="post">
 							<div class="text">
@@ -1021,7 +1017,7 @@ a {
 									class="sgnbtn2">JOIN</a>
 							</div>
 						</div>
-						<img class="logo" src="/team_Project/photo/logo2.png">
+						<img class="logo" src="/syl/photo/logo2.png">
 						<div>
 							<div class="lockPack2">
 								<!-- 다이어리 여닫이-똑딱이 -->
@@ -1066,8 +1062,8 @@ a {
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<img class="left_logo1" src="/team_Project/photo/logo2.png"> <img
-					class="left_logo2" src="/team_Project/photo/3syl2.png">
+				<img class="left_logo1" src="/syl/photo/logo2.png"> <img
+					class="left_logo2" src="/syl/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">
@@ -1099,7 +1095,7 @@ a {
 <%	// 로그온 세션 if 문
 	
 	} else { // 세션도 존재하고 로그인한 상태라면
-		response.sendRedirect("/team_Project/js/calendarM.jsp");
+		response.sendRedirect("/syl/js/calendarM.jsp");
 	}
 
 %>

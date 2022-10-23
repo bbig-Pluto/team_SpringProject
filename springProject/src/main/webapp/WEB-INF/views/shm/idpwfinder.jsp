@@ -59,9 +59,15 @@ request.setCharacterEncoding("UTF-8");
 
 			<% HttpSession logOnSession = request.getSession(); %>
 			
+			let popupWidth = 470;
+			let popupHeight = 140;
+			// 브라우저 기준 중앙 정렬			
+			let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+			let popupY= (window.screen.height / 2) - (popupHeight / 2);
+			
 			document.querySelector("#myPageLink").addEventListener("click", function(e) {
 				<% if ((""+logOnSession.getAttribute("isLogon")).equals("member")) { %>
-					window.open('${contextPath}/member/rd/inputpwdformypage', '비밀번호 재확인', 'width=700px,height=800px,scrollbars=yes');
+					window.open('${contextPath}/member/rd/inputpwdformypage', '비밀번호 재확인', 'width=' + popupHeight + ', height=' + popupHeight + ', left='+ popupX + ', top=' + popupY + ', scrollbars=yes');
 				<% } else { %>
 					alert("로그인이 필요한 서비스입니다.");				
 				<% } %>
@@ -786,7 +792,7 @@ request.setCharacterEncoding("UTF-8");
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
             </h1>
             <nav>
                <a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
@@ -796,7 +802,7 @@ request.setCharacterEncoding("UTF-8");
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a id="myPageLink" href="#" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
+                  <a href="${ contextPath }/member/login" class="headerlogin">로그인</a>
                   <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
                </div>
             </nav>
@@ -811,7 +817,7 @@ request.setCharacterEncoding("UTF-8");
 					<!-- 다이어리 로그인 메인틀 -->
 					<div class="lpgmain">
 						<div class="tag">
-							<img class="syl" src="/team_Project/photo/def.png">
+							<img class="syl" src="/syl/photo/def.png">
 						</div>
                         
 
@@ -924,8 +930,8 @@ request.setCharacterEncoding("UTF-8");
 <footer class="footer_all">
     <div>
         <div class="left_logo">
-            <img class="left_logo1" src="/team_Project/photo/logo2.png"> <img
-                class="left_logo2" src="/team_Project/photo/3syl2.png">
+            <img class="left_logo1" src="/syl/photo/logo2.png"> <img
+                class="left_logo2" src="/syl/photo/3syl2.png">
         </div>
         <div class="rc2">
             We ONLY contact to email during office(9-6 KTS) hours for
