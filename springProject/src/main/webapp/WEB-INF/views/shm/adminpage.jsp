@@ -152,15 +152,11 @@ request.setCharacterEncoding("UTF-8");
 	<br>
 	<br>
 	<div class="rn_generator">
-		가입할 관리자의 등급 설정 (1~9) &nbsp; <input id="adminClass" type="text" maxlength="1">
-		<button id="rn_generatorBtn" type="button">관리자 가입코드 생성</button><br>
-		<input id="generated_rn" type="text" readonly value="test"><br>
+		가입할 관리자의 등급 설정 (1~9) &nbsp; <input id="adminClass" type="text" maxlength="1"><br><br>
+		<button id="rn_generatorBtn" type="button">관리자 가입코드 생성</button> &nbsp;<input id="generated_rn" type="text" readonly><br><br>
 	</div>
 	<div class="linkTosignIn">
 		<a href="${contextPath}/member/logout.do">로그아웃</a><br>
-	</div>
-	<div class="linkToCalendar">
-		<a href="${contextPath}/sjs/calendarM.jsp">달력 페이지</a><br>
 	</div>
 </body>
 

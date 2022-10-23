@@ -57,7 +57,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int addMemberSvc(Map signUpMap) {
 		String signUpId = (String) signUpMap.get("id");
-		int result = idDupleCheck(signUpId);
+		int result = idDupleCheck(signUpId); // 중복 id 회원 여부 조회
 		
 		int resultOfInsertMember = 0;
 		
@@ -72,7 +72,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String getEnquiryPwdRewriting(Map ctrlParams) {
 		String result = memberDAO.enquiryPwdRewriting(ctrlParams);
-		
 		return result;
 	}
 	
@@ -84,9 +83,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int exeDelMemFromAdmin(String memberNum) {
-		
 		int result = memberDAO.delMemFromAdmin(memberNum);
-		
 		return result;
 	}
 	
@@ -99,7 +96,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO getMemberInfoForModify(String memberNum) {
 		MemberDTO dto = memberDAO.enquireMemberFromAdmin(memberNum);
-		
 		return dto;
 	}
 	
@@ -114,7 +110,7 @@ public class MemberServiceImpl implements MemberService {
 		int resultAccountInfoDel = memberDAO.deleteAccountInfo(memberNum);
 		int resultDiaryDel = memberDAO.deleteDiaryContents(memberNum);
 		int resultExerciseDel = memberDAO.deleteExerciseContents(memberNum);
-//		int resultWishListDel = memberDAO.deleteWishListContents(memberNum);
+//		int resultWishListDel = memberDAO.deleteWishListContents(memberNum); // 위시리스트 초기화
 //		
 //		int total = resultAccountDel + resultDiaryDel + resultExerciseDel + resultWishListDel;
 		System.out.println("exeDeleteAccountSelf total : " 
@@ -142,12 +138,13 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
+	@Override
 	public int getPermittingMemberClass(String rn_ForAdminSignUp) {
 		int result = memberDAO.enquiryPermittingMemberClass(rn_ForAdminSignUp);
 		return result;
 	}
 	
-	
+	@Override
 	public String setAdminClassGetSignUpCode(int adminClass) {
 		
 		// 가입할 admin의 관리등급 설정

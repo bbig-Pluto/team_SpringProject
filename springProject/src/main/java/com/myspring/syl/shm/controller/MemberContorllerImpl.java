@@ -1,9 +1,5 @@
 package com.myspring.syl.shm.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,75 +10,65 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.syl.shm.dto.MemberDTO;
 import com.myspring.syl.shm.service.MemberService;
 
 @Controller
 @RequestMapping
-public class MemberControllerImpl {
-
+public class MemberContorllerImpl {
+	
 	@Autowired
 	MemberService memberService;
-
+	
 	/**
 	 * 로그인 페이지 이동
-	 * 
-	 * @param model
-	 * @return String signin.jsp
+	 * @return 로그인 페이지
 	 */
 	@RequestMapping(value = "/member/login", 
-					method = { RequestMethod.GET, RequestMethod.POST })
-	public String firstContact() {
-		System.out.println("firstContact method");
+					method = { RequestMethod.GET, RequestMethod.POST})
+	public String firstContact () {
 		return "/shm/signin";
 	}
-
+	
 	/**
-	 * 단순 페이지 이동 redirect 유도 
-	 * 
-	 * '/member/rd/{uri} -> /shm/*.jsp page'
+	 * 단순 페이지 이동 redirect 유도
 	 * @param uri
 	 * @param model
-	 * @return String viewName
+	 * @return viewName
 	 */
 	@RequestMapping(value = "/member/rd/{uri}", 
-					method = {RequestMethod.GET, RequestMethod.POST})
-	public String leadingJSP(
-			@PathVariable("uri") String uri, 
+					method = { RequestMethod.GET, RequestMethod.POST })
+	public String leadingJSP (
+			@PathVariable("uri") String uri,
 			Model model) {
-		
 		System.out.println("/member/rd/{uri} : " + uri);
 		return "/shm/" + uri;
 	}
 	
 	/**
-	 * 로그아웃, 동시에 세션 폐기
-	 * 
+	 * 로그아웃 동시에 세션 폐기
 	 * @param model
 	 * @param request
 	 * @param logOnSession
-	 * @return viewName
+	 * @return 로그인 페이지
 	 */
 	@RequestMapping(value = "/member/logout.do", 
-					method = {RequestMethod.POST, RequestMethod.GET})
+					method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(
-			Model model, 
-			HttpServletRequest request, 
+			Model model,
+			HttpServletRequest request,
 			HttpSession logOnSession) {
 		logOnSession = request.getSession();
 		logOnSession.invalidate();
-
-		return "redirect:/member/login"; // 임시
-//		return "/sjs/calendarM";
+		
+		return "redirect:/member/login";
 	}
-
+	
 	/**
-	 * ID찾기 성공한 ajax response 받아오기
+	 * ID 찾기 성공한 ajax reponse 받아오기
 	 * @param model
 	 * @param id
-	 * @return
+	 * @return String (ajax ID)
 	 */
 	@RequestMapping(value = "/member/idFoundBinder", 
 					method = RequestMethod.GET)
@@ -93,5 +79,6 @@ public class MemberControllerImpl {
 		return "forward:/member/rd/idfound";
 	}
 	
-
+	
+	
 }

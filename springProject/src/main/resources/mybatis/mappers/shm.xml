@@ -4,11 +4,12 @@
 
 <mapper namespace="mapper.shm">
 
+	<!-- 슈퍼어드민 페이지 회원정보 리스팅 -->
 	<select id="selectAllMemberList" resultType="memberDTO">
 		select * from syl_member
 	</select>
 	
-	
+	<!-- 로그인 체크, 슈퍼어드민과 그외 나머지 분기 -->
 	<select id="loginResult" resultType="memberDTO" parameterType="MemberDTO">
 	
 		<if test ='"superadmin".equalsIgnoreCase(id)'>
@@ -24,13 +25,14 @@
 		</if>
 	</select>
 	
+	<!-- ID 찾기 -->
 	<select id="idSearching" resultType="String" parameterType="Hashmap">
 		SELECT nvl(max(id), '0')
 		FROM syl_member 
 		WHERE emailAdd=#{emailAdd} AND telNum=#{telNum}
 	</select>
 	
-	<!-- id 중복체크 -->
+	<!-- 회원가입 반영 전 ID 중복체크 -->
 	<select id="idDupleCheck" resultType="int" parameterType="String">
 		SELECT NVL(count(*), 0) FROM (
 			select count(id) 
@@ -42,11 +44,13 @@
 	<!-- 회원가입, 일반회원 관리자 분기 포함 -->
 	<insert id="addMember" parameterType="Hashmap">
 	
+		<!-- seq_userNum.nextval -->
 		<if test ="memberClass == 0">
 			INSERT INTO syl_member(id, pwd, nickName, emailAdd, telNum, memberNum, memberClass)
 			VALUES(#{id}, #{pwd}, #{nickName}, #{emailAdd}, #{telNum}, seq_userNum.nextval, #{memberClass})
 		</if>
 		
+		<!-- seq_adminNum.nextval -->
 		<if test ="memberClass >= 1">
 			INSERT INTO syl_member(id, pwd, nickName, emailAdd, telNum, memberNum, memberClass)
 			VALUES(#{id}, #{pwd}, #{nickName}, #{emailAdd}, #{telNum}, seq_adminNum.nextval, #{memberClass})
@@ -54,29 +58,34 @@
 		
 	</insert>
 	
+	<!-- 비밀번호 재설정 전 계정 확인 -->
 	<select id="enquiryForPwdRewriting" resultType="String" parameterType="Hashmap">
 		select NVL(max(memberNum), '0')
 		from syl_member
 		WHERE id=#{id} and telNum=#{telNum}
 	</select>
 	
+	<!-- 비밀번호 재설정 -->
 	<update id="reWritingNewPwd" parameterType="Hashmap">
 		update syl_member set
 		pwd=#{newPwd}
 		where memberNum=#{memberNum}
 	</update>
 	
+	<!-- 슈퍼어드민 페이지에서의 회원삭제 -->
 	<delete id="delMemFromAdmin" parameterType="String">
 		DELETE syl_member 
 		WHERE memberNum=#{_parameter}
 	</delete>
 	
+	<!-- 슈퍼어드민 페이지 회원 정보 수정을 위해 회원 DB 조회 -->
 	<select id="enquireMemFromAdmin" resultType="memberDTO" parameterType="String">
 		select * 
 		from syl_member 
 		where memberNum=#{_parameter}
 	</select>
 	
+	<!-- 슈퍼어드민 회원정보 수정 -->
 	<update id="modifyMemInfoFromAdmin" parameterType="MemberDTO">
 		update syl_member SET 
 		telNum=#{telNum}, 
@@ -85,6 +94,7 @@
 		where memberNum=#{memberNum}
 	</update>
 	
+	<!-- 마이페이지 회원탈퇴 -->
 	<delete id="delAccountInfoSelf" parameterType="String">
 		DELETE syl_member WHERE memberNum=#{_parameter}
 	</delete>
@@ -104,12 +114,14 @@
 		ELETE delCtntTest2 WHERE id=#{_parameter}
 	</delete>
 	
+	<!-- 마이페이지에서의 회원정보 수정을 위한 전시용 데이터 추출 -->
 	<select id="memberInfoForModify" resultType="memberDTO" parameterType="String">
 		select id, pwd, nickName, emailAdd, telNum, joinDate 
 		from syl_member 
 		where memberNum=#{_parameter}
 	</select>
 	
+	<!-- 마이페이지에서 직접 회원정보 수정 반영 -->
 	<update id="modifyMemberInfoSelf" parameterType="MemberDTO">
 		update syl_member SET 
 		nickName=#{nickName}, 
@@ -118,6 +130,7 @@
 		where memberNum=#{memberNum}
 	</update>
 	
+	<!-- 마이페이지 진입 전 비밀번호 확인 -->
 	<select id="queryResultForMyPage" resultType="int" parameterType="MemberDTO">
 		SELECT NVL(count(pwd), 0) FROM (
 			select pwd, memberNum
@@ -126,7 +139,6 @@
 			group by pwd, memberNum
 		)
 	</select>
-	
 	
 	<!-- SuperAdmin Table 의 인증코드 조회&비교, 관리자 가입에 부여해줄 memberClass 반환, admin의 회원가입 Controller 에 존재 -->
 	<select id="enquiryPermittingMemberClass" resultType="int" parameterType="String">
