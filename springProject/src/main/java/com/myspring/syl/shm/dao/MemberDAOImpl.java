@@ -147,8 +147,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 	
-	public int enquiryPermittingMemberClass(String rn_ForAdminAdd) {
-		int result = sqlSession.selectOne("mapper.shm.enquiryPermittingMemberClass", rn_ForAdminAdd);
+	// admin 가입시 SuperAdmin 이 설정해둔 난수 코드 일치 확인, 동시에 관리등급 획득
+	public int enquiryPermittingMemberClass(String rn_ForAdminSignUp) {
+		int result = sqlSession.selectOne("mapper.shm.enquiryPermittingMemberClass", rn_ForAdminSignUp);
 		return result;
 	}
 	

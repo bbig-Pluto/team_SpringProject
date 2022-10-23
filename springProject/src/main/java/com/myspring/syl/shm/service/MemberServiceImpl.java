@@ -142,8 +142,8 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
-	public int getPermittingMemberClass(String rn_ForAdminAdd) {
-		int result = memberDAO.enquiryPermittingMemberClass(rn_ForAdminAdd);
+	public int getPermittingMemberClass(String rn_ForAdminSignUp) {
+		int result = memberDAO.enquiryPermittingMemberClass(rn_ForAdminSignUp);
 		return result;
 	}
 	

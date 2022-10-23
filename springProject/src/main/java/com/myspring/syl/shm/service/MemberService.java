@@ -24,6 +24,6 @@ public interface MemberService {
 	public MemberDTO getMemberInfo(String memberNum);
 	public int exeModifyInfoSelf(MemberDTO dto);
 	public int getQueryResultForMyPage(MemberDTO dto);
-	public int getPermittingMemberClass(String rn_ForAdminAdd);
+	public int getPermittingMemberClass(String rn_ForAdminSignUp);
 	public String setAdminClassGetSignUpCode(int adminClass);
 }

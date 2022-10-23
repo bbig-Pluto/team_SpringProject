@@ -43,10 +43,10 @@ public class AjaxConnController {
 		getParamSignUp.put("emailAdd", dto.getEmailAdd());
 		getParamSignUp.put("telNum", dto.getTelNum());
 		
-		String rn_ForAdminAdd = dto.getRn_ForAdminAdd();
+		String rn_ForAdminSignUp = dto.getRn_ForAdminAdd();
 		
 		// 관리자 선택, 0 입력하고 가입하는 Case 방어
-		if(rn_ForAdminAdd.equals("0")) {
+		if(rn_ForAdminSignUp.equals("0")) {
 			dto.setMemberClass(1);
 		}
 		
@@ -56,9 +56,9 @@ public class AjaxConnController {
 		String resultMessage = ""; 
 		
 		// 관리자 회원가입
-		if ( !(rn_ForAdminAdd == null || rn_ForAdminAdd.equals("")) ) {
-			// DB 의 superAdmin 에 등록되어있는 난수와 일치 비교 후 permittingMemberClass 값을 반환해오는 메소드 필요
-			int permittingMemberClass = memberService.getPermittingMemberClass(rn_ForAdminAdd);
+		if ( !(rn_ForAdminSignUp == null || rn_ForAdminSignUp.equals("")) ) {
+			// DB 의 superAdmin 에 등록되어있는 난수와 일치 확인 후 permittingMemberClass 값을 반환해오는 메소드 필요
+			int permittingMemberClass = memberService.getPermittingMemberClass(rn_ForAdminSignUp);
 			System.out.println("permittingMemberClass : " + permittingMemberClass);
 			getParamSignUp.put("memberClass", permittingMemberClass);
 			

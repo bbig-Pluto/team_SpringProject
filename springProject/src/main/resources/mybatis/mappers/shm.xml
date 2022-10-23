@@ -149,6 +149,4 @@
 		WHERE id = 'superadmin'
 	</update>
 	
-	
-	
 </mapper>
