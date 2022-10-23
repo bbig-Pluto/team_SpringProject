@@ -1,5 +1,7 @@
 package com.myspring.syl.lhj.dto;
 
+import java.sql.Date;
+
 public class InbodyDTO {
 	
 	public InbodyDTO(){};
@@ -10,6 +12,7 @@ public class InbodyDTO {
 	private int inBody_Body_Fat;
 	private int inBody_Skeletal;
 	private int session_user_id;
+	private Date indody_Today;
 	
 	public int getSeq_Inbody() {
 		return seq_Inbody;
@@ -48,7 +51,13 @@ public class InbodyDTO {
 		this.session_user_id = session_user_id;
 	}
 	
-	
+	public Date getInBody_Today() {
+		return indody_Today;
+	}
+	public void setInBody_Today(Date indody_Today) {
+		this.indody_Today = indody_Today;
+	}
+
 	// =======================================================
 	private int seq_Inbody_2;
 	private int inbody_Height_2;	
@@ -56,6 +65,7 @@ public class InbodyDTO {
 	private int inbody_Body_Fat_2;
 	private int inbody_Skeletal_2;
 	private int session_user_id_2;
+	private Date inbody_Today_2;
 
 	public InbodyDTO(int seq_Inbody_2, int inbody_Height_2, int inbody_Weight_2, int inbody_Body_Fat_2, int inbody_Skeletal_2) {
 		this.seq_Inbody_2 = seq_Inbody_2;
@@ -105,6 +115,12 @@ public class InbodyDTO {
 		this.session_user_id_2 = session_user_id_2;
 	}
 
+	public Date getInbody_Today_2() {
+		return inbody_Today_2;
+	}
+	public void setInbody_Today_2(Date inbody_Today_2) {
+		this.inbody_Today_2 = inbody_Today_2;
+	}
 
 }
 

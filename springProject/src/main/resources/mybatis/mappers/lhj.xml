@@ -112,8 +112,14 @@
 
 	<!-- 조회 (DB에서 확인완료) -->
 	<select id="selectAllList" resultType="exerciseDTO">
-		select * from Exercise
-		ORDER BY seq_Exercise
+		SELECT *
+		  FROM (
+		         SELECT 
+		         	*
+		           FROM Exercise
+		          ORDER BY seq_Exercise DESC
+		       )
+		 WHERE ROWNUM <![CDATA[<=]]> 7
 	</select>
 
 	<!-- 추가 (DB에서 확인완료) -->
@@ -197,7 +203,15 @@
 		seq_Inbody_2 = #{seq_Inbody_2}
 	</update>
 
-
+	<!-- 삭제 (DB에서 확인완료) -->
+	<delete id="delete_Inbody" parameterType="java.util.ArrayList">
+		delete from Exercise_Inbody
+		where seq_Inbody in
+		<foreach item="item" collection="array" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
 </mapper>
 
 

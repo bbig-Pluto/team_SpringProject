@@ -53,7 +53,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 
 
 
-	// µÎ¹øÂ° ÆäÀÌÁö
+	// ï¿½Î¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	@Override
 	public List<InbodyDTO> select_Inbody_Last() {
@@ -84,6 +84,12 @@ public class ExerciseServiceImpl implements ExerciseService{
 	public int update_Inbody2(InbodyDTO inbodyDTO) {
 		int update_Inbody2 = exerciseDAO.update_Inbody2(inbodyDTO);
 		return update_Inbody2;
+	}
+
+	@Override
+	public int delete_Inbody(int[] seq_delete) {
+		int delete_Inbody = exerciseDAO.delete_Inbody(seq_delete);
+		return delete_Inbody;
 	}
 
 }

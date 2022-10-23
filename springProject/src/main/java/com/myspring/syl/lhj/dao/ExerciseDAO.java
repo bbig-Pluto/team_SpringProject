@@ -19,7 +19,7 @@ public interface ExerciseDAO {
 	
 	public String sayingAry(int sayingAry);
 	
-	// µÎ¹øÂ° ÆäÀÌÁö
+	// ï¿½Î¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	public List<InbodyDTO> select_Inbody_Last();
 			
@@ -30,4 +30,6 @@ public interface ExerciseDAO {
 	public List<InbodyDTO> select_Inbody_list();
 	
 	public int update_Inbody2(InbodyDTO inbodyDTO);
+	
+	public int delete_Inbody(int[] seq_delete);
 }

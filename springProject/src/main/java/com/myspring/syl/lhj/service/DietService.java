@@ -67,4 +67,6 @@ public class DietService {
 		int diet_menu_delete = dietDAO.diet_menu_delete(delete);
 		return diet_menu_delete;
 	}
+	
+	
 }

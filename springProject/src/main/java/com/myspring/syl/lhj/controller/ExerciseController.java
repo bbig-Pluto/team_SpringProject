@@ -19,7 +19,7 @@ public interface ExerciseController {
 	
 	public String sayingAry();
 	
-	// µÎ¹øÂ° ÆäÀÌÁö
+	// ï¿½Î¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void Inbody_List(Model model);
 	public String select_Inbody_Last(Model model);
 	
@@ -42,4 +42,5 @@ public interface ExerciseController {
 	
 	public void select_Inbody_list(Model model);
 	
+	public String delete_Inbody(Model model, int[] seq_Inbody);
 }

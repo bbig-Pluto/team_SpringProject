@@ -25,7 +25,7 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 	@Override
 	public int ec_insert(ExerciseDTO exerciseDTO) {
 		Integer ec_insert = sqlSession.insert("mapper.lhj.ec_insert" ,exerciseDTO);
-		System.out.println("DAO ½ÇÇà ec_insert " + ec_insert);
+		System.out.println("DAO ï¿½ï¿½ï¿½ï¿½ ec_insert " + ec_insert);
 		return ec_insert;
 	}
 
@@ -53,7 +53,7 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 		return sayingAry;
 	}
 
-//	¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á 2¹øÂ° ÆäÀÌÁö ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	@Override
 	public List<InbodyDTO> select_Inbody_Last() {
@@ -72,7 +72,7 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 		InbodyDTO select_One_Inbody_2 = sqlSession.selectOne("mapper.lhj.select_One_Inbody_2");
 		return select_One_Inbody_2;
 	}
-	// µÎ¹øÂ° ÆäÀÌÁö
+	// ï¿½Î¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	@Override
 	public List<InbodyDTO> select_Inbody_list() {
@@ -84,5 +84,11 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 	public int update_Inbody2(InbodyDTO inbodyDTO) {
 		int update_Inbody2 = sqlSession.update("mapper.lhj.update_Inbody2", inbodyDTO);
 		return update_Inbody2;
+	}
+
+	@Override
+	public int delete_Inbody(int[] seq_delete) {
+		int delete_Inbody = sqlSession.delete("mapper.lhj.delete_Inbody", seq_delete);
+		return delete_Inbody;
 	}
 }

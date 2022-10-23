@@ -27,23 +27,23 @@ public class ExerciseControllerImpl implements ExerciseController {
 	@Autowired
 	ExerciseService exerciseservice;
 
-	// ¸í¾ğ Å×ÀÌºí ¸®½ºÆ® (»ç¿ë¾ÈÇÏ´Â Áß)
-	// ÈÄ¿¡ int·Î ¹Ş°í Äõ¸®¼öÁ¤ÇØ¼­ size·Î »ç¿ë
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½Æ® (ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½)
+	// ï¿½Ä¿ï¿½ intï¿½ï¿½ ï¿½Ş°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ sizeï¿½ï¿½ ï¿½ï¿½ï¿½
 	@Override
 	public void saying(Model model) {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ saying ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ saying ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 		List<ExerciseDTO> saying = exerciseservice.saying();
 		model.addAttribute("saying", saying);
 	}
 	
-	// ¸í¾ğ Å×ÀÌºí
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 	@Override
 	public String sayingAry() {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ test sayingAry ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ test sayingAry ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 //		List<ExerciseDTO> saying = exerciseservice.saying();
 //		int randomint = (int)Math.random()*10;
-		// Äõ¸®¹®À» Ä«¿îÆ®·Î ¹Ù²ã¼­ int·Î ¹Ş¾Æ¿À¸é °¹¼ö°¡ ³ª¿Ã °Í °°´Ù ³ªÁß¿¡ ¼öÁ¤
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ù²ã¼­ intï¿½ï¿½ ï¿½Ş¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		Random random = new Random();
 		int n = random.nextInt(10)+1; 
@@ -54,23 +54,23 @@ public class ExerciseControllerImpl implements ExerciseController {
 	}
 	
 
-	// ÇöÀç Á¦Áß·® Å×ÀÌºí
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 	@Override
 	public void Inbody_List(Model model) {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ Inbody_List ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ Inbody_List ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 		List<InbodyDTO> select_Inbody_Last = exerciseservice.select_Inbody_Last();
 		model.addAttribute("select_Inbody_Last", select_Inbody_Last);
 		
 	}
 	
-	// ¸ñÇ¥ Ã¼Áß·® Å×ÀÌºí
+	// ï¿½ï¿½Ç¥ Ã¼ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
 	public void select_One_Inbody_2(Model model) {
 		InbodyDTO select_One_Inbody_2 = exerciseservice.select_One_Inbody_2();
 		model.addAttribute("select_One_Inbody_2", select_One_Inbody_2);
 	}
 
-	// ³ªÀÇ ±â·ÏÀÏÁö Å×ÀÌºí list·Î Ãâ·Â¸¸
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ listï¿½ï¿½ ï¿½ï¿½Â¸ï¿½
 	@Override
 	public void select_Inbody_list(Model model) {
 		
@@ -81,7 +81,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 	@Override
 	@RequestMapping(value = "/ec_list.do", method = RequestMethod.GET)
 	public String selectAllList(Model model) {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ list ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ list ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 		List<ExerciseDTO> exercise_list = exerciseservice.selectAllList();
 		model.addAttribute("exercise_list", exercise_list);
@@ -94,7 +94,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 	@RequestMapping(value = "/exercise/ec_add.do", method = RequestMethod.POST)
 	public String add(@RequestParam("exercise_Contents") String exercise_Contents,
 			@RequestParam("exercise_Time") String exercise_Time, Model model) {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ add ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ add ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		System.out.println("exercise_Contents " + exercise_Contents);
 		System.out.println("exercise_Time " + exercise_Time);
 		ExerciseDTO dto = new ExerciseDTO();
@@ -102,21 +102,21 @@ public class ExerciseControllerImpl implements ExerciseController {
 		dto.setExercise_Time(exercise_Time);
 
 		exerciseservice.ec_insert(dto);
-		selectAllList(model); // ¸®½ºÆ®¸¸ ÀÖ´Â ¸Ş¼Òµå
+		selectAllList(model); // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ş¼Òµï¿½
 		return "lhj/ec_list";
 	}
 
 	@Override
 	@RequestMapping(value = "/exercise/ec_del.do", method = RequestMethod.POST)
 	public String del(@RequestParam("seq_Exercise") int[] seq_Exercise, Model model) {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ del ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ del ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 
 		for (int i = 0; i < seq_Exercise.length; i++) {
 			System.out.println("seq_Exercise : " + seq_Exercise[i]);
 		};
 
 		exerciseservice.ec_delete(seq_Exercise);
-		selectAllList(model); // ¸®½ºÆ®¸¸ ÀÖ´Â ¸Ş¼Òµå
+		selectAllList(model); // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ş¼Òµï¿½
 
 		return "lhj/ec_list";
 	}
@@ -126,41 +126,42 @@ public class ExerciseControllerImpl implements ExerciseController {
 	public String update(@RequestParam("seq_Exercise") int[] seq_Exercise,
 			@RequestParam("exercise_Contents") String[] exercise_Contents,
 			@RequestParam("exercise_Time") String[] exercise_Time, Model model) {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ update ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ update ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		for (int i = 0; i < seq_Exercise.length; i++) {
 			ExerciseDTO exerciseDTO = new ExerciseDTO(seq_Exercise[i], exercise_Contents[i], exercise_Time[i]);
 			System.out.println("get name : " + seq_Exercise[i] + " " + exercise_Contents[i] + " " + exercise_Time[i]);
 			exerciseservice.ec_update(exerciseDTO);
 		};
 
-		selectAllList(model); // ¸®½ºÆ®¸¸ ÀÖ´Â ¸Ş¼Òµå
+		selectAllList(model); // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ş¼Òµï¿½
 		return "lhj/ec_list";
 	}
 	
-	// ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á µÎ¹øÂ° ÆäÀÌÁö ¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¹ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	@Override
 	@RequestMapping(value = "/inbody/ec_list.do", method = RequestMethod.GET)
 	public String select_Inbody_Last(Model model) {
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ select_Inbody ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ select_Inbody ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 		List<InbodyDTO> select_Inbody_Last = exerciseservice.select_Inbody_Last();
 		model.addAttribute("select_Inbody_Last", select_Inbody_Last);
 		
-		select_One_Inbody_2(model); // ¸ñÇ¥Ã¼Áß·® Å×ÀÌºí
-		select_Inbody_list(model); // ³ªÀÇ ±â·ÏÀÏÁö Å×ÀÌºí
+		select_One_Inbody_2(model); // ï¿½ï¿½Ç¥Ã¼ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		select_Inbody_list(model); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		model.addAttribute("ment", sayingAry()); // ëª…ì–¸í…Œì´ë¸”
 		return "lhj/ec_Inbody";
 	}
 	
 	@Override
-	@RequestMapping(value = "/inbody/ insert.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/inbody/insert.do", method = RequestMethod.POST)
 	public String insert_Inbody(Model model,
 								@RequestParam("inBody_Height") int inBody_Height,
 								@RequestParam("inBody_Weight") int inBody_Weight,
 								@RequestParam("inBody_Body_Fat") int inBody_Body_Fat,
 								@RequestParam("inBody_Skeletal") int inBody_Skeletal) {
 		
-		logger.info("¡á¡á¡á ÄÁÆ®·Ñ·¯ insert_Inbody ¸Ş¼Òµå ½ÇÇà ¡á¡á¡á");
+		logger.info("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ insert_Inbody ï¿½Ş¼Òµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		
 //		System.out.println("get name : " + inBody_Height + " " + inBody_Weight + " " + inBody_Body_Fat + " " + inBody_Skeletal);
 		InbodyDTO inbodyDTO = new InbodyDTO();
@@ -172,12 +173,13 @@ public class ExerciseControllerImpl implements ExerciseController {
 		exerciseservice.insert_Inbody(inbodyDTO);
 		
 		select_Inbody_Last(model);
+		sayingAry(); // ëª…ì–¸í…Œì´ë¸”
 		return "lhj/ec_Inbody";
 	}
 
 
 
-	// ¸ñÇ¥ Ã¼Áß·® Å×ÀÌºí ¼öÁ¤
+	// ï¿½ï¿½Ç¥ Ã¼ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½
 	@Override
 	@RequestMapping(value = "/inbody/update.do", method = RequestMethod.POST)
 	public String update_Inbody2(Model model,
@@ -194,13 +196,35 @@ public class ExerciseControllerImpl implements ExerciseController {
 		System.out.println("dto set name : " + inbodyDTO.getSeq_Inbody_2());
 		
 		int update_Inbody2 = exerciseservice.update_Inbody2(inbodyDTO);
-		System.out.println(" ÄÁÆ®·Ñ·¯ update_Inbody2 ½ÇÇà " + update_Inbody2);
+		System.out.println(" ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ update_Inbody2 ï¿½ï¿½ï¿½ï¿½ " + update_Inbody2);
 		
-		Inbody_List(model); // ÇöÀç Ã¼Áß·® Å×ÀÌºí
-		select_One_Inbody_2(model); // ¸ñÇ¥ Ã¼Áß·® Å×ÀÌºí
-		select_Inbody_list(model); // ³ªÀÇ ±â·ÏÀÏÁö Å×ÀÌºí
+		Inbody_List(model); // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		select_One_Inbody_2(model); // ï¿½ï¿½Ç¥ Ã¼ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		select_Inbody_list(model); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		model.addAttribute("ment", sayingAry()); // ëª…ì–¸í…Œì´ë¸”
 		return "lhj/ec_Inbody";
 	}
 
+	/*
+	 * ë‚˜ì˜ ê¸°ë¡ì¼ì§€(í˜„ì¬ ì²´ì¤‘ëŸ‰)ì‚­ì œ ë©”ì†Œë“œ
+	 */
+	@Override
+	@RequestMapping(value = "/inbody/delete.do", method = RequestMethod.POST)
+	public String delete_Inbody(Model model,
+								@RequestParam("seq_Inbody") int[] seq_Inbody) {
+		logger.info("â– â– â–  ì»¨íŠ¸ë¡¤ëŸ¬ delecte ë©”ì†Œë“œ ì‹¤í–‰ â– â– â– ");
+		for (int i = 0; i < seq_Inbody.length; i++) {
+			System.out.println("get name : " + seq_Inbody[i]);
+		};
+		
+		int delete_Inbody = exerciseservice.delete_Inbody(seq_Inbody);
+		System.out.println("delete_Inbody 1ì´ ë‚˜ì˜¤ë©´ ì„±ê³µ" + delete_Inbody);
+		
+		Inbody_List(model); // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		select_One_Inbody_2(model); // ï¿½ï¿½Ç¥ Ã¼ï¿½ß·ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		select_Inbody_list(model); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½
+		model.addAttribute("ment", sayingAry()); // ëª…ì–¸í…Œì´ë¸”
+		return "lhj/ec_Inbody";
+	}
 	
 }
