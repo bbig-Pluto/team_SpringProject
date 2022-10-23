@@ -72,7 +72,7 @@ public class FinderController {
 
 			if (!(foundId.equals("0"))) {
 				
-				return new ResponseEntity("location.href='/syl/member/idFoundBinder?id="+foundId+"'", responseHeaders,HttpStatus.CREATED);
+				return new ResponseEntity("location.href='/syl/member/idFoundBinder?id="+ foundId +"'", responseHeaders,HttpStatus.CREATED);
 			} else {
 				// 조회결과 없음
 				String failRes = "";

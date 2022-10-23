@@ -50,13 +50,10 @@ public class MemberControllerImpl {
 	@RequestMapping(value = "/member/rd/{uri}", 
 					method = {RequestMethod.GET, RequestMethod.POST})
 	public String leadingJSP(
-			@PathVariable("uri") String uri, Model model) {
-
-		if ("adminpage".equals(uri)) {
-			return "/shm/wrongapproach";
-		}
-
-		System.out.println("leadingJSP");
+			@PathVariable("uri") String uri, 
+			Model model) {
+		
+		System.out.println("/member/rd/{uri} : " + uri);
 		return "/shm/" + uri;
 	}
 	
@@ -81,14 +78,20 @@ public class MemberControllerImpl {
 //		return "/sjs/calendarM";
 	}
 
+	/**
+	 * ID찾기 성공한 ajax response 받아오기
+	 * @param model
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/member/idFoundBinder", 
 					method = RequestMethod.GET)
-			public String idFoundPage(
-					Model model,
-					@RequestParam String id) {
-				model.addAttribute("foundId", id);
-			return "forward:/member/rd/idfound";
-		}
-
+	public String idFoundPage(
+			Model model,
+			@RequestParam String id) {
+		model.addAttribute("foundId", id);
+		return "forward:/member/rd/idfound";
+	}
+	
 
 }

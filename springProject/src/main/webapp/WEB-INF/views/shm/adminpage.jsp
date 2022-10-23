@@ -18,6 +18,7 @@ request.setCharacterEncoding("UTF-8");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>관리자</title>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 	window.onload = function() {
 
@@ -56,6 +57,27 @@ request.setCharacterEncoding("UTF-8");
 			})
 		}
 
+
+		$(function() {
+			$("#rn_generatorBtn").click(function(e) {
+				let adminClass = document.querySelector("#adminClass").value;
+				if ( !(adminClass >= 1 && adminClass <= 9) ){
+					alert('유효하지 않은 관리자등급 설정입니다.')
+				} else {
+		    		let permittingAdminClass = { setAdminClass : adminClass }
+		        	$.ajax({
+		           		type: "post",
+		            	url: "${contextPath}/ajaxconn/rn_generating",
+		            	contentType: "application/json",
+		            	data: JSON.stringify(permittingAdminClass),
+		            	success: function(data, textStatus){
+		                	eval(data);
+            			}
+        			})
+				}
+            })
+		})
+
 	}
 </script>
 
@@ -76,6 +98,11 @@ request.setCharacterEncoding("UTF-8");
 .linkToCalendar {
 	text-align: center;
 }
+
+.rn_generator {
+	text-align: center;
+}
+
 </style>
 
 </head>
@@ -124,6 +151,11 @@ request.setCharacterEncoding("UTF-8");
 	</table>
 	<br>
 	<br>
+	<div class="rn_generator">
+		가입할 관리자의 등급 설정 (1~9) &nbsp; <input id="adminClass" type="text" maxlength="1">
+		<button id="rn_generatorBtn" type="button">관리자 가입코드 생성</button><br>
+		<input id="generated_rn" type="text" readonly value="test"><br>
+	</div>
 	<div class="linkTosignIn">
 		<a href="${contextPath}/member/logout.do">로그아웃</a><br>
 	</div>

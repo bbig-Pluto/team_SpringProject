@@ -10,11 +10,18 @@
 	
 	
 	<select id="loginResult" resultType="memberDTO" parameterType="MemberDTO">
-
-		SELECT id, pwd, memberNum, memberClass 
-		FROM syl_member 
-		WHERE id=#{id} AND pwd=#{pwd}
+	
+		<if test ='"superadmin".equalsIgnoreCase(id)'>
+			SELECT id, memberNum, memberClass 
+			FROM syl_superAdmin
+			WHERE id=#{id} AND pwd=#{pwd}
+		</if>
 		
+		<if test = '!("superadmin".equalsIgnoreCase(id))' >	
+			SELECT id, pwd, memberNum, memberClass 
+			FROM syl_member 
+			WHERE id=#{id} AND pwd=#{pwd}
+		</if>
 	</select>
 	
 	<select id="idSearching" resultType="String" parameterType="Hashmap">
@@ -119,5 +126,29 @@
 			group by pwd, memberNum
 		)
 	</select>
+	
+	
+	<!-- SuperAdmin Table 의 인증코드 조회&비교, 관리자 가입에 부여해줄 memberClass 반환, admin의 회원가입 Controller 에 존재 -->
+	<select id="enquiryPermittingMemberClass" resultType="int" parameterType="String">
+		SELECT nvl(max(permittingMemberClass), 0)
+		FROM syl_superAdmin 
+		WHERE RN_ForAdminSignUp = #{_parameter}
+	</select>
+	
+	<!-- SuperAdmin이 기입한 가입할 admin의 관리등급 설정 -->
+	<update id="setAdminClass" parameterType="int">
+		UPDATE syl_superAdmin
+		SET permittingMemberClass = #{_paratemter}
+		WHERE id = 'superadmin'
+	</update>
+	
+	<!-- admin이 가입할 때 기입해야할 난수 코드 저장 -->
+	<update id="permittingMemberClass" parameterType="String">
+		UPDATE syl_superAdmin
+		SET RN_ForAdminSignUp = #{_paratemter}
+		WHERE id = 'superadmin'
+	</update>
+	
+	
 	
 </mapper>

@@ -127,7 +127,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO getMemberInfo(String memberNum) {
 		MemberDTO dto = memberDAO.memberInfoForModify(memberNum);
-		
 		return dto;
 	}
 	
@@ -142,4 +141,23 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.queryResultForMyPage(dto);
 		return result;
 	}
+	
+	public int getPermittingMemberClass(String rn_ForAdminAdd) {
+		int result = memberDAO.enquiryPermittingMemberClass(rn_ForAdminAdd);
+		return result;
+	}
+	
+	
+	public String setAdminClassGetSignUpCode(int adminClass) {
+		
+		// 가입할 admin의 관리등급 설정
+		int result = memberDAO.setAdminClass(adminClass);
+		System.out.println("result setAdminClass : " + result);
+		
+		// admin 회원가입에 필요한 4자리 코드 DB에 설정, 반환
+		String signUpCode = memberDAO.getSignUpCode();
+		
+		return signUpCode;
+	}
+	
 }

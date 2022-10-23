@@ -116,12 +116,13 @@
                     if (signUpMandatoryCount == 0) { // 가입 필수 입력 여부 필터링
                             if (document.querySelector("#select").checked) {
                                 console.log("관리자 추가");
+                                console.log("관리자 등급 rn_ForAdminAdd : ", document.querySelector("input[name='rn_ForAdminAdd']").value);
                                 let signup = { id : document.querySelector("input[name='id']").value,
                                     pwd : document.querySelector("input[name='pwd']").value,
                                     nickName : document.querySelector("input[name='nickName']").value,
                                     emailAdd : document.querySelector("input[name='emailAdd']").value,
                                     telNum : document.querySelector("input[name='telNum']").value,
-                                    memberClass : document.querySelector("input[name='memberClass']").value}
+                                    rn_ForAdminAdd : document.querySelector("input[name='rn_ForAdminAdd']").value}
                                 $.ajax({
                                     type: "post",
                                     url: "${contextPath}/ajaxconn/signup.do",
@@ -160,77 +161,7 @@
 
             })
 
-            //         let signup = { id : document.querySelector("input[name='id']").value,
-            //                         pwd : document.querySelector("input[name='pwd']").value,
-            //                         nickName : document.querySelector("input[name='nickName']").value,
-            //                         emailAdd : document.querySelector("input[name='emailAdd']").value,
-            //                         telNum : document.querySelector("input[name='telNum']").value,
-            //                         memberClass : document.querySelector("input[name='memberClass']").value}
-            //         console.log(document.querySelector("input[name='memberClass']").value);
-            //         $.ajax({
-            //             type: "post",
-            //             url: "${contextPath}/ajaxconn/signup.do",
-            //             contentType: "application/json",
-            //             data: JSON.stringify(signup),
-            //             success: function(data, textStauts){
-            //                 alert(textStauts);
-            //             }
-            //         });
-            //     });
-            // });
-            	
-            	
-            //  ================== 회원가입 id 중복확인 end=====================
-
-            // =================== 회원가입 버튼 클릭 start ===================
-            // document.querySelector('input[type="submit"]').addEventListener("click",function (e) {
-            //             console.log("sbmBtnClicked");
-
-            //             e.preventDefault();
-
-            //             let signUpInputBoxes = document
-            //                 .querySelectorAll("#signUpForm .mandatoryInfo input[type=text]");
-            //             let signUpPwdBox = document
-            //                 .querySelector("#signUpForm .mandatoryInfo input[type=password]");
-            //             let signUpMandatoryCount = 0;
-
-            //             // 가입정보 필수 입력 사항 체크
-            //             for (let i = 0; i < signUpInputBoxes.length; i++) {
-            //                 // 공백 제거
-            //                 signUpInputBoxes[i].value = signUpInputBoxes[i].value
-            //                     .split(' ').join('');
-            //                 // signUpPwdBox = signUpPwdBox.value.split(' ').join(''); // 비밀번호 공백제거, value 말고 다른 방법으로
-
-            //                 if (((signUpInputBoxes[i].value) == '')
-            //                     || ((signUpInputBoxes[i].value) == null)) {
-            //                     signUpMandatoryCount++;
-            //                 }
-            //                 // if (((signUpPwdBox.value) == '') || ((signUpPwdBox.value) == null)) { // 비밀번호 공백제거, value 말고 다른 방법으로
-            //                 //     signUpMandatoryCount++;
-            //                 // }
-            //             }
-
-            //             if (signUpMandatoryCount == 0) { // 가입 필수 입력 여부 필터링
-            //                 if (document.querySelector("#select").checked) {
-            //                     console.log("관리자 추가");
-            //                     signUpForm.method = "post";
-            //                     signUpForm.action = "${contextPath}/ajaxConn/signup.do";
-            //                     signUpForm.submit();
-            //                 } else if (document.querySelector("#select2").checked) {
-            //                     console.log("일반회원 추가");
-            //                     document.querySelector('input[name="memberClass"]').value = 0;
-            //                     signUpForm.method = "post";
-            //                     signUpForm.action = "${contextPath}/ajaxConn/signup.do";
-            //                     signUpForm.submit();
-            //                     // nextbtn2();
-            //                 } else if (!(document.querySelector("#select2").checked)
-            //                     && !(document.querySelector("#select").checked)) {
-            //                     alert("가입형태를 선택해주세요.(관리자 또는 일반회원)");
-            //                 }
-            //             } else {
-            //                 alert("필수(*) 가입정보를 입력해주세요.");
-            //             }
-            //         })
+            
             // =================== 회원가입 버튼 클릭 end ===================
 
             function joinbtn() {
@@ -320,8 +251,10 @@
             document.querySelector("#select").addEventListener("click", function() {
                 document.querySelector("input[name='memberClass']").readOnly = false;
                 document.querySelector('input[name="memberClass"]').value = "";
+                document.querySelector("input[name='memberClass']").setAttribute("name", "rn_ForAdminAdd");
             })
             document.querySelector("#select2").addEventListener("click", function() {
+            	document.querySelector("input[name='rn_ForAdminAdd']").setAttribute("name", "memberClass");
                 document.querySelector("input[name='memberClass']").readOnly = true;
                 document.querySelector('input[name="memberClass"]').value = "일반회원";
             })

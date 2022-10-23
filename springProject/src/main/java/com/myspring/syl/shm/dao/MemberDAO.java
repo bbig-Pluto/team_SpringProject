@@ -23,4 +23,7 @@ public interface MemberDAO {
 	public MemberDTO memberInfoForModify(String memberNum);
 	public int modifyMemberInfoSelf(MemberDTO dto);
 	public int queryResultForMyPage(MemberDTO dto);
+	public int enquiryPermittingMemberClass(String rn_ForAdminAdd);
+	public int setAdminClass(int adminClass);
+	public String getSignUpCode();
 }

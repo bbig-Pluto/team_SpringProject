@@ -16,6 +16,7 @@ public class MemberDTO {
 	private int memberClass;
 	private Date joinDate;
 	private int loginWhether;
+	private String rn_ForAdminAdd;
 
 	public MemberDTO() {
 
@@ -131,5 +132,17 @@ public class MemberDTO {
 	public void setLoginWhether(int loginWhether) {
 		this.loginWhether = loginWhether;
 	}
+
+
+	public String getRn_ForAdminAdd() {
+		return rn_ForAdminAdd;
+	}
+
+
+	public void setRn_ForAdminAdd(String rn_ForAdminAdd) {
+		this.rn_ForAdminAdd = rn_ForAdminAdd;
+	}
+
+
 
 }

@@ -19,7 +19,7 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>로그인 페이지</title>
+<title>SuperAdmin 페이지</title>
 
 <style>
 /* 헤더 */
@@ -905,7 +905,7 @@ a {
 		            pwd : document.querySelector("input[name='signin_pwd']").value}
 		        $.ajax({
 		            type: "post",
-		            url: "${contextPath}/member/login.do",
+		            url: "${contextPath}/member/superAdminlogin.do",
 		            contentType: "application/json",
 		            data: JSON.stringify(signin),
 		            success: function(data, textStatus){
@@ -923,7 +923,6 @@ a {
 		}	
 		if( ((""+logOnSession.getAttribute("isLogon")).equals("guest")) 
 				|| (logOnSession.getAttribute("isLogon") == null) ) { // 다른 곳에서 세션은 만들고 들어온 비회원
-		
 	%>
 				
 	// 로그인 실패 -> 자물쇠 흔들리는 기능 구현
@@ -1097,11 +1096,14 @@ a {
 
 </html>
 <%	// 로그온 세션 if 문
-	
-	} else { // 세션도 존재하고 로그인한 상태라면
-		response.sendRedirect("/team_Project/js/calendarM.jsp");
+	} else { // 처음 접속이 아니라서 세션이 존재한다면
+		if (logOnSession.getAttribute("isLogon") == null) {
+			logOnSession.invalidate();
+			response.sendRedirect("/syl/member/rd/login");
+		} else { // 세션도 존재하고 로그인한 상태라면
+			response.sendRedirect("/syl/js/calendarM.jsp");
+		}
 	}
-
 %>
 
 

@@ -1,5 +1,6 @@
 package com.myspring.syl.shm.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -83,7 +84,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int delMemFromAdmin(String memberNum) {
 		int result = sqlSession.delete("mapper.shm.delMemFromAdmin", memberNum);
-		
 		return result;
 	}
 	
@@ -91,7 +91,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberDTO enquireMemberFromAdmin(String memberNum) {
 		MemberDTO dto = sqlSession.selectOne("mapper.shm.enquireMemFromAdmin", memberNum);
-		
 		return dto;
 	}
 	
@@ -134,19 +133,46 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public MemberDTO memberInfoForModify(String memberNum) {
 		MemberDTO dto = sqlSession.selectOne("mapper.shm.memberInfoForModify", memberNum);
-		
 		return dto;
 	}
 	
 	// 마이페이지에서 입력한 회원정보 수정 데이터 반영
 	public int modifyMemberInfoSelf(MemberDTO dto) {
 		int result = sqlSession.update("mapper.shm.modifyMemberInfoSelf", dto);
-		
 		return result;
 	}
 	
 	public int queryResultForMyPage(MemberDTO dto) {
 		int result = sqlSession.selectOne("mapper.shm.queryResultForMyPage", dto);
 		return result;
+	}
+	
+	public int enquiryPermittingMemberClass(String rn_ForAdminAdd) {
+		int result = sqlSession.selectOne("mapper.shm.enquiryPermittingMemberClass", rn_ForAdminAdd);
+		return result;
+	}
+	
+	// SuperAdmin이 기입한 가입할 admin의 관리등급 설정
+	public int setAdminClass(int adminClass) {
+		int result = sqlSession.update("mapper.shm.setAdminClass", adminClass);
+		return result;
+	}
+	
+	// admin 가입에 필요한 코드 생성, DB 등록 후, adminPage 의 inputBox 에 전시해줄 값을 위해 그대로 다시 반환
+	public String getSignUpCode() {
+		String fourDigitsCode = "";
+		
+		// 난수코드 생성
+		do {
+			fourDigitsCode = "";
+			for(int i = 0; i < 4; i++) {
+				String randomNum = String.valueOf((int)(Math.random() * 10));
+				fourDigitsCode += randomNum;
+			}
+		} while (Integer.parseInt(fourDigitsCode) <= 999);
+		
+		int result = sqlSession.update("mapper.shm.permittingMemberClass", fourDigitsCode);
+		
+		return fourDigitsCode;
 	}
 }

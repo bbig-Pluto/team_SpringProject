@@ -24,8 +24,7 @@ public class AdminController {
 	MemberService memberService;
 	
 	/**
-	 * 관리자 로그인 -> 회원정보 리스트 페이지 로드, 관리자 아닌 케이스의 방어 포함
-	 * 
+	 * 관리자 로그인 -> 회원정보 리스트 페이지 로드, 슈퍼관리자 아닌 케이스의 방어 포함
 	 * @param request
 	 * @return String viewName
 	 */
@@ -39,12 +38,12 @@ public class AdminController {
 			if (logOnSession != null) { // 기존 세션 존재 여부 판별
 				// '기존 세션이 존재한다면' 의 route 진입
 				Integer memberClass = (Integer) logOnSession.getAttribute("logOn.memberClass");
-				if (memberClass >= 1) { // 관리자라면
+				if (memberClass == 9) { // 슈퍼관리자라면
 					List<MemberDTO> membersList = memberService.getMemberList();
 					mav.addObject("memList", membersList);
 					mav.setViewName("/shm/adminpage");
 					return mav;
-				} else { // 관리자가 아니라면
+				} else { // 슈퍼관리자가 아니라면
 					mav.setViewName("/shm/wrongapproach"); // 세션은 존재, 관리자가 아닌 사람의 접근
 					return mav;
 				}
@@ -67,8 +66,8 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/member/delMemberFromAdmin.do", method = RequestMethod.GET)
 	public String delMemFromAdmin(
-
-			Model model, @RequestParam(value = "memberNum", required = true) String memberNum) {
+			Model model, 
+			@RequestParam(value = "memberNum", required = true) String memberNum) {
 		int delResult = memberService.exeDelMemFromAdmin(memberNum);
 
 		if (delResult == 1) {
@@ -84,7 +83,9 @@ public class AdminController {
 	 * @return viewName
 	 */
 	@RequestMapping(value = "/member/enquireMemberFromAdmin.do", method = RequestMethod.GET)
-	public String enquireMemberFromAdmin(Model model, @RequestParam("memberNum") String memberNum) {
+	public String enquireMemberFromAdmin(
+			Model model, 
+			@RequestParam("memberNum") String memberNum) {
 		MemberDTO dto = memberService.getMemberInfoForModify(memberNum);
 		model.addAttribute("memInfo", dto);
 		return "/shm/modifymemberform";
@@ -100,8 +101,11 @@ public class AdminController {
 	 * @return viewName
 	 */
 	@RequestMapping(value = "/member/modifyingMemberInfo.do", method = RequestMethod.GET)
-	public String modifyingMemberInfo(Model model, @RequestParam("nickName") String modiNickname,
-			@RequestParam("emailAdd") String modiEmailAdd, @RequestParam("telNum") String modiTelNum,
+	public String modifyingMemberInfo(
+			Model model, 
+			@RequestParam("nickName") String modiNickname,
+			@RequestParam("emailAdd") String modiEmailAdd, 
+			@RequestParam("telNum") String modiTelNum,
 			@RequestParam("memberNum") String modiMemberNum) {
 		MemberDTO dto = new MemberDTO();
 		dto.setNickName(modiNickname);
@@ -117,4 +121,5 @@ public class AdminController {
 			return "redierct:/member/rd/wrongapproach";
 		}
 	}
+	
 }
