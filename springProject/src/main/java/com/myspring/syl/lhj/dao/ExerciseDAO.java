@@ -9,6 +9,8 @@ public interface ExerciseDAO {
 
 	public List<ExerciseDTO> selectAllList();
 	
+	public List<ExerciseDTO> selectList();
+	
 	public int ec_insert(ExerciseDTO exerciseDTO);
 	
 	public int ec_delete(int[] seq_Exercise);

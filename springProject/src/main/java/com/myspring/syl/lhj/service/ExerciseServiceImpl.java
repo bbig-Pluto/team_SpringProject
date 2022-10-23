@@ -20,6 +20,13 @@ public class ExerciseServiceImpl implements ExerciseService{
 		List<ExerciseDTO> exercise_List = exerciseDAO.selectAllList();
 		return exercise_List;
 	}
+	
+	@Override
+	public List<ExerciseDTO> selectList() {
+		List<ExerciseDTO> selectList = exerciseDAO.selectList();
+		return selectList;
+	}
+
 
 	@Override
 	public int ec_insert(ExerciseDTO exerciseDTO) {
@@ -91,5 +98,6 @@ public class ExerciseServiceImpl implements ExerciseService{
 		int delete_Inbody = exerciseDAO.delete_Inbody(seq_delete);
 		return delete_Inbody;
 	}
+
 
 }

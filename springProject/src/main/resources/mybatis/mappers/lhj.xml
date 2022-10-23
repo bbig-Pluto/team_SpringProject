@@ -122,6 +122,10 @@
 		 WHERE ROWNUM <![CDATA[<=]]> 7
 	</select>
 
+	<select id="selectList" resultType="exerciseDTO">
+		SELECT * FROM EXERCISE ORDER BY seq_Exercise
+	</select>
+
 	<!-- 추가 (DB에서 확인완료) -->
 	<insert id="ec_insert" parameterType="exerciseDTO">
 		insert into exercise(seq_Exercise, exercise_Contents, exercise_Time)

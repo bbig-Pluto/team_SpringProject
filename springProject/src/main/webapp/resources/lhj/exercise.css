@@ -715,7 +715,7 @@ nav {
 	bottom: 0px;
 	top: 65px;
 	left: 405px;
-	line-height: 30px;
+	line-height: 20px;
 	margin: 0px 15px 0px 15px;
 	border: 1px solid black;
 	background-color: rgba(255, 255, 255, 0.725);
@@ -753,10 +753,7 @@ nav {
 }
 
 .tab_accordion_box {
-	/* position: relative; */
-	/* top: 150px; */
 	width: 560px;
-	/* left: 350px; */
 }
 
 /* 버튼 전부에 대한 */
@@ -805,9 +802,13 @@ nav {
 }
 
 .tab_accordion_Contents {
-	height: 500px;
-	margin-top: 5px;
-	overflow: auto;
+    height: 190px;
+    margin-top: 5px;
+    overflow: auto;
+    margin-left: 10px;
+    border: 1px solid #87a393;
+    border-radius: 3px;
+    width: 540px;
 }
 
 .content_box {
@@ -815,10 +816,96 @@ nav {
 }
 
 .ec_content {
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: 900;
 }
 
 .add_content {
 	font-size: 12px;
+}
+
+/* 운동기록 */
+
+.lnbody_scroll_box{
+    position: relative;
+    height: 300px;
+    width: 540px;
+    margin-top: 15px;
+    margin-left: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.lnbody_scroll_caption {
+	text-align: center;
+}
+
+
+.scrolltable {
+	/* width: 500px; */
+	height: 200px;
+	overflow: auto;
+}
+
+.lnbody_scroll_table{
+    border-collapse: collapse;
+    margin-left: 17px;
+}
+
+.lnbody_scroll_tr{
+	position: sticky;
+	top: -1px;
+    background-color:rgb(188, 215, 207);
+
+}
+
+.lnbody_scroll_th_checkbox {
+	width: 25px;
+    
+}
+
+.lnbody_scroll_th_No {
+    width: 25px;
+}
+
+.lnbody_scroll_th_Contents{
+    width: 260px;
+}
+
+.lnbody_scroll_th_Time{
+    width: 80px;
+}
+
+.lnbody_scroll_th_Today{
+    width: 100px;
+}
+
+.lnbody_scroll_td_checkbox{
+    text-align: center;
+
+}
+
+
+.lnbody_scroll_td {
+    /* background-color: white; */
+    height: 25px;
+	/* width: 90px; */
+	/* text-align: center; */
+	border: 1px solid gray;
+}
+
+.inbody_delete{
+    position: relative;
+    left: 455px;
+	top: 10px;
+	background-color: #818181;
+	border-radius: 3px;
+	color: white;
+	border: 0px;
+	padding: 10px 20px 10px 20px;
+}
+
+.inbody_delete:hover{
+	background-color: #666666
+
 }

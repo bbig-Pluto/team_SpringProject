@@ -65,6 +65,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 	}
 	
 	// ��ǥ ü�߷� ���̺�
+	@Override
 	public void select_One_Inbody_2(Model model) {
 		InbodyDTO select_One_Inbody_2 = exerciseservice.select_One_Inbody_2();
 		model.addAttribute("select_One_Inbody_2", select_One_Inbody_2);
@@ -78,6 +79,20 @@ public class ExerciseControllerImpl implements ExerciseController {
 		model.addAttribute("select_Inbody_list", select_Inbody_list);
 	}
 	
+	/*
+	 * 운동 기록 전체 list 메소드
+	 */
+	@Override
+	public void selectList(Model model) {
+		logger.info("컨트롤러 selectList 메소드 실행");
+		
+		List<ExerciseDTO> selectList = exerciseservice.selectList();
+		model.addAttribute("selectList",selectList);
+	}
+	
+	/*
+	 * 운동 기록 7개만 표시
+	 */
 	@Override
 	@RequestMapping(value = "/ec_list.do", method = RequestMethod.GET)
 	public String selectAllList(Model model) {
@@ -87,9 +102,31 @@ public class ExerciseControllerImpl implements ExerciseController {
 		model.addAttribute("exercise_list", exercise_list);
 		
 		model.addAttribute("ment", sayingAry());
+		
+		selectList(model); // 운동 기록 전체 list 메소드
 		return "lhj/ec_list";
 	}
 
+	/*
+	 * 운동 기록 삭제
+	 */
+	@Override
+	@RequestMapping(value = "/record/delete.do", method = RequestMethod.POST)
+	public String inbody_delete(Model model,
+								@RequestParam("seq_Exercise") int[] seq_Exercise
+								) {
+		logger.info("���� ��Ʈ�ѷ� del �޼ҵ� ���� ����");
+		for(int i=0; i<seq_Exercise.length; i++) {
+			System.out.println(" seq_record 확인" + seq_Exercise[i]);
+		}
+		int ec_delete = exerciseservice.ec_delete(seq_Exercise);
+		System.out.println(" 성공여부 1이 나오면 성공 : " + ec_delete);
+		
+		selectAllList(model); // 첫 페이지 메소드 (list 출력)
+		return "lhj/ec_list";
+	}
+
+	
 	@Override
 	@RequestMapping(value = "/exercise/ec_add.do", method = RequestMethod.POST)
 	public String add(@RequestParam("exercise_Contents") String exercise_Contents,
@@ -226,5 +263,6 @@ public class ExerciseControllerImpl implements ExerciseController {
 		model.addAttribute("ment", sayingAry()); // 명언테이블
 		return "lhj/ec_Inbody";
 	}
-	
+
+
 }

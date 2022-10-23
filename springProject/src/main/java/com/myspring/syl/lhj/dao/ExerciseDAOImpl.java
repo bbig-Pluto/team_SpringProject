@@ -22,6 +22,13 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 		return exercise_List;
 	}
 
+
+	@Override
+	public List<ExerciseDTO> selectList() {
+		List<ExerciseDTO> selectList = sqlSession.selectList("mapper.lhj.selectList");
+		return selectList;
+	}
+	
 	@Override
 	public int ec_insert(ExerciseDTO exerciseDTO) {
 		Integer ec_insert = sqlSession.insert("mapper.lhj.ec_insert" ,exerciseDTO);
@@ -91,4 +98,5 @@ public class ExerciseDAOImpl implements ExerciseDAO {
 		int delete_Inbody = sqlSession.delete("mapper.lhj.delete_Inbody", seq_delete);
 		return delete_Inbody;
 	}
+
 }

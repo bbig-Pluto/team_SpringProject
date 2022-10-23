@@ -25,6 +25,7 @@ window.onload = function () {
 // 	button_update();
 	one_check();
 	tab_accordion_tab();
+	record_check();
 	
 
 	
@@ -65,8 +66,8 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 			//	입력한 시간이 null이 아니며 공백이 아니면 아래 내용 실행
 			if(exercise_text != null && exercise_text.trim() && exercise_select_time !=null && exercise_select_time.trim()) {
 				console.log("입력 했을 경우")
-			// 운동기록량 제한걸었음
-				if (exercise_select_time != "" && exercise_tr.length <= 6) {
+			// 운동기록량 제한걸었음 // 제한 품
+				if (exercise_select_time != "" && exercise_tr.length <= 10) {
 					let html = exercise_tbody.innerHTML;
 					html += '<tr class=exercise_tr>';
 					html += '   <td><input type="checkbox" name="seq_Exercise"></td>';
@@ -82,7 +83,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 					ec_box.action = "${path}/exercise/ec_add.do";
 					ec_box.submit(); // 	세션이 있는데 logOn.id도 있으면
 					
-				} else if (exercise_tr.length > 6) {
+				} else if (exercise_tr.length > 10) {
 					alert(" 최근 기록만 입력 가능합니다\n운동 삭제 후 추가 해주세요")
 				}
 		}else{
@@ -226,11 +227,34 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 		
 		<%}%>
 	})
-	
-	
-	}
-	
-	
+
+	document.querySelector(".inbody_delete").addEventListener("click",function(e) {
+		e.preventDefault();
+		<%if (!(isLogon.equals("member"))) {%>
+			e.preventDefault();
+			alert("로그인이 필요합니다"); // 세션은 있는데 member가 아니면
+		<%} else {%>	// 	세션이 있는데 logOn.id도 있으면
+			
+			let count = 0;
+			let one_check = document.querySelectorAll("input[name='seq_Exercise']:checked");
+				for (let i = 0; i < one_check.length; i++) {	// 체크되면 count 증가
+					// .checked
+					count++;
+					console.log("for count : " + count);
+				}
+				if (count === 0) {
+					alert("삭제할 값을 선택해주세요");
+					console.log("count true : ", count);
+				} else if (count >= 1) {
+					console.log("count else : ", count);
+
+				record_delete.submit();
+				}
+		<%}%>
+
+	})
+
+}
 
 						// all_check 전체 체크, 해제
 						function all_check() {
@@ -286,6 +310,24 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 								})
 							}
 						}
+
+						function record_check() {
+						let record_check = document.querySelectorAll("input[name='record_checkbox']");
+
+						for (let i = 0; i < record_check.length; i++) {
+								record_check[i].addEventListener("click", function (e) {
+									record_check[i].checked = e.target.checked;
+									// 체크된 값 갖고옴
+									if (e.target.checked === true) {
+										record_check[i].value;
+										console.log(e.target.value);
+									}
+								})
+							}
+						}
+
+						
+
 </script>
 
 </head>
@@ -354,8 +396,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 												<tbody class="exercise_tbody">
 													<c:forEach var="exercise_list" items="${exercise_list}">
 														<tr class="exercise_tr">
-															<td><input type="checkbox" name="seq_Exercise"
-																value="${exercise_list.seq_Exercise}"></td>
+															<td><input type="checkbox" name="seq_Exercise" value="${exercise_list.seq_Exercise}"></td>
 															<td class="contents_td"
 																data-id="${exercise_list.seq_Exercise}"><b
 																class="exercise_Date"
@@ -815,6 +856,36 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 													</div>
 												</div>
 											</div>
+                                            <div class="lnbody_scroll_box">
+                                                <h3 class="lnbody_scroll_caption">운동 기록</h3>
+                                                <div class='scrolltable'>
+                                                    <form action="${path}/record/delete.do" method="post" name="record_delete">
+                                                        <table class="lnbody_scroll_table" border="1">
+                                                            <thead>
+                                                                <tr class="lnbody_scroll_tr">
+                                                                    <th class="lnbody_scroll_th_checkbox"></th>
+                                                                    <th class="lnbody_scroll_th_No">NO</th>
+                                                                    <th class="lnbody_scroll_th_Today">날짜</th>
+                                                                    <th class="lnbody_scroll_th_Contents">내용</th>
+                                                                    <th class="lnbody_scroll_th_Time">시간</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <c:forEach var="selectList" items="${selectList}" varStatus="var_count">
+                                                                    <tr>
+                                                                        <td class=""><input type="checkbox" name="seq_Exercise" value="${selectList.seq_Exercise}"></td>
+                                                                        <td class="lnbody_scroll_td_checkbox">${var_count.count}</td>
+                                                                        <td class="lnbody_scroll_td">${selectList.exercise_Today}</td>
+                                                                        <td class="lnbody_scroll_td">${selectList.exercise_Contents}</td>
+                                                                        <td class="lnbody_scroll_td">${selectList.exercise_Time}</td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                        </table>
+                                                        <input type="submit" value="삭제" class="inbody_delete">
+                                                    </form>
+                                                </div>
+                                            </div>
 										</div>
 									</div>
 									<!-- <div class="exercise_reservation2-1">후보1 : 날짜와 시간<br>후보2 : 그림이나 사진<br> 후보3 : 운동에 대한 tip </div> -->
