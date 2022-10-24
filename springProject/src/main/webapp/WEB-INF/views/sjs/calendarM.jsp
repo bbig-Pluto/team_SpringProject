@@ -918,10 +918,10 @@ input {
 						<a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
 					</h1>
 					<nav>
-						<a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
-						<a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성 |</a> 
-						<a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
-						<a href="${ contextPath }/shot11.jsp"	class="headersub">다이어리 사용법 |</a> 
+						<a href="/bar/intro" class="headersub">다이어리 소개 |</a> 
+						<a href="/bar/story11" class="headersub">다이어리 구성 |</a> 
+						<a href="/bar/func" class="headersub">다이어리 기능 |</a> 
+						<a href="/bar/shot11"	class="headersub">다이어리 사용법 |</a> 
 						<a href="/syl//notice" class="headersub">고객의 소리</a>
 						<div class="lgnbtn">
 							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a>
