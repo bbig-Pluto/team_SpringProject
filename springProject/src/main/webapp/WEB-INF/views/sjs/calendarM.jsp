@@ -805,7 +805,6 @@ input {
 	text-align: center;
 	padding-top: 10px;
 	color: rgba(104, 100, 100, 0.692);
-	text-decoration: none;
 	
 
 
@@ -1074,7 +1073,7 @@ input {
 
 	<div class="rightLine2">
 		<div class="post2 It1"></div>
-		<div class="post2 It4"><a href="/syl/ec_list.do">sport</a></div>
+		<a href="/syl/ec_list.do"><div class="post2 It4">Exercise</div></a>
 		<div class="post2 It6"></div>
 		<div class="post2 It7"></div>
 		<div class="post2 It8"></div>
