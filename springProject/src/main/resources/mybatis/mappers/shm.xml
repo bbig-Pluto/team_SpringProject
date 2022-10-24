@@ -41,7 +41,7 @@
 		)
 	</select>
 	
-	<!-- 회원가입, 일반회원 관리자 분기 포함 -->
+	<!-- 회원가입, 일반회원 관리자 분기 포함, seq 번호가 분리돼있음 -->
 	<insert id="addMember" parameterType="Hashmap">
 	
 		<!-- seq_userNum.nextval -->
@@ -116,7 +116,7 @@
 	
 	<!-- 마이페이지에서의 회원정보 수정을 위한 전시용 데이터 추출 -->
 	<select id="memberInfoForModify" resultType="memberDTO" parameterType="String">
-		select id, pwd, nickName, emailAdd, telNum, joinDate 
+		select id, pwd, nickName, memberNum, emailAdd, telNum, joinDate 
 		from syl_member 
 		where memberNum=#{_parameter}
 	</select>

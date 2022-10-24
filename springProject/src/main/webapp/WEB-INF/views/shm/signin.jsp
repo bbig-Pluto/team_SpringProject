@@ -963,7 +963,6 @@ a {
 	<header>
          <div class="wrapper">
             <h1>
-<!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
                <a href="${ contextPath }/sjs/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
             </h1>
             <nav>
@@ -1011,7 +1010,7 @@ a {
 						</form>
 						<div class="linkToOtherPages">
 							<div class="joinbtn">
-								<a href="${contextPath}/member/rd/idpwfinder" type="button"
+								<a href="${contextPath}/member/rd/idpwdfinder" type="button"
 									class="sgnbtn1">FORGOT ID/PASSWORD |</a> <a
 									href="${contextPath}/member/rd/signup" type="button"
 									class="sgnbtn2">JOIN</a>

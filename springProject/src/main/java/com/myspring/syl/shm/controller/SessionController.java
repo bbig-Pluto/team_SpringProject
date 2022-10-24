@@ -64,7 +64,7 @@ public class SessionController {
 		if (memberDTO.getLoginWhether() == 0 || memberDTO.getLoginWhether() == 1) {
 			logOnWhetherForSession = "member";
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
-			resultMessage = "location.href='/syl/sjs/calendarM'";
+			resultMessage = "location.href='/syl/calendarM'";
 			
 		// 로그인 실패
 		} else if (memberDTO.getLoginWhether() == -1) {
@@ -101,6 +101,7 @@ public class SessionController {
 			@RequestBody MemberDTO dto) {
 		
 		logOnSession = request.getSession();
+		logOnSession.setMaxInactiveInterval(5*60);
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");

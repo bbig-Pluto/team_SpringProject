@@ -47,17 +47,22 @@
 					
 					setTimeout(()=>{
 						if (confirm("정말로 회원을 탈퇴 하시겠습니까?\n지금껏 작성하셨던 모든 데이터들(일기장 등)도 지워집니다.")) {
-							location.href = e.target.getAttribute("href");
+							if (confirm("정말로 회원을 탈퇴 하시겠습니까?\n지금껏 작성하셨던 모든 데이터들(일기장 등)도 지워집니다.(마지막)")) {
+								location.href = e.target.getAttribute("href");
+							} else {
+								
+							}
 						} else {
 	
 						}
 					}, 10);
 				})
 			
+				
 // 			회원정보 수정을 위해 DB 에서 회원정보 get
 			$(function() {
 	            $("#modiInfoSelf").click(function(e) {
-//                     e.preventDefault(); // ajax 적용하려면 a href 기능 죽여야함
+                    e.preventDefault(); // ajax 적용하려면 a href 기능 죽여야함
 					console.log("modiInfoSelf clicked")
 			    	let memberNum = { memberNum : ${ sessionMemberNum } }
 			        $.ajax({
@@ -71,6 +76,7 @@
 	        		})
 	            })
 			})
+	       
 	    }
 	</script>
 
@@ -80,8 +86,8 @@
             padding: 0;
         }
 
-        .backGrounImg {
-            background-image: url(../resources/shm/bgimg_resizing.png);
+        .backGroundImg {
+            background-image: url(../../resources/shm/bgimg_resizing.png);
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -109,32 +115,37 @@
             height: 5px;
             background-color: rgb(25, 136, 179);
         }
-
+		
+		.firstRow {
+			margin: 0;
+			padding: 10px;
+			height: 130px;
+		}
     </style>
     
 </head>
 <body>
-	<div class="backGrounImg">
+	<div class="backGroundImg">
         <div class="topColorSpacer"></div>
         <div class="linksWrapper">
             <table frame=void class="contentsArea" border="1" style="border-collapse : collapse; border-color: grey;">
                <tbody>
-                    <tr>
-                        <td>logo<br> <a id="bactToCalendar" href="${contextPath}/sjs/calendarM.jsp">캘린더로 돌아가기</a></td>
+                    <tr class="firstRow">
+                        <td>logo<br> <a id="bactToCalendar" href="${contextPath}/calendarM">캘린더로 돌아가기</a></td>
                         <td colspan="2" style="text-align: center;">${ sessionId } 님의 MyPage 입니다.</td>
                         <td><a id="logoutBtn" href="${contextPath}/member/logout.do">로그아웃</a></td>
                     </tr>
-                    <tr>
+                    <tr class="secondRow">
                         <td>콘텐츠 비우기 영역</td>
                         <td colspan="2"><a id="modiInfoSelf" href="${contextPath}/member/getMemberInfo.do">회원정보 수정</a></td>
                         <td>test</a></td>
                     </tr>
-                    <tr>
+                    <tr class="thirdRow">
                         <td rowspan="2">비울 콘텐츠 선택, 실행 영역</td>
                         <td id="inputModifyingInfoSelf" colspan="2" rowspan="2">회원정보 수정 실행 영역</td>
                         <td>test</td>
                     </tr>
-                    <tr>
+                    <tr class="fourthRow">
                         <td><a id="delAccountSelfBtn" href="${contextPath}/member/deleteAccount.do">회원탈퇴</td>
                     </tr>
                </tbody> 

@@ -171,7 +171,7 @@ public class AjaxConnController {
 		return new ResponseEntity (response, responseHeaders, HttpStatus.CREATED);
 	}
 	
-	/*
+
 	// 마이페이지 회원수정 누르면 DB에서 가져온 data들을 ajax 로 전시
 	@RequestMapping("/member/getMemberInfo.do")
 	public ResponseEntity loadMemberInfo(
@@ -184,60 +184,60 @@ public class AjaxConnController {
 		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String joinDate = fmt.format(dto.getJoinDate());
 		
-		System.out.println("/member/getMemberInfo.do, dto.getEmailAdd() : " + dto.getEmailAdd());
-		
 		String response = "";
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
-		response += " document.querySelector('#inputModifyingInfoSelf').innerHTML = ";
-		response += " 		<table align=\"center\">\r\n"
-				+ "            <caption>회원 정보 수정</caption>\r\n"
-				+ "            <tbody>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">아이디 : &nbsp;</td>\r\n"
-				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"id\" value= '" + dto.getId() + "' readonly></td>\r\n"
-				+ "                    <td><a href=\"${contextPath}/member/rd/idpwfinder\">아이디 찾기</a></td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">비밀번호 : &nbsp;</td>\r\n"
-				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"pwd\" value='" + dto.getPwd() + "' readonly></td>\r\n"
-				+ "                    <td><a href=\"${contextPath}/member/rd/idpwfinder\">비밀번호 재설정</a></td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">전화번호 : &nbsp;</td>\r\n"
-				+ "                    <td><input type=\"text\" name=\"telNum\" value='" + dto.getTelNum() + "'></td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">닉네임 : &nbsp;</td>\r\n"
-				+ "                    <td><input type=\"text\" name=\"nickName\" value='" + dto.getNickName() + "'></td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">이메일 : &nbsp;</td>\r\n"
-				+ "                    <td><input type=\"text\" name=\"emailAdd\" value='" + dto.getEmailAdd() + "'></td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">회원번호 : &nbsp;</td>\r\n"
-				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"memberNum\" value='" + String.valueOf(dto.getMemberNum()) + "' readonly>\r\n"
-				+ "                    </td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">관리등급 : &nbsp;</td>\r\n"
-				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"memberClass\" value='" + String.valueOf(dto.getMemberClass()) + "' readonly></td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td class=\"modCategory\">가입일 : &nbsp;</td>\r\n"
-				+ "                    <td><input class=\"forbidModi\" type=\"text\" name=\"joinDate\" value='" + joinDate + "' readonly>\r\n"
-				+ "                    </td>\r\n"
-				+ "                </tr>\r\n"
-				+ "                <tr>\r\n"
-				+ "                    <td></td>\r\n"
-				+ "                    <td colspan=\"1\"><input type=\"submit\" value=\"완료\">&nbsp;&nbsp;<input type=\"reset\" value=\"다시입력\"></td>\r\n"
-				+ "                </tr>\r\n"
-				+ "            </tbody>\r\n"
-				+ "        </table>\r\n";
+		response += " document.querySelector('#inputModifyingInfoSelf').innerHTML =";
+		response += "'<form action=\"/syl/member/modifyInfoSelf.do\" method=\"get\">"
+				+ "<table align=\"center\">"
+				+ "<caption>회원 정보 수정</caption>"
+				+ "<tbody>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">아이디 : &nbsp;</td>"
+				+ "<td><input class=\"forbidModi\" type=\"text\" name=\"id\" value= \"" + dto.getId() + "\" readonly></td>"
+				+ "<td><a href=\"syl/member/rd/idpwfinder\">아이디 찾기</a></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">비밀번호 : &nbsp;</td>"
+				+ "<td><input class=\"forbidModi\" type=\"text\" name=\"pwd\" value= \"" + dto.getPwd() + "\" readonly></td>"
+				+ "<td><a href=\"syl/member/rd/idpwfinder\">비밀번호 재설정</a></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">전화번호 : &nbsp;</td>"
+				+ "<td><input type=\"text\" name=\"telNum\" value= \"" + dto.getTelNum() + "\"></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">닉네임 : &nbsp;</td>"
+				+ "<td><input type=\"text\" name=\"nickName\" value= \"" + dto.getNickName() + "\"></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">이메일 : &nbsp;</td>"
+				+ "<td><input type=\"text\" name=\"emailAdd\" value= \"" + dto.getEmailAdd() + "\"></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">회원번호 : &nbsp;</td>"
+				+ "<td><input class=\"forbidModi\" type=\"text\" name=\"memberNum\" value= \"" + String.valueOf(dto.getMemberNum()) + "\" readonly>"
+				+ "</td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">관리등급 : &nbsp;</td>"
+				+ "<td><input class=\"forbidModi\" type=\"text\" name=\"memberClass\" value= \"" + String.valueOf(dto.getMemberClass()) + "\" readonly></td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td class=\"modCategory\">가입일 : &nbsp;</td>"
+				+ "<td><input class=\"forbidModi\" type=\"text\" name=\"joinDate\" value= \"" + joinDate + "\" readonly>"
+				+ "</td>"
+				+ "</tr>"
+				+ "<tr>"
+				+ "<td></td>"
+				+ "<td colspan=\"1\"><input type=\"submit\" value=\"완료\">&nbsp;&nbsp;<input type=\"reset\" value=\"다시입력\"></td>"
+				+ "</tr>"
+				+ "</tbody>"
+				+ "</table>"
+				+ "</form>'";
 		
 		return new ResponseEntity (response, responseHeaders, HttpStatus.CREATED);
 	}
-	*/
+	
 }

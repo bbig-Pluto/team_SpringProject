@@ -112,7 +112,6 @@ request.setCharacterEncoding("UTF-8");
 	<table align="center" border="1">
 		<tr align="center" bgcolor="lightgreen">
 			<td width="7%"><b>아이디</b></td>
-			<td width="7%"><b>비밀번호</b></td>
 			<td width="7%"><b>닉네임</b></td>
 			<td width="7%"><b>이메일</b></td>
 			<td width="7%"><b>전화번호</b></td>
@@ -133,7 +132,6 @@ request.setCharacterEncoding("UTF-8");
 				<c:forEach var="mem" items="${ memList }">
 					<tr align="center">
 						<td>${ mem.id }</td>
-						<td>${ mem.pwd }</td>
 						<td>${ mem.nickName}</td>
 						<td>${ mem.emailAdd }</td>
 						<td>${ mem.telNum }</td>
