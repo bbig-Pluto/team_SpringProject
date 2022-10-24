@@ -24,10 +24,10 @@
 	<insert id="insertWishlist" parameterType="wishlistDTO">
 	
 		insert into wishlist
-			(seqNum, category, name, photo, price, link)
+			(seqNum, category, name, photo, price, link, id)
 			
 		values
-			(seq_list.nextval, #{category}, #{name}, #{photo}, #{price}, #{link})
+			(seq_list.nextval, #{category}, #{name}, #{photo}, #{price}, #{link}, #{id})
 	
 	</insert>
 	

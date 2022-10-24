@@ -920,52 +920,71 @@
                     <div class="add_delete">
                     
                     <!-- +(추가) 버튼을 누르면 카테고리 추가 페이지로 이동  -->
-<%--                     <c:choose> --%>
-<%-- 	                    <c:when test="${empty sessionId }"> --%>
-<%-- 	                    	<a href="${contextPath }/member/login"> --%>
-<!-- 	                        	<input onclick="doDisplay()" class="add" type="submit" value="+"> -->
-<!-- 	                        </a> -->
-<%-- 	                    </c:when> --%>
-<%-- 	                    <c:when test="${!empty sessionId }"> --%>
+                    <c:choose>
+	                    <c:when test="${empty sessionId }">
+	                    	<a href="${contextPath }/member/login">
+	                        	<input onclick="doDisplay()" class="add" type="submit" value="+">
+	                        </a>
+	                    </c:when>
+	                    <c:when test="${!empty sessionId }">
 		                    <a href="${contextPath }/insertwishpage">
 		                        <input onclick="doDisplay()" class="add" type="submit" value="+">
 		                    </a>
-<%-- 	                    </c:when> --%>
-<%--                     </c:choose> --%>
+	                    </c:when>
+                    </c:choose>
                     
                         <img class="delete" src="https://ifh.cc/g/2K5tVb.png">
                     </div>
                     
                     <!-- 상품 카테고리 -->
                     <div class="category">
-                    			
-						<form method="post" action="${contextPath }/searchcategory">
-                    		<a href="${contextPath }/mainwish">
-		                    	<input class="category_all" type="button" value="All">
-		                    </a>
-							<input name="category" class="category_submit" type="submit" value="가전제품">
-							<input name="category" class="category_submit" type="submit" value="건강">
-							<input name="category" class="category_submit" type="submit" value="도서">
-							<input name="category" class="category_submit" type="submit" value="문화생활">
-							<input name="category" class="category_submit" type="submit" value="미용">
-							<input name="category" class="category_submit" type="submit" value="생활용품">
-							<input name="category" class="category_submit" type="submit" value="음식">
-							<input name="category" class="category_submit" type="submit" value="전자기기">
-							<input name="category" class="category_submit" type="submit" value="패션">
-							<input name="category" class="category_submit" type="submit" value="기타">
-						</form>
-						
+                    	
+                    	<c:choose>
+	                    	<c:when test="${empty sessionId }">
+	                    		<a href="${contextPath }/mainwish">
+				                    <input class="category_all" type="button" value="All">
+				                </a>
+	                    			<input name="category" class="category_submit" type="submit" value="가전제품">
+									<input name="category" class="category_submit" type="submit" value="건강">
+									<input name="category" class="category_submit" type="submit" value="도서">
+									<input name="category" class="category_submit" type="submit" value="문화생활">
+									<input name="category" class="category_submit" type="submit" value="미용">
+									<input name="category" class="category_submit" type="submit" value="생활용품">
+									<input name="category" class="category_submit" type="submit" value="음식">
+									<input name="category" class="category_submit" type="submit" value="전자기기">
+									<input name="category" class="category_submit" type="submit" value="패션">
+									<input name="category" class="category_submit" type="submit" value="기타">
+	                    	</c:when>
+	                    	<c:when test="${!empty sessionId }">
+								<form method="post" action="${contextPath }/searchcategory">
+		                    		<a href="${contextPath }/mainwish">
+				                    	<input class="category_all" type="button" value="All">
+				                    </a>
+									<input name="category" class="category_submit" type="submit" value="가전제품">
+									<input name="category" class="category_submit" type="submit" value="건강">
+									<input name="category" class="category_submit" type="submit" value="도서">
+									<input name="category" class="category_submit" type="submit" value="문화생활">
+									<input name="category" class="category_submit" type="submit" value="미용">
+									<input name="category" class="category_submit" type="submit" value="생활용품">
+									<input name="category" class="category_submit" type="submit" value="음식">
+									<input name="category" class="category_submit" type="submit" value="전자기기">
+									<input name="category" class="category_submit" type="submit" value="패션">
+									<input name="category" class="category_submit" type="submit" value="기타">
+								</form>
+							</c:when>
+	                    </c:choose>
+	                    
                     </div>
                     
                     <!-- 상품 목록 -->
                     <div class="list_area">
                         
                     <c:choose>
-                    	<c:when test="${empty wishlist }">
+                    	<c:when test="${empty wishlist || empty sessionId || ! sessionId.equals('admin01')}">
 							<div class="list_null">상품 목록이 없습니다</div>                    	
                     	</c:when>
                     	
-                    	<c:when test="${!empty wishlist }">
+                    	<c:when test="${!empty wishlist && !empty sessionId || sessionId.equals('admin01')}">
                     	
 		                    	<div class="allselect">
 	                                <input name="checkAll" class="all_chb" type="checkbox" onclick='selectAll(this)'>

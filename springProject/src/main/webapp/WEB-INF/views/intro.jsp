@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>다이어리 소개</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
  <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap');
 
@@ -186,17 +187,19 @@
 		}
         .logo_back {
             background-color:rgb(14, 75, 34);
-            height: 400px;
+            height: 300px;
             margin-top: 100px;
+            padding-top: 150px;
         }
         .logo_image {
-            width: 600px;
-            margin: 100px 390px;
+            width: 1000px;
+            text-align: center;
+			margin: auto;
         }
         .info_area {
             background-color: rgb(221, 221, 221);
-            height: 1300px;
             margin: 40px;
+			margin-top: 20px;
             border-radius: 15px;
             margin-top: 80px;
             margin-bottom: 150px;
@@ -204,21 +207,23 @@
             padding: 30px;
         }
         .info_title {
-            font-size: 30px;
+            font-size: 50px;
             font-weight: 900;
-            margin: 30px;
+            margin: 50px;
             color:rgb(14, 75, 34);
             padding-top: 50px;
         }
         .info_content {
-            font-size: 20px;
-            margin: 20px;
+            font-size: 26px;
+            margin: 100px;
         }
         .info_subcon {
             width: 900px;
             margin: auto;
             color:rgb(105, 138, 115);
-            font-size: 18.5px;
+            font-size: 23px;
+			font-weight: 900;
+			margin-top: 30px;
         }
         .idx1 {
             background-color:#FFCCAA;
@@ -230,6 +235,12 @@
             font-size: 23px;
             font-weight: 900;
         }
+		.diary {
+			display: none;
+		}
+		.idx1:hover + .diary {
+			display: block;
+		}
         .idx2 {
             background-color:#FFFFCA;
             width: 200px;
@@ -250,7 +261,19 @@
             font-size: 23px;
             font-weight: 900;
         }
+        .idx4 {
+        	background-color: #DCEDCA;
+            width: 200px;
+            margin: 20px auto;
+            height: 80px;
+            border-radius: 100px;
+            line-height: 80px;
+            font-size: 23px;
+            font-weight: 900;
+        }
     </style>
+    <script>
+    </script>
 </head>
 <body>
  <!--■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 헤더 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■-->
@@ -279,21 +302,36 @@
 
     <main>
 
+		<!-- 로고 배경 -->
         <div class="logo_back">
-            <img class="logo_image" src="https://ifh.cc/g/szyoGW.png">
+
+        	<div class="logo_image">
+            	<img src="https://ifh.cc/g/szyoGW.png">
+        	</div>
+
         </div>
 
+		<!-- 소개 화면 -->
         <div class="info_area">
+
             <div class="info_title">다이어리란?</div><br>
-            <div class="info_content">한 장 한 장 넘기면서 날짜별로 간단한 메모를 할 수 있도록 만들어진 기록장입니다</div>
-            <div class="info_content">일기는 대개 손으로 썼지만 이제는 디지털로 손쉽게 기록할 수 있습니다</div><br><br>
+            <div class="info_content">한 장 한 장 넘기면서 날짜별로 간단한 메모를 할 수 있도록 만들어진 기록장입니다<br><br><br>
+				손으로 매일 힘겹게 남기던 일기<br><br><br><br><br>
+				<b style="font-size: 30px;">이제는 디지털로 손쉽게 기록할 수 있습니다.</b></div><br><br>
             <div class="info_subcon">A diary is a written or audiovisual record with discrete entries arranged by date reporting on what has happened over the course of a day or other period. Diaries have traditionally been handwritten but are now also often digital.</div><br><br><br><br>
 
             <div class="info_title">3SYL의 다이어리</div><br><br><br><br>
             <div class="info_content">이런 기록들을 할 수 있습니다</div><br><br><br>
+			
             <div class="idx1">DIARY</div>
+
+				<div class="diary">다이어리</div>
+
+			
             <div class="idx2">DIET</div>
-            <div class="idx3">WISH</div>
+            <div class="idx4">EXERCISE</div>
+            <div class="idx3">WISHLIST</div>
+
         </div>
 
 
