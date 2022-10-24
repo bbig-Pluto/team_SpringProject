@@ -216,7 +216,7 @@ public class WishlistController {
 	
 	/* 파일 저장 위치 지정 */
 //	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\workspace\\teamproject\\springProject\\src\\main\\webapp\\resources\\wishimage";
+	private static final String CURR_IMAGE_REPO_PATH = "\\syl\\src\\main\\webapp\\resources\\wishimage";
 	
 	/* 파일 업로드 */
 	private String fileProcess(MultipartHttpServletRequest multipartRequest)throws Exception {
@@ -237,6 +237,7 @@ public class WishlistController {
 		
 		/* 파일 이름 하나씩 fileList에 저장하기 */
 		File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
+		System.out.println("[file 저장 경로] "+ file);
 		
 		/* 첨부된 파일이 있는지 체크 */
 		if ( mFile.getSize() != 0) {
@@ -252,6 +253,7 @@ public class WishlistController {
 			
 			/* 임시로 저장된 multiFile을 실제 파일로 전송 */
 			mFile.transferTo( new File (CURR_IMAGE_REPO_PATH + "\\" + originalFileName) );
+			
 		}
 		
 		/* 실제 파일 return */
