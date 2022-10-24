@@ -139,7 +139,6 @@ public class SessionController {
 		return new ResponseEntity (resultMessage, responseHeaders, HttpStatus.CREATED);
 	}
 	
-	
 	private void setFailSession(HttpSession logOnSession, MemberDTO memberDTO, String logOnWhetherForSession) {
 		logOnWhetherForSession = "guest";
 		logOnSession.setAttribute("isLogon", logOnWhetherForSession);
