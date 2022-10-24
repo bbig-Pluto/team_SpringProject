@@ -740,7 +740,7 @@ header {
 		</div>
 		<div class="blankArea"></div>
 		<div class="wrapper2">
-			해당 정보와 일치하는 정보를 가진 아이디는 <br> <br>
+			해당 정보와 일치하는 계정의 아이디는 <br> <br>
 			<div id="findId">${ foundId } </div><br>
 			입니다.
 			<div class="linkToLoginPage">

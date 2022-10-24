@@ -227,8 +227,7 @@
                     num3pg.style.display = 'none';
                     num4pg.style.display = 'block';
                 })
-            }
-            ;
+            };
 
             // 회원정보에서 뒤로가기 버튼
             function back2() {
@@ -697,7 +696,7 @@
             text-align: right;
             font-size: 14px;
             margin-left: 180px;
-            width: 200px;
+            width: 220px;
             color: rgb(76, 85, 75);
         }
 
@@ -1165,7 +1164,6 @@
         <!-- 다이어리 로그인 메인틀 / 오른쪽 다이어리 공간-->
         <div class="lpgmain">
 
-
             <!-- 가입 -->
             <div class="joinpg1">
                 <div class="signUp">
@@ -1296,25 +1294,6 @@
                     <img class="setyou" src="/syl/resources/photo/3syl2.png">
                 </div>
             </div>
-
-
-            <!-- 가입 완료 -->
-            <!--    <div class="completion">
-                <img class="comsyl" src="syl.png">
-                <div class="txtarea">
-                    <div class="cj1_p">
-                        <div class="complJoin cj1"> 여행자 등록 완료</div>
-                    </div>
-                    <div class="complJoin cj2"> 추억을 남기기 위해 필요한 모든 준비가 완료되었습니다</div>
-                    <div class="complJoin cj3"> 여행자의 앞으로의 모든 추억이 </div>
-                    <div class="complJoin cj4"> 3SYL 다이어리와 함께 </div>
-                    <div class="complJoin cj5"> 즐거운 시간이 되세요~</div>
-                </div>
-                 <input class="jp1Btn4 a" type="button" value="홈으로">
-                <input class="jp1Btn4 b" type="submit" value="로그인" >
-
-            </div> -->
-
 
         </div>
         <!-- 3개의 대각선 -->

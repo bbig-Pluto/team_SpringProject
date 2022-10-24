@@ -44,31 +44,7 @@ public class MyPageController {
 		return "redirect:/member/login";
 //		return "/sjs/calendar";
 	}
-	
-	
-	/**
-	 * 마이페이지에서 수정하고자 할 회원의 데이터 획득, 전시
-	 * @param request
-	 * @param logOnSession
-	 * @param model
-	 * @return DTO binding and viewName
-	 */
-	/*
-	@RequestMapping("/member/getMemberInfo.do")
-	public String loadMemberInfo(
-			HttpServletRequest request, 
-			HttpSession logOnSession, 
-			Model model) {
-		logOnSession = request.getSession();
-		String memberNum = "" + logOnSession.getAttribute("logOn.memberNum");
-		
-		MemberDTO dto = memberService.getMemberInfo(memberNum);
-		
-		model.addAttribute("memberInfo", dto);
-		
-		return "forward:/member/rd/mypagemodi";
-	}
-	*/
+
 	
 	/**
 	 * 마이페이지 회원정보 계정 본인이 직접 수정
