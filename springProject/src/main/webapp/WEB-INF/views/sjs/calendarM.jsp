@@ -206,6 +206,99 @@
 	</script>
 <style>
 
+ header {
+            margin-bottom: 20px;
+        }
+
+        div.wrapper {
+            width: 1240px;
+
+        }
+
+        h1 {
+            width: 200px;
+            margin: 0 auto;
+            display: inline-block;
+
+        }
+
+        .headerLogo {
+
+            width: 200px;
+            float: left;
+        }
+
+        nav {
+            width: 580px;
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 3%;
+            margin-left: 12%;
+            font-size: 16px;
+
+        }
+
+        .headersub {
+            color: #223919;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .headersub:before {
+            content: '';
+            border-radius: 100%;
+            background: #214192;
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            transition: all 0.2s;
+        }
+
+        .headersub:hover::before {
+            width: 5px;
+            height: 5px;
+            left: 50%;
+            opacity: 0.8;
+        }
+
+        .headersub:hover {
+            color: #42568a;
+        }
+        
+        .lgnbtn {
+            font-size: 12px;
+            width: 60px;
+            position: absolute;
+            top: 14px;
+            left: 1184px;
+        }
+
+        .headerlogin {
+            color: #223919;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+
+        }
+
+        .headerloginout {
+            color: #223919;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .headerlogin:hover {
+            color: #108269;
+            font-weight: bold;
+        }
+
+        .headerloginout:hover {
+            color: #108269;
+            font-weight: bold;
+        }
+
+
 /* ///////////////////////////////////////책안에 내용 집어넣기/////////////////////////////////////////// */
 /* 전체 틀 잡기 */
 main {
@@ -818,7 +911,26 @@ input {
 <body>
 <body>
 	<form action="/syl/calendarMA" method="post">
-
+			<header>
+				<div class="wrapper">
+					<h1>
+	<!-- 					<img class="headerLogo" src="./3syl.png"><a href=""></a> -->
+						<a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+					</h1>
+					<nav>
+						<a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
+						<a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성 |</a> 
+						<a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
+						<a href="${ contextPath }/shot11.jsp"	class="headersub">다이어리 사용법 |</a> 
+						<a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
+						<div class="lgnbtn">
+							<a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
+							<a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
+							<a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+						</div>
+					</nav>
+				</div>
+			</header>
 		<main>
 			<section>
 				<article>
