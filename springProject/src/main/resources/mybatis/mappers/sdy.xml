@@ -349,8 +349,8 @@
 		<!--글쓰기 -->
 	<insert id="insertTodoContents" parameterType="todoDTO">
 		insert into todoList
-		(todo_id,todo)
-	    values(#{todo_id},#{todo})
+		(todo_id,todo,id)
+	    values(#{todo_id},#{todo},#{id})
 	</insert>
 		<!--전체 수정 -->
 	<!--  <update id="updateTodoChk" parameterType="java.util.Map">

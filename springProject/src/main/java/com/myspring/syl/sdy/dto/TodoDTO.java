@@ -9,6 +9,7 @@ public class TodoDTO {
 	int todo_id;
 	int chk;
 	Date write_date;
+	String id;
 
 	public String getTodo() {
 		return todo;
@@ -33,6 +34,12 @@ public class TodoDTO {
 	}
 	public void setWrite_date(Date write_date) {
 		this.write_date = write_date;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

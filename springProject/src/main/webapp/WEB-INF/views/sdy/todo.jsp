@@ -371,6 +371,18 @@ main {
 	padding-top: 10px;
 	color: rgba(104, 100, 100, 0.692);
 }
+.postTodo {
+	width: 60px;
+	height: 27px;
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: rgba(104, 100, 100, 0.692);
+}
 
 .post2 {
 	width: 40px;
@@ -378,7 +390,7 @@ main {
 	position: absolute;
 }
 
-.post1.It1 {
+.postTodo.It1 {
 	z-index: 1;
 	top: 32px;
 	left: -19px;
@@ -595,9 +607,11 @@ footer {
 		
 			chkUpdate();
 			selectAll();
+			 delHover();
             
         } 
-	 
+	  
+	 //하트체크 클릭시 chk=0이 chk=1로 업데이트 
 	 function chkUpdate(){
 			$('input:checkbox[name="chk"]').off("click").on("click",function(){
 				  
@@ -710,7 +724,7 @@ footer {
 				checkbox.checked = selectAll.checked;
 			  })
 			} */
-	  
+	  //전체선택,해제
 		function selectAll() {
 				$("#heart-check_all").click(function() {
 					if($("#heart-check_all").is(":checked")) $("input[name=chk]").prop("checked", true);
@@ -741,11 +755,13 @@ footer {
 			}
 		})
 	}
-	
+	//todo 입력 ajax
 		function bind(){
 				let todo = $(".text_input").val();//jquery로만 추출
+				 var uid = '<%=(String)session.getAttribute("logOn.id")%>';
 				let info = {
-					todo : todo
+					todo : todo,
+					id : uid
 				}; 
 				$.ajax({
 					url:"/syl/todoInsert",
@@ -770,7 +786,7 @@ footer {
 							selectAll();
 					},
 					error:function(){
-						alert("에ㅇ에에에에에에에에에엥에에에에에에엥에러발생!!!!!!!")
+						alert("다시 입력해주세요")
 					}
 				});
 		}
@@ -837,6 +853,9 @@ footer {
         Text="";
         })
     } */
+    function loginAlert(){
+        	alert("로그인이 필요한 서비스입니다.");
+    }
         
 	</script>
 </head>
@@ -882,25 +901,54 @@ footer {
 									   <div class="allCheck">전체선택</div>
 									   <input type="checkbox" name="chkAll" id="heart-check_all" class="heart_input">
 									   <label for="heart-check_all" class="heart-check_all"></label>
-								
+						<c:if test="${! empty sessionId }">
 						   <form  method="post" action="/syl/todo_delCheck">
 							   <input type="submit" value="+" class="del_btn">
+						</c:if>
 								   <div class="box">
+						
 									  	<c:forEach var="list" items="${list}">
-										   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
-											   <input type="checkbox" name="chk" id="heart-check[${list.todo_id }]" class="heart_input"  data-id="${list.todo_id}" <c:if test="${list.chk ==1}">checked</c:if>>
-											   <label for="heart-check[${list.todo_id }]" style="margin-top:-25px;" ></label>
-											   <input type="hidden" name="todo_id" value="${list.todo_id }" class="id">
-											   <input type="hidden" name="todo_chk" value="${list.chk}">
-										  		 <div class="text">${list.todo} </div>
-										   </div>
+										    <c:if test="${sessionId eq list.id }"> 
+											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
+												   <input type="checkbox" name="chk" id="heart-check[${list.todo_id }]" class="heart_input"  data-id="${list.todo_id}" <c:if test="${list.chk ==1}">checked</c:if>>
+												   <label for="heart-check[${list.todo_id }]" style="margin-top:-25px;" ></label>
+												   <input type="hidden" name="todo_id" value="${list.todo_id }" class="id">
+												   <input type="hidden" name="todo_chk" value="${list.chk}">
+												   <input type="hidden" name="id" value="${sessionId}" class="sessionId">
+											  		 <div class="text">${list.todo} </div>
+											   </div>
+									   		 </c:if> 
 										  </c:forEach>
+										    <c:if test="${empty sessionId}"> 
+											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
+												   <input type="checkbox" name="chk" id="heart-check[null]" class="heart_input" checked>
+												   <label for="heart-checkheart-check[null]" style="margin-top:-25px;" ></label>
+											  		 <div class="text">작살나게 밥먹기</div>
+											   </div>
+											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
+												   <input type="checkbox" name="chk" id="heart-check[null1]" class="heart_input" >
+												   <label for="heart-checkheart-check[null1]" style="margin-top:-25px;" ></label>
+											  		 <div class="text">간지나게 자기</div>
+											   </div>
+											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
+												   <input type="checkbox" name="chk" id="heart-check[null2]" class="heart_input">
+												   <label for="heart-checkheart-check[null2]" style="margin-top:-25px;" ></label>
+											  		 <div class="text">끝장나게 숨귀기</div>
+											   </div>
+									   		 </c:if> 
 								   </div>
 							   	</form>
 								</section>
 									<div class="input_todo">
 										<input type="text"  name="todo" class="text_input">
-										<input type="button" class="regi" value="입력" onclick="bind()">
+								<c:choose>
+									 <c:when test="${! empty sessionId }">
+											<input type="button" class="regi" value="입력" onclick="bind()">
+									</c:when>
+									<c:otherwise>
+										<button type="button" class="regi" onclick="loginAlert()">입력</button>
+									</c:otherwise>
+								</c:choose>
 									</div>
 					
 					 </div>
@@ -942,7 +990,7 @@ footer {
 					<div class="rightLine1">
 						<!--  여기 Index에 이동 a링크 구성하기 -->
 						<a href='/syl/todo'>
-							<div class="post1 It1">todo<br>memo</div>
+							<div class="postTodo It1">todo<br>memo</div>
 						</a> 
 						<a href='/syl/diaryList'>
 							<div class="post1 It2">Diary</div>

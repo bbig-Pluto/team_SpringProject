@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +30,11 @@ public class TodoController extends HttpServlet {
 	
 	//todo 입력 ajax
 	@RequestMapping(value="/todoInsert",method= {RequestMethod.POST})
-	public  TodoDTO listTodo(@RequestBody TodoDTO dto) {
+	public  TodoDTO listTodo(@RequestBody TodoDTO dto,
+							HttpServletRequest request) {
+		
 		System.out.println("인서트 진입");
 		int todo_id = todoService.getTodoInsertList(dto);
-		dto.setTodo_id(todo_id);
 	
 		return dto;
 	}

@@ -843,8 +843,8 @@ function reReCancel(){
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<img class="left_logo1" src="/syl/resources/photo/logo2.png"> <img
-					class="left_logo2" src="/syl/resources/photo/3syl2.png">
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png"> 
+				<img class="left_logo2" src="/syl/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">
