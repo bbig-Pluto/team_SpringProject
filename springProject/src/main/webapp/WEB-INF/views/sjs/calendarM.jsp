@@ -915,7 +915,7 @@ input {
 				<div class="wrapper">
 					<h1>
 	<!-- 					<img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-						<a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+						<a href="/syl/calendarM.jsp"><img class="headerLogo" src="../../resources/photo/3syl.png"></a>
 					</h1>
 					<nav>
 						<a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
