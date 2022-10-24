@@ -189,6 +189,7 @@ h2 {
    	width:80px;
 	height:30px;
 	background-color:litghtgray;
+	margin-bottom:20px;
 	
    }
   
@@ -288,8 +289,7 @@ footer {
 .footer_all {
 	width: 1240px;
 	height: 200px;
-	position: absolute;
-	top: 1080px;
+	position: relative;
 	background-color: rgba(0, 0, 0, 0.13);
 	border-radius: 20px;
 }
@@ -318,9 +318,9 @@ footer {
 	width: 450px;
 	height: 80px;
 	font-size: 12px;
-	position: absolute;
+	position: relative;
 	left: 300px;
-	top: 140px;
+	top: -230px;
 }
 
 .mc1 {
@@ -339,8 +339,8 @@ footer {
 
 .right_contact {
 	width: 280px;
-	position: absolute;
-	top: 40px;
+	position: relative;
+	top: -220px;
 	left: 950px;
 }
 
@@ -353,9 +353,9 @@ footer {
 .rc2 {
 	width: 480px;
 	font-style: italic;
-	position: absolute;
+	position: relative;
 	left: 400px;
-	top: 20px;
+	top: -160px;
 }
 /*footer 끝*/
 /* 전체 틀 잡기 */
@@ -664,13 +664,13 @@ function reReCancel(){
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="/syl/js/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
+              <a href="/syl/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
             </h1>
             <nav>
-               <a href="/syl/intro.jsp" class="headersub">다이어리 소개 |</a> 
-               <a href="/syl/story11.jsp" class="headersub">다이어리 구성 |</a> 
-               <a href="/syl/func.jsp" class="headersub">다이어리 기능 |</a> 
-               <a href="/syl/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
+               <a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="/syl/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="/syl/bar/func"  class="headersub">다이어리 기능 |</a> 
+               <a href="/syl/bar/shot11"  class="headersub">다이어리 사용법 |</a> 
                <a href="/syl//notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a href="/syl/member/rd/mypage " class="headermypage">마이페이지</a>
@@ -840,17 +840,11 @@ function reReCancel(){
 						<form method="post" action="/syl/ask">
 							<input type="submit" value="목록" class="list">
 						</form>
-					</div>
-			</article>
-		</section>
-	</main>
-	
-		<!-- <footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<img class="left_logo1" src="sdy/logo2.png"> <img
-					class="left_logo2" src="sdy/3syl2.png">
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png"> <img
+					class="left_logo2" src="/syl/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">
@@ -874,7 +868,11 @@ function reReCancel(){
 
 			</div>
 		</div>
+					</div>
+			</article>
+		</section>
+	</main>
+	
 
-	</footer> -->
 </body>
 </html>

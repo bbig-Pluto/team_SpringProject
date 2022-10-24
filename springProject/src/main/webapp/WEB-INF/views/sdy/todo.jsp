@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
  <link rel="stylesheet" href = "resources/sdy/todo.css"/> 
  <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
@@ -357,7 +358,106 @@ main {
 	top: 114px;
 	left: 1166px;
 }
+/* 포스트잇 */
+/* 포스트잇 */
+.post1 {
+	width: 60px;
+	height: 27px;
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	padding-top: 10px;
+	color: rgba(104, 100, 100, 0.692);
+}
 
+.post2 {
+	width: 40px;
+	height: 37px;
+	position: absolute;
+}
+
+.post1.It1 {
+	z-index: 1;
+	top: 32px;
+	left: -19px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #FF9A9A;
+}
+
+.post1.It2 {
+	z-index: 2;
+	top: 120px;
+	left: 8px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #FFCCAA;
+}
+
+.post1.It3 {
+	z-index: 2;
+	top: 200px;
+	left: -10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #fffabb;
+	border: 1px solid rgb(219, 219, 219);
+	border-left: none;
+}
+
+.post2.It4 {
+	z-index: 2;
+	top: 240px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #DCEDCA;
+}
+
+.post1.It5 {
+	z-index: 2;
+	top: 300px;
+	left: 10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #c2e3e5;
+}
+
+.post2.It6 {
+	z-index: 2;
+	top: 380px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #bed6f8;
+}
+
+.post2.It7 {
+	z-index: 2;
+	top: 420px;
+	left: 10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #c7cbef;
+}
+
+.post2.It8 {
+	z-index: 2;
+	top: 500px;
+	/* left: 10px; */
+	border-radius: 0px 80px 80px 0px;
+	background-color: #d8cbf1;
+}
+/* tab_accordion 시작 */
+/* tab_accordion 시작 */
+
+/* tab_accordion 시작 */
+/* tab_accordion 시작 */
+/* tab_accordion 시작 */
+/* tab_accordion 시작 */
+/* tab_accordion 시작 */
+.tab_accordion_box {
+	border-top: 1px solid black;
+	/*             position: relative; */
+	/*             top: 150px; */
+	width: 1000px;
+	height: 700px;
+	/*             left: 350px; */
+	background-color: rgb(255, 247, 213);
+}
 /* 책표지 */
 .LMR {
 	width: 1198px;
@@ -745,13 +845,13 @@ footer {
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="/syl/js/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
+             <a href="/syl/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
             </h1>
             <nav>
-               <a href="/syl/intro.jsp" class="headersub">다이어리 소개 |</a> 
-               <a href="/syl/story11.jsp" class="headersub">다이어리 구성 |</a> 
-               <a href="/syl/func.jsp" class="headersub">다이어리 기능 |</a> 
-               <a href="/syl/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
+             <a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="/syl/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="/syl/bar/func"  class="headersub">다이어리 기능 |</a> 
+               <a href="/syl/bar/shot11"  class="headersub">다이어리 사용법 |</a> 
                <a href="/syl//notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a href="/syl/member/rd/mypage " class="headermypage">마이페이지</a>
@@ -839,8 +939,27 @@ footer {
 					<div class="leftLine2"></div>
 					<div class="leftLine3"></div>
 					<!-- 오른쪽 직선 3개 -->
-					<div class="rightLine1"></div>
-					<div class="rightLine2"></div>
+					<div class="rightLine1">
+						<!--  여기 Index에 이동 a링크 구성하기 -->
+						<a href='/syl/todo'>
+							<div class="post1 It1">todo<br>memo</div>
+						</a> 
+						<a href='/syl/diaryList'>
+							<div class="post1 It2">Diary</div>
+						</a> 
+						<a href='/syl/diet_1page.do'>
+							<div class="post1 It3">Diet</div>
+						</a>
+						 <a href='/syl/mainwish'>
+						 	<div class="post1 It5">Wish</div>
+						 </a>
+					</div>
+					<div class="rightLine2">
+						<div class="post2 It4"></div>
+						<div class="post2 It6"></div>
+						<div class="post2 It7"></div>
+						<div class="post2 It8"></div>
+					</div>
 					<div class="rightLine3"></div>
 
 					<!-- 책표지 부분 -->
@@ -859,8 +978,8 @@ footer {
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<img class="left_logo1" src="./logo2.png"> <img
-					class="left_logo2" src="./3syl2.png">
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png"> 
+				<img class="left_logo2" src="/syl/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">

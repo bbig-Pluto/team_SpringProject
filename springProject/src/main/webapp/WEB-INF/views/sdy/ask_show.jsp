@@ -403,13 +403,13 @@ font-size:10px;
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="/syl/js/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
+               <a href="/syl/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
             </h1>
             <nav>
-               <a href="/syl/intro.jsp" class="headersub">다이어리 소개 |</a> 
-               <a href="/syl/story11.jsp" class="headersub">다이어리 구성 |</a> 
-               <a href="/syl/func.jsp" class="headersub">다이어리 기능 |</a> 
-               <a href="/syl/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
+               <a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="/syl/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="/syl/bar/func"  class="headersub">다이어리 기능 |</a> 
+               <a href="/syl/bar/shot11"  class="headersub">다이어리 사용법 |</a> 
                <a href="/syl//notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a href="/syl/member/rd/mypage " class="headermypage">마이페이지</a>
@@ -594,6 +594,35 @@ font-size:10px;
 		<a href="/syl/ask?pageNum=<%=lastPage %>&ser_name=${ map.ser_name}&q_head=${map.q_head }&search=${map.search }" style="color:red;font-weight:bold; color: black; text-decoration: none; " id="result" > >> </a>&nbsp;
 	</c:if>
 				</div>
+				<div class="footer_all">
+
+			<div class="left_logo">
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png"> 
+				<img class="left_logo2" src="/syl/resources/photo/3syl2.png">
+			</div>
+
+			<div class="rc2">
+				We ONLY contact to email during office(9-6 KTS) hours for
+				assistance, as emails regarding syl service team.<br> Do NOT
+				send multiple emails as it delays our ability to respond in a timely
+				manner.
+
+			</div>
+			<div class="right_contact">
+				<div class="rc">Contact Us</div>
+				<br> syl <br> Our Company Information<br> E-mail:
+				syl2022@email.com<br>
+			</div>
+
+			<div class="middle_copyRight">
+				<div class="mc1">이용약관</div>
+				<div class="mc2">개인정보 처리방침</div>
+				<div class="mc3">2022 syl Inc. All rights reserved. This site
+					for our customers.</div>
+
+			</div>
+		</div>
+					</div>
 
 			</article>
 		</section>

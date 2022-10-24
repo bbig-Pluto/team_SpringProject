@@ -336,11 +336,11 @@ window.onload=()=>{
                <a href="/team_Project/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
             </h1>
             <nav>
-               <a href="/team_Project/intro.jsp" class="headersub">다이어리 소개 |</a> 
-               <a href="/team_Project/story11.jsp" class="headersub">다이어리 구성 |</a> 
-               <a href="/team_Project/func.jsp" class="headersub">다이어리 기능 |</a> 
-               <a href="/team_Project/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
-              <a href="/syl//notice" class="headersub">고객의 소리</a>
+               <a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="/syl/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="/syl/bar/func"  class="headersub">다이어리 기능 |</a> 
+               <a href="/syl/bar/shot11"  class="headersub">다이어리 사용법 |</a> 
+               <a href="/syl//notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                    <a href="/syl/member/rd/mypage " class="headermypage">마이페이지</a>
                   <c:choose>
@@ -395,12 +395,12 @@ window.onload=()=>{
 		</section>
 	</main>
 	
-	<!-- 	<footer>
+		<footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<img class="left_logo1" src="./logo2.png"> <img
-					class="left_logo2" src="./3syl2.png">
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png"> 
+				<img class="left_logo2" src="/syl/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">
@@ -425,6 +425,6 @@ window.onload=()=>{
 			</div>
 		</div>
 
-	</footer> -->
+	</footer> 
 </body>
 </html>
