@@ -52,38 +52,153 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 }%>
 
 
-	document.querySelector(".form_button1").addEventListener("click",
-				function(e) {
-					e.preventDefault();
-<%if (!(isLogon.equals("member"))) {%>
-	e.preventDefault();
-					alert("로그인이 필요합니다"); // 세션은 있는데 member가 아니면
-<%} else {%>
-	form_name_button_1.submit(); // 	세션이 있는데 logOn.id도 있으면
-<%}%>
-	})
 
-		document.querySelector(".form_button2").addEventListener("click",
-				function(e) {
-					e.preventDefault();
-<%if (!(isLogon.equals("member"))) {%>
+// 추가를 눌렀을때
+let add_button= document.querySelectorAll(".form_button1");
+for(let i=0; i<add_button.length; i++){
+add_button[i].addEventListener("click", function(e) {
+console.log("add_button[i]", add_button[i]);
 	e.preventDefault();
-					alert("로그인이 필요합니다");
-<%} else {%>
-	form_name_button_2.submit();
-<%}%>
-	})
+	<%if (!(isLogon.equals("member"))) {%>
+		e.preventDefault();
+		alert("로그인이 필요합니다"); // 세션은 있는데 member가 아니면
+	<%} else {%>	// 맞는 세션으로 들어오고 id도 있는 정상적인 회원이면
 
-		document.querySelector(".form_button3").addEventListener("click",
-				function(e) {
-					e.preventDefault();
-<%if (!(isLogon.equals("member"))) {%>
-	e.preventDefault();
-					alert("로그인이 필요합니다");
-<%} else {%>
-	form_name_button_3.submit();
-<%}%>
-	})
+
+
+
+
+
+
+		// 해야할 것 : e.target(버튼) 기준으로 tbody 안의 value를 가져올 것 (form까지 갈 필요없음 name은 tbody안에 있으니까)
+		// 방법 : e.target(버튼) parentNode 사용해서 tbody를 잡고
+		// 		  아래 얘네들이 document가 아닌 위에서 지정한 tbody 안의 (".Diet_diary_box6_input_menu")value를 읽어야 함
+		// 메뉴, 칼로리, 총합 가져옴 (null과 trim을 체크할 예정)
+		
+		// 클릭한 버튼의 tbody 잡아옴
+		let parent_tbody = add_button[i].parentNode.parentNode.parentNode;
+		console.log("parent_tbody", parent_tbody);
+
+
+		let menu_1 = parent_tbody.querySelector(".Diet_diary_box6_input_menu").value;
+		console.log(" tbody_menu_1 : ", menu_1);
+		let calorie_1 = parent_tbody.querySelector(".Diet_diary_box6_input_calorie").value;
+		console.log(" tbody_menu_1 : ", calorie_1);
+		let sum_1 = parent_tbody.querySelector(".Diet_diary_box6_input_sum").value;
+		console.log(" tbody_menu_1 : ", sum_1);
+		//		  
+
+
+
+
+
+
+
+
+
+		// 정규표현식 test 함수안에 넣을 예정
+		
+		// 한글,영어,숫자,특수문자 구분 정규식 모음
+        var check_num = /[0-9]/;    // 숫자 
+        var check_eng = /[a-zA-Z]/;    // 문자 
+        var check_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+		
+        // test() 함수를 이용하면 boolen 값을 얻을 수 있다.
+		let str = parent_tbody.querySelector(".Diet_diary_box6_input_menu").value;
+		console.log("str1 : ", str);
+        // 한글 제한
+		check_num.test(str); //숫자 return 값 true / false
+        check_eng.test(str); //영문 return 값 true / false
+        check_spc.test(str); //특수 return 값 true / false
+        check_kor.test(str); //한글 return 값 true / false
+
+		let str2 = parent_tbody.querySelector(".Diet_diary_box6_input_calorie").value;
+		console.log("str2 : ", str2);
+		// 숫자 제한
+		check_num.test(str2); //숫자 return 값 true / false
+        check_eng.test(str2); //영문 return 값 true / false
+        check_spc.test(str2); //특수 return 값 true / false
+        check_kor.test(str2); //한글 return 값 true / false
+
+		let str3 = parent_tbody.querySelector(".Diet_diary_box6_input_sum").value;
+		console.log("str3 : ", str3);
+		// 숫자 제한2
+		check_num.test(str3); //숫자 return 값 true / false
+        check_eng.test(str3); //영문 return 값 true / false
+        check_spc.test(str3); //특수 return 값 true / false
+        check_kor.test(str3); //한글 return 값 true / false
+
+			// null이 아니고 공백이 아니면
+		if(menu_1 != null && menu_1.trim() &&
+		   calorie_1 != null && calorie_1.trim() &&
+		   sum_1 != null && sum_1.trim()
+		){
+			// 위의 조건식 일치하면 여기 if를 실행
+			if(check_kor.test(str) && !check_num.test(str) && !check_eng.test(str) && !check_spc.test(str) &&
+			  !check_kor.test(str2) && check_num.test(str2) && !check_eng.test(str2) && !check_spc.test(str2) &&
+			  !check_kor.test(str3) && check_num.test(str3) && !check_eng.test(str3) && !check_spc.test(str3)
+			){
+				// 정규표현식 확인완료 적합 > sumbit 실행
+				console.log("if 안의 if 정규표현식 적합");
+
+
+				// 해야할 것 : form을 가져와서 submit() 시켜야 함
+				// 방법 : e.target.버튼[i] parentNode 사용해서 가져오고 submit();
+				// 참고 : name을 가져올 필요가 없다고 함 form을 가져오니까
+				let dgdgdddd = add_button[i].parentNode.parentNode.parentNode.parentNode.parentNode.submit();
+				console.log("되는건가? : ", add_button[i].parentNode.parentNode.parentNode.parentNode.parentNode.submit());
+				console.log("되는건가2? : ", dgdgdddd);
+
+
+			}else{
+				// null이 아니고 공백도 아니지만 정규표현식에 적합하지 않은 경우 
+				console.log("if 안의 else 정규표현식에 부적합");
+				e.preventDefault();
+				alert("메뉴에는 한글\n칼로리와 총 칼로리에는 숫자만 입력 가능합니다");
+			}
+
+		}else{
+			console.log("else의 alert");
+			e.preventDefault();
+			alert("값을 입력 후 제출해주세요");
+		}
+		
+	<%}%>
+
+
+
+
+})
+
+
+}
+
+
+
+
+
+// 	document.querySelector(".form_button2").addEventListener("click",
+// 				function(e) {
+// 					e.preventDefault();
+// <%if (!(isLogon.equals("member"))) {%>
+// 	e.preventDefault();
+// 					alert("로그인이 필요합니다");
+// <%} else {%>
+// 	form_name_button_2.submit();
+// <%}%>
+// 	})
+
+// 	document.querySelector(".form_button3").addEventListener("click",
+// 				function(e) {
+// 					e.preventDefault();
+// <%if (!(isLogon.equals("member"))) {%>
+// 	e.preventDefault();
+// 					alert("로그인이 필요합니다");
+// <%} else {%>
+// 	form_name_button_3.submit();
+// <%}%>
+// 	})
 
 
 // 값이 없을때 click한 경우
@@ -1099,7 +1214,7 @@ footer {
 																</tr>
 																<tr>
 																	<td colspan="2">
-																	<input type="submit" value="추가" class="form_button1"></td>
+																	<input type="submit" value="추가" class="form_button1" id="form_button1"></td>
 																</tr>
 															</tbody>
 														</table>
@@ -1133,7 +1248,7 @@ footer {
 																		</tr>
 																		<tr>
 																			<td colspan="2">
-																			<input type="submit" value="추가" class="form_button2"></td>
+																			<input type="submit" value="추가" class="form_button1" id="form_button1"></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -1174,7 +1289,7 @@ footer {
 																		</tr>
 																		<tr>
 																			<td colspan="2"><input type="submit" value="추가"
-																				class="form_button3"></td>
+																				class="form_button1" id="form_button1"></td>
 																		</tr>
 																	</tbody>
 																</table>

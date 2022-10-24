@@ -172,7 +172,6 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 
 
 
-					// 여기부터 one_check 변수명 수정
 
 
 					// 체크된 값
@@ -184,7 +183,6 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 						console.log("one_check_data.value 확인: ", one_check_data[i].value); // 값 갖고온거 확인
 
 
-						// 이걸 못 잡음
 						// 기존에 적은 내용임 > value를 innerhtml value에 입히기 위해 가져옴
 						let contents_text = document.querySelector(".contents_text[data-id='" + one_check_data[i].value + "']");
 						console.log("contents_text 확인 : ", contents_text);
@@ -227,11 +225,6 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 						document.querySelector(".time_Date[data-id='" + one_check_data[i].value + "']").remove(); // 기존 시간 remove
 					}
 
-					// 여기까지 one_check 변수명 수정
-
-
-
-
 
 
 					// remove로 수정버튼을 지움
@@ -260,7 +253,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 		<%if (!(isLogon.equals("member"))) {%>
 			e.preventDefault();
 			alert("로그인이 필요합니다"); // 세션은 있는데 member가 아니면
-		<%} else {%>	// 	세션이 있는데 logOn.id도 있으면
+		<%} else {%>	// 	세션이 있고 logOn.id도 있으면
 			
 			let count = 0;
 			let one_checkd = document.querySelectorAll("input[name='seq_Exercise']:checked");
@@ -325,6 +318,8 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 
 						// all_check 전체 체크, 해제 끝
 						
+
+						// 운동종류 아코디언
 						function tab_accordion_tab() {
 							let tab_accordion_tab = document.querySelectorAll(".tab_accordion_tab");
 							let tab_accordion_content = document.querySelectorAll(".tab_accordion_content");
@@ -340,6 +335,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 							}
 						}
 
+						// 운동 기록 체크한거 가져오기
 						function record_check() {
 						let record_check = document.querySelectorAll("input[name='record_checkbox']");
 

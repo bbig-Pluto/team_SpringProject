@@ -173,7 +173,9 @@
 									html += '<input type="button" value="추가" class="insert_button">'
 									sapn_button_box.innerHTML = html;
 
-									let insert_button = document.querySelector(".insert_button");
+
+
+
 									
 									// 이게 있으면.. 취소로 다시 돌아오고 없으면...  추가에 바인딩이 안됨
 									// 추가를 클릭 했을때 call_fn 여기까지 옴
@@ -185,20 +187,21 @@
 									// 3단계X call_fn 함수 안의 클릭 이벤트를 눌렀을 때 취소가 remove 되며 추가 버튼이 생김
 									// 문제 발생 = 취소를 눌렀을 때 아주 빠른 속도로 취소를 지우고 추가버튼을 만들고 다시 취소 버튼을 생성시킴
 									// 왜????.........왜....... 클릭 이벤트 이후여서 제한이 없으니까
-									// 해결방안 클릭 이벤트를 두자
+									// 해결방안 추가에 대한 함수호출(insert_bind) > 클릭 이벤트 > if(로그인x), else(로그인o 기능on) > 취소에 대한 함수호출(call_fn)
 
 									// 4단계 추가 버튼을 innerhtml로 생성 했으니 다시 insert_bide()로 바인딩 함
 									// 5단계 insert_bide 함수에 진입해서 클릭 이벤트를 기다려야 함
 
-									insert_bind();
-									
+									// 추가 버튼 do을 js 변수에 다시 초기화
+									let insert_button = document.querySelector(".insert_button");
+									insert_bind(); // 새롭게 생성된 버튼에 바인딩해서 이벤트를 기다리게 함
 
 									console.log("call_fn 이벤트 끝나기 직전")
 								})
 								
 			}
 
-		// 추가 버튼 do을 js 변수에 다시 초기화
+
 		
 
 
@@ -286,8 +289,12 @@
 		}
 
 	} // 세션 닫는 괄호
+
+
+
+	// 하나 클릭
 	function one_check() {
-		let one_check = document.querySelectorAll(".one_check"); // 하나 클릭
+		let one_check = document.querySelectorAll(".one_check");
 
 		for (let i = 0; i < one_check.length; i++) {
 			one_check[i].addEventListener("click", function(e) {
