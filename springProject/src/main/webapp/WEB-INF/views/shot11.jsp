@@ -356,60 +356,60 @@ request.setCharacterEncoding("UTF-8");
 			<div class="wrapper">
 				<h1>
 <!-- 					<img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-					<a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+					<a href=/syl/calendarM.jsp"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
 				</h1>
 				<nav>
-					<a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
-					<a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성 |</a> 
-					<a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
-					<a href="${ contextPath }/shot11.jsp"	class="headersub">다이어리 사용법 |</a> 
-					<a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
-					<div class="lgnbtn">
-						<a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-						<a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-						<a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+					<a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
+						<a href="/syl/bar/story11" class="headersub">다이어리 구성 |</a> 
+						<a href="/syl/bar/func" class="headersub">다이어리 기능 |</a> 
+						<a href="/syl/bar/shot11"	class="headersub">다이어리 사용법 |</a> 
+						<a href="/syl//notice" class="headersub">고객의 소리</a>
+						<div class="lgnbtn">
+							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a>
+							<a href="/syl/member/mypage" class="headerlogin">로그인</a>
+							<a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
 					</div>
 				</nav>
 			</div>
 		</header>
 
     <main>
-        <div><img class="pic a1" src="/team_Project/photo/shot1.png"><a href=""></a>
+        <div><img class="pic a1" src="/syl/resources/photo/shot1.png"><a href=""></a>
             <div class="txt1">
                <p class="b1"> 로그인 페이지로 로그인을 통해 자신만의 다이어리를 확인 할 수 있다. </p>
             </div>
         </div>  
-        <div><img class="pic a2" src="/team_Project/photo/shot2.png"><a href=""></a>
+        <div><img class="pic a2" src="/syl/resources/photo/shot2.png"><a href=""></a>
             <div class="txt2">
                 <p class="b2"> 회원가입 페이지로 회원가입 통해 자신만의 다이어리를 설정 할 수 있다. </p>
              </div>
         </div>
-        <div><img class="pic a3" src="/team_Project/photo/shot3.png"><a href=""></a>
+        <div><img class="pic a3" src="/syl/resources/photo/shot3.png"><a href=""></a>
             <div class="txt3">
                 <p class="b3"> 아이디나 비밀번호를 기억이나지 않는 경우 찾기 페이지를 통해 확인 할 수 있다. </p>
              </div>
         </div>
-        <div><img class="pic a4" src="/team_Project/photo/shot4.png"><a href=""></a>
+        <div><img class="pic a4" src="/syl/resources/photo/shot4.png"><a href=""></a>
             <div class="txt4">
                 <p class="b4"> 메인 페이지로 일정을 추가하거나, 주간이나, 일간 일정을 확인 할 수 있도록 준비중이다. </p>
              </div>
         </div>
-        <div><img class="pic a5" src="/team_Project/photo/shot5.png"><a href=""></a>
+        <div><img class="pic a5" src="/syl/resources/photo/shot5.png"><a href=""></a>
             <div class="txt5">
                 <p class="b5"> 일기장 하루의 기록을 남길 수 있다. </p>
              </div>
         </div>
-        <div><img class="pic a6" src="/team_Project/photo/shot6.png"><a href=""></a>
+        <div><img class="pic a6" src="/syl/resources/photo/shot6.png"><a href=""></a>
             <div class="txt6">
                 <p class="b6"> 식단표를 활용함으로써 하루의 칼로리와 식단을 정리할 수 있다. </p>
              </div>
         </div>
-        <div><img class="pic a7" src="/team_Project/photo/shot7.png"><a href=""></a>
+        <div><img class="pic a7" src="/syl/resources/photo/shot7.png"><a href=""></a>
             <div class="txt7">
                 <p class="b7"> 위시리스트를 활용해서 본인이 원하는 것을 담아 놓을 수 있다. </p>
              </div>
         </div>
-        <div><img class="pic a8" src="/team_Project/photo/shot8.png"><a href=""></a>
+        <div><img class="pic a8" src="/syl/resources/photo/shot8.png"><a href=""></a>
             <div class="txt8">
                 <p class="b8"> 상단의 고객의 소리를 통해서 질문과 응답을 받을 수 있다.  </p>
              </div>
@@ -420,8 +420,8 @@ request.setCharacterEncoding("UTF-8");
         <div  class="footer_all">
 
             <div class="left_logo">
-                <img class="left_logo1" src="/team_Project/photo/logo2.png">
-                <img class="left_logo2" src="/team_Project/photo/3syl2.png">
+                <img class="left_logo1" src="/syl/resources/photo/logo2.png">
+                <img class="left_logo2" src="/syl/resources/photo/3syl2.png">
             </div>
 
             <div  class="rc2">

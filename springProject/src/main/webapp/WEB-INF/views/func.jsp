@@ -32,8 +32,8 @@
     </style>
 </head>
 <body>
-    <a href="${ contextPath }/js/calendarM.jsp"><img class="m_logo" src="/team_Project/photo/logo3.png"></a>
-    <a href="${ contextPath }/js/calendarM.jsp"><img class="m_logo2" src="/team_Project/photo/3syl2.png"></a>
+    <a href="/syl/js/calendarM.jsp"><img class="m_logo" src="/syl/resources/photo/logo3.png"></a>
+    <a href="/syl/js/calendarM.jsp"><img class="m_logo2" src="/syl/resources/photo/3syl2.png"></a>
     <div id="c1">단장중 - 3차에 돌아오겠습니다. <br>기다려주셔서 감사합니다.</div>
 </body>
 </html>

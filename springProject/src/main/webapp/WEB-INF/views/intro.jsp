@@ -257,18 +257,18 @@
     <header>
 			<div class="wrapper">
 				<h1>
-					<a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/logo.png"></a>
+					<a href="/syl/calendarM.jsp"><img class="headerLogo" src="/syl/resources/photo/logo.png"></a>
 				</h1>
 				<nav>
-					<a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
-					<a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성 |</a> 
-					<a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
-					<a href="${ contextPath }/shot11.jsp"	class="headersub">다이어리 사용법 |</a> 
-					<a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
+					<a href="/syl/intro.jsp" class="headersub">다이어리 소개 |</a> 
+					<a href="/syl/story11.jsp" class="headersub">다이어리 구성 |</a> 
+					<a href="/syl/func.jsp" class="headersub">다이어리 기능 |</a> 
+					<a href="/syl/shot11.jsp"	class="headersub">다이어리 사용법 |</a> 
+					<a href="/syl/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
 					<div class="lgnbtn">
-						<a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-						<a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-						<a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+						<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a>
+						<a href="/syl/member/mypage" class="headerlogin">로그인</a>
+						<a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
 					</div>
 				</nav>
 			</div>

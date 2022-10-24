@@ -220,18 +220,18 @@ header {
 			<div class="wrapper">
 				<h1>
 <!-- 					<img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-					<a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+					<a href=/syl/calendarM.jsp"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
 				</h1>
 				<nav>
-					<a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
-					<a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성 |</a> 
-					<a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
-					<a href="${ contextPath }/shot11.jsp"	class="headersub">다이어리 사용법 |</a> 
-					<a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
-					<div class="lgnbtn">
-						<a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-						<a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-						<a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+					<a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
+						<a href="/syl/bar/story11" class="headersub">다이어리 구성 |</a> 
+						<a href="/syl/bar/func" class="headersub">다이어리 기능 |</a> 
+						<a href="/syl/bar/shot11"	class="headersub">다이어리 사용법 |</a> 
+						<a href="/syl//notice" class="headersub">고객의 소리</a>
+						<div class="lgnbtn">
+							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a>
+							<a href="/syl/member/mypage" class="headerlogin">로그인</a>
+							<a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
 					</div>
 				</nav>
 			</div>
@@ -240,34 +240,34 @@ header {
 
     <main>
         <div>
-            <div><img class="pic1" src="/team_Project/photo/stb1.png"><a href=""></a></div>
-            <div><img class="pic1" src="/team_Project/photo/stb2.png"><a href=""></a></div>
-            <div><img class="pic1" src="/team_Project/photo/stb3.png"><a href=""></a></div>
-            <div><img class="pic1" src="/team_Project/photo/stb4.png"><a href=""></a></div>
-            <div><img class="pic1" src="/team_Project/photo/stb5.png"><a href=""></a></div>
-            <div><img class="pic1" src="/team_Project/photo/stb6.png"><a href=""></a></div>
-            <div><img class="pic1" src="/team_Project/photo/stb7.png"><a href=""></a></div>
-            <div><img class="pic2" src="/team_Project/photo/stb2_1.png"><a href=""></a></div>
-
-            
-            <div><img class="pic3" src="/team_Project/photo/stb3_1.png"><a href=""></a></div>
-            <div><img class="pic3" src="/team_Project/photo/stb3_2.png"><a href=""></a></div>
-            <div><img class="pic3" src="/team_Project/photo/stb3_3.png"><a href=""></a></div>
-
-            <div><img class="pic4" src="/team_Project/photo/stb4_1.jpg"><a href=""></a></div>
-            <div><img class="pic4" src="/team_Project/photo/stb4_2.jpg"><a href=""></a></div>
-            <div><img class="pic4" src="/team_Project/photo/stb4_3.jpg"><a href=""></a></div>
-                                     
-            <div><img class="pic5" src="/team_Project/photo/stb5_1.jpg"><a href=""></a></div>
-                                       
-            <div><img class="pic6" src="/team_Project/photo/stb6_1.png"><a href=""></a></div>
-            <div><img class="pic6" src="/team_Project/photo/stb6_2.png"><a href=""></a></div>
-            <div><img class="pic6" src="/team_Project/photo/stb6_3.png"><a href=""></a></div>
-            <div><img class="pic6" src="/team_Project/photo/stb6_4.png"><a href=""></a></div>
-            <div><img class="pic6" src="/team_Project/photo/stb6_5.png"><a href=""></a></div>
-            <div><img class="pic6" src="/team_Project/photo/stb6_6.png"><a href=""></a></div>
-            <div><img class="pic6" src="/team_Project/photo/stb6_7.png"><a href=""></a></div>
-            <div><img class="pic6" src="/team_Project/photo/stb6_8.png"><a href=""></a></div>
+            <div><img class="pic1" src="/syl/resources/photo/stb1.png"><a href=""></a></div>
+            <div><img class="pic1" src="/syl/resources/photo/stb2.png"><a href=""></a></div>
+            <div><img class="pic1" src="/syl/resources/photo/stb3.png"><a href=""></a></div>
+            <div><img class="pic1" src="/syl/resources/photo/stb4.png"><a href=""></a></div>
+            <div><img class="pic1" src="/syl/resources/photo/stb5.png"><a href=""></a></div>
+            <div><img class="pic1" src="/syl/resources/photo/stb6.png"><a href=""></a></div>
+            <div><img class="pic1" src="/syl/resources/photo/stb7.png"><a href=""></a></div>
+            <div><img class="pic2" src="/syl/resources/photo/stb2_1.png"><a href=""></a></div>
+                                        
+                                        
+            <div><img class="pic3" src="/syl/resources/photo/stb3_1.png"><a href=""></a></div>
+            <div><img class="pic3" src="/syl/resources/photo/stb3_2.png"><a href=""></a></div>
+            <div><img class="pic3" src="/syl/resources/photo/stb3_3.png"><a href=""></a></div>
+                                        
+            <div><img class="pic4" src="/syl/resources/photo/stb4_1.jpg"><a href=""></a></div>
+            <div><img class="pic4" src="/syl/resources/photo/stb4_2.jpg"><a href=""></a></div>
+            <div><img class="pic4" src="/syl/resources/photo/stb4_3.jpg"><a href=""></a></div>
+                                        
+            <div><img class="pic5" src="/syl/resources/photo/stb5_1.jpg"><a href=""></a></div>
+                                        
+            <div><img class="pic6" src="/syl/resources/photo/stb6_1.png"><a href=""></a></div>
+            <div><img class="pic6" src="/syl/resources/photo/stb6_2.png"><a href=""></a></div>
+            <div><img class="pic6" src="/syl/resources/photo/stb6_3.png"><a href=""></a></div>
+            <div><img class="pic6" src="/syl/resources/photo/stb6_4.png"><a href=""></a></div>
+            <div><img class="pic6" src="/syl/resources/photo/stb6_5.png"><a href=""></a></div>
+            <div><img class="pic6" src="/syl/resources/photo/stb6_6.png"><a href=""></a></div>
+            <div><img class="pic6" src="/syl/resources/photo/stb6_7.png"><a href=""></a></div>
+            <div><img class="pic6" src="/syl/resources/photo/stb6_8.png"><a href=""></a></div>
 
 
         </div>
@@ -277,8 +277,8 @@ header {
         <div  class="footer_all">
 
             <div class="left_logo">
-                <img class="left_logo1" src="/team_Project/photo/logo2.png">
-                <img class="left_logo2" src="/team_Project/photo/3syl2.png">
+                <img class="left_logo1" src="/syl/resources/photo/logo2.png">
+                <img class="left_logo2" src="/syl/resources/photo/3syl2.png">
             </div>
 
             <div  class="rc2">
