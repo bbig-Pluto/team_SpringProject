@@ -16,8 +16,9 @@ public interface WishlistService {
 	
 	int getDeleteWish(WishlistDTO wishDTO);
 	
-	WishlistDTO getSelCategory(String category);
+//	WishlistDTO getSelCategory(String category);
 	
 	List<WishlistDTO> getSearchCategory(String category);
 	
+	public void getCheckDel(List seqNum);
 }

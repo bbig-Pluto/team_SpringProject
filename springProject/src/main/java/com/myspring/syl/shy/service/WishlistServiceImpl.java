@@ -54,15 +54,15 @@ public class WishlistServiceImpl implements WishlistService {
 		return result;
 	}
 
-	@Override
-	public WishlistDTO getSelCategory(String category) {
-		
-		WishlistDTO dto = new WishlistDTO();
-		
-		dto = wishDAO.selCategory(category);
-		
-		return dto;
-	}
+//	@Override
+//	public WishlistDTO getSelCategory(String category) {
+//		
+//		WishlistDTO dto = new WishlistDTO();
+//		
+//		dto = wishDAO.selCategory(category);
+//		
+//		return dto;
+//	}
 
 	@Override
 	public List<WishlistDTO> getSearchCategory(String category) {
@@ -70,6 +70,13 @@ public class WishlistServiceImpl implements WishlistService {
 		List<WishlistDTO> list = wishDAO.searchCategory(category);
 		
 		return list;
+	}
+
+	@Override
+	public void getCheckDel(List seqNum) {
+		
+		wishDAO.checkDel(seqNum);
+		
 	}
 
 

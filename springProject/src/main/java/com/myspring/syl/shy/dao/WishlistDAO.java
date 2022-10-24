@@ -20,4 +20,6 @@ public interface WishlistDAO {
 	
 	public List searchCategory(String category);
 	
+	public void checkDel(List seqNum);
+	
 }

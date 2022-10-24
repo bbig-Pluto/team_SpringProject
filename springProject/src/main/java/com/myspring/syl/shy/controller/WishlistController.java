@@ -1,6 +1,7 @@
  package com.myspring.syl.shy.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -214,7 +215,8 @@ public class WishlistController {
 	}
 	
 	/* 파일 저장 위치 지정 */
-	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
+//	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\workspace\\teamproject\\springProject\\src\\main\\webapp\\WEB-INF\\views\\shy\\wishimage";
 	
 	/* 파일 업로드 */
 	private String fileProcess(MultipartHttpServletRequest multipartRequest)throws Exception {
@@ -271,6 +273,26 @@ public class WishlistController {
 		request.setAttribute("search", search);
 		
 		return "/shy/CategoryWish";
+	}
+	
+	/* 선택 삭제 */
+	@RequestMapping(value="/checkdel",
+					method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView checkDel(
+			HttpServletRequest request,
+			HttpServletResponse response) {
+		
+		String[] check = request.getParameterValues("check");
+		List<String> list = new ArrayList();
+		
+		for(int i=0; i<check.length; i++) {
+			list.add(check[i]);
+		}
+		wishService.getCheckDel(list);
+		
+		ModelAndView mav = new ModelAndView("forward:/mainwish");
+		
+		return mav;
 	}
 	
 

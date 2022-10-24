@@ -77,5 +77,11 @@ public class WishlistDAOImpl implements WishlistDAO {
 		return list;
 	}
 
+	@Override
+	public void checkDel(List seqNum) {
+		
+		sqlSession.delete("mapper.shy.checkDelete", seqNum);
+	}
+
 
 }

@@ -56,11 +56,11 @@
 	</delete>
 	
 	<!-- 카테고리 목록 표시 -->
-	<select id="selectCategory" parameterType="wishlistDTO">
+<!-- 	<select id="selectCategory" parameterType="wishlistDTO"> -->
 	
-		SELECT DISTINCT category FROM wishlist
+<!-- 		SELECT DISTINCT category FROM wishlist -->
 	
-	</select>
+<!-- 	</select> -->
 	
 	<!-- 카테고리 별 조회 -->
 	<select id="searchCategory" resultType="wishlistDTO">
@@ -70,5 +70,17 @@
 			order by seqNum desc
 	
 	</select>
+	
+	<!-- 선택 삭제 -->
+	<delete id="checkDelete" parameterType="java.util.Map">
+	
+		delete from wishlist
+			where seqNum in
+			<foreach item="item" collection="list" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	
+	</delete>
+	
 	
 </mapper>
