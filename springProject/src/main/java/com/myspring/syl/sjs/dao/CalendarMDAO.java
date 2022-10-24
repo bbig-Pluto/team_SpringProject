@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.myspring.syl.sjs.dto.CalendarDTO;
 import com.myspring.syl.sjs.dto.CalendarMDTO;
+import com.myspring.syl.sjs.dto.CalendarWDTO;
 
 
 
@@ -23,26 +24,33 @@ public class CalendarMDAO {
 		
 		return list;
 	}
-	public int insertGoal(String goalSet) {
-		int result = sqlSession.insert("mapper.sjs.goalValueInsert", goalSet);
+	public int insertGoal(CalendarMDTO CalendarMDTO) {
+		int result = sqlSession.insert("mapper.sjs.goalValueInsert", CalendarMDTO);
+		
 		return result; 
 		
 	
 	}
 	
 	
-//	public List<CalendarMDTO> selectTodo() {
-//		List<CalendarMDTO> list2 =sqlSession.selectList("mapper.sjs.todoList");
-//		
-//		
-//		return list2;
-//	}
-//	public int insertTodo(String todoTxt) {
-//		int result2 = sqlSession.insert("mapper.sjs.todoValueInsert", todoTxt);
-//		return result2; 
-//		
-//		
-//	}
+	
+	
+	
+	public List<CalendarMDTO> selectTodo() {
+		List<CalendarMDTO> todoList =sqlSession.selectList("mapper.sjs.todoList");
+			
+		return todoList;
+	}
+	public int insertTodo(CalendarWDTO CalendarWDTO) {
+		int result2 = sqlSession.insert("mapper.sjs.todoValueInsert", CalendarWDTO);
+		return result2; 
+		
+		
+	}
+	
+	
+	
+	
 	
 	public List<CalendarMDTO> selectCalendarM() {
 		List<CalendarMDTO> calendarM_list =sqlSession.selectList("mapper.sjs.calendarM_List");

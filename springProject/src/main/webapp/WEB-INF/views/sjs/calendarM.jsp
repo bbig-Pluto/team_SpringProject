@@ -21,17 +21,25 @@
 			$("input[name=previousMonth]").click(function () { // 이전달
 				$(".calendar > tbody > td").remove();
 				$(".calendar > tbody > tr").remove();
+				//사라지는 부분은 가능한데, 다시 나타나게는 불가능.....??
+				$(".take_info_goal").remove();
+				$(".take_info").remove();
 				date = new Date(date.getFullYear(), date.getMonth() - 1, date.getDate());
 				days();
 				selectDate();
+				yyyyDD();
+
 			})
 
 			$("input[name=followingMonth]").click(function () { //다음달
 				$(".calendar > tbody > td").remove();
 				$(".calendar > tbody > tr").remove();
+				$(".take_info_goal").remove();
+				$(".take_info").remove();
 				date = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate());
 				days();
 				selectDate();
+				yyyyDD();
 
 
 			})
@@ -56,7 +64,7 @@
 				}
 
 // 				$(".year_month").text(showUpYear + "-" + (showUpMonth + 1));
-				$(".year_month").text(showUpYear + "년 " + (showUpMonth + 1) + "일 ");
+				$(".year_month").text(showUpYear + "년 " + (showUpMonth + 1) + "월 ");
 
 				for (i = 0; i < firstDay; i++) { //첫번째 줄 빈칸
 					$(".calendar tbody").append("<td></td>");
@@ -96,8 +104,10 @@
 // 			             })
 
 			selectDate();
+			yyyyDD();
 
-
+			
+			
 
 		}
 
@@ -179,6 +189,17 @@
 
 		}
 
+		function yyyyDD(){
+			
+
+			let target_yyyyDD = document.querySelector(".year_month").innerHTML;
+// 			console.log(target_yyyyDD);
+
+			document.querySelectorAll("#target_yd")[0].value = target_yyyyDD;
+			document.querySelectorAll("#target_yd")[1].value = target_yyyyDD;
+// 			console.log(calendar_yyyyDD);
+
+		}
 
 
 
@@ -575,10 +596,10 @@ input {
 }
 
 #goal {
-	width: 560px;
-	height: 40px;
+	width: 160px;
+	height: 20px;
 	margin-bottom: 10px;
-	font-size: 20px;
+	font-size: 16px;
 	border: 1px solid white;
 }
 
@@ -604,7 +625,10 @@ input {
 }
 
 #tmc {
-	width: 20px;
+	width: 16px;
+	height:14px;
+	margin-top:5px
+	
 }
 
 #tmt {
@@ -616,7 +640,7 @@ input {
 	height: 20px;
 }
 
-#a {
+#todo_btn {
 	width: 20px;
 	height: 20px;
 	border: 1px solid white;
@@ -777,6 +801,18 @@ input {
 	height: 30px;
 	border-radius: 10px;
 }
+
+
+	.take_info{
+/* 			border: 1px solid red; */
+			height: 490px;
+		}
+	.take_info_goal{
+/* 			border: 1px solid red; */
+			width: 300px;
+			display: inline-block;
+		}
+
 </style>
 </head>
 <body>
@@ -805,11 +841,21 @@ input {
 											<%-- 											<%HttpSession userInfo = request.getSession(); --%>
 											<%-- // 											String sessionId = "" + userInfo.getAttribute("logOn.id");  --%>
 											<!-- 											%> --> <input type="hidden" name="sessionId">
-
+											<div class="take_info_goal">
+												<c:forEach var="goalList" items="${ goalList }">
+													<span>${goalList.goal_set}</span>
+												<input type="submit" value="삭제"> 
+												</c:forEach>
+											</div>
+											
+	        								<input	type="hidden" name="command" value="delGoal"> 
 											<input id="goal" type="text" name="goal_set"
-											placeholder="이달의 목표를 설정하세요.  50자 내외"> <input id="t"
-											type="submit" name="goal_Num" value="설정"> <input
-											type="hidden" name="command" value="addGoal">
+											placeholder="이달의 목표를 설정하세요.  50자 내외"> 
+<!-- 											<input type="hidden" name="goal_Num"> -->
+											<input id="t" type="submit" value="설정"> 
+											<input type="hidden" name="command" value="addGoal">
+											<input type="hidden" id="target_yd" name="calendarM_yyyyDD">
+											
 
 										</th>
 
@@ -836,7 +882,7 @@ input {
 							</table>
 	</form>
 
-	<form action="" method=post>
+	<form action="/syl/calendarMA_todo" method=post>
 		<div class="todo_month">
 			<div class="m_do">이번달 할일</div>
 			<%-- 			<%HttpSession userInfo = request.getSession(); --%>
@@ -844,10 +890,19 @@ input {
 			<%-- 			%> --%>
 			<!-- 					<input type="hidden" name="sessionId"> -->
 
-			<input id="tmt" type="text" name="todo_txt"> <input id="a"
-				type="button" value="+">
-			<!-- 			<input id="a" type="submit" value="+">  -->
+			<input id="tmt" type="text" name="todo_txt"> 
+<!-- 			<input id="a" type="button" value="+"> -->
+				<input id="todo_btn" type="submit" value="+">
+				<div class="take_info">			
+					<c:forEach var="todoList" items="${ todoList }">
+						<input id="tmc" type="checkbox">
+						<span>${todoList.todo_txt}</span>
+						<br>
+					</c:forEach> 
+				</div>
 			<input type="hidden" name="command" value="addTodo">
+			<input type="hidden" id="target_yd" name="calendarM_yyyyDD">
+			
 		</div>
 	</form>
 
@@ -922,7 +977,9 @@ input {
 			<div class="schedule_Popup_date"></div>
 			<input type="hidden" id="target" name="calendarM_time">
 			
-<%-- 			${calendarM_time} --%>
+<%-- 			<c:forEach var="calendarM_List" items="${ calendarM_List }"> --%>
+<%-- 				${calendarM_List.calendarM_Title} --%>
+<%-- 			</c:forEach> --%>
 
 			
 			<button type="submit" class="schedule_Popup_chk">확인</button>

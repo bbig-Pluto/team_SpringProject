@@ -4,46 +4,51 @@
  
 <mapper namespace="mapper.sjs">
 
-<select id="goalList" 
+	<select id="goalList" 
 			resultType="calendarMDTO">
 				
 		 select  * from m_goal
 	
 	</select>
 	
-	<insert id="goalValueInsert" parameterType="String">
+	<insert id="goalValueInsert" parameterType="calendarMDTO">
 		insert into m_goal(
-			goal_Num
+			calendarM_yyyyDD
+			, goal_Num
 			, goal_set
 		)VALUES(
-			goal_Num.nextval
-			, #{_parameter}
+			#{sdfDate2}
+			, goal_Num.nextval
+			, #{goal_set}
 		)
 	
 	</insert>
 	
-<!-- 	<select id="todoList"  -->
-<!-- 			resultType="calendarMDTO"> -->
+	<select id="todoList" 
+			resultType="calendarWDTO">
 				
-<!-- 		 select  * from m_todo -->
+		 select  * from m_todo
 	
-<!-- 	</select> -->
+	</select>
 	
-<!-- 	<insert id="todoValueInsert" parameterType="String"> -->
-<!-- 		insert into m_todo( -->
-<!-- 			todo_Num -->
-<!-- 			, todo_txt -->
-<!-- 		)VALUES( -->
-<!-- 			todo_Num.nextval -->
-<!-- 			, #{todo_txt} -->
-<!-- 		) -->
+	<insert id="todoValueInsert" parameterType="calendarWDTO">
+		insert into m_todo(
+			calendarM_yyyyDD
+			, todo_Num
+			, todo_txt
+		)VALUES(
+			#{sdfDate3}
+			, todo_Num.nextval
+			, #{todo_txt}
+		)
 	
-<!-- 	</insert> -->
+	</insert>
 
 <select id="calendarM_List" 
 			resultType="CalendarDTO">
 				
 		 select  * from calendarM 
+<!-- 		 where calendarM_time = calendarM_time; -->
 	
 	</select>
 	
@@ -54,11 +59,13 @@
 			, calendarM_Title
 			, calendarM_Txt
 		)VALUES(
+<!-- 			,TO_DATE(#{calendarM_time}) -->
 			#{sdfDate}
 			,#{calendarM_Title}
 			, #{calendarM_Txt}
 		)
 	
 	</insert>
+
 
 </mapper>

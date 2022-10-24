@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.myspring.syl.sjs.dao.CalendarMDAO;
 import com.myspring.syl.sjs.dto.CalendarDTO;
 import com.myspring.syl.sjs.dto.CalendarMDTO;
+import com.myspring.syl.sjs.dto.CalendarWDTO;
 
 
 
@@ -28,26 +29,36 @@ public class CalendarMService {
 	CalendarMDAO calendarMDAO;
 	
 	public List<CalendarMDTO> selectGoal() {
-	
+		
 		return calendarMDAO.selectGoal();
 	}
-	public int insertGoal(String goalSetParam) {
+	public int insertGoal(CalendarMDTO CalendarMDTO) {
+		String date2 = CalendarMDTO.getCalendarM_yyyyDD();
 		
-		int result = calendarMDAO.insertGoal(goalSetParam);
+		Date dateAfter2 = getCalendarWM_Date(date2);
+		
+		CalendarMDTO.setSdfDate2(dateAfter2);
+		
+		int result = calendarMDAO.insertGoal(CalendarMDTO);
 		return result; 
 	}
 	
-//	public List<CalendarMDTO> selectTodo() {
-//		
-//		return calendarMDAO.selectTodo();
-//	}
-//	public int insertTodo(String todoTxtParam) {
-//		
-//		int result = calendarMDAO.insertTodo(todoTxtParam);
-//		return result; 
-//	}
+	public List<CalendarWDTO> selectTodo() {
+		
+		return calendarMDAO.selectTodo();
+	}
 	
-	public List<CalendarMDTO> selectCalendarM() {
+	public int insertTodo(CalendarWDTO CalendarWDTO) {
+		String date3 = CalendarWDTO.getCalendarM_yyyyDD();
+		Date dateAfter3 = getCalendarWM_Date(date3);
+
+		CalendarWDTO.setSdfDate3(dateAfter3);
+		
+		int result = calendarMDAO.insertTodo(CalendarWDTO);
+		return result; 
+	}
+	
+	public List<CalendarDTO> selectCalendarM() {
 		
 		return calendarMDAO.selectCalendarM();
 	}
@@ -67,13 +78,31 @@ public class CalendarMService {
 	
 	public Date getCalendarM_time(String calendarM_time) {
 		
-		System.out.println("getCalendarM_time method, calendarM_time : " + calendarM_time);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM일 dd일");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
 
 		Date to = null;
 		try {
 			to = (Date) sdf.parse(calendarM_time);
+			System.out.println("Date로 변환할 String Data: " + to);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return to;
+		
+	}
+	
+	public Date getCalendarWM_Date(String calendarM_yyyyDD) {
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 ");
+		
+		Date to = null;
+		try {
+			to = (Date) sdf.parse(calendarM_yyyyDD);
 			System.out.println("Date로 변환할 String Data: " + to);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
