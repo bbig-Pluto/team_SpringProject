@@ -3,4 +3,62 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="mapper.sjs">
+
+<select id="goalList" 
+			resultType="calendarMDTO">
+				
+		 select  * from m_goal
+	
+	</select>
+	
+	<insert id="goalValueInsert" parameterType="String">
+		insert into m_goal(
+			goal_Num
+			, goal_set
+		)VALUES(
+			goal_Num.nextval
+			, #{_parameter}
+		)
+	
+	</insert>
+	
+<!-- 	<select id="todoList"  -->
+<!-- 			resultType="calendarMDTO"> -->
+				
+<!-- 		 select  * from m_todo -->
+	
+<!-- 	</select> -->
+	
+<!-- 	<insert id="todoValueInsert" parameterType="String"> -->
+<!-- 		insert into m_todo( -->
+<!-- 			todo_Num -->
+<!-- 			, todo_txt -->
+<!-- 		)VALUES( -->
+<!-- 			todo_Num.nextval -->
+<!-- 			, #{todo_txt} -->
+<!-- 		) -->
+	
+<!-- 	</insert> -->
+
+<select id="calendarM_List" 
+			resultType="CalendarDTO">
+				
+		 select  * from calendarM 
+	
+	</select>
+	
+	<insert id="calendarValueInsert" parameterType="calendarDTO">
+	
+		insert into calendarM(
+			calendarM_time
+			, calendarM_Title
+			, calendarM_Txt
+		)VALUES(
+			#{sdfDate}
+			,#{calendarM_Title}
+			, #{calendarM_Txt}
+		)
+	
+	</insert>
+
 </mapper>
