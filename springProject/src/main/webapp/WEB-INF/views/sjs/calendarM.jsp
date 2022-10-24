@@ -922,11 +922,11 @@ input {
 						<a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성 |</a> 
 						<a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
 						<a href="${ contextPath }/shot11.jsp"	class="headersub">다이어리 사용법 |</a> 
-						<a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
+						<a href="/syl//notice" class="headersub">고객의 소리</a>
 						<div class="lgnbtn">
-							<a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-							<a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-							<a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a>
+							<a href="/syl/member/mypage" class="headerlogin">로그인</a>
+							<a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
 						</div>
 					</nav>
 				</div>
@@ -1054,16 +1054,14 @@ input {
 	<!-- 오른쪽 직선 3개 -->
 	<div class="rightLine1">
 		<!-- 여기 Index에 이동 a링크 구성하기 -->
-		<a href='${ contextPath }/yyk/diaryList.jsp'><div
-				class="post1 It2">Diary</div></a> <a
-			href='${ contextPath }/Hanu/Diet_diary_EL_View.jsp'><div
-				class="post1 It3">Diet</div></a> <a
-			href='${ contextPath }/shy/mainwish.jsp'><div class="post1 It5">Wish</div></a>
+		<a href='/syl/diaryList'><div class="post1 It2">Diary</div></a> <a
+			href='/syl/diet_1page.do'><div class="post1 It3">Diet</div></a> <a
+			href='/syl/mainwish'><div class="post1 It5">Wish</div></a>
 	</div>
 
 	<div class="rightLine2">
 		<div class="post2 It1"></div>
-		<div class="post2 It4"></div>
+		<div class="post2 It4"><a href="/syl/ec_list.do">sport</a></div>
 		<div class="post2 It6"></div>
 		<div class="post2 It7"></div>
 		<div class="post2 It8"></div>
