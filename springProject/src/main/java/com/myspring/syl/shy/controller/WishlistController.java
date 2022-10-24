@@ -216,7 +216,7 @@ public class WishlistController {
 	
 	/* 파일 저장 위치 지정 */
 //	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\workspace\\teamproject\\springProject\\src\\main\\webapp\\WEB-INF\\views\\shy\\wishimage";
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\workspace\\teamproject\\springProject\\src\\main\\webapp\\resources\\wishimage";
 	
 	/* 파일 업로드 */
 	private String fileProcess(MultipartHttpServletRequest multipartRequest)throws Exception {
