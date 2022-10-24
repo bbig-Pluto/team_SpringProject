@@ -31,6 +31,36 @@ request.setCharacterEncoding("utf-8");
 <title>Insert title here</title>
 <script type="text/javascript">
 	window.onload = function() {
+		
+		<%HttpSession userInfo = request.getSession(); // 세션 가져와서
+		String isLogon = "guest";
+
+		if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창에 들어온 Case, 세션을 여기서 생성하고, 달력페이지로 튕겨냄
+			userInfo.setAttribute("isLogon", "guest");
+			response.sendRedirect("/team_Project/js/calendarM.jsp"); // 나중에 바꿀 내용
+		} else if (userInfo.getAttribute("logOn.id") == null) { // 세션은 만들었는데, 로그인은 안 한 케이스
+			isLogon = "guest";
+		} else { // 세션도 만들었고, 로그인도 하고 들어온 Case
+			isLogon = "member";
+		}%>
+
+
+		// 수정 버튼 눌렀을 때
+		document.querySelector(".table_class_diet_reset").addEventListener("click",function(e) {
+		// e.preventDefault();
+		<%if (!(isLogon.equals("member"))) {%>
+			// e.preventDefault();
+			alert("로그인이 필요합니다"); // 세션은 있는데 member가 아니면
+		<%} else {%>	// 	세션이 있는데 logOn.id도 있으면
+			// lnbody_table_name.submit();
+			insert_bind()
+		<%}%>
+		})
+
+
+
+		function insert_bind() {
+
 		// 수정버튼
 		let reset = document.querySelector(".table_class_diet_reset");
 		// 수정취소버튼
@@ -49,7 +79,6 @@ request.setCharacterEncoding("utf-8");
 		let set_sum_2 = document.querySelector(".set_sum_2");
 
 		// 수정 버튼을 누르면
-		reset.addEventListener("click", function() {
 			// 가려진 값이 보임
 			set_menu_2.style.display = "block"
 			set_calorie_2.style.display = "block"
@@ -62,7 +91,6 @@ request.setCharacterEncoding("utf-8");
 			set_calorie.style.display = "none"
 			set_sum.style.display = "none"
 			reset.style.display = "none"
-		})
 
 		// 수정 취소 버튼을 누르면
 		cancel.addEventListener("click", function() {
@@ -81,7 +109,102 @@ request.setCharacterEncoding("utf-8");
 
 		})
 
-	} // window 닫는 괄호
+	}
+
+	// 오늘의 아침 메뉴
+	
+	
+	document.querySelector(".table_class_diet_update").addEventListener("click", function(e){
+		console.log("수정제출 클릭 이벤트 진입 : ");
+	
+
+
+
+		let set_menu_2_value = document.querySelector(".set_menu_2").value;
+		let set_calorie_2_value = document.querySelector(".set_calorie_2").value;
+		let set_sum_2_value = document.querySelector(".set_sum_2").value;
+
+
+
+		let str = document.querySelector(".set_menu_2").value;
+        
+        // 한글,영어,숫자,특수문자 구분 정규식 모음
+        var check_num = /[0-9]/;    // 숫자 
+        var check_eng = /[a-zA-Z]/;    // 문자 
+        var check_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+        var check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+
+        // test() 함수를 이용하면 boolen 값을 얻을 수 있다.
+        check_num.test(str); //숫자 return 값 true / false
+        check_eng.test(str); //영문 return 값 true / false
+        check_spc.test(str); //특수 return 값 true / false
+        check_kor.test(str); //한글 return 값 true / false
+
+		
+		let str2 = document.querySelector(".set_calorie_2").value;
+
+		// 숫자 제한
+		check_num.test(str2); //숫자 return 값 true / false
+        check_eng.test(str2); //영문 return 값 true / false
+        check_spc.test(str2); //특수 return 값 true / false
+        check_kor.test(str2); //한글 return 값 true / false
+
+		
+		let str3 = document.querySelector(".set_sum_2").value;
+
+		// 숫자 제한2
+		check_num.test(str3); //숫자 return 값 true / false
+        check_eng.test(str3); //영문 return 값 true / false
+        check_spc.test(str3); //특수 return 값 true / false
+        check_kor.test(str3); //한글 return 값 true / false
+
+
+        // if(  ) {
+        //     console.log("if의 분기");
+        //     alert("한글 O");
+        //     return true
+        // }else{
+        //     console.log("else if의 분기");
+        //     alert("한글 X");
+        //     return false;
+        // }
+
+
+
+		// null이 아니고 공백이 아니면
+		if(
+			set_menu_2_value != null && set_menu_2_value.trim() &&
+			set_calorie_2_value != null && set_calorie_2_value.trim() &&
+			set_sum_2_value != null && set_sum_2_value.trim()
+		){
+			// 위의 조건을 충족하면 정규표현식의 if로 이동
+			// 메뉴가 한글일 경우
+			// 칼로리가 숫자일 경우
+			// 칼로리 총합이 숫자일 경우
+			if(check_kor.test(str) && !check_num.test(str) && !check_eng.test(str) && !check_spc.test(str) &&
+  			  !check_kor.test(str2) && check_num.test(str2) && !check_eng.test(str2) && !check_spc.test(str2) &&
+			  !check_kor.test(str3) && check_num.test(str3) && !check_eng.test(str3) && !check_spc.test(str3)
+			){
+				// null이 아니고 공백이 아니며 정규표현식에 적합한 경우
+				console.log("if안의 if submit() 직전 ");
+				diet_update_2page.submit();
+			}else{ // null이 아니고 공백이 아니지만 정규표현식에 적합하지 않은 경우
+				e.preventDefault();
+				alert("메뉴에는 한글\n칼로리와 총 칼로리에는 숫자만 입력 가능합니다");
+			}
+
+			// null이거나 공백인 경우
+			}else{
+			console.log("else의 alert");
+			e.preventDefault();
+			alert("값을 입력 후 제출해주세요");
+		}
+	})
+
+
+
+
+} // window 닫는 괄호
 </script>
 <style>
 .set_menu_2, .set_calorie_2, .set_sum_2, .table_class_diet_cancel {
@@ -978,7 +1101,7 @@ footer {
 
 
 
-										<form action="${contextPath}/diet_update_2page.do"
+										<form action="${contextPath}/diet_update_2page.do" name = "diet_update_2page"
 											method="post">
 											<table class="today_menu">
 												<thead>

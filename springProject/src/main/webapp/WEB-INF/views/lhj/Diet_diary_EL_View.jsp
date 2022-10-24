@@ -41,7 +41,6 @@ request.setCharacterEncoding("UTF-8");
 <%HttpSession userInfo = request.getSession(); // 세션 가져와서
 String isLogon = "guest";
 
-// 803 ~ 815
 if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창에 들어온 Case, 세션을 여기서 생성하고, 달력페이지로 튕겨냄
 	userInfo.setAttribute("isLogon", "guest");
 	response.sendRedirect("/team_Project/hunminjsp/calendarMTest.jsp");
@@ -86,7 +85,12 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 <%}%>
 	})
 
-	}
+
+// 값이 없을때 click한 경우
+// 한글과 숫자가 적합하지 않을때 click한 경우
+
+
+}
 </script>
 <style>
 /* 헤더 */
