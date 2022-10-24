@@ -92,6 +92,10 @@ public class AskDAO {
 	public void delReChk(List board_no) {
 		sqlSession.delete("mapper.sdy.deleteAskReChk",board_no);		
 	}
+//	//글 상세 이전,다음글
+//	public AskDTO movePage(String board_no)throws Exception{
+//		return sqlSession.selectOne("mapper.sdy.movePage", board_no);
+//	}
 
  
 		 

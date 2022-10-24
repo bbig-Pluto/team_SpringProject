@@ -154,7 +154,10 @@ public class AskService {
 		askDAO.delReChk(board_no);
 		askDAO.delAskChk(board_no);
 	}
-
+//	//글상세 이전글,다음글
+//	public AskDTO movePage(String board_no)throws Exception{
+//		return askDAO.movePage(board_no);
+//	}
 	
 	
 }

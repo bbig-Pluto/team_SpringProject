@@ -4,6 +4,7 @@
 	      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -448,8 +449,11 @@ main {
  	z-index:1 ; 
 	
 }
+.re_menuBox{
+ 	margin-left:590px; 
+}
 .mod_re{
-	margin-left:590px;
+/* 	margin-left:590px; */
 	font-size:13px;
 	color: black;
 	display:inline-block;
@@ -679,133 +683,156 @@ function reReCancel(){
 		<section>
 			<article>
 				<div class="area_wrapper">
-		<h2>문의하기</h2>
-		<div class="box">
-		  <% 
-		 	HttpSession userInfo = request.getSession();
-			String sessionId = "" + userInfo.getAttribute("logOn.id");
-			%>	 
-		<%-- 	<%if(!sessionId.equals("null")){ %> --%>
-			<div class="view_more">
-				<img src="https://cdn-icons-png.flaticon.com/512/7794/7794501.png">
-			</div>
-		<%-- 	<%} %> --%>
-			<div class="parent">
-		            <div class="close">
-            			<button type="button" style="height:15px; width: 15px; font-size: 10px; padding: 0; background-color:lightgray;">X</button>
-   					 </div>
-			  <%--  <%if(id.equals(sessionId) || "admin01".equals(sessionId)){ %>	 --%>
-		        <a href="/syl/ask_mod?board_no=${list.board_no }" class="mod">수정하기</a><br>
-		        <br>
-		        <div class="del_text">삭제하기</div><br>
-		        <br>
-		       <%--  <%} %>  --%>
-		        <a href="/syl/reWrite?board_no=${list.board_no }" class="re">답글달기</a> 
-	    	</div>
-		
-
-			<div class="title_p"> 
-				<div class="title">
-					<strong>제목</strong>
-				</div>
-				<div class="title_text">
-					[${list.ask_classify}] ${list.title}</div>
-			</div>
-			<div class="nick_p">
-				<div class="nick">
-					<strong>작성자</strong>
-				</div>
-				<div class="nick_text">${list.id}</div>
-			</div>
-			<div class="content">${list.content}</div>
-		</div>
-		<div class="reBox">
-		<c:forEach var="reply" items="${ReplyList }">
-		<!-- 시스템에서 현제시간 -->
-					<c:set var="now" value="<%=new java.util.Date()%>" />
-					<c:set var="sysNow"><fmt:formatDate value="${now}" pattern="YYYY-MM-dd" /></c:set> 
-					<!-- 뎃글쓴 시간 -->
-					<c:set var="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></c:set> 
-				
-			<c:choose>
-				<c:when test="${empty reply.parent_no }">
-					<div class="re_inbox">
-						<div class="re_id" >${reply.id}</div>
+					<h2>문의하기</h2>
+					<div class="box">
+					<%--   <% 
+					 	HttpSession userInfo = request.getSession();
+						String sessionId = "" + userInfo.getAttribute("logOn.id");
+						%>	  --%>
+						 <c:if test="${!empty sessionId}">
+							<div class="view_more">
+								<img src="https://cdn-icons-png.flaticon.com/512/7794/7794501.png">
+							</div>
+					 	</c:if> 
+						<div class="parent">
+					            <div class="close">
+			            			<button type="button" style="height:15px; width: 15px; font-size: 10px; padding: 0; background-color:lightgray;">X</button>
+			   					 </div>
+							<c:if test="${list.id eq sessionId || sessionId eq 'admin01'}">
+						        <a href="/syl/ask_mod?board_no=${list.board_no }" class="mod">수정하기</a><br>
+						        <br>
+						        <div class="del_text">삭제하기</div><br>
+						        <br>
+					        </c:if>
+					        <a href="/syl/reWrite?board_no=${list.board_no }" class="re">답글달기</a> 
+				    	</div>
+					
+			
+						<div class="title_p"> 
+							<div class="title">
+								<strong>제목</strong>
+							</div>
+							<div class="title_text">[${list.ask_classify}] ${list.title}</div>
+						</div>
+						<div class="nick_p">
+							<div class="nick">
+								<strong>작성자</strong>
+							</div>
+							<div class="nick_text">${list.id}</div>
+						</div>
+						<div class="content">${list.content}</div>
+					</div>
+					<div class="reBox">
+					<c:forEach var="reply" items="${ReplyList }">
+					<!-- 시스템에서 현제시간 -->
+								<c:set var="now" value="<%=new java.util.Date()%>" />
+								<c:set var="sysNow"><fmt:formatDate value="${now}" pattern="YYYY-MM-dd" /></c:set> 
+								<!-- 뎃글쓴 시간 -->
+								<c:set var="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></c:set> 
+							
 						<c:choose>
-							<c:when test="${ sysNow eq re_date}">
-								<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="hh:mm:ss"/></div> 
+							<c:when test="${empty reply.parent_no }">
+								<div class="re_inbox">
+									<div class="re_id" >${reply.id}</div>
+									<c:choose>
+										<c:when test="${ sysNow eq re_date}">
+											<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="hh:mm:ss"/></div> 
+										</c:when>
+										<c:otherwise>
+											<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
+										</c:otherwise>
+								   </c:choose>
+									<div class="re_content">${reply.content}</div>
+								   <div class="re_menuBox">
+									 	 <c:if test="${reply.id eq sessionId || sessionId eq 'admin01'}">
+											<div class="mod_re" data-re_no="${reply.re_no }">수정</div>
+											<a href="/syl/ask_reply_del?re_no=${reply.re_no }&board_no=${param.board_no }" class="del_re">삭제</a>
+										</c:if>
+										<c:choose>
+											<c:when test="${reply.id eq sessionId || sessionId eq 'admin01'}">
+												<div class="re_re" data-re_re_no="${reply.re_no }">답글쓰기</div>
+											</c:when>
+											<c:when test="${!empty sessionId}">
+												<div class="re_re" data-re_re_no="${reply.re_no }" style="margin-left:50px;">답글쓰기</div>
+											</c:when>
+										</c:choose>
+								   </div>
+								</div>
 							</c:when>
 							<c:otherwise>
-								<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
+								<div class="re_inbox">
+									<div class="re_id" style="padding-left:${reply.level *10}px;"><div class="reicon">↳</div>&nbsp${reply.id}</div>
+									<c:choose>
+										<c:when test="${ sysNow eq re_date}">
+											<div class="re_date" ><fmt:formatDate value="${reply.reply_date}" pattern="hh:mm:ss"/></div> 
+										</c:when>
+										<c:otherwise>
+											<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
+										</c:otherwise>
+								   </c:choose>
+									<div class="re_content" style="padding-left:${(reply.level *10)+15}px;">${reply.content}</div>
+									 <div class="re_menuBox">
+								   <c:if test="${reply.id eq sessionId || sessionId eq 'admin01'}">
+										<div class="mod_re" data-re_no="${reply.re_no }">수정</div>
+										<a href="/syl/ask_reply_del?re_no=${reply.re_no }&board_no=${param.board_no }" class="del_re">삭제</a>
+									</c:if>
+									<c:choose>
+											<c:when test="${reply.id eq sessionId || sessionId eq 'admin01'}">
+												<div class="re_re" data-re_re_no="${reply.re_no }">답글쓰기</div>
+											</c:when>
+											<c:when test="${!empty sessionId}">
+												<div class="re_re" data-re_re_no="${reply.re_no }" style="margin-left:50px;">답글쓰기</div>
+											</c:when>
+										</c:choose>
+								   </div>
+								</div>
 							</c:otherwise>
-					   </c:choose>
-						<div class="re_content">${reply.content}</div>
-						<div class="mod_re" data-re_no="${reply.re_no }">수정</div>
-						<a href="/syl/ask_reply_del?re_no=${reply.re_no }&board_no=${param.board_no }" class="del_re">삭제</a>
-						<div class="re_re" data-re_re_no="${reply.re_no }">답글쓰기</div>
+						</c:choose>
+						</c:forEach>
 					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="re_inbox">
-						<div class="re_id" style="padding-left:${reply.level *10}px;"><div class="reicon">↳</div>&nbsp${reply.id}</div>
-						<c:choose>
-							<c:when test="${ sysNow eq re_date}">
-								<div class="re_date" ><fmt:formatDate value="${reply.reply_date}" pattern="hh:mm:ss"/></div> 
-							</c:when>
-							<c:otherwise>
-								<div class="re_date"><fmt:formatDate value="${reply.reply_date}" pattern="YYYY-MM-dd"/></div>
-							</c:otherwise>
-					   </c:choose>
-						<div class="re_content" style="padding-left:${(reply.level *10)+15}px;">${reply.content}</div>
-						<div class="mod_re" data-re_no="${reply.re_no }">수정</div>
-						<a href="/syl/ask_reply_del?re_no=${reply.re_no }&board_no=${param.board_no }" class="del_re">삭제</a>
-						<div class="re_re" data-re_re_no="${reply.re_no }">답글쓰기</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
-			</c:forEach>
-		</div>
-					<div class="re_writer"><%=sessionId %></div>
-		<div class="re_box">
-			<form name="replyFrm" class="frm" >
-				<div class="re_title">댓글쓰기</div>
-				<input type="text" name="content" class="re_content_input">
-				<input type="button" value="등록" onclick="replyInsert()" class="reply_mod_btn">
-			</form>
-		</div>
-		<div class="re_mod_box">
-			<form name="replyMod" class="frm" >
-				<div class="re_mod_title">댓글수정 중</div>
-				<input type="text" name="content" class="re_content_input">
-				<input type="button" value="취소" class="mod_cancel_btn">
-				<input type="button" value="등록" onclick="replyModGo()" class="reply_regi_btn">
-				<input type="hidden"  name="re_no" value="" id="re_no_hidden">
-			</form>
-		</div>
-		<div class="re_re_box">
-			<form name="replyRe" class="frm" >
-				<div class="re_mod_title">답댓글 쓰기</div>
-				<input type="text" name="content" class="re_content_input">
-				<input type="button" value="취소" class="re_cancel_btn">
-				<input type="button" value="등록" onclick="replyDelGO()" class="reply_re_btn">
-				<input type="hidden"  name="re_no" value="" id="re_re_no_hidden">
-			</form>
-		</div>
-		  <div class="del_p">
-				    <div class="del">
-				        <div class="warn"><strong>삭제하시겠습니까?</strong></div>
-				        <div class="go">
-				            <a href="/syl/ask_del?board_no=${list.board_no }" >확인</a>
-				        </div>
-				        <div class="cancel">
-				            <a href="/syl/detail?board_no=${list.board_no }">취소</a>
-				        </div>
-				    </div>
-			    </div>
+					 <c:if test="${ not empty sessionId }">  
+							<div class="re_writer">${sessionId }</div>
+							<div class="re_box">
+								<form name="replyFrm" class="frm" >
+									<div class="re_title">댓글쓰기</div>
+									<input type="text" name="content" class="re_content_input">
+									<input type="button" value="등록" onclick="replyInsert()" class="reply_mod_btn">
+								</form>
+							</div>
+							<div class="re_mod_box">
+								<form name="replyMod" class="frm" >
+									<div class="re_mod_title">댓글수정 중</div>
+									<input type="text" name="content" class="re_content_input">
+									<input type="button" value="취소" class="mod_cancel_btn">
+									<input type="button" value="등록" onclick="replyModGo()" class="reply_regi_btn">
+									<input type="hidden"  name="re_no" value="" id="re_no_hidden">
+								</form>
+							</div>
+							<div class="re_re_box">
+								<form name="replyRe" class="frm" >
+									<div class="re_mod_title">답댓글 쓰기</div>
+									<input type="text" name="content" class="re_content_input">
+									<input type="button" value="취소" class="re_cancel_btn">
+									<input type="button" value="등록" onclick="replyDelGO()" class="reply_re_btn">
+									<input type="hidden"  name="re_no" value="" id="re_re_no_hidden">
+								</form>
+							</div>
+				 	</c:if>  
+				  <div class="del_p">
+						    <div class="del">
+						        <div class="warn"><strong>삭제하시겠습니까?</strong></div>
+						        <div class="go">
+						            <a href="/syl/ask_del?board_no=${list.board_no }" >확인</a>
+						        </div>
+						        <div class="cancel">
+						            <a href="/syl/detail?board_no=${list.board_no }">취소</a>
+						        </div>
+						    </div>
+					    </div>
 
-	<form method="post" action="/syl/ask">
-		<input type="submit" value="목록" class="list">
-	</form>
+						<form method="post" action="/syl/ask">
+							<input type="submit" value="목록" class="list">
+						</form>
 					</div>
 			</article>
 		</section>

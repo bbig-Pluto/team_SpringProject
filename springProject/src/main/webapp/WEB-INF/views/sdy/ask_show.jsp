@@ -125,6 +125,7 @@ table .check {
 	color:white;
 /* 	margin-top: 15px; */
 	margin-left: 1000px;
+	margin-top:20px;
 }
 
 .ser {
@@ -409,7 +410,7 @@ font-size:10px;
                <a href="/syl/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a href="/syl/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-                  <a href="/syl/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
+                  <a href="/syl/member/login" class="headerlogin">로그인</a>
                   <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
                </div>
             </nav>
@@ -462,9 +463,9 @@ font-size:10px;
 
 		<table>
 			<tr>
-			<%-- <%if(!sessionId.equals("null")){ %>   --%>
+			 <%if(sessionId.equals("admin01")){ %>
 				<th class="check"><input type="checkbox" name="checkAll" onclick="selectAll(this)"></th>
-	<%-- 			<%} %> --%>
+			<%} %> 
 				<th class="no">No.</th>
 				<th class="category">카테고리</th>
 				<th class="title" colspan="2">제목</th>
@@ -476,9 +477,9 @@ font-size:10px;
 	<form name="frm" action="/syl/AdelCheck" method="post">
 		<c:forEach var="list" items="${ map.list}">
 			<tr class="show">
-		<%-- 	<%if(!sessionId.equals("null")){ %>  --%> 
+		 <%if(sessionId.equals("admin01")){ %> 
 				<td class="chk"><input type="checkbox" name="check"value="${list.board_no}" onclick="checkSelectAll()"></td>
-	<%-- 			<%} %> --%>
+	 			<%} %> 
 				<td class="n">${list.board_no}</td>
 				<td class="c">[${list.ask_classify}]</td>
 				 <td class="t" colspan="2">
@@ -532,17 +533,17 @@ font-size:10px;
 		</c:forEach>
 		
 		</table>
-	<%-- 	<%if(!sessionId.equals("null")){ %>   --%>
+	 <%if(sessionId.equals("admin01")){ %> 
 		<input type="submit" value="삭제" class="checkDel_btn">
-<%-- 		<%}%>   --%>
+	<%}%>   
 	</form>
- 	<%--   <%if(!sessionId.equals("null")){ %>   --%>
+ 	   <%if(!sessionId.equals("null")){ %>  
 		<form method="post" action="/syl/write">
 			<div class="btn">
 				<input type="submit" value="글쓰기">
 			</div>
 		</form>
-	<%-- 	<%}%>   --%> 
+	 	<%}%>   
 		<form method="post" action="/syl/ask">
 			<div class="ser">
 			<select name="q_head" onchange="classifyValue(this)">

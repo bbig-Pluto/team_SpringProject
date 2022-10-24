@@ -15,6 +15,10 @@ public class AskDTO {
 	private String level;
 	private int hit;
 	private int reply_count;
+	private int next;
+	private int last;
+	private String nexttitle;
+	private String lasttitle;
 	
 	public String getParent_no() {
 		return parent_no;
@@ -88,5 +92,29 @@ public class AskDTO {
 	}
 	public void setReply_count(int reply_count) {
 		this.reply_count = reply_count;
+	}
+	public int getNext() {
+		return next;
+	}
+	public void setNext(int next) {
+		this.next = next;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
+	}
+	public String getNexttitle() {
+		return nexttitle;
+	}
+	public void setNexttitle(String nexttitle) {
+		this.nexttitle = nexttitle;
+	}
+	public String getLasttitle() {
+		return lasttitle;
+	}
+	public void setLasttitle(String lasttitle) {
+		this.lasttitle = lasttitle;
 	}
 }

@@ -464,7 +464,7 @@ function modaldel(){
 				        </div>
 				    </div>
 			    </div>
-	<%-- <%if("admin01".equals(sessionId)){ %> --%>
+	 <%if("admin01".equals(sessionId)){ %> 
 			<div class="view_more">
 				<img src="https://cdn-icons-png.flaticon.com/512/7794/7794501.png">
 			</div>
@@ -472,21 +472,15 @@ function modaldel(){
 			       <div class="close">
             			<button type="button" style="height:15px; width: 15px; font-size: 10px; padding: 0; background-color:rgba(217, 225, 143, 0.684);">X</button>
    					 </div>
-		<%-- 	 <%
-			   HttpSession testSession = request.getSession();
-			   testSession.setAttribute("board_no",no); 
-			   testSession.setAttribute("title",title); 
-			   testSession.setAttribute("content",content); 
-			   testSession.setAttribute("title",title); 
-			   testSession.setAttribute("id",id); 
-			   %> --%>
 			   
 		        <a href="/syl/Nmod?board_no=${list.board_no}" class="mod">수정하기</a><br>
 		        <br>
 		         <div class="del_text">삭제하기</div><br>
 		        <br>
 	    	</div>
-	    <%-- 	<%} %> --%>
+		 	 <%
+				 }
+			   %> 
 			<div class="title_p">
 				<div class="title">
 					<strong>제목</strong>

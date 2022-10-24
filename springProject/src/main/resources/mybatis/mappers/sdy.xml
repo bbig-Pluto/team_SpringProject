@@ -185,6 +185,20 @@
 			#{item}
 		</foreach>
 	</delete>
+	<!-- 상세글 이전글 다음글 구현 -->
+	<!-- <select id="movePage" parameterType="String" resultType="askDTO">
+		select * from(SELECT 
+		board_no,
+         LEAD(board_no,1,9999) OVER(ORDER BY board_no) AS next,
+         LAG(board_no,1,9999) OVER(ORDER BY board_no) AS last,
+         title,
+         LEAD(TITLE,1,9999) OVER(ORDER BY board_no) AS nexttitle,
+         LAG(TITLE,1,9999) OVER(ORDER BY board_no) AS lasttitle
+         
+		FROM ask_board
+        order by board_no DESC) 
+        WHERE board_no = #{board_no}
+</select> -->
 	
 	
 

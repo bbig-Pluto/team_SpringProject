@@ -378,7 +378,7 @@ function selectAll(selectAll) {
                <a href="/syl/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a href="/syl/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-                  <a href="/syl/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
+                  <a href="/syl/member/login" class="headerlogin">로그인</a>
                   <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
                </div>
             </nav>
@@ -405,16 +405,6 @@ function selectAll(selectAll) {
 	<% Date date = new Date(); SimpleDateFormat sd = new SimpleDateFormat("yyyy년-MM월-dd일(hh시:mm분:ss초) E요일"); 
 		%>
 		<jsp:useBean id="noticeDate" class="java.util.Date"/>
-	<form action="/syl/NdelCheck" method="post">
-	<table>
-		<tr>
-			<th class="check"><input type="checkbox"  name="checkAll" onclick="selectAll(this)"></th>
-			<th class="no">No.</th>
-			<th class="title">제목</th>
-			<th class="nic">작성자</th>
-			<th class="date">작성일</th>
-			<th class="hit">조회수</th>
-		</tr>
 		<%
 		HttpSession userInfo = request.getSession();
 		String sessionId = "" + userInfo.getAttribute("logOn.id");
@@ -438,10 +428,24 @@ function selectAll(selectAll) {
 		int lastNo = firstNo + section - 1;
 		if(lastNo > lastPage){ lastNo = lastPage; }
 	%>
+	<form action="/syl/NdelCheck" method="post">
+	<table>
+		<tr>
+	 <%if(sessionId.equals("admin01")){ %> 
+			<th class="check"><input type="checkbox"  name="checkAll" onclick="selectAll(this)"></th>
+	  	<%} %> 
+			<th class="no">No.</th>
+			<th class="title">제목</th>
+			<th class="nic">작성자</th>
+			<th class="date">작성일</th>
+			<th class="hit">조회수</th>
+		</tr>
 	<c:set var="lastPage" value="<%= lastPage %>" />
 		<c:forEach var="list" items="${ map.list}">
 		<tr class="show">
+			 <%if(sessionId.equals("admin01")){ %> 
 				<td class="chk"><input type="checkbox" name="check" value="${list.board_no }" onclick="checkSelectAll()"></td>
+		 	<%} %> 
 		<c:choose>
 			<c:when test="${list.n_set eq '공지'}">
 				<td class="n"><strong>[${list.n_set }]</strong></td>
@@ -473,16 +477,17 @@ function selectAll(selectAll) {
 		</tr>
 		</c:forEach>
 	</table>
-
+ 	<%if(sessionId.equals("admin01")){ %> 
 		<input type="submit" value="삭제" class="checkDel_btn">
+	<%} %> 
 </form>
-	<%-- <%if(sessionId.equals("admin01")){ %> --%>
+	<%if(sessionId.equals("admin01")){ %> 
 	<form method="post" action="/syl/notice_write">
 		<div class="btn">
 			<input type="submit" value="글쓰기">
 		</div>
 	</form>
-<%-- 	<%} %> --%>
+	<%} %> 
 	<form method="post" action="/syl/notice">
 	<div class="ser">
 		 <select name="ser_name">

@@ -255,7 +255,7 @@ window.onload=()=>{
 	
 	list_btn.addEventListener("click",()=>{
 		frm.method="post";
-		frm.action="notice_show.jsp";
+		frm.action="/syl/notice";
 		frm.submit();
 		
 	})

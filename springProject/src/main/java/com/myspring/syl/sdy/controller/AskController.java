@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,7 +65,6 @@ public class AskController extends HttpServlet {
 				countPerPage = Integer.parseInt(str_countPerPage);
 			} catch (NumberFormatException nfe) {
 			}
-//			if((q_head!=null || ser_name !=null )&& search!=null) {
 				System.out.println("검색 컨트롤 진입");
 				Map map = askService.getSearchList(pageNum, countPerPage,ser_name,q_head,search);
 				map.put("pageNum", pageNum);
@@ -74,14 +74,6 @@ public class AskController extends HttpServlet {
 				map.put("search", search);
 				
 				mav.addObject("map",map);
-//			}else {
-//				System.out.println("리스트 컨트롤 진입");
-//				Map map = askService.getPagingList(pageNum, countPerPage);
-//				map.put("pageNum", pageNum);
-//				map.put("countPerPage", countPerPage);
-//				
-//				mav.addObject("map",map);
-//			}
 			mav.setViewName("/sdy/ask_show");
 			return mav;
 		}
