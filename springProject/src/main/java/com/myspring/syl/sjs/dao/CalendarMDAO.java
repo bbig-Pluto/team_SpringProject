@@ -36,8 +36,8 @@ public class CalendarMDAO {
 	
 	
 	
-	public List<CalendarMDTO> selectTodo() {
-		List<CalendarMDTO> todoList =sqlSession.selectList("mapper.sjs.todoList");
+	public List<CalendarWDTO> selectTodo() {
+		List<CalendarWDTO> todoList =sqlSession.selectList("mapper.sjs.todoList");
 			
 		return todoList;
 	}
@@ -52,8 +52,8 @@ public class CalendarMDAO {
 	
 	
 	
-	public List<CalendarMDTO> selectCalendarM() {
-		List<CalendarMDTO> calendarM_list =sqlSession.selectList("mapper.sjs.calendarM_List");
+	public List<CalendarDTO> selectCalendarM() {
+		List<CalendarDTO> calendarM_list =sqlSession.selectList("mapper.sjs.calendarM_List");
 		
 		
 		return calendarM_list;
