@@ -421,7 +421,7 @@ window.onload=()=>{
 		</section>
 	</main>
 	
-		<footer>
+		<!-- <footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
@@ -451,6 +451,6 @@ window.onload=()=>{
 			</div>
 		</div>
 
-	</footer>
+	</footer> -->
 </body>
 </html>

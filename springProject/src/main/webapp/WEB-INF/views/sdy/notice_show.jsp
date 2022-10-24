@@ -525,7 +525,7 @@ function selectAll(selectAll) {
 		</section>
 	</main>
 	
-		<footer>
+<!-- 		<footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
@@ -555,6 +555,6 @@ function selectAll(selectAll) {
 			</div>
 		</div>
 
-	</footer>
+	</footer> -->
 </body>
 </html>

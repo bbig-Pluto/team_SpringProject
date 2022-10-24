@@ -838,7 +838,7 @@ function reReCancel(){
 		</section>
 	</main>
 	
-		<footer>
+		<!-- <footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
@@ -868,6 +868,6 @@ function reReCancel(){
 			</div>
 		</div>
 
-	</footer>
+	</footer> -->
 </body>
 </html>

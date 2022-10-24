@@ -598,7 +598,7 @@ font-size:10px;
 	</div> --%>
 	
 	
-		<footer>
+		<!-- <footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
@@ -628,6 +628,6 @@ font-size:10px;
 			</div>
 		</div>
 
-	</footer>
+	</footer> -->
 </body>
 </html>

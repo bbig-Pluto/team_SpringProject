@@ -503,7 +503,7 @@ function modaldel(){
 		</section>
 	</main>
 	
-		<footer>
+	<!-- 	<footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
@@ -533,6 +533,6 @@ function modaldel(){
 			</div>
 		</div>
 
-	</footer>
+	</footer> -->
 </body>
 </html>

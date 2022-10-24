@@ -516,7 +516,7 @@ main {
 		</section>
 	</main>
 	
-		<footer>
+		<!-- <footer>
 		<div class="footer_all">
 
 			<div class="left_logo">
@@ -546,6 +546,6 @@ main {
 			</div>
 		</div>
 
-	</footer>
+	</footer> -->
 </body>
 </html>
