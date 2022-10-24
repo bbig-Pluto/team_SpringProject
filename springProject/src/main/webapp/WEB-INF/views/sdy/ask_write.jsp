@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
 <style>
 h2 {
 	margin-top:100px;
@@ -335,11 +340,17 @@ window.onload=()=>{
                <a href="/team_Project/story11.jsp" class="headersub">다이어리 구성 |</a> 
                <a href="/team_Project/func.jsp" class="headersub">다이어리 기능 |</a> 
                <a href="/team_Project/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
-               <a href="/team_Project/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
+              <a href="/syl//notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="/team_Project/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-                  <a href="/team_Project/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-                  <a href="/team_Project/member/logout.do" class="headerloginout">로그아웃</a>
+                   <a href="/syl/member/rd/mypage " class="headermypage">마이페이지</a>
+                  <c:choose>
+	                  <c:when test="${empty sessionId }">
+		                  <a href="/syl/member/login " class="headerlogin">로그인</a>
+	                  </c:when>
+	                  <c:otherwise>
+		                  <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+	                  </c:otherwise>
+                  </c:choose>
                </div>
             </nav>
          </div>

@@ -330,4 +330,48 @@
 			#{item}
 		</foreach>
 	</delete>
+	
+	<!-- todo -->
+	<select id="selectAllTodoList" 
+			resultType="todoDTO">
+		select * from todoList
+		order by write_date desc
+	</select>
+	<!-- 체크시 삭제 -->
+	<delete id="deleteChkTodo" parameterType="java.util.Map">
+			delete from todoList
+			where todo_id in
+		<foreach item="item" collection="list" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete> 
+	
+		<!--글쓰기 -->
+	<insert id="insertTodoContents" parameterType="todoDTO">
+		insert into todoList
+		(todo_id,todo)
+	    values(#{todo_id},#{todo})
+	</insert>
+		<!--전체 수정 -->
+	<!--  <update id="updateTodoChk" parameterType="java.util.Map">
+		UPDATE todoList
+		   SET chk  = #{chk}
+		  	where todo_id in
+			<foreach item="item" collection="list" open="(" close=")" separator=",">
+			#{item}
+			</foreach>
+	</update>  -->
+		<!--수정 -->
+	 <update id="updateTodoChk" parameterType="todoDTO">
+		UPDATE todoList
+		   SET chk  = #{chk}
+		  	where todo_id =#{todo_id}
+	</update> 
+	<!-- todoseq -->
+	<select id="todoSeq" 
+			resultType="int">
+		select todo_seq.nextVal from dual
+	</select>
+	
+	
 </mapper>

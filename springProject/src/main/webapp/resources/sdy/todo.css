@@ -1,0 +1,275 @@
+@charset "UTF-8";
+/*왼쪽 구역-------------------------------------------------------------------------------------------------------------------*/
+.title{
+    color: white;
+    font-size: 50px;
+    font-weight: bolder;
+    margin-left: 140px;
+    margin-top: 100px;
+ }
+ :root{
+     /*체크박스 체크 후 색상*/
+     --heratColor:rgb(225, 19, 19);
+     /*체크박스 체크 전 색상*/
+     --disableBg:#d1d6ee;
+ }
+  /*처음 체크박스 위치가 페이지 정중간으로 옮겨짐*/
+ section{
+     /* display: flex; */
+     /* align-items: center;
+     justify-content: center; */
+     /* width: 100%;
+     height: 100%; */
+ }
+ /*네모 체크박스가 화면에서 사라짐*/
+  .heart_input{
+     position:relative;
+     display: inline-block;
+     position: absolute;
+     opacity: 0;
+     visibility:hidden; 
+ }
+ /*하트 모양 구현*/
+ label, label:before{
+     height:100px;
+     width: 100px;
+     background-size: 50px 50px;
+     background-repeat: no-repeat;
+     background-position: top left,top right,bottom left,bottom right ;
+     transition: all linear 0.45s;
+
+ }
+ label{
+     position:relative;
+     display: inline-block;
+     cursor: pointer;
+     /*체크박스 체크 전 색상*/
+     background-image:
+         radial-gradient(circle at 75% 85.5%, var(--disableBg) 25%,transparent 25%),
+         radial-gradient(circle at 25% 85.5%, var(--disableBg) 25%,transparent 25%),
+         radial-gradient(circle at 108.8% -41%, var(--disableBg) 40%,transparent 40%),
+         radial-gradient(circle at -8.8% -41%, var(--disableBg) 40%,transparent 40%);
+ }
+ label:before{
+     content:'';
+     position:absolute;
+     top:0;
+     left:0;
+     /*체크박스 체크 후 색상*/
+     background-image:
+         radial-gradient(circle at 75% 85.5%, var(--heratColor) 25%,transparent 25%),
+         radial-gradient(circle at 25% 85.5%, var(--heratColor) 25%,transparent 25%),
+         radial-gradient(circle at 108.8% -41%, var(--heratColor) 40%,transparent 40%),
+         radial-gradient(circle at -8.8% -41%, var(--heratColor) 40%,transparent 40%);
+         opacity: 0; 
+ }
+
+ input:checked ~ label:before{
+     opacity: 1;
+ }
+ /*하트안에 원*/
+ label:after{
+     content: '';
+     position: absolute;
+     height:29px;
+     width: 29px;
+     background-color: #ffffff;
+     border-radius: 50%;
+     /* border:1px solid black; */
+     animation:heart-out 0.45s linear forwards;
+ }
+ /*체크 시 원의 움직임*/
+ @keyframes heart-out {
+     0% { transform: translate(50px,28px); }
+     /* 25% { transform: translate(30px,43px); } */
+     50% { transform: translate(35px,40px); }
+     /* 75% { transform: translate(25px,45px); } */
+     100% { transform: translate(22.6px,27px); }
+ }
+
+ input:checked ~ label:after{
+   animation: heart-in 0.45s linear forwards;
+ }
+ /*체크 시 원의 움직임*/
+ @keyframes heart-in {
+     0% { transform: translate(22px,25px); }
+     /* 25% { transform: translate(30px,43px); } */
+     50% { transform: translate(35px,40px); }
+     /* 75% { transform: translate(25px,45px); } */
+     100% {transform: translate(50px,26px);  }
+ }
+ .allCheck{
+     display: inline-block;
+     color: white;
+     position: absolute;
+     top:190px;
+     left: 200px;
+ }
+ .box{
+     width: 450px;
+     height: 450px;
+     border: 2px solid white;
+     margin-left: 20px;
+     margin-top: 170px;
+     overflow-y: scroll;
+ }
+ #heart-check label{
+     display: inline-block;
+ }
+ #heart-check_all label{
+ 	display: inline-block;
+ }
+ .text{
+     display: inline-block; 
+     font-size: 25px;
+     width: 300px;
+     border-bottom: 2px solid white;
+      margin-top: 10px; 
+     vertical-align: top;
+     
+ }
+ .text_input{
+     width: 350px;
+     height: 25px;
+     background-color: white;
+ }
+ .heart-check_all {
+     position: absolute;
+     top:150px;
+     left: 120px;
+ }
+ .input_todo{
+     margin-left: 20px;
+     font-size: 0;
+ }
+ .input_todo input[type="text"]{
+     height: 30px;
+     width: 446px;
+     background-color: rgba(255, 255, 255, 0.579);
+     border-left: 2px solid white;
+     border-right: 2px solid white;
+     border-bottom: 2px solid white;
+     border-top:0px;
+     outline:none;
+     position:relative;
+     
+ }
+ .regi{
+ 
+ 	 position:relative;
+ 	 left:385px;
+ 	top:-32px;
+ 	 z-index:1;
+ 	 background-color:white;
+ 	 border-radius:50px;
+ 	 height:27px;
+ 	 width:60px;
+ 	 border:0px;
+ 	 cursor:pointer;
+ }
+ .submit{
+ 	display:inline-block;
+ 	position:absolute;
+ 	top:695px;
+ 	left:540px;
+ }
+ .del_btn {
+    font-size: 45px;
+    height:55px;
+    width: 55px;
+    color: rgb(245, 63, 63);
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    padding: 0px;
+    transition: all 1s;
+    transform:rotate(45deg);
+    position:absolute;
+    top:180px;
+    left: 540px;
+}
+.del_btn:hover {
+    cursor: pointer;
+    color:rgb(245, 63, 63);
+    transform: rotate(225deg);
+}
+.textInfo{
+    background-color: rgba(255, 255, 255, 0.47);
+    width: 150px;
+    height: 20px;
+    text-align: center;
+    padding-top: 5px;
+    position: absolute;
+    top:170px;
+    left: 420px;
+    font-size: 13px;
+    border-radius: 30px;
+    opacity: 0;
+    transition: all ease 0.5s;
+}
+.p{
+    font-size: 0;
+}
+.hA{
+    width: 42px;
+    height: 35px;
+    position: absolute;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    background-color: white;
+    z-index: 2;
+    display: inline-block;
+
+
+}
+.hLT{
+    width: 20px;
+    height: 17px;
+    border-radius: 13px 20px 0px 13px;
+    position: absolute;
+    top:2px; left: 3px;
+    border: none;
+    background-color: rgb(225, 19, 19);
+    z-index: 1;
+    margin-top: 3px;
+
+}
+.hRT{
+    width: 20px;
+    height: 17px;
+    border-radius: 20px 13px 13px 0px;
+    position: absolute;
+    top:2px; left: 21px;
+    border: none;
+    background-color: rgb(225, 19, 19);
+    z-index: 1;
+    margin-top: 3px;
+
+}
+.hLB{
+    width: 20px;
+    height: 17px;
+    border-radius: 0px 0px 0px 200%;
+    position: absolute;
+    top:12px; left: 3px;
+    border: none;
+    background-color: rgb(225, 19, 19);
+    z-index: 1;
+    margin-top: 3px;
+
+}
+.hRB{
+    
+
+    width: 20px;
+    height: 17px;
+    border-radius: 0px 0px 200% 0px;
+    position: absolute;
+    top:12px; left: 21px;
+    border: none;
+    background-color: rgb(225, 19, 19);
+    z-index: 1;
+    margin-top: 3px;
+
+}
+</style>

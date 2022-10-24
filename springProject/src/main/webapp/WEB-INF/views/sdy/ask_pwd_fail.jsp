@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
 <style>
 	.parent{
 		margin-top:300px;

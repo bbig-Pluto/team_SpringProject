@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
+  <link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
     <style>
         .out_box{
             border: 1px solid black;
