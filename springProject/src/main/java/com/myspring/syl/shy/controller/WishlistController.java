@@ -1,12 +1,12 @@
  package com.myspring.syl.shy.controller;
 
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,6 +73,10 @@ public class WishlistController {
 			@RequestParam("link") String link,
 			MultipartHttpServletRequest multipartRequest
 			) throws Exception {
+		
+		HttpSession userInfo = request.getSession();
+		String sessionId = "" + userInfo.getAttribute("logOn.id");
+		
 		/* 파일 저장 */
 		String originalFileName = fileProcess(multipartRequest);
 		
@@ -97,6 +101,8 @@ public class WishlistController {
 		} else {
 			wishDTO.setLink(link);
 		}
+		
+		wishDTO.setId(sessionId);
 		
 		System.out.println("카테고리 : " + wishDTO.getCategory());
 		System.out.println("상품명 : "+ wishDTO.getName());

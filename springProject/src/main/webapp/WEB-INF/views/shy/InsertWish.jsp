@@ -11,6 +11,7 @@
 %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
  
 <!DOCTYPE html>
 <html>
@@ -461,6 +462,12 @@
         .list:hover {
             cursor: pointer;
             color:rgb(116, 116, 116);
+        }
+        .del_chb {
+            position: absolute;
+            zoom: 2.0;
+            accent-color: rgb(255, 181, 206);
+            display: none;
         }
         .list_photo {
             width: 120px;
@@ -1130,7 +1137,7 @@
 	                    	<c:forEach var="wish" items="${wishlist }">
 	                    		<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
-				                        <div class="null_photo"></div>
+			                        	<input class="del_chb" type="checkbox">
 			                            <img class="list_photo"
 			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>

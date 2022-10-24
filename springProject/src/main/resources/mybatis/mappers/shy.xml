@@ -34,13 +34,16 @@
 	<!-- 상품 수정 -->
 	<update id="updateWishlist" parameterType="wishlistDTO">
 	
-		update wishlist
-			set category=#{category},
-				name=#{name},
-				photo=#{photo},
-				price=#{price},
-				link=#{link}
+			update wishlist
+				set category=#{category},
+					name=#{name},
+				<if test="photo != null and photo != ''">
+					photo=#{photo},
+				</if>
+					price=#{price},
+					link=#{link}
 			where SEQNUM = #{seqNum}
+		
 	
 	</update>
 	

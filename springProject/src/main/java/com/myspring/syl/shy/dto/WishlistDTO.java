@@ -8,18 +8,20 @@ public class WishlistDTO {
 	private String price;
 	private String link;
 	private int seqNum;
+	private String id;
 	
 	public WishlistDTO() {
 		
 	}
 	
-	public WishlistDTO(int seqNum, String category, String name, String photo, String price, String link) {
+	public WishlistDTO(int seqNum, String category, String name, String photo, String price, String link, String id) {
 		this.seqNum = seqNum;
 		this.category = category;
 		this.name = name;
 		this.photo = photo;
 		this.price = price;
 		this.link = link;
+		this.id = id;
 	}
 	
 	public String getCategory() {
@@ -57,6 +59,14 @@ public class WishlistDTO {
 	}
 	public void setSeqNum(int seqNum) {
 		this.seqNum = seqNum;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 

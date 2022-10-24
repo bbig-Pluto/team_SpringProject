@@ -12,6 +12,7 @@
 %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
     
 <!DOCTYPE html>
 <html>
@@ -463,14 +464,16 @@
             cursor: pointer;
             color:rgb(116, 116, 116);
         }
+        .chb {
+        	float: left;
+			position: relative;
+			top: 30px;
+			display: none;
+        }
         .del_chb {
-            float: left;
-            /* margin: 5px 5px; */
-            zoom: 1.8;
+        	float: left;
+            zoom: 1.5;
             accent-color: rgb(0, 105, 79);
-            /* accent-color: rgb(255, 176, 200); */
-            position: absolute;
-            display: none;
         }
         .list_photo {
             width: 120px;
@@ -804,9 +807,9 @@
         function dellist() {
 
             let del = document.querySelector(".delete");
-            let list = document.querySelector(".del_chb");
-
-            del.addEventListener("click", ()=> list.style.display = "block");
+            let chb = document.querySelector(".chb");
+            
+            del.addEventListener("click", ()=> chb.style.display = "block");
         }
     </script>
 </head>
@@ -836,11 +839,20 @@
                     <div class="add_delete">
                     
                     <!-- +(추가) 버튼을 누르면 카테고리 추가 페이지로 이동  -->
-                    <a href="${contextPath }/insertwishpage">
-                        <input onclick="doDisplay()" class="add" type="submit" value="+">
-                    </a>
+<%--                     <c:choose> --%>
+<%-- 	                    <c:when test="${empty sessionId }"> --%>
+<%-- 	                    	<a href="${contextPath }/member/login"> --%>
+<!-- 	                        	<input onclick="doDisplay()" class="add" type="submit" value="+"> -->
+<!-- 	                        </a> -->
+<%-- 	                    </c:when> --%>
+<%-- 	                    <c:when test="${!empty sessionId }"> --%>
+		                    <a href="${contextPath }/insertwishpage">
+		                        <input onclick="doDisplay()" class="add" type="submit" value="+">
+		                    </a>
+<%-- 	                    </c:when> --%>
+<%--                     </c:choose> --%>
                     
-<!--                         <img class="delete" src="https://ifh.cc/g/2K5tVb.png"> -->
+                        <img class="delete" src="https://ifh.cc/g/2K5tVb.png">
                     </div>
                     
                     <!-- 상품 카테고리 -->
@@ -876,7 +888,7 @@
 	                    	<c:forEach var="wish" items="${wishlist }">
 	                    		<a href="${contextPath }/pickwish?seqNum=${ wish.seqNum }">
 			                        <div class="list">
-			                        	<input class="del_chb" type="checkbox">
+			                        	<div class="chb"><input class="del_chb" type="checkbox"></div>
 			                            <img class="list_photo"
 			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${wish.photo}">
 			                            <div class="list_name">${wish.name }</div>

@@ -991,32 +991,41 @@
 	    window.onload = function() {
 	        upload();
 	        notice();
-	        dellist();
+// 	        dellist();
 	        
-            document.querySelector('input[name="save"]').addEventListener("click", function(e) {
-            	e.preventDefault();
+	        document.querySelector('input[name="save"]').addEventListener("click", function(e) {
+	        	e.preventDefault();
             	
-            	let name = document.querySelector('input[name="name"]').value;
+	        	let name = document.querySelector('input[name="name"]').value;
             	name = name.trim();
             	
-            	let image = document.querySelector('input[name="photo"]').value;
-            	image = image.trim();
+//             	let image = document.querySelector('input[name="photo"]').value;
+//             	image = image.trim();
             	
-            	let imgntc = document.querySelector(".image_notice");
-            		let imgcf = document.querySelector(".image_confirm");
+//             	let imgntc = document.querySelector(".image_notice");
+//             		let imgcf = document.querySelector(".image_confirm");
             	let namentc = document.querySelector(".name_notice");
             		let namecf = document.querySelector(".name_confirm");
+            		
+        			let ntc = document.querySelector(".notice");
+        			let save = document.querySelector(".save");
+        			let can = document.querySelector(".notice_cancle");
+        			let real = document.querySelector(".real_update");
+        			let nd = document.querySelector(".notice_delete");
             	
-            	if(name == '' || name.length == 0) {
-            		namentc.style.display = "block";
-            		namecf.addEventListener("click", ()=> namentc.style.display = "none");
-            		
-            	} else if(image == '' || image.length == 0) {
-            		imgntc.style.display = "block";
-            		imgcf.addEventListener("click", ()=> imgntc.style.display = "none");
-            		
-            	} else {
-            		<% System.out.println("InsertWish Submit Route"); %>
+                	if(name == '' || name.length == 0) {
+                		namentc.style.display = "block";
+                		namecf.addEventListener("click", ()=> namentc.style.display = "none");
+                		
+//                 	} else if(image == '' || image.length == 0) {
+//                 		imgntc.style.display = "block";
+//                 		imgcf.addEventListener("click", ()=> imgntc.style.display = "none");
+                		
+                	} else {
+            			save.addEventListener("click", ()=> ntc.style.display = "block");
+            			can.addEventListener("click", ()=> ntc.style.display = "none");
+            			nd.addEventListener("click", ()=> real.click());
+            		<% System.out.println("UpdateWish Submit Route"); %>
             		update.method = "post";
             		update.action = "/syl/updatewish";
             		update.enctype = "multipart/form-data"
@@ -1042,8 +1051,6 @@
 		/* 이미지 미리보기 */
 		function readURL(input) {
 			
-			let image = document.querySelector('input[name="photo"]').value;
-			
 			if(input.files && input.files[0]) {
 				var reader = new FileReader();
 				
@@ -1056,23 +1063,16 @@
 				let photo = document.querySelector(".view_photo");
 				photo.style.display = "block";
 
-			} else if(image != '' || image.length != 0) {
-
-				update.method = "post";
-				update.action = "/syl/updatewish";
-				update.enctype = "multipart/form-data"
-				update.submit();
-				
 			}
 		}
 
 		function notice() {
 		        
-			let ntc = document.querySelector(".notice");
-			let save = document.querySelector(".save");
-			let can = document.querySelector(".notice_cancle");
-			let real = document.querySelector(".real_update");
-			let nd = document.querySelector(".notice_delete");
+// 			let ntc = document.querySelector(".notice");
+// 			let save = document.querySelector(".save");
+// 			let can = document.querySelector(".notice_cancle");
+// 			let real = document.querySelector(".real_update");
+// 			let nd = document.querySelector(".notice_delete");
 			let back = document.querySelector(".back");
 			let ntc2 = document.querySelector(".notice2");
 			let exit = document.querySelector(".notice_exit");
@@ -1080,10 +1080,10 @@
 			back.addEventListener("click", ()=> ntc2.style.display = "block");
 			exit.addEventListener("click", ()=> ntc2.style.display = "none");
 			
-			nd.addEventListener("click", ()=> real.click());
+// 			nd.addEventListener("click", ()=> real.click());
 			
-			save.addEventListener("click", ()=> ntc.style.display = "block");
-			can.addEventListener("click", ()=> ntc.style.display = "none");
+// 			save.addEventListener("click", ()=> ntc.style.display = "block");
+// 			can.addEventListener("click", ()=> ntc.style.display = "none");
 		        
 		 }
     </script>
@@ -1190,7 +1190,7 @@
                         		<div class="right_title">VIEW</div>
 
                 <!-- 상품 추가 -->
-                <form name="update" method="post" action="${contextPath }/updatewish" enctype="multipart/form-data">
+                <form name="update">
 
 						<!-- 이미지 업로드 -->
                         <div class="view">
@@ -1236,8 +1236,8 @@
 			                            
 						                <div class="back">취소</div>
 						                
-						                <input class="real_update" style="display: none;" type="submit">
-						                <input class="save" type="button" value="완료하기">
+						                <input name="real" class="real_update" style="display: none;" type="submit">
+						                <input name="save" class="save" type="button" value="완료하기">
 						                
 						                
                          			</div>

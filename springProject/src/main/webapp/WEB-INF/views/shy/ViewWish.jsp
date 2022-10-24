@@ -844,7 +844,7 @@
     
 	    window.onload = function() {
 	        notice();
-	        dellist();
+// 	        dellist();
 	    }
 
 			function notice() {
