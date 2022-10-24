@@ -14,6 +14,7 @@
 		<typeAlias type="com.myspring.syl.shy.dto.WishlistDTO" alias="wishlistDTO"></typeAlias>
 		
 		<typeAlias type="com.myspring.syl.yyk.dto.DiaryDTO" alias="diaryDTO"></typeAlias>
+		<typeAlias type="com.myspring.syl.yyk.dto.MemoDTO" alias="memoDTO"></typeAlias>
 		
 		<typeAlias type="com.myspring.syl.sdy.dto.AskDTO" alias="askDTO"></typeAlias>
 		<typeAlias type="com.myspring.syl.sdy.dto.NoticeDTO" alias="noticeDTO"></typeAlias>

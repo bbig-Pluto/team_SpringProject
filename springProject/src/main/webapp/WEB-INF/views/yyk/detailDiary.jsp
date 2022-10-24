@@ -473,10 +473,16 @@ main {
         }
 
 .preview {
+/* 	position:absolute; */
+/*     width: 200px; */
+/*     right: 62px; */
+/*     top: 48px; */
+}
+/* 파일 영역 컨테이너 */
+.file_container {
 	position:absolute;
-    width: 200px;
-    right: 62px;
-    top: 48px;
+    top:43px;
+    left:93px;
 }
 
 /* ////////////////////////////////////////////////////////////////// */
@@ -487,7 +493,7 @@ main {
 	/* background-color: rgb(247, 242, 226); */
 	border-radius: 25px;
 	width: 80%;
-	height: 21%;
+	height: 144px;
 	margin-left: 14%;
 	margin-top: 1%;
 }
@@ -574,7 +580,6 @@ main {
 	background-color: white;
 	margin-top: -20px;
 	margin-left: 5%;
-/* 	margin-top: 5%; */
 	width: 85%;
 	height: 552px;
 }
@@ -902,7 +907,8 @@ footer {
 				}
 			}, 10); // 0.01초
 		})
-}
+	}		
+
 	
 	//아이콘 클릭 시 아이콘 value 저장
 	function icon(){
@@ -1038,9 +1044,11 @@ footer {
 										<!-- 포스트잇 -->
 										<div class="postit_container">
 											<img src="resources/yyk/image/포스트잇(완).png" class="postit"> 
-											<img class="preview" style="width: 250px; height: 250px;"
-												src="${contextPath }/download?imageFileName=${param.fileName }">
-											<input type="file" name="file" onchange ="readURL(this);">
+											<div class="file_container">
+												<img class="preview" width=250 height=250 src="${contextPath }/download?imageFileName=${param.fileName }">
+												<br>
+												<input type="file" name="file" onchange ="readURL(this);"><br>
+											</div>
 										</div>
 									</div>
 	
@@ -1078,7 +1086,7 @@ footer {
 										
 											<!-- 제목 & 제목 입력 창 -->
 											<div class="title">제목</div>
-											<input type="text" name="d_title" class="title_input" value="${param.title } ">
+											<input type="text" name="d_title" class="title_input" value="${param.title} ">
 											<!-- 일기 내용 -->
 											<div class="textarea_container">
 												<textarea class="notes" name="d_content">${param.content }</textarea>

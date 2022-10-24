@@ -8,6 +8,7 @@ import com.myspring.syl.yyk.dto.DiaryDTO;
 
 public interface DiaryService {
 
+//	List<DiaryDTO> getDiaryList(String sessionId);
 	List<DiaryDTO> getDiaryList();
 	
 	int getAddDiary(DiaryDTO diaryDTO);
@@ -17,5 +18,6 @@ public interface DiaryService {
 	int getDelDiary(DiaryDTO diaryDTO);
 	
 	List<DiaryDTO> getSearchDiary(DiaryDTO diaryDTO);
+	
 	
 }

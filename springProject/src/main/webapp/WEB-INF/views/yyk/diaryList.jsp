@@ -11,6 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%-- 웹폰트 적용 --%>
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -438,6 +441,9 @@ main {
 		flex-wrap: wrap;
 		margin-left: 7.5%;
 		margin-top: 4%;
+		width: 840px;
+		height: 440px;
+		overflow: auto;
 	}
 	/* 일기장 목록 박스 하나 하나 */
 	.box {
@@ -523,22 +529,54 @@ main {
      
     /* 일기장 추가 버튼*/
     .addBtn_container{
-            position: absolute;
-            right: 13.5%;
-            margin-top: 30px;
-        }
+     	position: absolute;
+        right: 13.5%;
+        margin-top: 30px;
+    }
     .addBtn {
-            border:none;
-            background-color: #fba568aa;
-            width: 40px;
-            height: 25px;
-            color: rgba(255, 255, 255, 0.826);
-            border-radius: 5px;
-            font-size: 20px;
-        }
+        border:none;
+        background-color: #fba568aa;
+        width: 40px;
+        height: 25px;
+        color: rgba(255, 255, 255, 0.826);
+        border-radius: 5px;
+        font-size: 20px;
+    }
      .addBtn:hover {
-            background-color: #fdad748e;
-        }
+        background-color: #fdad748e;
+    }
+        
+   	/* 스크롤바 전체 */
+	.diaryList_boxWrap::-webkit-scrollbar {
+	    width: 15px;
+	    /* height: 15px; */
+		/* margin-right: 10px; */
+		
+	}
+	 /* 스크롤 여백 */
+	.diaryList_boxWrap::-webkit-scrollbar-track {
+	    /* background-color: rgba(0,0,0,0.1); */
+	    border-radius: 5px;
+	}
+
+	/* 스크롤 막대 */
+	.diaryList_boxWrap::-webkit-scrollbar-thumb {
+	    /* background-color: rgba(239, 117, 117, 0.8); */
+	/*     background-color: rgba(119, 118, 118, 0.223); */
+	    background-color: rgba(255, 126, 52, 0.15);
+	    border-radius: 5px;
+		/* height: 10px; */
+	}
+
+        
+     .msg {
+          display: none; 
+          font-size: 30px;
+        	 color: rgba(159, 158, 158, 0.656);
+          text-align: center;
+          margin-top: 10%;
+     }
+        
 
 
 
@@ -705,17 +743,7 @@ footer {
             border-radius: 0px 80px 80px 0px;
             background-color: #d8cbf1;
         }
-        
-        
-        
-        .msg {
-             display: none; 
-             font-size: 30px;
-           	 color: rgba(159, 158, 158, 0.656);
-             text-align: center;
-             margin-top: 10%;
-        }
-        
+       
        
 </style>
 
@@ -738,9 +766,25 @@ window.onload = function () {
     	let msg = document.querySelector(".msg");
         msg.style.display = "block"
     }
+    <%
+    // 세션을 연결해주는 통로 
+    HttpSession logOnSession = request.getSession();
+    // 로그인 통해서 들어오지 않고 주소창에서 바로 들어오는 사람을 위해 
+    // isNew로 세션이 없으면 만들어 주고 있으면 가져다 씀
+    if (logOnSession.isNew()) {
+    	System.out.println("diaryList.jsp isNew true route");
+    	logOnSession.setAttribute("isLogon", "guest");
+    } else {
+    	System.out.println("diaryList.jsp isNew false route");
+    }
+    
+   	System.out.println("diaryList isLogon 아이디 : " + logOnSession.getAttribute("isLogon"));
+    %>
     
     
 }
+
+
 
 </script>
 
@@ -758,9 +802,9 @@ window.onload = function () {
                <a href="${ contextPath }/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-                  <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+                  <a href="${ contextPath }/shm/mypage.jsp" class="headermypage">마이페이지</a>
+                  <a href="${ contextPath }/shm/signin.jsp" class="headerlogin">로그인</a>
+                  <a href="${ contextPath }/shm/logout.do" class="headerloginout">로그아웃</a>
                </div>
             </nav>
          </div>

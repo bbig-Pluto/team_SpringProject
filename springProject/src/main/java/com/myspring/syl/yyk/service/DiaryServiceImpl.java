@@ -16,6 +16,11 @@ public class DiaryServiceImpl implements DiaryService{
 
 	
 	// 일기장 조회
+//	@Override
+//	public List<DiaryDTO> getDiaryList(String sessionId) {
+//		List<DiaryDTO> list = diaryDAO.diaryList(sessionId);
+//		return list;
+//	}
 	@Override
 	public List<DiaryDTO> getDiaryList() {
 		List<DiaryDTO> list = diaryDAO.diaryList();
@@ -49,5 +54,7 @@ public class DiaryServiceImpl implements DiaryService{
 		List<DiaryDTO> list = diaryDAO.searchDiary(diaryDTO);
 		return list;
 	}
+
+
 
 }

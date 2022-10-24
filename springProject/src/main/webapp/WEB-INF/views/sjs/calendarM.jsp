@@ -206,6 +206,99 @@
 	</script>
 <style>
 
+ header {
+            margin-bottom: 20px;
+        }
+
+        div.wrapper {
+            width: 1240px;
+
+        }
+
+        h1 {
+            width: 200px;
+            margin: 0 auto;
+            display: inline-block;
+
+        }
+
+        .headerLogo {
+
+            width: 200px;
+            float: left;
+        }
+
+        nav {
+            width: 580px;
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 3%;
+            margin-left: 12%;
+            font-size: 16px;
+
+        }
+
+        .headersub {
+            color: #223919;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .headersub:before {
+            content: '';
+            border-radius: 100%;
+            background: #214192;
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            transition: all 0.2s;
+        }
+
+        .headersub:hover::before {
+            width: 5px;
+            height: 5px;
+            left: 50%;
+            opacity: 0.8;
+        }
+
+        .headersub:hover {
+            color: #42568a;
+        }
+        
+        .lgnbtn {
+            font-size: 12px;
+            width: 60px;
+            position: absolute;
+            top: 14px;
+            left: 1184px;
+        }
+
+        .headerlogin {
+            color: #223919;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+
+        }
+
+        .headerloginout {
+            color: #223919;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .headerlogin:hover {
+            color: #108269;
+            font-weight: bold;
+        }
+
+        .headerloginout:hover {
+            color: #108269;
+            font-weight: bold;
+        }
+
+
 /* ///////////////////////////////////////책안에 내용 집어넣기/////////////////////////////////////////// */
 /* 전체 틀 잡기 */
 main {
@@ -703,6 +796,18 @@ input {
 }
 
 .post2.It4 {
+	width: 60px;
+	height: 27px;
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	padding-top: 10px;
+	color: rgba(104, 100, 100, 0.692);
+	
+
+
 	z-index: 2;
 	top: 240px;
 	border-radius: 0px 80px 80px 0px;
@@ -818,7 +923,26 @@ input {
 <body>
 <body>
 	<form action="/syl/calendarMA" method="post">
-
+			<header>
+				<div class="wrapper">
+					<h1>
+	<!-- 					<img class="headerLogo" src="./3syl.png"><a href=""></a> -->
+						<a href="/syl/calendarM.jsp"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
+					</h1>
+					<nav>
+						<a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 
+						<a href="/syl/bar/story11" class="headersub">다이어리 구성 |</a> 
+						<a href="/syl/bar/func" class="headersub">다이어리 기능 |</a> 
+						<a href="/syl/bar/shot11"	class="headersub">다이어리 사용법 |</a> 
+						<a href="/syl//notice" class="headersub">고객의 소리</a>
+						<div class="lgnbtn">
+							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a>
+							<a href="/syl/member/mypage" class="headerlogin">로그인</a>
+							<a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+						</div>
+					</nav>
+				</div>
+			</header>
 		<main>
 			<section>
 				<article>
@@ -942,16 +1066,14 @@ input {
 	<!-- 오른쪽 직선 3개 -->
 	<div class="rightLine1">
 		<!-- 여기 Index에 이동 a링크 구성하기 -->
-		<a href='${ contextPath }/yyk/diaryList.jsp'><div
-				class="post1 It2">Diary</div></a> <a
-			href='${ contextPath }/Hanu/Diet_diary_EL_View.jsp'><div
-				class="post1 It3">Diet</div></a> <a
-			href='${ contextPath }/shy/mainwish.jsp'><div class="post1 It5">Wish</div></a>
+		<a href='/syl/diaryList'><div class="post1 It2">Diary</div></a> <a
+			href='/syl/diet_1page.do'><div class="post1 It3">Diet</div></a> <a
+			href='/syl/mainwish'><div class="post1 It5">Wish</div></a>
 	</div>
 
 	<div class="rightLine2">
 		<div class="post2 It1"></div>
-		<div class="post2 It4"></div>
+		<a href="/syl/ec_list.do"><div class="post2 It4">Exercise</div></a>
 		<div class="post2 It6"></div>
 		<div class="post2 It7"></div>
 		<div class="post2 It8"></div>

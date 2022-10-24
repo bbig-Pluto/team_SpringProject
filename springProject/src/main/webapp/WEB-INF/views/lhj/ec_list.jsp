@@ -287,9 +287,12 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 						function all_check() {
 							let all_check = document.querySelector("th input[type='checkbox']"); // 전체체크버튼
 
+
+							// 
 							// 전체 선택이 change 일때
 							all_check.addEventListener("change", function (e) {
-								let one_check = document.querySelectorAll("input[name=seq_Exercise]"); // 하나 클릭
+								// let one_check = document.querySelectorAll("input[name=seq_Exercise]"); // 하나 클릭
+								let one_check = document.querySelectorAll(".seq_class"); // 하나 클릭
 								// one_check 사이즈 만큼 증가하고
 								for (let i = 0; i < one_check.length; i++) {
 									// one_check[i]가 이벤트 되어 체크된다 
@@ -321,7 +324,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 						}
 
 						// all_check 전체 체크, 해제 끝
-
+						
 						function tab_accordion_tab() {
 							let tab_accordion_tab = document.querySelectorAll(".tab_accordion_tab");
 							let tab_accordion_content = document.querySelectorAll(".tab_accordion_content");
@@ -404,8 +407,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 								<div id="tab_ec_E1" class="tab_ec_content">
 									<!-- <div class="tab_ec_Contents"> -->
 									<!-- exercise_checkbox 시작 -->
-									<h1><a href='${ contextPath }/diet_1page.do'></h1>
-									<h1><a href='${ contextPath }/ec_list.do'></h1>
+
 									<div class="exercise_checkbox">
 										<caption>
 											<h1 class="exercise_caption">나만의 운동 만들기</h1>
@@ -424,11 +426,8 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 												<tbody class="exercise_tbody">
 													<c:forEach var="exercise_list" items="${exercise_list}">
 														<tr class="exercise_tr">
-															<td><input type="checkbox" name="seq_Exercise" value="${exercise_list.seq_Exercise}"></td>
-															<td class="contents_td"
-																data-id="${exercise_list.seq_Exercise}"><b
-																class="exercise_Date"
-																data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Today}<br></b>
+															<td><input type="checkbox" name="seq_Exercise" value="${exercise_list.seq_Exercise}" class="seq_class"></td>
+															<td class="contents_td" data-id="${exercise_list.seq_Exercise}"><b class="exercise_Date" data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Today}<br></b>
 																<b class="contents_text" data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Contents}</b>
 															</td>
 															<td class="contents_td2" data-id="${exercise_list.seq_Exercise}">
@@ -456,8 +455,6 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 												</span>
 											</div>
 										</form>
-
-
 
 										<!-- exercise_checkbox 끝 -->
 										<div class="exercise_reservation">

@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,6 +87,15 @@ public class CalendarMController {
 		
 		ModelAndView mav2 = new ModelAndView("redirect:/calendarM");
 		return mav2;
+	}
+	
+	
+	@RequestMapping(value = "/bar/{uri}", 
+	method = { RequestMethod.GET, RequestMethod.POST })
+		public String headerBar (
+	@PathVariable("uri") String uri,Model model) {
+//		System.out.println("/bar/{uri} : " + uri);
+		return "/" + uri;
 	}
 	
 	

@@ -1155,7 +1155,7 @@
         <!-- 왼쪽 다이어리 공간 -->
         <div class="squre4">
             <div class="joinInfo">
-                <img class="syl" src="/syl/photo/3syl.png">
+                <img class="syl" src="/syl/resources/photo/3syl.png">
                 <div class="joinInfom j1">1. 회원가입</div>
                 <div class="joinInfom j2">2. 약관동의</div>
                 <div class="joinInfom j3">3. 회원정보</div>
@@ -1169,7 +1169,7 @@
             <!-- 가입 -->
             <div class="joinpg1">
                 <div class="signUp">
-                    <img class="joinsyl" src="/syl/photo/3syl.png">
+                    <img class="joinsyl" src="/syl/resources/photo/3syl.png">
                     <div class="s1_p">
                         <div class="signUup s1">여행자 등록 준비</div>
                     </div>
@@ -1236,7 +1236,7 @@
                     <input class="jp1Btn2 a" type="button" value="뒤로가기"> <input class="jp1Btn2 b" type="button"
                         value="다음">
                 </div>
-                <img class="jpsetyou2" src="20220819_015209.png">
+                <img class="jpsetyou2" src="/syl/resources/photo/3syl2.png">
             </div>
 
             <!-- 회원 정보 -->
@@ -1246,8 +1246,6 @@
                 <div class="info">
 
                     <form id="signUpForm" name="signUpForm">
-                        <!-- <%-- action="${contextPath}/member/signup.do"
-						name="signUpForm" method="post" --%> -->
                         <div>
                             <div class="r_title">아이디*</div>
                             <div class="r_id mandatoryInfo">
@@ -1295,7 +1293,7 @@
                             value="다음">
                     </form>
 
-                    <img class="setyou" src="20220819_015209.png">
+                    <img class="setyou" src="/syl/resources/photo/3syl2.png">
                 </div>
             </div>
 

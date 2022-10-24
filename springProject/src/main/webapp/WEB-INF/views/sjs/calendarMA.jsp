@@ -855,6 +855,18 @@ input {
             border-left: none;
         }
         .post2.It4 {
+        	width: 60px;
+			height: 27px;
+			position: absolute;
+			font-size: 12px;
+			font-weight: bold;
+			font-style: italic;
+			text-align: center;
+			padding-top: 10px;
+			color: rgba(104, 100, 100, 0.692);
+			text-decoration: none;
+        
+        
 
             z-index: 2;
             top: 240px;
