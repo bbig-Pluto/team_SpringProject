@@ -738,20 +738,20 @@ window.onload = function () {
     	let msg = document.querySelector(".msg");
         msg.style.display = "block"
     }
-<%--     <% --%>
-//     // 세션을 연결해주는 통로 
-//     HttpSession logOnSession = request.getSession();
-//     // 로그인 통해서 들어오지 않고 주소창에서 바로 들어오는 사람을 위해 
-//     // isNew로 세션이 없으면 만들어 주고 있으면 가져다 씀
-//     if (logOnSession.isNew()) {
-//     	System.out.println("searchList.jsp isNew true route");
-//     	logOnSession.setAttribute("isLogon", "guest");
-//     } else {
-//     	System.out.println("searchList.jsp isNew false route");
-//     }
+    <%
+    // 세션을 연결해주는 통로 
+    HttpSession logOnSession = request.getSession();
+    // 로그인 통해서 들어오지 않고 주소창에서 바로 들어오는 사람을 위해 
+    // isNew로 세션이 없으면 만들어 주고 있으면 가져다 씀
+    if (logOnSession.isNew()) {
+    	System.out.println("searchList.jsp isNew true route");
+    	logOnSession.setAttribute("isLogon", "guest");
+    } else {
+    	System.out.println("searchList.jsp isNew false route");
+    }
     
-//    	System.out.println("searchList isLogon 아이디 : " + logOnSession.getAttribute("isLogon"));
-<%--     %> --%>
+   	System.out.println("searchList isLogon 아이디 : " + logOnSession.getAttribute("isLogon"));
+	 %>
     
 }
 

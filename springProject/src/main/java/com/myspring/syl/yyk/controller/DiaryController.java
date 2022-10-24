@@ -1,11 +1,11 @@
 package com.myspring.syl.yyk.controller;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.syl.yyk.dto.DiaryDTO;
 import com.myspring.syl.yyk.service.DiaryService;
@@ -25,13 +25,18 @@ public class DiaryController {
 
 	@Autowired
 	DiaryService diaryService;
-//	@Autowired
-//	DiaryDTO diaryDTO; // DTO는 빈 생성해주는 애너테이션 안써서 Autowired 쓰면 안 됨
 	
 	
 	// 일기장 조회
 	@RequestMapping(value="/diaryList", method= {RequestMethod.GET, RequestMethod.POST})
-	public String diaryList(Model model) {
+	public String diaryList(Model model, HttpServletRequest request) {
+		
+		// 세션 아이디 받기
+//		HttpSession logOnSession = request.getSession();
+//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+//		System.out.println("logOnSession : "+ sessionId);
+		
+//		List<DiaryDTO> list = diaryService.getDiaryList(sessionId);
 		List<DiaryDTO> list = diaryService.getDiaryList();
 
 		model.addAttribute("list", list);
@@ -43,8 +48,13 @@ public class DiaryController {
 	@RequestMapping(value="/addDiary", method = {RequestMethod.GET, RequestMethod.POST})
 	public String addDiary(Model model,
 							@ModelAttribute DiaryDTO diaryDTO, // 입력 받은 값 알아서 저장해줌
-							MultipartHttpServletRequest multipartRequest
-							 ) throws Exception {
+							MultipartHttpServletRequest multipartRequest,
+							HttpServletRequest request) throws Exception {
+		
+		// 세션 아이디 받기
+//		HttpSession logOnSession = request.getSession();
+//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+//		System.out.println("logOnSession : "+ sessionId);
 		
 		System.out.println(">>> addDiary controller route");
 		System.out.println("addDiary : title : " + diaryDTO.getD_title());
@@ -56,6 +66,7 @@ public class DiaryController {
 		String originalFileName = fileProcess(multipartRequest);
 		System.out.println("addDiary : 파일 이름 : " + originalFileName);
 		
+//		diaryDTO.setId(sessionId);
 		diaryDTO.setD_fileName(originalFileName);
 		
 		diaryService.getAddDiary(diaryDTO);
@@ -68,7 +79,12 @@ public class DiaryController {
 	public String updateDiary(Model model,
 							// 입력 받은 값 알아서 저장해줌
 							@ModelAttribute("diaryDTO") DiaryDTO diaryDTO,
-							MultipartHttpServletRequest multipartRequest) throws Exception {
+							MultipartHttpServletRequest multipartRequest,
+							HttpServletRequest request) throws Exception {
+		
+//		HttpSession logOnSession = request.getSession();
+//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+//		System.out.println("logOnSession : "+ sessionId);
 		
 		System.out.println(">>> updateDiary controller route");
 		System.out.println("updateDiary : title : " + diaryDTO.getD_title());
@@ -80,6 +96,7 @@ public class DiaryController {
 		String originalFileName = fileProcess(multipartRequest);
 		System.out.println("addDiary : 파일 이름 : [" + originalFileName +"]");
 				
+//		diaryDTO.setId(sessionId);
 		diaryDTO.setD_fileName(originalFileName);
 		
 		int result = diaryService.getUpdateDiary(diaryDTO);
@@ -93,12 +110,19 @@ public class DiaryController {
 	@RequestMapping(value="/delDiary", method= {RequestMethod.GET, RequestMethod.POST})
 	public String delDiary(Model model,
 							// 입력 받은 값 알아서 저장해줌
-							@ModelAttribute DiaryDTO diaryDTO) {
-			
+							@ModelAttribute DiaryDTO diaryDTO,
+							HttpServletRequest request) {
+		
+		// 세션 아이디 받기
+//		HttpSession logOnSession = request.getSession();
+//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+//		System.out.println("logOnSession : "+ sessionId);
+		
 		System.out.println(">>> delDiary controller route");
 		System.out.println("delDiary : title : " + diaryDTO.getD_title());
 		System.out.println("delDiary : content : " + diaryDTO.getD_content());
 			
+//		diaryDTO.setId(sessionId);
 		int result = diaryService.getDelDiary(diaryDTO);
 //		System.out.println("controller : delete된 행 개수 : " + result);
 //		model.addAttribute("diaryDTO", diaryDTO);
@@ -109,14 +133,19 @@ public class DiaryController {
 	// 일기장 검색
 	@RequestMapping(value="/searchDiary", method= {RequestMethod.GET, RequestMethod.POST})
 	public String searchDiary(Model model,
-							// 입력 받은 값 알아서 저장해줌
 							// 입력 받은 d_title만 dto에 값 저장 해주고
 							// 나머지 필드는 초기값 (null)
-							@ModelAttribute DiaryDTO diaryDTO) {
+							@ModelAttribute DiaryDTO diaryDTO,
+							HttpServletRequest request) {
 			
+//		HttpSession logOnSession = request.getSession();
+//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+//		System.out.println("logOnSession : "+ sessionId);
+		
 		System.out.println(">>> searchDiary controller route");
 		System.out.println("searchDiary : title : " + diaryDTO.getD_title());
 			
+//		diaryDTO.setId(sessionId);
 		List<DiaryDTO> list = diaryService.getSearchDiary(diaryDTO);
 //		model.addAttribute("diaryDTO", diaryDTO);
 			
@@ -126,8 +155,6 @@ public class DiaryController {
 	}
 	
 	
-	//파일 저장 위치를 지정
-		private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
 	
 		// 일기장 추가 페이지로 이동
 		@RequestMapping(value="/addDiaryList", method=RequestMethod.GET)
@@ -146,15 +173,15 @@ public class DiaryController {
 		}
 		
 		
+		//파일 저장 위치를 지정
+		private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
 		
-		
+		// 파일 다운로드 메소드
 		private String fileProcess(MultipartHttpServletRequest multipartRequest)throws Exception {
-//			List<String> fileList = new ArrayList<String>();
 			
 			// 첨부된 파일 모두다 가져옴
 			Iterator<String> fileNames =  multipartRequest.getFileNames(); 
 			
-//			while(fileNames.hasNext()) {
 				// 첨부된 파일 이름을 가져옴
 				String fileName = fileNames.next(); 
 				System.out.println("fileName : " + fileName);
@@ -166,8 +193,6 @@ public class DiaryController {
 				String originalFileName = mFile.getOriginalFilename();
 				System.out.println("originalFileName : " + originalFileName );
 				
-				// 파일 이름을 하나씩 fileList에 저장
-//				fileList.add(originalFileName);
 				File file = new File(CURR_IMAGE_REPO_PATH + "\\" + fileName);
 				
 				if(mFile.getSize()!=0) { // 첨부된 파일이 있는지 체크
@@ -180,10 +205,11 @@ public class DiaryController {
 					// 임시로 저장된 multiFile을 실제 파일로 전송
 					mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + originalFileName));
 				}
-//			}
 			
 			return originalFileName; 
 		}
 
+		
+		
 		
 }

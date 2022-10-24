@@ -5,10 +5,17 @@
 <mapper namespace="mapper.yyk">
 
 	<!-- 다이어리 조회 -->
-	<select id="diaryList" resultType="diaryDTO">
-		SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum 
-		FROM diary order by d_createTime desc
-	</select>
+<!-- 	<select id="diaryList" resultType="diaryDTO"> -->
+<!-- 		SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum, id -->
+<!-- 		FROM diary  -->
+<!-- 		where id = 'test01'  -->
+<!-- 		order by d_createTime desc -->
+<!-- 	</select> -->
+		<select id="diaryList" resultType="diaryDTO">
+				SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum
+				FROM diary 
+				order by d_createTime desc
+		</select>
 	
 	
 	<!-- 다이어리 추가 -->
@@ -19,7 +26,7 @@
 	
 	
 	<!-- 다이어리 수정 -->
-	<insert id="updateDiary" parameterType="diaryDTO">
+	<update id="updateDiary" parameterType="diaryDTO">
 		update diary
 		set d_title= #{d_title}, d_content= #{d_content}
 		<if test = "d_fileName != '' and d_fileName != null">
@@ -27,8 +34,7 @@
 		</if>
 		, d_weather= #{d_weather}, d_emotion=#{d_emotion}, d_createTime= sysdate
 		where diaryNum= #{diaryNum}
-		
-	</insert>
+	</update>
 	
 	
 	<!-- 다이어리 삭제 -->
@@ -47,6 +53,25 @@
 	</select>
 	
 	
-
+	<!-- 메모장 리스트 -->
+	<select id="memoList" resultType="memoDTO">
+		SELECT m_content
+		FROM memo 
+	</select>
+	
+	
+	<!-- 메모장 추가 -->                                                    
+	<insert id="addMemo" parameterType="String">
+		insert into memo (m_content, id)
+		values (#{m_content}, 'yyk') 
+	</insert>
+	
+	
+	<!-- 메모장 수정 -->
+	<update id="updateMemo" parameterType="String">
+		update memo
+		set m_content= #{m_content}
+		where id = 'yyk'
+	</update>
 
 </mapper>

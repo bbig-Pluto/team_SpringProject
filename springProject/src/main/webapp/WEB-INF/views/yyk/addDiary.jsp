@@ -849,12 +849,39 @@ window.onload = function() {
 	icon();
 	change_slide();
 	
+	<%
+	String isLogon = "guest";
+	HttpSession logOnSession = request.getSession();
+	
+	if(logOnSession.isNew()) {
+		logOnSession.setAttribute("isLogon", "guest"); // 세션이 없으면 만들어서 isLogon 에 guest 세팅
+	} else { // 세션은 있는데 로그인을 안 하고 들어온 Case
+		if(logOnSession.getAttribute("logOn.id") == null) {
+			isLogon = "guest"; // 세션이 있다면 isLogon 에 세션에 있던 값을 세팅
+			System.out.println("addDiary if-else route ( guest )" );
+		} else {
+			isLogon = "member"; 			
+			System.out.println("addDiary if-else route ( member )");
+//				isLogon = (String) logOnSession.getAttribute("logOn.id");
+		}
+	
+	}
+	
+	
+%>
 	// 일기장 제목 여부 확인
 	// 회원 : 제목 입력 안하고 저장 시 경고창
 	// 비회원 : 저장 시 로그인 경고 문구
 	document.querySelector('input[type="submit"]').addEventListener("click", function(e) {
 		// form type이 submit이라 써줌
 			e.preventDefault();
+		
+			<%
+				System.out.println("isLogon : " + isLogon);
+				if (isLogon.equals("member")) {
+				System.out.println("addDiary member route");
+			%>
+			
 			let title = document.querySelector('input[name="d_title"]').value;
 			title = title.trim();
 			if(title == '' || title.length == 0 ) {
@@ -866,6 +893,20 @@ window.onload = function() {
 				add.enctype = "multipart/form-data"
 				add.submit();
 			}
+			
+			<%
+			} else if (isLogon.equals("guest")) {
+				System.out.println("addDiary guest route");
+			%>
+			
+				alert('로그인 후 이용해주세요.');
+				e.preventDefault();
+				
+			<%
+			} else {
+				System.out.println("addDiary guest route");
+			}
+			%>
 	})
 
 }
@@ -887,8 +928,8 @@ window.onload = function() {
 							icons[j].style.transition = "all 0.1s";
 						}
 			        // 아이콘 크기 크게
-						e.target.style.width = "65px"; 
-						e.target.style.height = "65px"; 
+						e.target.style.width = "58px"; 
+						e.target.style.height = "58px"; 
 						e.target.style.filter = "drop-shadow(6px 4px 5px #c3c3c3)";
 						e.target.style.zIndex = 1;
 			            e.target.style.transition = "all 0.1s";

@@ -15,6 +15,11 @@ public class DiaryDAOImpl implements DiaryDAO {
 	SqlSession sqlSession;
 	
 	// 일기장 조회
+//	@Override
+//	public List<DiaryDTO> diaryList(String sessionId) {
+//		List<DiaryDTO> list = sqlSession.selectList("mapper.yyk.diaryList", sessionId);
+//		return list;
+//	}
 	@Override
 	public List<DiaryDTO> diaryList() {
 		List<DiaryDTO> list = sqlSession.selectList("mapper.yyk.diaryList");
@@ -48,5 +53,7 @@ public class DiaryDAOImpl implements DiaryDAO {
 		List<DiaryDTO> list = sqlSession.selectList("mapper.yyk.searchDiary", dto);
 		return list;
 	}
+
+
 
 }
