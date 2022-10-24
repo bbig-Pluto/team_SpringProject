@@ -168,30 +168,50 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 					console.log("count else : ", count);
 
 
-					let one_check = document.querySelectorAll("input[name='seq_Exercise']:checked");
-					for (let i = 0; i < one_check.length; i++) {
 
-						one_check[i].value	// 이 값을 td에 넣음
-						console.log("one_check.value : ", one_check[i].value); // 값 갖고온거 확인
 
+
+
+					// 여기부터 one_check 변수명 수정
+
+
+					// 체크된 값
+					let one_check_data = document.querySelectorAll("input[name='seq_Exercise']:checked");
+					console.log("one_check_data 확인 : ", one_check_data);
+					for (let i = 0; i < one_check_data.length; i++) {
+
+						one_check_data[i].value	// 이 값을 td에 넣음
+						console.log("one_check_data.value 확인: ", one_check_data[i].value); // 값 갖고온거 확인
+
+
+						// 이걸 못 잡음
 						// 기존에 적은 내용임 > value를 innerhtml value에 입히기 위해 가져옴
-						let contents_text = document.querySelector(".contents_text[data-id='" + one_check[i].value + "']");
+						let contents_text = document.querySelector(".contents_text[data-id='" + one_check_data[i].value + "']");
+						console.log("contents_text 확인 : ", contents_text);
+						console.log("contents_text 확인 : ", document.querySelector(".contents_text[data-id='" + one_check_data[i].value + "']"));
+
 						// td = 운동내용 안에 input 그리기
-						let contents_td = document.querySelector(".contents_td[data-id='" + one_check[i].value + "']"); // innerHTML 사용 (이 안에 넣겠다)
-						console.log("contents_td : ", document.querySelector(".contents_td[data-id='" + one_check[i].value + "']")); // 값 갖고옴
+						let contents_td = document.querySelector(".contents_td[data-id='" + one_check_data[i].value + "']"); // innerHTML 사용 (이 안에 넣겠다)
+						console.log("contents_td 확인 : ", document.querySelector(".contents_td[data-id='" + one_check_data[i].value + "']")); // 체크된 값 갖고옴
+						
 						let html = contents_td.innerHTML;
-						console.log("확인 ", html);
-						html += '<b><input type="text" class ="exercise_Contents" name="exercise_Contents" value="' + contents_text.innerText + '"></b>'
+						console.log("확인 : ", contents_td.innerHTML);
+						html += '<b>'
+						html +=	'<input type="text" class ="exercise_Contents" name="exercise_Contents" value="'
+						html += contents_text.innerText
+						html += '">'
+						html += '</b>'
 						contents_td.innerHTML = html;
 						console.log("그린거확인 = td : ", contents_td.innerHTML = html);
 						// td2 = 시간 안에 select박스 그리기 > 이 value를 내가 그린 innerhtml의 value에 넣어야 함
-						let time_Date = document.querySelector(".time_Date[data-id='" + one_check[i].value + "']");
-						let contents_td2 = document.querySelector(".contents_td2[data-id='" + one_check[i].value + "']");
+						let time_Date = document.querySelector(".time_Date[data-id='" + one_check_data[i].value + "']");
+						let contents_td2 = document.querySelector(".contents_td2[data-id='" + one_check_data[i].value + "']");
 						let html_2 = contents_td2.innerHTML;
 						html_2 += '<b class="time_Date"[data-id='
-						html_2 += " ' + one_check[i].value + ']>"
+						html_2 += " ' + one_check_data[i].value + ']>"
 						html_2 += '<select class="exercise_time" name="exercise_Time">'
-						html_2 += '<option value="' + time_Date.innerText + '">' + time_Date.innerText + '</option>'
+						html_2 += '<option value="' + time_Date.innerText + '">' + time_Date.innerText
+						html_2 += '</option>'
 						html_2 += '<option value="10분">10분</option>'
 						html_2 += '<option value="20분">20분</option>'
 						html_2 += '<option value="30분">30분</option>'
@@ -203,9 +223,16 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 						console.log("그린거확인 = td2 : ", contents_td2.innerHTML = html_2);
 
 						// remove로 기존 내용들을 지움
-						document.querySelector(".contents_text[data-id='" + one_check[i].value + "']").remove(); // 기존 내용 remove
-						document.querySelector(".time_Date[data-id='" + one_check[i].value + "']").remove(); // 기존 시간 remove
+						document.querySelector(".contents_text[data-id='" + one_check_data[i].value + "']").remove(); // 기존 내용 remove
+						document.querySelector(".time_Date[data-id='" + one_check_data[i].value + "']").remove(); // 기존 시간 remove
 					}
+
+					// 여기까지 one_check 변수명 수정
+
+
+
+
+
 
 					// remove로 수정버튼을 지움
 					document.querySelector(".button_update").remove();
@@ -236,8 +263,8 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 		<%} else {%>	// 	세션이 있는데 logOn.id도 있으면
 			
 			let count = 0;
-			let one_check = document.querySelectorAll("input[name='seq_Exercise']:checked");
-				for (let i = 0; i < one_check.length; i++) {	// 체크되면 count 증가
+			let one_checkd = document.querySelectorAll("input[name='seq_Exercise']:checked");
+				for (let i = 0; i < one_checkd.length; i++) {	// 체크되면 count 증가
 					// .checked
 					count++;
 					console.log("for count : " + count);
@@ -262,8 +289,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 
 							// 전체 선택이 change 일때
 							all_check.addEventListener("change", function (e) {
-								let one_check = document
-									.querySelectorAll("input[name=seq_Exercise]"); // 하나 클릭
+								let one_check = document.querySelectorAll("input[name=seq_Exercise]"); // 하나 클릭
 								// one_check 사이즈 만큼 증가하고
 								for (let i = 0; i < one_check.length; i++) {
 									// one_check[i]가 이벤트 되어 체크된다 
@@ -336,7 +362,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 	<header>
 		<div class="wrapper">
 			<h1>
-				<!-- <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
+				<img class="headerLogo" src="./3syl.png"><a href=""></a>
 			</h1>
 			<nav>
 				<a href class="headersub">다이어리 소개 |</a> <a href class="headersub">다이어리
@@ -378,6 +404,8 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 								<div id="tab_ec_E1" class="tab_ec_content">
 									<!-- <div class="tab_ec_Contents"> -->
 									<!-- exercise_checkbox 시작 -->
+									<h1><a href='${ contextPath }/diet_1page.do'></h1>
+									<h1><a href='${ contextPath }/ec_list.do'></h1>
 									<div class="exercise_checkbox">
 										<caption>
 											<h1 class="exercise_caption">나만의 운동 만들기</h1>
@@ -401,13 +429,10 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 																data-id="${exercise_list.seq_Exercise}"><b
 																class="exercise_Date"
 																data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Today}<br></b>
-																<b class="contents_text"
-																data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Contents}</b>
+																<b class="contents_text" data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Contents}</b>
 															</td>
-															<td class="contents_td2"
-																data-id="${exercise_list.seq_Exercise}"><b
-																class="time_Date"
-																data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Time}</b>
+															<td class="contents_td2" data-id="${exercise_list.seq_Exercise}">
+																<b class="time_Date" data-id="${exercise_list.seq_Exercise}">${exercise_list.exercise_Time}</b>
 															</td>
 														</tr>
 													</c:forEach>
@@ -946,8 +971,8 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<!-- 				<img class="left_logo1" src="./logo2.png"> -->
-				<!-- 				<img class="left_logo2" src="./3syl2.png"> -->
+								<img class="left_logo1" src="./logo2.png">
+								<img class="left_logo2" src="./3syl2.png">
 			</div>
 
 			<div class="rc2">
