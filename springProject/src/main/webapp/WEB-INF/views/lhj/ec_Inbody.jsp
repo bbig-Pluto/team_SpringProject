@@ -320,7 +320,7 @@
 	<header>
          <div class="wrapper">
             <h1>
-               <a href="${ path }/calendarM"><img class="headerLogo" src="/resources/photo/3syl.png"></a>
+               <a href="${ path }/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
             </h1>
             <nav>
                <a href="${ path }/bar/intro" class="headersub">다이어리 소개 |</a> 
@@ -569,6 +569,10 @@
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
 						<!--  여기 Index에 이동 a링크 구성하기 -->
+						<a href='${ Path }/syl/todo'>
+						<div class="postTodo It1">todo<br>memo</div>
+						</a>
+						
 						<a href='${ path }/diaryList'>
 						<div class="post1 It2">Diary</div>
 						</a>
@@ -583,7 +587,7 @@
 						</a>
 					</div>
 					<div class="rightLine2">
-						<div class="post2 It1"></div>
+<!-- 						<div class="post2 It1"></div> -->
 						<a href='${ path }/ec_list.do'>
 						<div class="post2 It4">Exercise</div>
 						</a>

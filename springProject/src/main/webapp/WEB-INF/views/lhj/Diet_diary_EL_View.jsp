@@ -693,6 +693,27 @@ footer {
 }
 
 /* 포스트잇 */
+.postTodo {
+	width: 60px;
+	height: 27px;
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: rgba(104, 100, 100, 0.692);
+}
+
+.postTodo.It1 {
+	z-index: 1;
+	top: 32px;
+	left: 10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #FF9A9A;
+}
+
 .post1 {
 	width: 60px;
 	height: 27px;
@@ -1386,6 +1407,10 @@ footer {
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
 						<!--  여기 Index에 이동 a링크 구성하기 -->
+						<a href='${ Path }/syl/todo'>
+						<div class="postTodo It1">todo<br>memo</div>
+						</a>
+						
 						<a href='${ contextPath }/diaryList'>
 						<div class="post1 It2">Diary</div>
 						</a>
@@ -1400,7 +1425,7 @@ footer {
 						</a>
 					</div>
 					<div class="rightLine2">
-						<div class="post2 It1"></div>
+<!-- 						<div class="post2 It1"></div> -->
 						<a href='${ contextPath }/ec_list.do'>
 						<div class="post2 It4">Exercise</div>
 						</a>
