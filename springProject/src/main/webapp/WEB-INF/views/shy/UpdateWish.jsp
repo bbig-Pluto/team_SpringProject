@@ -1304,14 +1304,15 @@
 //                 		imgcf.addEventListener("click", ()=> imgntc.style.display = "none");
                 		
                 	} else {
-            			save.addEventListener("click", ()=> ntc.style.display = "block");
+            			ntc.style.display = "block";
             			can.addEventListener("click", ()=> ntc.style.display = "none");
             			nd.addEventListener("click", ()=> real.click());
-            		<% System.out.println("UpdateWish Submit Route"); %>
-            		update.method = "post";
-            		update.action = "/syl/updatewish";
-            		update.enctype = "multipart/form-data"
-            		update.submit();
+            			
+	            		<% System.out.println("UpdateWish Submit Route"); %>
+	            		update.method = "post";
+	            		update.action = "/syl/updatewish";
+	            		update.enctype = "multipart/form-data"
+	            		update.submit();
             	}
             })
 	    }
@@ -1350,11 +1351,11 @@
 
 		function notice() {
 		        
-// 			let ntc = document.querySelector(".notice");
-// 			let save = document.querySelector(".save");
-// 			let can = document.querySelector(".notice_cancle");
-// 			let real = document.querySelector(".real_update");
-// 			let nd = document.querySelector(".notice_delete");
+			let ntc = document.querySelector(".notice");
+			let save = document.querySelector(".save");
+			let can = document.querySelector(".notice_cancle");
+			let real = document.querySelector(".real_update");
+			let nd = document.querySelector(".notice_delete");
 			let back = document.querySelector(".back");
 			let ntc2 = document.querySelector(".notice2");
 			let exit = document.querySelector(".notice_exit");
@@ -1365,7 +1366,7 @@
 // 			nd.addEventListener("click", ()=> real.click());
 			
 // 			save.addEventListener("click", ()=> ntc.style.display = "block");
-// 			can.addEventListener("click", ()=> ntc.style.display = "none");
+			can.addEventListener("click", ()=> ntc.style.display = "none");
 		        
 		 }
 		
