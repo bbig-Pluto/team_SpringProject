@@ -83,7 +83,7 @@ table td {
 }
 
 table .no {
-	width: 40px;
+	width: 60px;
 }
 
 table .title {

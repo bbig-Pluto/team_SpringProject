@@ -414,6 +414,7 @@ main {
 	height:70px;
 	margin-left: 290px;
 	position:relative;
+	
 }
 .reply_btn{
 	margin-top:10px;
@@ -451,7 +452,7 @@ main {
 	
 }
 .re_menuBox{
- 	margin-left:590px; 
+ 	margin-left:550px; 
 }
 .mod_re{
 /* 	margin-left:590px; */
@@ -750,7 +751,6 @@ function reReCancel(){
 						        <a href="/syl/ask_mod?board_no=${list.board_no }" class="mod">수정하기</a><br>
 						        <br>
 						        <div class="del_text">삭제하기</div><br>
-						        <br>
 					        </c:if>
 					        <a href="/syl/reWrite?board_no=${list.board_no }" class="re">답글달기</a> 
 				    	</div>
@@ -839,7 +839,7 @@ function reReCancel(){
 						</c:forEach>
 					</div>
 					 <c:if test="${ not empty sessionId }">  
-							<div class="re_writer">${sessionId }</div>
+							<div class="re_writer">${sessionId }</div> 
 							<div class="re_box">
 								<form name="replyFrm" class="frm" >
 									<div class="re_title">댓글쓰기</div>

@@ -42,7 +42,7 @@ public class AskController extends HttpServlet {
 		public ModelAndView listMembers(HttpServletRequest request,
 				@RequestParam(value="ser_name",required=false ) String ser_name,
 				@RequestParam(value="q_head",required=false) String q_head,
-				@RequestParam(value="search",required=false) String search) {
+				@RequestParam(value="search",required=false) String search) throws Exception {
 			ModelAndView mav = 	new ModelAndView();
 			
 			int pageNum = 1;		// 현재 페이지
@@ -72,6 +72,7 @@ public class AskController extends HttpServlet {
 				map.put("q_head", q_head);
 				map.put("ser_name", ser_name);
 				map.put("search", search);
+				
 				
 				mav.addObject("map",map);
 			mav.setViewName("/sdy/ask_show");
