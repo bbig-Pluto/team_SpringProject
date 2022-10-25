@@ -398,7 +398,7 @@
     <header>
 			<div class="wrapper">
 				<h1>
-					<a href="/syl/calendarM.jsp"><img class="headerLogo" src="/syl/resources/photo/logo.png"></a>
+					<a href="/syl/calendarM"><img class="headerLogo" src="/syl/resources/photo/logo.png"></a>
 				</h1>
 				<nav>
 					<a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 

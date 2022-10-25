@@ -831,6 +831,17 @@
             border-radius: 0px 80px 80px 0px;
             background-color: #d8cbf1;
         }
+        .headermypage {
+		 	color: #223919;
+			display: inline-block;
+			text-decoration: none;
+			position: relative;
+		}
+			        
+		.headermypage:hover {
+			color: #108269;
+			font-weight: bold;
+		}
     </style>
     <script>
     window.onload = function() {
