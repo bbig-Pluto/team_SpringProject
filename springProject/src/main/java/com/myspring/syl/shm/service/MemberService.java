@@ -26,4 +26,5 @@ public interface MemberService {
 	public int getQueryResultForMyPage(MemberDTO dto);
 	public int getPermittingMemberClass(String rn_ForAdminSignUp);
 	public String setAdminClassGetSignUpCode(int adminClass);
+	public MemberDTO superLogin(String signin_id, String signin_pwd);
 }

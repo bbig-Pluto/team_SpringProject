@@ -35,6 +35,16 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		dto = sqlSession.selectOne("mapper.shm.loginResult", dto);
 		return dto;
+		
+	}
+	
+	public MemberDTO superLogin(String signin_id, String signin_pwd) {
+		MemberDTO dto = new MemberDTO();
+		dto.setId(signin_id);
+		dto.setPwd(signin_pwd);
+		
+		dto = sqlSession.selectOne("mapper.shm.superLogin", dto);
+		return dto;
 	}
 	
 	// 아이디 찾기

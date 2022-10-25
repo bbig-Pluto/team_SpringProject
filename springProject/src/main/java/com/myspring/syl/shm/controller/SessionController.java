@@ -110,7 +110,7 @@ public class SessionController {
 		String signin_pwd = dto.getPwd();
 		
 		MemberDTO memberDTO = new MemberDTO();
-		memberDTO = memberService.getLoginResult(signin_id, signin_pwd);
+		memberDTO = memberService.superLogin(signin_id, signin_pwd);
 		
 		String logOnWhetherForSession = "";
 		String resultMessage = "";

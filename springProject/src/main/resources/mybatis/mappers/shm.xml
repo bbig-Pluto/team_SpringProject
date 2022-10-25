@@ -6,23 +6,24 @@
 
 	<!-- 슈퍼어드민 페이지 회원정보 리스팅 -->
 	<select id="selectAllMemberList" resultType="memberDTO">
-		select * from syl_member
+		SELECT 
+		substr(id,1,1) || lpad('*',length(id)-2,'*') || substr(id, length(id), 1)id, 
+		lpad('*', LENGTH(pwd), '*')pwd, 
+		nickname, emailadd, telnum, membernum, memberclass, joindate
+		FROM syl_member
 	</select>
 	
 	<!-- 로그인 체크, 슈퍼어드민과 그외 나머지 분기 -->
 	<select id="loginResult" resultType="memberDTO" parameterType="MemberDTO">
+		SELECT id, pwd, memberNum, memberClass 
+		FROM syl_member 
+		WHERE id=#{id} AND pwd=#{pwd}
+	</select>
 	
-		<if test ='"superadmin".equalsIgnoreCase(id)'>
-			SELECT id, memberNum, memberClass 
-			FROM syl_superAdmin
-			WHERE id=#{id} AND pwd=#{pwd}
-		</if>
-		
-		<if test = '!("superadmin".equalsIgnoreCase(id))' >	
-			SELECT id, pwd, memberNum, memberClass 
-			FROM syl_member 
-			WHERE id=#{id} AND pwd=#{pwd}
-		</if>
+	<select id="superLogin" resultType="memberDTO" parameterType="MemberDTO">
+		SELECT id, memberNum, memberClass 
+		FROM syl_superAdmin
+		WHERE id=#{id} AND pwd=#{pwd}
 	</select>
 	
 	<!-- ID 찾기 -->
@@ -80,9 +81,14 @@
 	
 	<!-- 슈퍼어드민 페이지 회원 정보 수정을 위해 회원 DB 조회 -->
 	<select id="enquireMemFromAdmin" resultType="memberDTO" parameterType="String">
-		select * 
-		from syl_member 
+	<![CDATA[
+		SELECT 
+		substr(id,1,1) || lpad('*',length(id)-2,'*') || substr(id, length(id), 1)id, 
+		lpad('*', LENGTH(pwd), '*')pwd, 
+		nickname, emailadd, telnum, membernum, memberclass, joindate
+		FROM syl_member 
 		where memberNum=#{_parameter}
+	]]>
 	</select>
 	
 	<!-- 슈퍼어드민 회원정보 수정 -->

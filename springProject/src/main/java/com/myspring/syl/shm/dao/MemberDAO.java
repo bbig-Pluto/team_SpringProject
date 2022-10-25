@@ -26,4 +26,5 @@ public interface MemberDAO {
 	public int enquiryPermittingMemberClass(String rn_ForAdminSignUp);
 	public int setAdminClass(int adminClass);
 	public String getSignUpCode();
+	public MemberDTO superLogin(String signin_id, String signin_pwd);
 }

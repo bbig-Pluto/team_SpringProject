@@ -157,4 +157,26 @@ public class MemberServiceImpl implements MemberService {
 		return signUpCode;
 	}
 	
+	public MemberDTO superLogin(String signin_id, String signin_pwd) {
+		MemberDTO dto = new MemberDTO();
+		try {
+			dto = memberDAO.superLogin(signin_id, signin_pwd);
+			// 로그인 성공(관리자)
+			if (Integer.parseInt(dto.getMemberNum()) >= 900001 && dto.getMemberClass() >= 1) {
+				System.out.println();
+				dto.setLoginWhether(1);
+
+			// 로그인 성공(일반회원)
+			} else if (Integer.parseInt(dto.getMemberNum()) < 900001 && dto.getMemberClass() == 0) {
+				dto.setLoginWhether(0);
+			}
+
+		} catch (NullPointerException e) {
+			// 쿼리 조회 결과 없음( = 로그인 실패)
+			dto = new MemberDTO();
+			dto.setLoginWhether(-1);
+		}
+		return dto;
+	}
+	
 }
