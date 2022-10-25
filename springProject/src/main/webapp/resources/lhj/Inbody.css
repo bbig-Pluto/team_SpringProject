@@ -459,8 +459,28 @@ nav {
 	top: 20px;
 }
 
-
 /* 포스트잇 */
+.postTodo {
+	width: 60px;
+	height: 27px;
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: rgba(104, 100, 100, 0.692);
+}
+
+.postTodo.It1 {
+	z-index: 1;
+	top: 32px;
+	left: 10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #FF9A9A;
+}
+
 .post1 {
 	width: 60px;
 	height: 27px;
@@ -505,22 +525,19 @@ nav {
 }
 
 .post2.It4 {
-   width: 60px;
-   height: 27px;
-   position: absolute;
-   font-size: 12px;
-   font-weight: bold;
-   font-style: italic;
-   text-align: center;
-   padding-top: 10px;
-   color: rgba(104, 100, 100, 0.692);
-   
-
-
-   z-index: 2;
-   top: 240px;
-   border-radius: 0px 80px 80px 0px;
-   background-color: #DCEDCA;
+	width: 60px;
+	height: 27px;
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	padding-top: 10px;
+	color: rgba(104, 100, 100, 0.692);
+	z-index: 2;
+	top: 240px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #DCEDCA;
 }
 
 .post1.It5 {
@@ -553,8 +570,6 @@ nav {
 	border-radius: 0px 80px 80px 0px;
 	background-color: #d8cbf1;
 }
-
-
 
 /* tab_ec 시작 */
 /* tab_ec 시작 */
@@ -625,13 +640,11 @@ nav {
 	height: 40px;
 	background-color: rgb(255, 255, 255);
 	right: 6px;
-	
 }
 
 #tab_ec_F, #tab_ec_F1 {
 	background-color: rgb(255, 255, 255);
 }
-
 
 #tab_ec_G {
 	z-index: 3;
@@ -707,19 +720,18 @@ nav {
 	border: solid 1px gray;
 }
 
-.text_hidden{
-    width: 80px;
-    background-color: #effffa;
-    border: 1px solid gray;
-    margin-left: 2px;
-    
+.text_hidden {
+	width: 80px;
+	background-color: #effffa;
+	border: 1px solid gray;
+	margin-left: 2px;
 }
 
-.update_hidden{
-    width: 80px;
-    background-color: #effffa;
-    border: 1px solid gray;
-    margin-left: 2px;
+.update_hidden {
+	width: 80px;
+	background-color: #effffa;
+	border: 1px solid gray;
+	margin-left: 2px;
 }
 
 .sapn_button_box {
@@ -728,26 +740,25 @@ nav {
 	left: 50px;
 }
 
-.lnbody_input,
-.lnbody_input_2{
-    background-color: rgb(160 203 215);
+.lnbody_input, .lnbody_input_2 {
+	background-color: rgb(160, 203, 215);
 	padding: 10px 25px 10px 25px;
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
 	margin-right: 5px;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .lnbody_input:hover
 .lnbody_input_2:hover {
-    background-color: rgb(155, 191, 201);
+	background-color: rgb(155, 191, 201);
 	padding: 10px 25px 10px 25px;
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
 	margin-right: 5px;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .insert_button {
@@ -757,7 +768,7 @@ nav {
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .insert_button:hover {
@@ -767,17 +778,17 @@ nav {
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .insert_cancel {
-	background-color: rgb(88 148 189);
+	background-color: rgb(88, 148, 189);
 	color: white;
 	padding: 10px 25px 10px 25px;
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .insert_cancel:hover {
@@ -787,7 +798,7 @@ nav {
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .sapn_button_box2 {
@@ -803,37 +814,37 @@ nav {
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .update_button:hover {
-    background-color: rgb(41, 136, 198);
+	background-color: rgb(41, 136, 198);
 	color: white;
 	padding: 10px 25px 10px 25px;
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .update_cancel {
-	background-color: rgb(88 148 189);
+	background-color: rgb(88, 148, 189);
 	color: white;
 	padding: 10px 25px 10px 25px;
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .update_cancel:hover {
 	background-color: rgb(71, 130, 169);
-    color: white;
+	color: white;
 	padding: 10px 25px 10px 25px;
 	border-radius: 2px;
 	border: 0;
 	font-weight: 900;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .lnbody_table_2 {
@@ -844,30 +855,30 @@ nav {
 }
 
 .exercise_reservation {
-    position: relative;
-    bottom: 610px;
-    margin: 0px 15px 0px 39px;
-    border: 1px solid black;
-    background-color: white;
-    border-radius: 5px;
-    color: rgb(28, 132, 202);
-    font-weight: 800;
-    text-align: center;
-    padding: 60px 25px 60px 25px;
-    width: 360px;
+	position: relative;
+	bottom: 610px;
+	margin: 0px 15px 0px 39px;
+	border: 1px solid black;
+	background-color: white;
+	border-radius: 5px;
+	color: rgb(28, 132, 202);
+	font-weight: 800;
+	text-align: center;
+	padding: 60px 25px 60px 25px;
+	width: 360px;
 }
 
 /* ▼ 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 */
 /* ▼ 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 나의 기록일지 테이블 */
 .lnbody_box_1 {
-position: relative;
-    position: relative;
-    height: 600px;
-    width: 445px;
-    bottom: 20px;
-    margin-left: 22px;
-    border-radius: 3px;
-    background-color: rgba(255, 255, 255, 0.725);
+	position: relative;
+	position: relative;
+	height: 600px;
+	width: 445px;
+	bottom: 20px;
+	margin-left: 22px;
+	border-radius: 3px;
+	background-color: rgba(255, 255, 255, 0.725);
 }
 
 .lnbody_box_2 {
@@ -923,7 +934,7 @@ position: relative;
 .lnbody_scroll_th_checkbox {
 	position: sticky;
 	top: -1px;
-	background-color: rgb(237 255 253);
+	background-color: rgb(237, 255, 253);
 }
 
 .lnbody_scroll_td {
@@ -934,18 +945,15 @@ position: relative;
 	border: 1px solid gray;
 }
 
-
-
 /* 마이페이지 */
 .headermypage {
- 	color: #223919;
+	color: #223919;
 	display: inline-block;
 	text-decoration: none;
 	position: relative;
 }
-	        
+
 .headermypage:hover {
 	color: #108269;
 	font-weight: bold;
 }
-

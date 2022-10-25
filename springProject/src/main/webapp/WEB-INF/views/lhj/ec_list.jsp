@@ -975,6 +975,10 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
 						<!--  여기 Index에 이동 a링크 구성하기 -->
+						<a href='${ Path }/syl/todo'>
+						<div class="postTodo It1">todo<br>memo</div>
+						</a>
+						
 						<a href='${ Path }/syl/diaryList'>
 						<div class="post1 It2">Diary</div>
 						</a>
@@ -989,7 +993,7 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 						</a>
 					</div>
 					<div class="rightLine2">
-						<div class="post2 It1"></div>
+<!-- 						<div class="post2 It1"></div> -->
 						<a href='${ Path }/syl/ec_list.do'>
 						<div class="post2 It4">Exercise</div>
 						</a>

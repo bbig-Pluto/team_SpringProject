@@ -664,7 +664,7 @@ footer {
         .post1.It2 {
             z-index: 2;
             top: 120px;
-            left: 8px;
+            left: -18px;
             border-radius: 0px 80px 80px 0px;
             background-color: #FFCCAA;
 
@@ -730,6 +730,25 @@ footer {
             border-radius: 0px 80px 80px 0px;
             background-color: #d8cbf1;
         }
+          .postTodo {
+			width: 60px;
+			height: 27px;
+			position: absolute;
+			font-size: 12px;
+			font-weight: bold;
+			font-style: italic;
+			text-align: center;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			color: rgba(104, 100, 100, 0.692);
+		}
+		.postTodo.It1 {
+			z-index: 1;
+			top: 32px;
+			left: 10px;
+			border-radius: 0px 80px 80px 0px;
+			background-color: #FF9A9A;
+		}
        
         
         /*마이페이지*/
@@ -923,13 +942,14 @@ window.onload = function () {
 					
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
+						<a href='/syl/todo'><div class="postTodo It1">todo<br>memo</div></a>
 						<a href='${ contextPath }/diaryList'><div class="post1 It2">Diary</div></a>
 			            <a href='${ contextPath }/diet_1page.do'><div class="post1 It3">Diet</div></a>
 			            <a href='${ contextPath }/mainwish'><div class="post1 It5">Wish</div></a>
 					</div>
 					
 					<div class="rightLine2">
-						<div class="post2 It1"></div>
+<!-- 						<div class="post2 It1"></div> -->
 			            <a href="/syl/ec_list.do"><div class="post2 It4">Exercise</div></a>
 			            <div class="post2 It6"></div>
 			            <div class="post2 It7"></div>

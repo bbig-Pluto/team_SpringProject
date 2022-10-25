@@ -738,7 +738,7 @@
             cursor: pointer;
         }
         .save {
-            margin-top: 45px;
+            margin-top: 35px;
             margin-left: 170px;
             width: 240px;
             height: 45px;
