@@ -730,7 +730,7 @@ footer {
             border-radius: 0px 80px 80px 0px;
             background-color: #d8cbf1;
         }
-          .postTodo {
+        .postTodo {
 			width: 60px;
 			height: 27px;
 			position: absolute;
@@ -738,8 +738,8 @@ footer {
 			font-weight: bold;
 			font-style: italic;
 			text-align: center;
-			padding-top: 5px;
-			padding-bottom: 5px;
+			padding-top: 1px;
+			padding-bottom: 9px;
 			color: rgba(104, 100, 100, 0.692);
 		}
 		.postTodo.It1 {
