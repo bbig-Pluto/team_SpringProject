@@ -608,11 +608,9 @@ footer {
 			background-color: #FF9A9A;
 		}
 
-
-
-        .post1.It2 {
+ .post1.It2 {
             z-index: 2;
-            top: 120px;
+            top: 100px;
             left: 8px;
             border-radius: 0px 80px 80px 0px;
             background-color: #FFCCAA;
@@ -621,7 +619,7 @@ footer {
         .post1.It3 {
 
             z-index: 2;
-            top: 200px;
+            top: 170px;
             left: -10px;
 
             border-radius: 0px 80px 80px 0px;
@@ -643,7 +641,7 @@ footer {
 		
 		
 		   z-index: 2;
-		   top: 240px;
+		   top: 220px;
 		   border-radius: 0px 80px 80px 0px;
 		   background-color: #DCEDCA;
 			}

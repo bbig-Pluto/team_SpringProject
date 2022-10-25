@@ -610,7 +610,7 @@ footer {
 
         .post1.It2 {
             z-index: 2;
-            top: 120px;
+            top: 100px;
             left: 8px;
             border-radius: 0px 80px 80px 0px;
             background-color: #FFCCAA;
@@ -619,7 +619,7 @@ footer {
         .post1.It3 {
 
             z-index: 2;
-            top: 200px;
+            top: 170px;
             left: -10px;
 
             border-radius: 0px 80px 80px 0px;
@@ -627,13 +627,24 @@ footer {
                        border: 1px solid rgb(219, 219, 219);
             border-left: none;
         }
-        .post2.It4 {
-
-            z-index: 2;
-            top: 240px;
-            border-radius: 0px 80px 80px 0px;
-            background-color: #DCEDCA;
-        }
+       .post2.It4 {
+		   width: 60px;
+		   height: 27px;
+		   position: absolute;
+		   font-size: 12px;
+		   font-weight: bold;
+		   font-style: italic;
+		   text-align: center;
+		   padding-top: 10px;
+		   color: rgba(104, 100, 100, 0.692);
+		   
+		
+		
+		   z-index: 2;
+		   top: 220px;
+		   border-radius: 0px 80px 80px 0px;
+		   background-color: #DCEDCA;
+			}
         .post1.It5 {
 
             z-index: 2;
@@ -1234,7 +1245,7 @@ window.onload = function () {
 					</div>
 					
 					<div class="rightLine2">
-			            <div class="post2 It4"></div>
+			            <a href="/syl/ec_list.do"><div class="post2 It4">Exercise</div></a>
 			            <div class="post2 It6"></div>
 			            <div class="post2 It7"></div>
 			            <div class="post2 It8"></div>
