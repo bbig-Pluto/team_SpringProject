@@ -185,7 +185,10 @@
 			left: 400px;
 			top: 20px;
 		}
-        .logo_back {
+		
+ 		/* ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 메인 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ */
+
+		 .logo_back {
             background-color:rgb(14, 75, 34);
             height: 300px;
             margin-top: 100px;
@@ -197,7 +200,7 @@
 			margin: auto;
         }
         .info_area {
-            background-color: rgb(221, 221, 221);
+            background-color: rgb(238, 241, 233);
             margin: 40px;
 			margin-top: 20px;
             border-radius: 15px;
@@ -205,74 +208,143 @@
             margin-bottom: 150px;
             text-align: center;
             padding: 30px;
+			padding-bottom: 1000px;
         }
         .info_title {
-            font-size: 50px;
+			font-size: 50px;
             font-weight: 900;
-            margin: 50px;
+            margin: 100px;
             color:rgb(14, 75, 34);
             padding-top: 50px;
+			margin-top: 180;
         }
+		.title_logo {
+			position: relative;
+			width: 230px;
+			top: 15px;
+		}
         .info_content {
-            font-size: 26px;
+            font-size: 28px;
             margin: 100px;
         }
         .info_subcon {
             width: 900px;
             margin: auto;
             color:rgb(105, 138, 115);
-            font-size: 23px;
+            font-size: 27px;
 			font-weight: 900;
-			margin-top: 30px;
+			margin-top: 50px;
         }
         .idx1 {
             background-color:#FFCCAA;
-            width: 200px;
-            margin: 20px auto;
-            height: 80px;
+            width: 350px;
+            margin: 80px auto;
+            height: 130px;
             border-radius: 100px;
-            line-height: 80px;
-            font-size: 23px;
+            line-height: 130px;
+            font-size: 30px;
             font-weight: 900;
+			cursor: pointer;
         }
 		.diary {
-			display: none;
+			/* visibility: hidden; */
+			height: 0vh;
+			margin: 120px auto;
+			font-size: 40px;
+			font-weight: 900;
+			transition: all 0.3s;
 		}
-		.idx1:hover + .diary {
-			display: block;
+		.diet {
+			/* visibility: hidden; */
+			height: 0vh;
+			margin: 120px auto;
+			font-size: 40px;
+			font-weight: 900;
+		}
+		.exercise {
+			/* visibility: hidden; */
+			height: 0vh;
+			margin: 120px auto;
+			font-size: 40px;
+			font-weight: 900;
+		}
+		.wishlist {
+			/* visibility: hidden; */
+			height: 0vh;
+			margin: 120px auto;
+			font-size: 40px;
+			font-weight: 900;
+		}
+		.contents {
+			font-weight: 500;
+			margin: 100px;
+			font-size: 30px;
+			margin-bottom: 150px;
+		}
+		.links {
+			width: 100px;
+			line-height: 40px;
+			background-color: rgb(0, 0, 0);
+			text-decoration: none;
+			color: rgb(255, 255, 255);
+			font-size: 20px;
+			padding: 23px 50px;
+			border-radius: 80px;
 		}
         .idx2 {
             background-color:#FFFFCA;
-            width: 200px;
-            margin: 30px auto;
-            height: 80px;
+            width: 350px;
+            margin: 80px auto;
+            height: 130px;
             border-radius: 100px;
-            line-height: 80px;
-            font-size: 23px;
+            line-height: 130px;
+            font-size: 30px;
             font-weight: 900;
+			cursor: pointer;
+			margin-top: 750px;
         }
         .idx3 {
-            background-color:#c2e3e5;
-            width: 200px;
-            margin: 20px auto;
-            height: 80px;
+			background-color: #DCEDCA;
+            width: 350px;
+            margin: 80px auto;
+            height: 130px;
             border-radius: 100px;
-            line-height: 80px;
-            font-size: 23px;
+            line-height: 130px;
+            font-size: 30px;
             font-weight: 900;
+			cursor: pointer;
+			margin-top: 750px;
         }
-        .idx4 {
-        	background-color: #DCEDCA;
-            width: 200px;
-            margin: 20px auto;
-            height: 80px;
-            border-radius: 100px;
-            line-height: 80px;
-            font-size: 23px;
-            font-weight: 900;
-        }
+		.idx4 {
+			background-color:#c2e3e5;
+			width: 350px;
+			margin: 80px auto;
+			height: 130px;
+			border-radius: 100px;
+			line-height: 130px;
+			font-size: 30px;
+			font-weight: 900;
+			cursor: pointer;
+			margin-top: 750px;
+		}
+		.act {
+			visibility: visible;
+			height: 60vh;
+		}
+		.bottom_logo {
+			width: 400px;
+			position: relative;
+			top: 800px;
+		}
     </style>
     <script>
+
+		const btn = document.querySelector(".idx1");
+		const cts = document.querySelector(".diary");
+
+		btn.addEventListener("click", ()=> {
+			cts.classList.toggle('act');
+		})
     </script>
 </head>
 <body>
@@ -317,20 +389,53 @@
             <div class="info_title">다이어리란?</div><br>
             <div class="info_content">한 장 한 장 넘기면서 날짜별로 간단한 메모를 할 수 있도록 만들어진 기록장입니다<br><br><br>
 				손으로 매일 힘겹게 남기던 일기<br><br><br><br><br>
-				<b style="font-size: 30px;">이제는 디지털로 손쉽게 기록할 수 있습니다.</b></div><br><br>
+				<b style="font-size: 35px;">이제는 디지털로 손쉽게 기록할 수 있습니다.</b></div><br><br>
             <div class="info_subcon">A diary is a written or audiovisual record with discrete entries arranged by date reporting on what has happened over the course of a day or other period. Diaries have traditionally been handwritten but are now also often digital.</div><br><br><br><br>
 
-            <div class="info_title">3SYL의 다이어리</div><br><br><br><br>
+            <div class="info_title">
+				<img class="title_logo" src="https://ifh.cc/g/yvQoPf.png">
+				의 다이어리
+			</div><br><br><br><br>
             <div class="info_content">이런 기록들을 할 수 있습니다</div><br><br><br>
 			
-            <div class="idx1">DIARY</div>
+            <div class="idx1">D I A R Y</div>
 
-				<div class="diary">다이어리</div>
+				<div class="diary">다이어리
+					<div class="contents">하루하루의 일상을 사진과 함께 기록하세요<br><br>
+						날씨와 기분에 따라 그 날의 특별한 감정을 남길 수 있습니다</div>
+					<a class="links" href="/syl/diaryList">다이어리 페이지 보기 &nbsp; <b>→</b></a>
+				</div>
+					
+					
+			<div class="idx2">D I E T</div>
+					
+				<div class="diet">식단 관리
+					<div class="contents">그 날 섭취한 식사를 기록하세요<br><br>
+						식사별 칼로리와 몸의 변화를 한눈에 확인하세요</div>
+					<a class="links" href="/syl/diet_1page.do">식단 관리 페이지 보기 &nbsp; <b>→</b></a>
+				</div>
 
-			
-            <div class="idx2">DIET</div>
-            <div class="idx4">EXERCISE</div>
-            <div class="idx3">WISHLIST</div>
+
+			<div class="idx3">E X E R C I S E</div>
+
+				<div class="exercise">운동 기록
+					<div class="contents">매일 열심히 운동하고, 기록하세요<br><br>
+						내가 했던 운동을 기록하며 건강에 한걸음 더 가까워지세요</div>
+					<a class="links" href="/syl/ec_list.do">운동 기록 페이지 보기 &nbsp; <b>→</b></a>
+				</div>
+
+
+			<div class="idx4">W I S H L I S T</div>
+
+				<div class="wishlist">위시리스트
+					<div class="contents">가지고 싶은 물건을 담아놓으세요<br><br>
+						구매하고 싶은 물건을 나만의 장바구니에 보기쉽게 분류하고 정리하세요</div>
+					<a style="margin-bottom: 800px;" 
+					class="links" href="/syl/mainwish">위시리스트 페이지 보기 &nbsp; <b>→</b></a>
+				</div>
+
+
+			<img class="bottom_logo" src="https://ifh.cc/g/mcjZ7T.png">
 
         </div>
 
