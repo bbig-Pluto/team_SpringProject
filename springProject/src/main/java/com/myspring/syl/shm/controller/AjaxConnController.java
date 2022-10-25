@@ -51,14 +51,16 @@ public class AjaxConnController {
 		getParamSignUp.put("telNum", dto.getTelNum());
 		
 		String rn_ForAdminSignUp = dto.getRn_ForAdminAdd();
-
+		
+		System.out.println("rn_ForAdminSignUp : " + rn_ForAdminSignUp);
+		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 		String resultMessage = "";
-
+		
 		// 관리자 회원가입
-		if ( !(dto.getRn_ForAdminAdd() == null || dto.getRn_ForAdminAdd().equals("")) ) {
+		if ( !(dto.getRn_ForAdminAdd() == null || dto.getRn_ForAdminAdd().equals("") || rn_ForAdminSignUp.isEmpty()) ) {
 			int permittingMemberClass = memberService.getPermittingMemberClass(rn_ForAdminSignUp);
 			getParamSignUp.put("memberClass", permittingMemberClass);
 			
@@ -77,7 +79,7 @@ public class AjaxConnController {
 					resultMessage += "alert('중복되는 회원 ID가 존재합니다');";
 					resultMessage += " document.querySelector('input[name=\"id\"]').focus();";
 				}
-			// 관리자 
+			// 관리자 등록코드 불일치
 			} else {
 				resultMessage += "alert('관리자 등록 코드가 일치하지 않습니다.');";
 				resultMessage += " document.querySelector('input[name=\"rn_ForAdminAdd\"]').focus();";

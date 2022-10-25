@@ -90,7 +90,6 @@ public class AdminController {
 
 	/**
 	 * 관리자 페이지에서 정보를 수정할 회원 특정, DB에서 수정할 정보 불러오기
-	 * 
 	 * @return viewName
 	 */
 	@RequestMapping(value = "/member/enquireMemberFromAdmin.do", method = RequestMethod.GET)
