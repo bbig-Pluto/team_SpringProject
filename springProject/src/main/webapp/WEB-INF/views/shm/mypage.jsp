@@ -25,6 +25,10 @@
 
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
+		function logout() {
+	        location.href = "/syl/member/logout.do"
+	    }
+		
 	    window.onload = function() {
 			
 	    	<%
@@ -38,8 +42,9 @@
 	    				&& !(logOnSession.getAttribute("isLogon") == null) ) {
 	    		
 	    	%>
-    			
 	    	
+	    	
+    			
 	        let delAccountSelfBtn = document.querySelector("#delAccountSelfBtn");
 	        
 	            delAccountSelfBtn.addEventListener("click", function(e) {
@@ -59,6 +64,7 @@
 				})
 			
 				
+	    	
 // 			회원정보 수정을 위해 DB 에서 회원정보 get
 			$(function() {
 	            $("#modiInfoSelf").click(function(e) {
@@ -121,6 +127,29 @@
 			padding: 10px;
 			height: 130px;
 		}
+		
+		.btnBlueGreen {
+          background: #00AE68;
+        }
+
+        .btnFade.btnLightBlue:hover {
+            background: #01939A;
+        }
+
+        .button {
+            display: block;
+            position: relative;
+            float: left;
+            width: 120px;
+            padding: 0;
+            margin: 10px 20px 10px 0;
+            font-weight: 600;
+            text-align: center;
+            line-height: 50px;
+            color: #FFF;
+            border-radius: 5px;
+            transition: all 0.2s ;
+        }
     </style>
     
 </head>
@@ -128,21 +157,22 @@
 	<div class="backGroundImg">
         <div class="topColorSpacer"></div>
         <div class="linksWrapper">
-            <table frame=void class="contentsArea" border="1" style="border-collapse : collapse; border-color: grey;">
+            <table  align="center" frame=void class="contentsArea" border="1" style="border-collapse : collapse; border-color: grey;">
                <tbody>
                     <tr class="firstRow">
-                        <td>logo<br> <a id="bactToCalendar" href="${contextPath}/calendarM">캘린더로 돌아가기</a></td>
+                        <td style="width: 400px"><a href="${ contextPath }/calendarM"><img style="width: 200px" class="headerLogo" src="/syl/resources/photo/3syl.png"></a></td>
                         <td colspan="2" style="text-align: center;">${ sessionId } 님의 MyPage 입니다.</td>
-                        <td><a id="logoutBtn" href="${contextPath}/member/logout.do">로그아웃</a></td>
+                        <td><button class="button btnFade btnLightBlue btnBlueGreen" onclick="logout()" id="logoutBtn">로그아웃</button></td>
                     </tr>
                     <tr class="secondRow">
-                        <td>콘텐츠 비우기 영역</td>
-                        <td colspan="2"><a id="modiInfoSelf" href="${contextPath}/member/getMemberInfo.do">회원정보 수정</a></td>
-                        <td>test</a></td>
+                        <td style="width: 200px;">콘텐츠 비우기 영역</td>
+                        <td style="align: center;" colspan="2"><div style="display: inline-block; margin:0 auto;"><button class="button btnFade btnLightBlue btnBlueGreen" onclick="getMemberInfo()" id="modiInfoSelf">회원정보 수정</button></div>
+                        </td>
+                        <td>test</td>
                     </tr>
                     <tr class="thirdRow">
-                        <td rowspan="2">비울 콘텐츠 선택, 실행 영역</td>
-                        <td id="inputModifyingInfoSelf" colspan="2" rowspan="2">회원정보 수정 실행 영역</td>
+                        <td style="height: 290px;" rowspan="2">비울 콘텐츠 선택, 실행 영역</td>
+                        <td style="overflow:scroll; width: 400px;" id="inputModifyingInfoSelf" colspan="2" rowspan="2">회원정보 수정 실행 영역</td>
                         <td>test</td>
                     </tr>
                     <tr class="fourthRow">
