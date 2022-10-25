@@ -920,7 +920,7 @@
                     <!-- 상품 추가 / 삭제 버튼 -->
                     <div class="add_delete">
                     
-                    <!-- +(추가) 버튼을 누르면 카테고리 추가 페이지로 이동  -->
+                    <!-- +(추가) 버튼을 누르면 상품 추가 페이지로 이동  -->
                     <c:choose>
 	                    <c:when test="${isLogon eq 'guest' }">
 	                    	<a href="${contextPath }/member/login">
