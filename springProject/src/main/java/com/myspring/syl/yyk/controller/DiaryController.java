@@ -47,7 +47,7 @@ public class DiaryController {
 	// 일기장 추가
 	@RequestMapping(value="/addDiary", method = {RequestMethod.GET, RequestMethod.POST})
 	public String addDiary(Model model,
-							@ModelAttribute DiaryDTO diaryDTO, // 입력 받은 값 알아서 저장해줌
+							@ModelAttribute DiaryDTO diaryDTO, 
 							MultipartHttpServletRequest multipartRequest,
 							HttpServletRequest request) throws Exception {
 		
@@ -66,7 +66,6 @@ public class DiaryController {
 		String originalFileName = fileProcess(multipartRequest);
 		System.out.println("addDiary : 파일 이름 : " + originalFileName);
 		
-//		diaryDTO.setId(sessionId);
 		diaryDTO.setD_fileName(originalFileName);
 		
 		diaryService.getAddDiary(diaryDTO);

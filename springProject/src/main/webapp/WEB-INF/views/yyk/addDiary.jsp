@@ -562,11 +562,13 @@ main {
             font-size: 52px;
             font-weight: 600;
             font-family: 'Dongle', sans-serif;
-            margin: 20px;
-            margin-top: 30px;
+/*             margin: 20px; */
+/*             margin-top: 30px; */
             /* margin-left: 7%; */
             position: relative;
-            left: 70%;
+            left: 451px;
+            top: 37px;
+            display: inline;
         }
 
         /* 오른쪽 일기장 배경 */
@@ -574,10 +576,10 @@ main {
             /* border: 1px solid rgb(57, 56, 56); */
             border-radius: 25px;
             background-color: white;
-            margin-top: -20px;
+            margin-top: 28px;
             margin-left: 5%;
             width: 85%;
-            height: 552px;
+            height: 558px;
         }
 
         /* 제목 */
@@ -784,7 +786,7 @@ footer {
         .post1.It2 {
             z-index: 2;
             top: 120px;
-            left: 8px;
+            left: -20px;
             border-radius: 0px 80px 80px 0px;
             background-color: #FFCCAA;
 
@@ -800,13 +802,24 @@ footer {
                        border: 1px solid rgb(219, 219, 219);
             border-left: none;
         }
-        .post2.It4 {
-
-            z-index: 2;
-            top: 240px;
-            border-radius: 0px 80px 80px 0px;
-            background-color: #DCEDCA;
-        }
+            .post2.It4 {
+		   width: 60px;
+		   height: 27px;
+		   position: absolute;
+		   font-size: 12px;
+		   font-weight: bold;
+		   font-style: italic;
+		   text-align: center;
+		   padding-top: 10px;
+		   color: rgba(104, 100, 100, 0.692);
+		   
+		
+		
+		   z-index: 2;
+		   top: 240px;
+		   border-radius: 0px 80px 80px 0px;
+		   background-color: #DCEDCA;
+		}
         .post1.It5 {
 
             z-index: 2;
@@ -839,23 +852,25 @@ footer {
             border-radius: 0px 80px 80px 0px;
             background-color: #d8cbf1;
         }
-        .post2.It4 {
-		   width: 60px;
-		   height: 27px;
-		   position: absolute;
-		   font-size: 12px;
-		   font-weight: bold;
-		   font-style: italic;
-		   text-align: center;
-		   padding-top: 10px;
-		   color: rgba(104, 100, 100, 0.692);
-		   
-		
-		
-		   z-index: 2;
-		   top: 240px;
-		   border-radius: 0px 80px 80px 0px;
-		   background-color: #DCEDCA;
+ 
+		  .postTodo {
+			width: 60px;
+			height: 27px;
+			position: absolute;
+			font-size: 12px;
+			font-weight: bold;
+			font-style: italic;
+			text-align: center;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			color: rgba(104, 100, 100, 0.692);
+		}
+		.postTodo.It1 {
+			z-index: 1;
+			top: 32px;
+			left: 10px;
+			border-radius: 0px 80px 80px 0px;
+			background-color: #FF9A9A;
 		}
         
         /*마이페이지*/
@@ -1096,10 +1111,9 @@ window.onload = function() {
 					                <!-- 기분 & 날씨 -->
 					                <div class="left_bottom_text">Today's Emotion</div>
 					                <div class="left_bottom_wrap">
-					                
 					                    <!-- 날씨 -->
 					                    <div class="weather">
-					                        <img src="resources/yyk/image/맑음.png" class="icon" id="sunny" value="sunny"
+					                        <img src="resources/yyk/image/맑음.png" class="icon" id="sunny" value="sunny" 
 					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
 					                        <img src="resources/yyk/image/구름.png" class="icon" value="cloud"
 					                        	onmouseenter="icon_zoomIn(event)" onmouseleave="icon_zoomOut(event)">
@@ -1114,11 +1128,8 @@ window.onload = function() {
 					                    <div class="slidecontainer">
 					                        <input type="range" min="1" max="5" class="diary_slider" name="d_emotion" value="">
 					                    </div>
-					                    
 					                </div>
 					            	</div>
-					
-					
 					
 					            <!-- 오른쪽 영역 -->
 					            <div class="right">
@@ -1183,13 +1194,14 @@ window.onload = function() {
 					
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
+						<a href='/syl/todo'><div class="postTodo It1">todo<br>memo</div></a>
 						<a href='${ contextPath }/diaryList'><div class="post1 It2">Diary</div></a>
 			            <a href='${ contextPath }/diet_1page.do'><div class="post1 It3">Diet</div></a>
 			            <a href='${ contextPath }/mainwish'><div class="post1 It5">Wish</div></a>
 					</div>
 					
 					<div class="rightLine2">
-						<div class="post2 It1"></div>
+<!-- 						<div class="post2 It1"></div> -->
 			            <a href="/syl/ec_list.do"><div class="post2 It4">Exercise</div></a>
 			            <div class="post2 It6"></div>
 			            <div class="post2 It7"></div>
