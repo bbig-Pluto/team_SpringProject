@@ -468,11 +468,10 @@ nav {
 	font-weight: bold;
 	font-style: italic;
 	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 1px;
+	padding-bottom: 9px;
 	color: rgba(104, 100, 100, 0.692);
 }
-
 .postTodo.It1 {
 	z-index: 1;
 	top: 32px;

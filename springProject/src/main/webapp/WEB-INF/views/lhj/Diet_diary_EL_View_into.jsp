@@ -178,18 +178,6 @@ request.setCharacterEncoding("utf-8");
         check_kor.test(str3); //한글 return 값 true / false
 
 
-        // if(  ) {
-        //     console.log("if의 분기");
-        //     alert("한글 O");
-        //     return true
-        // }else{
-        //     console.log("else if의 분기");
-        //     alert("한글 X");
-        //     return false;
-        // }
-
-
-
 		// null이 아니고 공백이 아니면
 		if(
 			set_menu_2_value != null && set_menu_2_value.trim() &&
@@ -712,11 +700,10 @@ footer {
 	font-weight: bold;
 	font-style: italic;
 	text-align: center;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 1px;
+	padding-bottom: 9px;
 	color: rgba(104, 100, 100, 0.692);
 }
-
 .postTodo.It1 {
 	z-index: 1;
 	top: 32px;

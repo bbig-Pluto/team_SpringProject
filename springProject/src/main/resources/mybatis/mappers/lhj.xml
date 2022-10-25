@@ -168,6 +168,14 @@
 
 	<!-- ■■■■■■■■■■■■■■■■■■■ 2 page ■■■■■■■■■■■■■■■■■■■■■ -->
 
+	<!-- 현재체중량 list 출력 -->
+	<select id="select_Inbody_list" resultType="inbodyDTO">
+		select * from
+		Exercise_Inbody
+	</select>
+	
+
+	<!-- 현재체중량 하나만 조회 -->
 	<select id="select_Inbody_Last" resultType="inbodyDTO">
 		SELECT *
 		FROM(
@@ -178,12 +186,7 @@
 		WHERE ROWNUM = 1
 	</select>
 	
-	<!-- 하나만 입력하고 그 값을 수정할 예정 -->
-	<select id="select_Inbody_list" resultType="inbodyDTO">
-		select * from
-		Exercise_Inbody
-	</select>
-	
+
 	<!-- 하나만 입력하고 그 값을 수정만 할 예정 -->
 	<select id="select_One_Inbody_2" resultType="inbodyDTO">
 		select * from

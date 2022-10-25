@@ -108,12 +108,9 @@
 		})
 
 
-		// 추가를 클릭하면 session제한을 봄
-		// document.querySelector(".insert_button").addEventListener("click",function(e) {
-		// e.preventDefault();
-
-		insert_bind();
 		
+		insert_bind();
+			// 추가 버튼을 클릭했을때
 			function insert_bind() {
 				document.querySelector(".insert_button").addEventListener("click",function(e) {
 				<%if (!(isLogon.equals("member"))) {%>

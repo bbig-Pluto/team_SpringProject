@@ -27,76 +27,56 @@ public class ExerciseControllerImpl implements ExerciseController {
 	@Autowired
 	ExerciseService exerciseservice;
 
-	// ��� ���̺� ����Ʈ (�����ϴ� ��)
-	// �Ŀ� int�� �ް� ���������ؼ� size�� ���
+	
 	@Override
 	public void saying(Model model) {
-		logger.info("���� ��Ʈ�ѷ� saying �޼ҵ� ���� ����");
-
+		logger.info(" 컨트롤러 : saying 메소드 실행 ");
+		// 후에 이 list를 사용해서 sayingAry의 size를 잡을 예정
 		List<ExerciseDTO> saying = exerciseservice.saying();
 		model.addAttribute("saying", saying);
 	}
 	
-	// ��� ���̺�
+	/**
+	 * 명언 내용을 랜덤으로 보여줌
+	 * 
+	 * @return 명언 내용
+	 */
 	@Override
 	public String sayingAry() {
-		logger.info("���� ��Ʈ�ѷ� test sayingAry �޼ҵ� ���� ����");
-//		List<ExerciseDTO> saying = exerciseservice.saying();
-//		int randomint = (int)Math.random()*10;
-		// �������� ī��Ʈ�� �ٲ㼭 int�� �޾ƿ��� ������ ���� �� ���� ���߿� ����
+		logger.info(" 컨트롤러 : sayingAry 메소드 실행 ");
 		
 		Random random = new Random();
 		int n = random.nextInt(10)+1; 
-		System.out.println(" randomint :"+ n);
+//		System.out.println(" randomint :"+ n);
 		String sayingAry = exerciseservice.sayingAry(n);
 
 		return sayingAry;
 	}
-	
 
-	// ���� ���߷� ���̺�
-	@Override
-	public void Inbody_List(Model model) {
-		logger.info("���� ��Ʈ�ѷ� Inbody_List �޼ҵ� ���� ����");
-		
-		List<InbodyDTO> select_Inbody_Last = exerciseservice.select_Inbody_Last();
-		model.addAttribute("select_Inbody_Last", select_Inbody_Last);
-		
-	}
-	
-	// ��ǥ ü�߷� ���̺�
-	@Override
-	public void select_One_Inbody_2(Model model) {
-		InbodyDTO select_One_Inbody_2 = exerciseservice.select_One_Inbody_2();
-		model.addAttribute("select_One_Inbody_2", select_One_Inbody_2);
-	}
-
-	// ���� ������� ���̺� list�� ��¸�
-	@Override
-	public void select_Inbody_list(Model model) {
-		
-		List<InbodyDTO> select_Inbody_list = exerciseservice.select_Inbody_list();
-		model.addAttribute("select_Inbody_list", select_Inbody_list);
-	}
-	
-	/*
-	 * 운동 기록 전체 list 메소드
+	/**
+	 * 1page 운동기록 전체 list seq 정렬
+	 * 
+	 * @param model
 	 */
 	@Override
 	public void selectList(Model model) {
-		logger.info("컨트롤러 selectList 메소드 실행");
+		logger.info("컨트롤러 : selectList 메소드 실행");
 		
 		List<ExerciseDTO> selectList = exerciseservice.selectList();
 		model.addAttribute("selectList",selectList);
 	}
-	
-	/*
-	 * 운동 기록 7개만 표시
+
+	/**
+	 * 1page 최근 일주일 값 출력 메소드
+	 * 7개의 list만 보임 (sql 제한)
+	 * 
+	 * @param model
+	 * @return 1page 운동 기록 7개 list 메소드
 	 */
 	@Override
 	@RequestMapping(value = "/ec_list.do", method = RequestMethod.GET)
 	public String selectAllList(Model model) {
-		logger.info("���� ��Ʈ�ѷ� list �޼ҵ� ���� ����");
+		logger.info("컨트롤러 : selectAllList 메소드 실행");
 
 		List<ExerciseDTO> exercise_list = exerciseservice.selectAllList();
 		model.addAttribute("exercise_list", exercise_list);
@@ -108,7 +88,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 	}
 
 	/*
-	 * 운동 기록 삭제
+	 * 1page 운동 기록 삭제
 	 */
 	@Override
 	@RequestMapping(value = "/record/delete.do", method = RequestMethod.POST)
@@ -126,7 +106,10 @@ public class ExerciseControllerImpl implements ExerciseController {
 		return "lhj/ec_list";
 	}
 
-	
+	/**
+	 * 1page 운동 추가
+	 * 
+	 */
 	@Override
 	@RequestMapping(value = "/exercise/ec_add.do", method = RequestMethod.POST)
 	public String add(@RequestParam("exercise_Contents") String exercise_Contents,
@@ -143,6 +126,9 @@ public class ExerciseControllerImpl implements ExerciseController {
 		return "redirect:/ec_list.do";
 	}
 
+	/**
+	 * 1page 운동 삭제
+	 */
 	@Override
 	@RequestMapping(value = "/exercise/ec_del.do", method = RequestMethod.POST)
 	public String del(@RequestParam("seq_Exercise") int[] seq_Exercise, Model model) {
@@ -157,6 +143,9 @@ public class ExerciseControllerImpl implements ExerciseController {
 		return "redirect:/ec_list.do";
 	}
 
+	/**
+	 * 1page 운동 업데이트
+	 */
 	@Override
 	@RequestMapping(value = "/exercise/ec_update.do", method = RequestMethod.POST)
 	public String update(@RequestParam("seq_Exercise") int[] seq_Exercise,
@@ -173,8 +162,47 @@ public class ExerciseControllerImpl implements ExerciseController {
 		return "lhj/ec_list";
 	}
 	
-	// ��������������� �ι�° ������ ����������������
+	/**
+	 * 2page 현재체중량 테이블 마지막 값 호출 메소드
+	 * (sql 제한) 메소드 호출해서 사용
+	 * 
+	 * @param model
+	 */
+	@Override
+	public void Inbody_List(Model model) {
+		logger.info(" 컨트롤러 : Inbody_List 메소드 실행 ");
+		
+		List<InbodyDTO> select_Inbody_Last = exerciseservice.select_Inbody_Last();
+		model.addAttribute("select_Inbody_Last", select_Inbody_Last);
+	}
 	
+	/**
+	 * 2page 목표체중량 테이블 list 호출 메소드
+	 * 입력 하나만 함
+	 * 
+	 * @param model
+	 */
+	@Override
+	public void select_One_Inbody_2(Model model) {
+		InbodyDTO select_One_Inbody_2 = exerciseservice.select_One_Inbody_2();
+		model.addAttribute("select_One_Inbody_2", select_One_Inbody_2);
+	}
+
+	/**
+	 * 2page 현재체중량 전체 list 호출 메소드
+	 * 
+	 * @param model
+	 */
+	@Override
+	public void select_Inbody_list(Model model) {
+		
+		List<InbodyDTO> select_Inbody_list = exerciseservice.select_Inbody_list();
+		model.addAttribute("select_Inbody_list", select_Inbody_list);
+	}
+
+	/**
+	 * 2page 운동 마지막 값 조회
+	 */
 	@Override
 	@RequestMapping(value = "/inbody/ec_list.do", method = RequestMethod.GET)
 	public String select_Inbody_Last(Model model) {
@@ -189,6 +217,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 		return "lhj/ec_Inbody";
 	}
 	
+	// 2page 현재체중량 추가
 	@Override
 	@RequestMapping(value = "/inbody/insert.do", method = RequestMethod.POST)
 	public String insert_Inbody(Model model,
@@ -208,14 +237,15 @@ public class ExerciseControllerImpl implements ExerciseController {
 		
 		exerciseservice.insert_Inbody(inbodyDTO);
 		
-		select_Inbody_Last(model);
-		sayingAry(); // 명언테이블
-		return "lhj/ec_Inbody";
+//		select_Inbody_Last(model);
+//		sayingAry(); // 명언테이블
+//		return "lhj/ec_Inbody";
+		return "redirect:/inbody/ec_list.do";
 	}
 
-
-
-	// ��ǥ ü�߷� ���̺� ����
+	/**
+	 * 2page 목표체중량 업데이트
+	 */
 	@Override
 	@RequestMapping(value = "/inbody/update.do", method = RequestMethod.POST)
 	public String update_Inbody2(Model model,

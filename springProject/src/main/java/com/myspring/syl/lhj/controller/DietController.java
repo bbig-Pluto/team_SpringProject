@@ -27,17 +27,25 @@ public class DietController {
 	
 
 	/*
-	 * 1page ����
+	 * 식단일지 메인 페이지                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	 * @return 메인페이지 접속
 	 */
 	@RequestMapping(value = "/diet_1page.do", method = RequestMethod.GET)
 	public String diet_diary_View() {
-		
+		logger.info(" 컨트롤러 : 식단일지 메인 페이지 메소드 실행 ");
 		return "lhj/Diet_diary_EL_View";
 	};
 	
-	/*
-	 * Diet_diary ���̺� insert 
-	 * Diet_diary_Menu ���̺� insert 
+	/**
+	 * 식단일지 내용 추가 insert
+	 * 
+	 * @param model
+	 * @param request
+	 * @param diet_diary_type
+	 * @param diet_diary_menu
+	 * @param diet_diary_menu_calorie
+	 * @param diet_diary_menu_sum
+	 * @return 식단일지 2page
 	 */
 	@RequestMapping(value = "/diet_insert.do", method = RequestMethod.POST)
 	public String diet_insert(
@@ -51,50 +59,39 @@ public class DietController {
 			
 			
 			) {
-		logger.info("���� ��Ʈ�ѷ� diet_insert �޼ҵ� ���� ����");
+		logger.info(" 컨트롤러 : 내용 입력 추가 메소드 실행 ");
 		DietDTO dietDTO = new DietDTO();
 		
 		HttpSession userInfo = request.getSession();
-		String sessionId_HJ = "" + userInfo.getAttribute("isLogon");	// ������Ʈ Ÿ���̶� "" �� �ٿ� String���� ����
+		String sessionId_HJ = "" + userInfo.getAttribute("isLogon");	// 오브젝트 타입이라 "" 사용해서 String으로 변경
+		
 		dietDTO.setSession_user_id_hj(sessionId_HJ);
 		dietDTO.setDiet_diary_type(diet_diary_type);
 		int diet_insert = dietService.diet_insert(dietDTO);
-		System.out.println("1�� ������ ���� diet_insert : " + diet_insert);
-		// �� Diet_diary ���̺�
+//		System.out.println(" diet_insert 성공여부 확인 : " + diet_insert);
+		// Diet_diary 테이블 내용
 		
-		// �� Diet_insert_menu ���̺�
-		System.out.println("get name" + diet_diary_menu + " " + diet_diary_menu_calorie + " " + diet_diary_menu_sum);
+		
+		// Diet_insert_menu 테이블 내용
+//		System.out.println("get name" + diet_diary_menu + " " + diet_diary_menu_calorie + " " + diet_diary_menu_sum);
 		dietDTO.setDiet_diary_menu(diet_diary_menu);
 		dietDTO.setDiet_diary_menu_calorie(diet_diary_menu_calorie);
 		dietDTO.setDiet_diary_menu_sum(diet_diary_menu_sum);
-//		
-//		
-//		
+
+		
+		
 		int diet_insert_menu = dietService.diet_insert_menu(dietDTO);
-		System.out.println("1�� ������ ���� diet_insert_menu : " + diet_insert_menu);
-		diet_list_Last(model); // �̵� �� ������ OO ǥ��
+
+		diet_list_Last(model); // 식단일지 2page 가장 최근에 기록한 내용 보여줌 
 		diet_menu_list(model); // 오른쪽 오늘 먹은 음식
 		return "lhj/Diet_diary_EL_View_into";
 	};
-	
-	/*
-	 * 2page ����
-	 * list ������
-	 */
-	@RequestMapping(value = "/diet_2page.do", method = RequestMethod.GET)
-	public String diet_menu_list(Model model) {
-		logger.info("���� ��Ʈ�ѷ� diet_list �޼ҵ� ���� ����");
-		
-		List<DietDTO> diet_menu_list = dietService.diet_menu_list();
-		model.addAttribute("listDiet_diary_menu", diet_menu_list);
-		
-		diet_list_Last(model);
-		return "lhj/Diet_diary_EL_View_into";
-	};
-	
-	
-	/*
-	 * 2page 마지막 값 출력해주는 메소드 맵핑x
+
+	/**
+	 * 2page 가장 최근에 입력한(마지막 값) 내용 보여줌 (페이지 왼쪽)
+	 * 
+	 * @param 
+	 * @return 식단일지 2page
 	 */
 	public String diet_list_Last(Model model) {
 
@@ -104,42 +101,71 @@ public class DietController {
 		return "lhj/Diet_diary_EL_View.into";
 	}
 	
-	/*
-	 * 2page update 해주는 메소드
+	/**
+	 * list로 출력하는 메소드 (페이지 오른쪽)
+	 * 
+	 * @param 
+	 * @return 식단일지 2page
+	 */
+	@RequestMapping(value = "/diet_2page.do", method = RequestMethod.GET)
+	public String diet_menu_list(Model model) {
+		logger.info(" 컨트롤러 : 2page list 출력 메소드 실행 ");
+		
+		List<DietDTO> diet_menu_list = dietService.diet_menu_list();
+		model.addAttribute("listDiet_diary_menu", diet_menu_list);
+		
+		diet_list_Last(model);
+		return "lhj/Diet_diary_EL_View_into";
+	};
+	
+	/**
+	 * 가장 최근에 입력한(마지막 값) 내용 수정
+	 * 
+	 * @param model
+	 * @param diet_diary_menu
+	 * @param diet_diary_menu_calorie
+	 * @param diet_diary_menu_sum
+	 * @return 식단일지 2page
 	 */
 	@RequestMapping(value = "/diet_update_2page.do", method = RequestMethod.POST)
 	public String diet_menu_update(Model model,
+
 			@RequestParam("diet_diary_menu") String diet_diary_menu,
 			@RequestParam("diet_diary_menu_calorie") int diet_diary_menu_calorie,
 			@RequestParam("diet_diary_menu_sum") int diet_diary_menu_sum
 			) {
-
+		logger.info(" 컨트롤러 : 2page update 메소드 실행 ");
+		
 		DietDTO dietDTO = new DietDTO();
-
 		dietDTO.setDiet_diary_menu(diet_diary_menu);
 		dietDTO.setDiet_diary_menu_calorie(diet_diary_menu_calorie);
 		dietDTO.setDiet_diary_menu_sum(diet_diary_menu_sum);
 		int diet_menu_update = dietService.diet_menu_update(dietDTO);
 		
-		System.out.println( " 컨트롤러 diet_menu_update 성공여부 " + diet_menu_update);
+//		System.out.println( " 컨트롤러 diet_menu_update 성공여부 " + diet_menu_update);
 		
-		diet_list_Last(model);
+		diet_list_Last(model); // 왼쪽 마지막 값 내용
 		diet_menu_list(model); // 오른쪽 오늘 먹은 음식
 		return "lhj/Diet_diary_EL_View_into";
 	}
 	
-	/*
-	 * 2page delete 해주는 메소드
+	/**
+	 * 식단일지 삭제 메소드
+	 * 
+	 * @param model
+	 * @param seq_diet_diary_menu (where 조건)
+	 * @return 식단일지 2page
 	 */
 	@RequestMapping(value = "/diet_delete_2page.do", method = RequestMethod.POST)
 	public String diet_menu_delete(Model model,
 								   @RequestParam("seq_diet_diary_menu") int seq_diet_diary_menu) {
+		logger.info(" 컨트롤러 : 2page update 메소드 실행 ");
 		
 		int diet_menu_delete = dietService.diet_menu_delete(seq_diet_diary_menu);
 		
-		System.out.println(" 컨트롤러 diet_menu_delete 성공여부  " + diet_menu_delete);
+//		System.out.println(" 컨트롤러 diet_menu_delete 성공여부  " + diet_menu_delete);
 		
-		diet_list_Last(model); // 왼쪽 오늘의 아침
+		diet_list_Last(model); // 왼쪽 마지막 값 내용
 		diet_menu_list(model); // 오른쪽 오늘 먹은 음식
 		return "lhj/Diet_diary_EL_View_into";
 	}

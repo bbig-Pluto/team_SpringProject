@@ -7,10 +7,8 @@ import com.myspring.syl.lhj.dto.ExerciseDTO;
 
 public interface ExerciseController {
 	
-	// 운동 기록 7개만 표시
 	public String selectAllList(Model model);
 	
-	// 운동 기록 전체 메소드
 	public void selectList(Model model);
 	
 	public String inbody_delete(Model model, int[] seq_record);
@@ -25,8 +23,8 @@ public interface ExerciseController {
 	
 	public String sayingAry();
 	
-	// �ι�° ������
 	public void Inbody_List(Model model);
+	
 	public String select_Inbody_Last(Model model);
 	
 	public String insert_Inbody(Model model,
@@ -35,7 +33,6 @@ public interface ExerciseController {
 			int InBody_Body_Fat,
 			int InBody_Skeletal
 			);
-	
 	
 	public void select_One_Inbody_2(Model model);
 	

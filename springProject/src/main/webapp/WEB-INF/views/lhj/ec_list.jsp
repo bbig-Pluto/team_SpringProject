@@ -186,13 +186,6 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 				} else if (count >= 1) {
 					console.log("count else : ", count);
 
-
-
-
-
-
-
-
 					// 체크된 값
 					let one_check_data = document.querySelectorAll("input[name='seq_Exercise']:checked");
 					console.log("one_check_data 확인 : ", one_check_data);
