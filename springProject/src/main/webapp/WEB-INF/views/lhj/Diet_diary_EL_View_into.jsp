@@ -12,6 +12,8 @@
 <%-- <jsp:useBean id="dto" class="Diet_diary_01.DietDTO" /> --%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
+<% HttpSession logOnSession = request.getSession(); %>
 
 <!-- 오늘의 날짜와 어떤 날짜를 가져올지에 대한 제약조건 -->
 <%
@@ -28,16 +30,33 @@ request.setCharacterEncoding("utf-8");
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title> 식단일지 </title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
 <script type="text/javascript">
 	window.onload = function() {
+		
+		// 마이페이지 js
+		let popupWidth = 470;
+		let popupHeight = 140;
+		// 브라우저 기준 중앙 정렬			
+		let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+		let popupY = (window.screen.height / 2) - (popupHeight / 2);
+					
+		document.querySelector("#myPageLink").addEventListener("click", function(e) {
+			<% if ((""+logOnSession.getAttribute("isLogon")).equals("member")) { %>
+				window.open('${contextPath}/member/rd/inputpwdformypage', '비밀번호 재확인', 'width=' + popupHeight + ', height=' + popupHeight + ', left='+ popupX + ', top=' + popupY + ', scrollbars=yes');
+			<% } else { %>
+				alert("로그인이 필요한 서비스입니다.");				
+			<% } %>
+		})
+		
 		
 		<%HttpSession userInfo = request.getSession(); // 세션 가져와서
 		String isLogon = "guest";
 
 		if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창에 들어온 Case, 세션을 여기서 생성하고, 달력페이지로 튕겨냄
 			userInfo.setAttribute("isLogon", "guest");
-			response.sendRedirect("/team_Project/js/calendarM.jsp"); // 나중에 바꿀 내용
+			response.sendRedirect("/syl/calendarM"); // 세션 없고, 로그인 없이 들어오면 캘린더로 보냄
 		} else if (userInfo.getAttribute("logOn.id") == null) { // 세션은 만들었는데, 로그인은 안 한 케이스
 			isLogon = "guest";
 		} else { // 세션도 만들었고, 로그인도 하고 들어온 Case
@@ -728,10 +747,22 @@ footer {
 }
 
 .post2.It4 {
-	z-index: 2;
-	top: 240px;
-	border-radius: 0px 80px 80px 0px;
-	background-color: #DCEDCA;
+   width: 60px;
+   height: 27px;
+   position: absolute;
+   font-size: 12px;
+   font-weight: bold;
+   font-style: italic;
+   text-align: center;
+   padding-top: 10px;
+   color: rgba(104, 100, 100, 0.692);
+   
+
+
+   z-index: 2;
+   top: 240px;
+   border-radius: 0px 80px 80px 0px;
+   background-color: #DCEDCA;
 }
 
 .post1.It5 {
@@ -1022,37 +1053,48 @@ footer {
 	font-size: 15px;
 }
 
-/* 지워질 부분 */
-.test_loginpath {
-	border: 1px solid rgb(204, 204, 204);
-	font-size: 17px;
+
+/* 마이페이지 */
+.headermypage {
+ 	color: #223919;
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
 }
+	        
+.headermypage:hover {
+	color: #108269;
+	font-weight: bold;
+}
+
 </style>
 </head>
 
 <body>
 	<header>
-		<div class="wrapper">
-			<h1>
-				<!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-				<a href="${ contextPath }/js/calendarM.jsp"><img
-					class="headerLogo" src="/team_Project/photo/3syl.png"></a>
-			</h1>
-			<nav>
-				<a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a>
-				<a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성
-					|</a> <a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능
-					|</a> <a href="${ contextPath }/shot11.jsp" class="headersub">다이어리
-					사용법 |</a> <a href="${ contextPath }/sdy/notice_show.jsp"
-					class="headersub">고객의 소리</a>
-				<div class="lgnbtn">
-					<a href="${ contextPath }/hunminjsp/mypage.jsp"
-						class="headermypage">마이페이지</a> <a
-						href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-					<a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
-				</div>
-			</nav>
-		</div>
+         <div class="wrapper">
+            <h1>
+               <a href="${ contextPath }/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
+            </h1>
+            <nav>
+               <a href="${ contextPath }/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="${ contextPath }/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="${ contextPath }/bar/func" class="headersub">다이어리 기능 |</a> 
+               <a href="${ contextPath }/bar/shot11"   class="headersub">다이어리 사용법 |</a> 
+               <a href="${ contextPath }/notice" class="headersub">고객의 소리</a>
+               <div class="lgnbtn">
+                  <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
+ 					<c:choose>
+	                  <c:when test="${empty sessionId }">
+		                  <a href="/syl/member/login" class="headerlogin">로그인</a>
+	                  </c:when>
+		                  <c:otherwise>
+			                  <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+		                  </c:otherwise>
+                  </c:choose>
+               </div>
+            </nav>
+         </div>
 	</header>
 
 	<main>
@@ -1081,24 +1123,15 @@ footer {
 										</span>
 										<h2 class="Diet_diary_h2">오늘 먹은 음식</h2>
 										<div class="Diet_diary_type">
-											<img src="../Hanu/Hanuimg/식단표 아침.png" width="40px"
+											<img src="/syl/resources/lhj/lhjimg/morning.png" width="40px"
 												height="35px" class="page2_img1"> <img
-												src="../Hanu/Hanuimg/식단표 점심.png" width="40px" height="35px"
+												src="/syl/resources/lhj/lhjimg/lunch.png" width="40px" height="35px"
 												class="page2_img2"> <img
-												src="../Hanu/Hanuimg/식단표 저녁.png" width="40px" height="35px"
+												src="/syl/resources/lhj/lhjimg/dinner.png" width="40px" height="35px"
 												class="page2_img3"> <span class="page2text"><span
 												class="img1text2">아침</span><span class="img2text2">점심</span><span
 												class="img3text2">저녁</span></span>
 										</div>
-
-
-
-
-
-
-
-
-
 
 
 										<form action="${contextPath}/diet_update_2page.do" name = "diet_update_2page"
@@ -1158,11 +1191,11 @@ footer {
 										<!-- 내가 생성한 테이블  -->
 										<div class="into_box">
 											<div class="Diet_diary_type">
-												<img src="../Hanu/Hanuimg/식단표 아침.png" width="40px"
+												<img src="/syl/resources/lhj/lhjimg/morning.png" width="40px"
 													height="35px" class="page2_form_img1"> <img
-													src="../Hanu/Hanuimg/식단표 점심.png" width="40px" height="35px"
+													src="/syl/resources/lhj/lhjimg/lunch.png" width="40px" height="35px"
 													class="page2_form_img2"> <img
-													src="../Hanu/Hanuimg/식단표 저녁.png" width="40px" height="35px"
+													src="/syl/resources/lhj/lhjimg/dinner.png" width="40px" height="35px"
 													class="page2_form_img3"> <span
 													class="page2_text_form"> <span
 													class="img1_form_text1">아침</span> <span
@@ -1254,17 +1287,24 @@ footer {
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
 						<!--  여기 Index에 이동 a링크 구성하기 -->
-						<a href='${ contextPath }/yyk/diaryList.jsp'>
-							<div class="post1 It2">Diary</div>
-						</a> <a href='${ contextPath }/diet_1page.do'>
-							<div class="post1 It3">Diet</div>
-						</a> <a href='${ contextPath }/shy/mainwish.jsp'>
-							<div class="post1 It5">Wish</div>
+						<a href='${ contextPath }/diaryList'>
+						<div class="post1 It2">Diary</div>
+						</a>
+						
+						<a href='${ contextPath }/diet_1page.do'>
+						<div class="post1 It3">Diet</div>
+						</a>
+						
+
+						<a href='${ contextPath }/mainwish'>
+						<div class="post1 It5">Wish</div>
 						</a>
 					</div>
 					<div class="rightLine2">
 						<div class="post2 It1"></div>
-						<div class="post2 It4"></div>
+						<a href='${ contextPath }/ec_list.do'>
+						<div class="post2 It4">Exercise</div>
+						</a>
 						<div class="post2 It6"></div>
 						<div class="post2 It7"></div>
 						<div class="post2 It8"></div>
@@ -1287,8 +1327,8 @@ footer {
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<img class="left_logo1" src="../Hanu/Hanuimg/logo2.png"> <img
-					class="left_logo2" src="../Hanu/Hanuimg/3syl2.png">
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png"> <img
+					class="left_logo2" src="/syl/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">

@@ -4,12 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
+
+<% HttpSession logOnSession = request.getSession(); %>
+
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title> 운동일지 </title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
 
 <link href="${path}/resources/lhj/exercise.css" rel="stylesheet">
 <style>
@@ -27,7 +32,21 @@ window.onload = function () {
 	tab_accordion_tab();
 	record_check();
 	
-
+	
+	// 마이페이지 세션
+	let popupWidth = 470;
+	let popupHeight = 140;
+	// 브라우저 기준 중앙 정렬			
+	let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+	let popupY = (window.screen.height / 2) - (popupHeight / 2);
+				
+	document.querySelector("#myPageLink").addEventListener("click", function(e) {
+		<% if ((""+logOnSession.getAttribute("isLogon")).equals("member")) { %>
+			window.open('${path}/member/rd/inputpwdformypage', '비밀번호 재확인', 'width=' + popupHeight + ', height=' + popupHeight + ', left='+ popupX + ', top=' + popupY + ', scrollbars=yes');
+		<% } else { %>
+			alert("로그인이 필요한 서비스입니다.");				
+		<% } %>
+	})
 	
 	
 }
@@ -37,7 +56,7 @@ String isLogon = "guest";
 
 if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창에 들어온 Case, 세션을 여기서 생성하고, 달력페이지로 튕겨냄
 	userInfo.setAttribute("isLogon", "guest");
-	response.sendRedirect("/team_Project/js/calendarM.jsp"); // 나중에 바꿀 내용
+	response.sendRedirect("/syl/calendarM"); // 세션 없고, 로그인 없이 들어오면 캘린더로 보냄
 } else if (userInfo.getAttribute("logOn.id") == null) { // 세션은 만들었는데, 로그인은 안 한 케이스
 	isLogon = "guest";
 } else { // 세션도 만들었고, 로그인도 하고 들어온 Case
@@ -351,7 +370,6 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 							}
 						}
 
-						
 
 </script>
 
@@ -360,20 +378,28 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 <body>
 	<header>
 		<div class="wrapper">
-			<h1>
-				<img class="headerLogo" src="./3syl.png"><a href=""></a>
-			</h1>
-			<nav>
-				<a href class="headersub">다이어리 소개 |</a> <a href class="headersub">다이어리
-					구성 |</a> <a href class="headersub">다이어리 기능 |</a> <a href
-					class="headersub">다이어리 사용법 |</a> <a href class="headersub">Q&A</a>
-				<div class="lgnbtn">
-					<!-- <a href class="headerlogin">로그인 /</a> -->
-					<a href class="headerloginout">로그아웃</a>
-				</div>
-			</nav>
-		</div>
-
+            <h1>
+               <a href="${ path }/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
+            </h1>
+            <nav>
+               <a href="${ path }/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="${ path }/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="${ path }/bar/func" class="headersub">다이어리 기능 |</a> 
+               <a href="${ path }/bar/shot11"   class="headersub">다이어리 사용법 |</a> 
+               <a href="${ path }/notice" class="headersub">고객의 소리</a>
+               <div class="lgnbtn">
+                  <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
+ 					<c:choose>
+	                  <c:when test="${empty sessionId }">
+		                  <a href="/syl/member/login" class="headerlogin">로그인</a>
+	                  </c:when>
+		                  <c:otherwise>
+			                  <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+		                  </c:otherwise>
+                  </c:choose>
+               </div>
+            </nav>
+         </div>
 	</header>
 
 	<main>
@@ -393,9 +419,12 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 						<div class="tab_ec_box">
 							<div class="tab_ec_box1">
 								<button id="tab_ec_E" class="tab_ec_tab">운동일지 만들기</button>
-								<button id="tab_ec_F" class="tab_ec_tab">F</button>
-								<button id="tab_ec_G" class="tab_ec_tab">G</button>
-								<button id="tab_ec_H" class="tab_ec_tab">H</button>
+								
+								<a href="/syl/inbody/ec_list.do" id="myPageLink" class="headermypage">
+									<button id="tab_ec_F" class="tab_ec_tab">바디 기록실</button>
+								</a>
+<!-- 								<button id="tab_ec_G" class="tab_ec_tab">G</button> -->
+<!-- 								<button id="tab_ec_H" class="tab_ec_tab">H</button> -->
 							</div>
 
 							<!-- exercise_tap_E -->
@@ -944,8 +973,31 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 					<div class="leftLine2"></div>
 					<div class="leftLine3"></div>
 					<!-- 오른쪽 직선 3개 -->
-					<div class="rightLine1"></div>
-					<div class="rightLine2"></div>
+					<div class="rightLine1">
+						<!--  여기 Index에 이동 a링크 구성하기 -->
+						<a href='${ Path }/syl/diaryList'>
+						<div class="post1 It2">Diary</div>
+						</a>
+						
+						<a href='${ Path }/syl/diet_1page.do'>
+						<div class="post1 It3">Diet</div>
+						</a>
+						
+
+						<a href='${ Path }/syl/mainwish'>
+						<div class="post1 It5">Wish</div>
+						</a>
+					</div>
+					<div class="rightLine2">
+						<div class="post2 It1"></div>
+						<a href='${ Path }/syl/ec_list.do'>
+						<div class="post2 It4">Exercise</div>
+						</a>
+
+						<div class="post2 It6"></div>
+						<div class="post2 It7"></div>
+						<div class="post2 It8"></div>
+					</div>
 					<div class="rightLine3"></div>
 
 					<!-- 책표지 부분 -->
@@ -964,8 +1016,8 @@ if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창
 		<div class="footer_all">
 
 			<div class="left_logo">
-								<img class="left_logo1" src="./logo2.png">
-								<img class="left_logo2" src="./3syl2.png">
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png">
+				<img class="left_logo2" src="/syl/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">

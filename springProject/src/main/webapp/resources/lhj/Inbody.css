@@ -19,11 +19,11 @@ h1 {
 }
 
 nav {
-	width: 560px;
+	width: 580px;
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 3%;
-	margin-left: 14%;
+	margin-left: 12%;
 	font-size: 16px;
 }
 
@@ -459,6 +459,103 @@ nav {
 	top: 20px;
 }
 
+
+/* 포스트잇 */
+.post1 {
+	width: 60px;
+	height: 27px;
+	position: absolute;
+	font-size: 12px;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	padding-top: 10px;
+	color: rgba(104, 100, 100, 0.692);
+}
+
+.post2 {
+	width: 40px;
+	height: 37px;
+	position: absolute;
+}
+
+.post2.It1 {
+	z-index: 2;
+	top: 60px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #FF9A9A;
+}
+
+.post1.It2 {
+	z-index: 2;
+	top: 120px;
+	left: 8px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #FFCCAA;
+}
+
+.post1.It3 {
+	z-index: 2;
+	top: 200px;
+	left: -10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #fffabb;
+	border: 1px solid rgb(219, 219, 219);
+	border-left: none;
+}
+
+.post2.It4 {
+   width: 60px;
+   height: 27px;
+   position: absolute;
+   font-size: 12px;
+   font-weight: bold;
+   font-style: italic;
+   text-align: center;
+   padding-top: 10px;
+   color: rgba(104, 100, 100, 0.692);
+   
+
+
+   z-index: 2;
+   top: 240px;
+   border-radius: 0px 80px 80px 0px;
+   background-color: #DCEDCA;
+}
+
+.post1.It5 {
+	z-index: 2;
+	top: 300px;
+	left: 10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #c2e3e5;
+}
+
+.post2.It6 {
+	z-index: 2;
+	top: 380px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #bed6f8;
+}
+
+.post2.It7 {
+	z-index: 2;
+	top: 420px;
+	left: 10px;
+	border-radius: 0px 80px 80px 0px;
+	background-color: #c7cbef;
+}
+
+.post2.It8 {
+	z-index: 2;
+	top: 500px;
+	/* left: 10px; */
+	border-radius: 0px 80px 80px 0px;
+	background-color: #d8cbf1;
+}
+
+
+
 /* tab_ec 시작 */
 /* tab_ec 시작 */
 /* tab_ec 시작 */
@@ -507,10 +604,15 @@ nav {
 
 /* 각각 버튼 , 내용 색상*/
 #tab_ec_E {
-	z-index: 5;
+	z-index: 4;
 	position: relative;
-	height: 40px;
-	background-color: rgb(175, 223, 213)
+	top: 13px;
+	height: 25px;
+	background-color: rgb(175, 223, 213);
+}
+
+#tab_ec_E:hover {
+	background-color: rgb(134, 211, 194)
 }
 
 #tab_ec_E1 {
@@ -518,20 +620,18 @@ nav {
 }
 
 #tab_ec_F {
-	z-index: 4;
+	z-index: 5;
 	position: relative;
-	top: 12px;
+	height: 40px;
+	background-color: rgb(255, 255, 255);
 	right: 6px;
-	height: 25px;
+	
 }
 
 #tab_ec_F, #tab_ec_F1 {
-	background-color: rgb(175, 223, 213)
+	background-color: rgb(255, 255, 255);
 }
 
-#tab_ec_F:hover {
-	background-color: rgb(134, 211, 194)
-}
 
 #tab_ec_G {
 	z-index: 3;
@@ -833,3 +933,19 @@ position: relative;
 	text-align: center;
 	border: 1px solid gray;
 }
+
+
+
+/* 마이페이지 */
+.headermypage {
+ 	color: #223919;
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
+}
+	        
+.headermypage:hover {
+	color: #108269;
+	font-weight: bold;
+}
+
