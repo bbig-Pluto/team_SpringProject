@@ -2,6 +2,7 @@ package com.myspring.syl.sdy.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.syl.sdy.dto.TodoDTO;
 import com.myspring.syl.sdy.service.TodoService;
+import com.myspring.syl.yyk.service.MemoService;
 
 
 @RestController
@@ -27,6 +29,9 @@ public class TodoController extends HttpServlet {
 
 	@Autowired
 	TodoService todoService;
+	
+	@Autowired
+	MemoService memoService;
 	
 	//todo 입력 ajax
 	@RequestMapping(value="/todoInsert",method= {RequestMethod.POST})
@@ -40,12 +45,29 @@ public class TodoController extends HttpServlet {
 	}
 	//전체 리스트 보여주는 페이지
 	@RequestMapping(value="/todo",method= {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView listTodo() {
+	public ModelAndView listTodo(HttpServletRequest request) {
 		ModelAndView mav = 	new ModelAndView();
 		
-		List<TodoDTO> list = todoService.getTodoList();
-		mav.addObject("list",list);
-		mav.setViewName("/sdy/todo");
+		// 세션 아이디 받기
+				HttpSession logOnSession = request.getSession();
+				String sessionId = "" + logOnSession.getAttribute("logOn.id");
+				System.out.println("logOnSession : "+ sessionId);
+
+				String memoContent = memoService.getMemoList(sessionId);
+				
+				List<TodoDTO> list = todoService.getTodoList();
+				mav.addObject("list",list);
+				// content 에 add 라는 메시지가 담겨서 오면 addMemo 로 rediecting
+				if(memoContent.equals("add")) {
+					System.out.println("/memoList -> addMemo.jsp route");
+					mav.setViewName("yyk/addMemo");
+				// 이미 memo 를 작성한 적이 있는 사람의 분기
+				} else {
+					mav.addObject("m_content",memoContent);
+					System.out.println("/memoList -> memoList.jsp route");
+					mav.setViewName("yyk/memoList");
+				}
+		
 		
 		return mav;
 	}
@@ -80,5 +102,22 @@ public class TodoController extends HttpServlet {
 			List list = new ArrayList();
 			list.add(dto);
 			return list;
+		}
+		//todo chkAll수정 ajax
+		@RequestMapping(value="/todoModAll",method= {RequestMethod.POST})
+		public  Map chkAllMod(@RequestBody Map map,
+				HttpServletRequest request) {
+			
+			HttpSession userInfo = request.getSession();
+			String sessionId = "" + userInfo.getAttribute("logOn.id");
+			
+			System.out.println("전체 수정 진입");
+			System.out.println("map chk :"+map.get("chk"));
+			System.out.println("map ids :"+map.get("todo_id"));
+			map.put("id", sessionId);		
+			map.put("chk", ((List)map.get("chk")).get(0));		
+				
+		todoService.getModTodoAllChk(map);
+			return map;
 		}
 }

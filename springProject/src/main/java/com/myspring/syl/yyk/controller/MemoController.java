@@ -71,7 +71,7 @@ public class MemoController {
 		int result = memoService.getAddMemo(map);
 		System.out.println("insert : " + result);
 		
-		return "redirect:/memoList";
+		return "redirect:/todo";
 	}
 	
 	
@@ -95,6 +95,6 @@ public class MemoController {
 		int result2 = memoService.getUpdateMemo(map);
 		System.out.println("update : " + result2);
 		
-		return "redirect:/memoList";
+		return "redirect:/todo";
 	}
 }

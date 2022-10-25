@@ -427,7 +427,7 @@ function modaldel(){
          <div class="wrapper">
             <h1>
 <!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="/syl/js/calendarM.jsp"><img class="headerLogo" src="/syl/photo/3syl.png"></a>
+               <a href="/syl/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
             </h1>
             <nav>
              <a href="/syl/bar/intro" class="headersub">다이어리 소개 |</a> 

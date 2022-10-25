@@ -35,9 +35,13 @@ public class TodoDAO {
 			System.out.println("del 다오진입");
 			sqlSession.delete("mapper.sdy.deleteChkTodo",todo_id);		
 			}
-		//글수정
+		//개별체크수정
 		public void modTodoChk(TodoDTO todoDTO) {
 			sqlSession.update("mapper.sdy.updateTodoChk", todoDTO);
+		}
+		//전체 체크 수정
+		public void modTodoAllChk(Map map) {
+			sqlSession.update("mapper.sdy.updateTodoAllChk", map);
 		}
 	
 	

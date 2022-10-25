@@ -5,7 +5,7 @@
     font-size: 50px;
     font-weight: bolder;
     margin-left: 140px;
-    margin-top: 100px;
+    margin-top: 50px;
  }
  :root{
      /*체크박스 체크 후 색상*/
@@ -23,6 +23,13 @@
  }
  /*네모 체크박스가 화면에서 사라짐*/
   .heart_input{
+     position:relative;
+     display: inline-block;
+     position: absolute;
+     opacity: 0;
+     visibility:hidden; 
+ }
+  .heart_input_all{
      position:relative;
      display: inline-block;
      position: absolute;
@@ -102,15 +109,15 @@
      display: inline-block;
      color: white;
      position: absolute;
-     top:190px;
-     left: 200px;
+     top:170px;
+     left: 210px;
  }
  .box{
      width: 450px;
      height: 450px;
      border: 2px solid white;
      margin-left: 20px;
-     margin-top: 170px;
+     margin-top: 150px;
      overflow-y: scroll;
  }
  #heart-check label{
@@ -121,12 +128,11 @@
  }
  .text{
      display: inline-block; 
-     font-size: 25px;
+     font-size: 18px;
      width: 300px;
      border-bottom: 2px solid white;
       margin-top: 10px; 
      vertical-align: top;
-     
  }
  .text_input{
      width: 350px;
@@ -135,7 +141,7 @@
  }
  .heart-check_all {
      position: absolute;
-     top:150px;
+     top:130px;
      left: 120px;
  }
  .input_todo{
@@ -152,6 +158,7 @@
      border-top:0px;
      outline:none;
      position:relative;
+
      
  }
  .regi{
@@ -184,7 +191,7 @@
     transition: all 1s;
     transform:rotate(45deg);
     position:absolute;
-    top:180px;
+    top:160px;
     left: 540px;
 }
 .del_btn:hover {
@@ -199,7 +206,7 @@
     text-align: center;
     padding-top: 5px;
     position: absolute;
-    top:170px;
+    top:150px;
     left: 420px;
     font-size: 13px;
     border-radius: 30px;

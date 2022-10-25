@@ -383,13 +383,6 @@ main {
 	padding-bottom: 5px;
 	color: rgba(104, 100, 100, 0.692);
 }
-
-.post2 {
-	width: 40px;
-	height: 37px;
-	position: absolute;
-}
-
 .postTodo.It1 {
 	z-index: 1;
 	top: 32px;
@@ -397,6 +390,13 @@ main {
 	border-radius: 0px 80px 80px 0px;
 	background-color: #FF9A9A;
 }
+
+.post2 {
+	width: 40px;
+	height: 37px;
+	position: absolute;
+}
+
 
 .post1.It2 {
 	z-index: 2;
@@ -417,10 +417,22 @@ main {
 }
 
 .post2.It4 {
-	z-index: 2;
-	top: 240px;
-	border-radius: 0px 80px 80px 0px;
-	background-color: #DCEDCA;
+   width: 60px;
+   height: 27px;
+   position: absolute;
+   font-size: 12px;
+   font-weight: bold;
+   font-style: italic;
+   text-align: center;
+   padding-top: 10px;
+   color: rgba(104, 100, 100, 0.692);
+   
+
+
+   z-index: 2;
+   top: 240px;
+   border-radius: 0px 80px 80px 0px;
+   background-color: #DCEDCA;
 }
 
 .post1.It5 {
@@ -604,11 +616,15 @@ footer {
 <!--------------------------------------스크립트--------------------------->
 <script>
 	  window.onload=()=>{
-		
 			chkUpdate();
 			selectAll();
 			 delHover();
-            
+			 
+			 if($(".heart_input:checked").length == $(".heart_input").length){
+			   	  	$("#heart-check_all").prop("checked", true);
+			   	   }else{
+			   	  	$("#heart-check_all").prop("checked", false);
+			   	  }
         } 
 	  
 	 //하트체크 클릭시 chk=0이 chk=1로 업데이트 
@@ -616,12 +632,15 @@ footer {
 			$('input:checkbox[name="chk"]').off("click").on("click",function(){
 				  
 					if(this.checked){
-					  $(this).val(1)
+					  $(this).val(1);
+					  $(this).parent().find(".hidden_id").val(1);
 					}else{
-						 $(this).val(0)
+						 $(this).val(0);
+						  $(this).parent().find(".hidden_id").val(0);
 					}
 				  var chk = $(this).val();
 				  var todo_id = $(this).data('id');
+				/*   var chk_hidden=$(this).parent().find(".hidden_id") */
 					console.log($(this).val());
 				
 				let info = {
@@ -636,14 +655,57 @@ footer {
 					data:JSON.stringify(info),
 					success :function(data){
 						
+					selectAll();	
+					},
+					error:function(){
+						alert("에ㅇ에에에에에에에에에엥에에에에에에엥에러발생!!!!!!!")
+					}
+				});
+			   	  if($(".heart_input:checked").length == $(".heart_input").length){
+			   	  	$("#heart-check_all").prop("checked", true);
+			   	   }else{
+			   	  	$("#heart-check_all").prop("checked", false);
+			   	  }
+				});
+			
+	 }
+	 //전체 선택시 모든 값 업데이트
+	<%--  function chkUpdateAll(){
+			var uid = '<%=(String)session.getAttribute("logOn.id")%>';
+			$('input:checkbox[name="chkAll"]').off("click").on("click",function(){
+				  
+					if(this.checked){
+					  $('input:checkbox[name="chk"]').each(function(){
+						  $(this).val(1);
+					  });
+					}else{
+						  $('input:checkbox[name="chk"]').each(function(){
+							  $(this).val(0);
+						  });
+					}
+				  var chk[] = $(this).val();
+				  var todo_id[] = $(this).data('id');
+				
+				let info = {
+						chk:chk,
+						id:uid
+				}; 
+				  
+				$.ajax({
+					url:"/syl/todoModAll",
+					type:"post",
+					contentType:"application/json",
+					data:JSON.stringify(info),
+					success :function(data){
 						
+					selectAll();	
 					},
 					error:function(){
 						alert("에ㅇ에에에에에에에에에엥에에에에에에엥에러발생!!!!!!!")
 					}
 			});
 				});
-		} 
+		}  --%>
 	 /* function chkAllUpdate(){
 			$('input:checkbox[name="chk"]').off("click").on("click",function(){
 				$('input:checkbox[name="chk"]').each(function() {
@@ -727,18 +789,60 @@ footer {
 	  //전체선택,해제
 		function selectAll() {
 				$("#heart-check_all").click(function() {
-					if($("#heart-check_all").is(":checked")) $("input[name=chk]").prop("checked", true);
-					else $("input[name=chk]").prop("checked", false);
+					//전체 체크 클릭시 개별체크 모두 체크해주고 값을 1로 바꿈
+					if($("#heart-check_all").is(":checked")){
+						$("input[name=chk]").prop("checked", true);
+						$("input[name=chk]").val(1);
+						 $("input[name=chk]").parent().find(".hidden_id").val(1);
+					}
+					//전체 체크 해제시 개별체크 모두 해제 후 값을 0으로 바꿈
+					else {
+						$("input[name=chk]").prop("checked", false);
+						$("input[name=chk]").val(0);
+						 $("input[name=chk]").parent().find(".hidden_id").val(0);
+					}
+					//배열을 선언해서 여러개의 값들을 가져와서 배열에 넣어줌
+						var chk_arr =[];
+						var todo_id_arr=[];
+					 var chk = $("input[name=chk]").each(function(){
+						 var chks =$(this).val();
+						 chk_arr.push(chks);
+						 var todo_ids = $(this).data('id');
+						 todo_id_arr.push(todo_ids);
+					 });
+						console.log(chk_arr);
+						console.log(todo_id_arr);
+					let info = {
+							chk:chk_arr,
+							todo_id:todo_id_arr
+					}; 
+					  
+					$.ajax({
+						url:"/syl/todoModAll",
+						type:"post",
+						contentType:"application/json",
+						data:JSON.stringify(info),
+						success :function(data){
+							
+						},
+						error:function(){
+							alert("에ㅇ에에에에에에에에에엥에에에에에에엥에러발생!!!!!!!")
+						}
 				});
 
 				$("input[name=chk]").click(function() {
 					var total = $("input[name=chk]").length;
 					var checked = $("input[name=chk]:checked").length;
 
-					if(total != checked) $("#heart-check_all").prop("checked", false);
-					else $("#heart-check_all").prop("checked", true); 
+					if(total != checked) 
+						$("#heart-check_all").prop("checked", false);
+					else 
+						$("#heart-check_all").prop("checked", true); 
 				});
-			};
+				})
+			}
+			
+			
 	//x버튼에 마우스오버 시 텍스트 정보 나오고 마우스아웃 시 텍스트 정보 없어짐
 	function delHover(){
 		let del_btn = document.querySelector(".del_btn");
@@ -777,51 +881,59 @@ footer {
 							html+="  <label for='heart-check["+data.todo_id+"]' style='margin-top:-25px;' /></label> ";
 							html+="  		 <div class='text' >"+data.todo+"</div>"; 
 							html+=" <input type='hidden' name='todo_id' value='"+data.todo_id+"' class='id'>";
-							html+="  <input type='hidden' name='todo_chk' value='"+data.chk+"'>";
+							html+="  <input type='hidden' name='todo_chk' value='"+data.chk+"'class='hidden_id'>";
 							 html+="   </div>"; 
 							
 							$(".box").prepend(html); 
 							
 							chkUpdate();
 							selectAll();
+							
+							 
+							
+						
 					},
 					error:function(){
 						alert("다시 입력해주세요")
 					}
 				});
 		}
-    /*체크된 체크박스 삭제줄 만들기*/
-/*     function deleteLine(){ */
+	/* 	function deleteLineFix(){
+			let chk=document.querySelectorAll(".heart_input");
+			if(chk)
+		} */
+    //체크된 체크박스 삭제줄 만들기
+/*      function deleteLine(){  */
         //개별 체크박스 잡아오기
-   /*      let chk=document.querySelectorAll(".heart_input"); */
+ /*        let chk=document.querySelectorAll(".heart_input");  */
         // 입력받은 텍스트 잡아오기 (체크박스와 텍스트의 부모에서 자식인 자기자신을 잡아오는것이 좋음 )
         //체크박스에 이벤트 주기
-/*         for(let i=0;i<chk.length;i++){
-        chk[i].addEventListener("change", (evt) => { */
+   /*      for(let i=0;i<chk.length;i++){
+        chk[i].addEventListener("change", (evt) => {  */
       		//chk의 부모로 올라갔다가 그 부모의 자식인 text 잡아옴
         	/*  let text = event.target.parentNode.querySelector(".text");
-	            if (event.target.checked) { */
+	            if (event.target.checked) {  */
 	                // textDecoration 의 속성을 line-through로 변경
-	/*                 text.style.textDecoration = "line-through";
+/* 	                 text.style.textDecoration = "line-through";
 	            } else {
 	                text.style.textDecoration = "";
 	            }   
 
     })
         }
-    } */
+    }  */
     //전체선택 시 삭제줄 만들기
-  /*   function deleteLine_all(){ */
+    /*  function deleteLine_all(){  */
         //전체 체크박스 잡아오기
-       /*  let chk_all=document.querySelector("#heart-check_all"); */
+       /*  let chk_all=document.querySelector("#heart-check_all");  */
         // 입력받은 텍스트 잡아오기 (체크박스와 텍스트의 부모에서 자식인 자기자신을 잡아오는것이 좋음 )
       /*   let text = document.querySelectorAll(".text");
-        for(let i=0; i<text.length;i++){ 	 */
+        for(let i=0; i<text.length;i++){ */ 	 
 	        //체크박스에 이벤트 주기
-	    /*     chk_all.addEventListener("change", (evt) => {
-	            if (evt.target.checked) { */
+	       /*  chk_all.addEventListener("change", (evt) => {
+	            if (evt.target.checked) {  */
 	                // textDecoration 의 속성을 line-through로 변경
-/* 	                text[i].style.textDecoration = "line-through";
+	/*                 text[i].style.textDecoration = "line-through";
 	            } else {
 	                text[i].style.textDecoration = "";
 	            }
@@ -829,7 +941,7 @@ footer {
 	
 	    })
         }
-    } */
+    }  */
   //전체선택 박스 해제
 /*     function checkSelectAll()  {
     	  const checkboxes 
@@ -856,6 +968,9 @@ footer {
     function loginAlert(){
         	alert("로그인이 필요한 서비스입니다.");
     }
+   
+   
+     
         
 	</script>
 </head>
@@ -899,7 +1014,7 @@ footer {
 							   <section>
 							   
 									   <div class="allCheck">전체선택</div>
-									   <input type="checkbox" name="chkAll" id="heart-check_all" class="heart_input">
+									   <input type="checkbox" name="chkAll" id="heart-check_all" class="heart_input_all">
 									   <label for="heart-check_all" class="heart-check_all"></label>
 						<c:if test="${! empty sessionId }">
 						   <form  method="post" action="/syl/todo_delCheck">
@@ -909,28 +1024,28 @@ footer {
 						
 									  	<c:forEach var="list" items="${list}">
 										    <c:if test="${sessionId eq list.id }"> 
-											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
-												   <input type="checkbox" name="chk" id="heart-check[${list.todo_id }]" class="heart_input"  data-id="${list.todo_id}" <c:if test="${list.chk ==1}">checked</c:if>>
+											   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
+												   <input type="checkbox" name="chk" id="heart-check[${list.todo_id }]" class="heart_input" value="${list.chk }" data-id="${list.todo_id}" <c:if test="${list.chk ==1}">checked</c:if>>
 												   <label for="heart-check[${list.todo_id }]" style="margin-top:-25px;" ></label>
 												   <input type="hidden" name="todo_id" value="${list.todo_id }" class="id">
-												   <input type="hidden" name="todo_chk" value="${list.chk}">
+												   <input type="hidden" name="todo_chk" value="${list.chk}" class="hidden_id">
 												   <input type="hidden" name="id" value="${sessionId}" class="sessionId">
 											  		 <div class="text">${list.todo} </div>
 											   </div>
 									   		 </c:if> 
 										  </c:forEach>
 										    <c:if test="${empty sessionId}"> 
-											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
+											   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
 												   <input type="checkbox" name="chk" id="heart-check[null]" class="heart_input" checked>
 												   <label for="heart-checkheart-check[null]" style="margin-top:-25px;" ></label>
 											  		 <div class="text">작살나게 밥먹기</div>
 											   </div>
-											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
+											   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
 												   <input type="checkbox" name="chk" id="heart-check[null1]" class="heart_input" >
 												   <label for="heart-checkheart-check[null1]" style="margin-top:-25px;" ></label>
 											  		 <div class="text">간지나게 자기</div>
 											   </div>
-											   <div style="height: 50px; overflow: scroll; display: inline-block; margin-top: 20px;">
+											   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
 												   <input type="checkbox" name="chk" id="heart-check[null2]" class="heart_input">
 												   <label for="heart-checkheart-check[null2]" style="margin-top:-25px;" ></label>
 											  		 <div class="text">끝장나게 숨귀기</div>
@@ -1003,7 +1118,9 @@ footer {
 						 </a>
 					</div>
 					<div class="rightLine2">
-						<div class="post2 It4"></div>
+						<a href="/syl/ec_list.do">
+							<div class="post2 It4">Exercise</div>
+						</a>
 						<div class="post2 It6"></div>
 						<div class="post2 It7"></div>
 						<div class="post2 It8"></div>

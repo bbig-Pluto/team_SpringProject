@@ -30,8 +30,12 @@ public class TodoService {
 		todoDAO.insertTOdoContents(todoDTO);
 		return todo_id;
 	}
-	//글수정
+	//개별 체크 수정
 	public void getModTodoChk(TodoDTO todoDTO){
 		todoDAO.modTodoChk(todoDTO);
+	}
+	//전체 체크 수정
+	public void getModTodoAllChk(Map map){
+		todoDAO.modTodoAllChk(map);
 	}
 }

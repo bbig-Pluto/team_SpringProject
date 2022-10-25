@@ -40,7 +40,7 @@ public class AskDAO {
 	}
 	//게시글 비밀번호 조회
 	public String pwCheck(String board_no) throws Exception {
-		String result=sqlSession.selectOne("mapper.sdy.pwCheck", board_no);
+		String result=sqlSession.selectOne("mapper.sdy.AskpwCheck", board_no);
 		return result;
 		
 	}
