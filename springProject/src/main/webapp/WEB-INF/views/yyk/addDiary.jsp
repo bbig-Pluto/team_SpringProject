@@ -1053,8 +1053,14 @@ window.onload = function() {
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
-                  <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+                  <c:choose>
+	                  <c:when test="${empty sessionId }">
+		                  <a href="/syl/member/login " class="headerlogin">로그인</a>
+	                  </c:when>
+	                  <c:otherwise>
+		                  <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+	                  </c:otherwise>
+                  </c:choose>
                </div>
             </nav>
          </div>

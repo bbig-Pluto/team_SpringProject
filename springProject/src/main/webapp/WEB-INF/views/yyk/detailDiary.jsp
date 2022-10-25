@@ -6,6 +6,9 @@
 	import="java.util.List" 
 	import="java.sql.Date"
 	%>
+	
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -935,7 +938,10 @@ footer {
 			}, 10); // 0.01초
 		})
 		
-		
+		<%
+		// 세션을 연결해주는 통로 
+	    HttpSession logOnSession = request.getSession();
+		%>
 		// 마이페이지
 		let popupWidth = 470;
 		let popupHeight = 140;
@@ -1059,8 +1065,14 @@ footer {
                <a href="${ contextPath }/notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
                   <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/member/login" class="headerlogin">로그인</a>
-                  <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+                  <c:choose>
+	                  <c:when test="${empty sessionId }">
+		                  <a href="/syl/member/login " class="headerlogin">로그인</a>
+	                  </c:when>
+	                  <c:otherwise>
+		                  <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+	                  </c:otherwise>
+                  </c:choose>
                </div>
             </nav>
          </div>

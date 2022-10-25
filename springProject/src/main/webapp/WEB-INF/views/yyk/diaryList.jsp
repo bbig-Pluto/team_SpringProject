@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
 
 <!DOCTYPE html>
 <html>
@@ -844,9 +845,15 @@ window.onload = function () {
                <a href="${ contextPath }/bar/shot11"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/member/login" class="headerlogin">로그인</a>
-                  <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
+                   <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
+                  <c:choose>
+	                  <c:when test="${empty sessionId }">
+		                  <a href="/syl/member/login " class="headerlogin">로그인</a>
+	                  </c:when>
+	                  <c:otherwise>
+		                  <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+	                  </c:otherwise>
+                  </c:choose>
                </div>
             </nav>
          </div>
