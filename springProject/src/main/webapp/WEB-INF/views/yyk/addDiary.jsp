@@ -839,6 +839,37 @@ footer {
             border-radius: 0px 80px 80px 0px;
             background-color: #d8cbf1;
         }
+        .post2.It4 {
+		   width: 60px;
+		   height: 27px;
+		   position: absolute;
+		   font-size: 12px;
+		   font-weight: bold;
+		   font-style: italic;
+		   text-align: center;
+		   padding-top: 10px;
+		   color: rgba(104, 100, 100, 0.692);
+		   
+		
+		
+		   z-index: 2;
+		   top: 240px;
+		   border-radius: 0px 80px 80px 0px;
+		   background-color: #DCEDCA;
+		}
+        
+        /*마이페이지*/
+        .headermypage {
+		 	color: #223919;
+			display: inline-block;
+			text-decoration: none;
+			position: relative;
+		}
+	        
+		.headermypage:hover {
+			color: #108269;
+			font-weight: bold;
+		}
         
 </style>
 
@@ -907,7 +938,22 @@ window.onload = function() {
 			}
 			%>
 	})
-
+	
+	
+	// 마이페이지
+	let popupWidth = 470;
+	let popupHeight = 140;
+	// 브라우저 기준 중앙 정렬			
+	let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+	let popupY = (window.screen.height / 2) - (popupHeight / 2);
+				
+	document.querySelector("#myPageLink").addEventListener("click", function(e) {
+		<% if ((""+logOnSession.getAttribute("isLogon")).equals("member")) { %>
+			window.open('${contextPath}/member/rd/inputpwdformypage', '비밀번호 재확인', 'width=' + popupHeight + ', height=' + popupHeight + ', left='+ popupX + ', top=' + popupY + ', scrollbars=yes');
+		<% } else { %>
+			alert("로그인이 필요한 서비스입니다.");				
+		<% } %>
+	})
 }
 
 
@@ -1006,7 +1052,7 @@ window.onload = function() {
                <a href="${ contextPath }/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
+                  <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
                   <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
                   <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
                </div>
@@ -1138,7 +1184,7 @@ window.onload = function() {
 					
 					<div class="rightLine2">
 						<div class="post2 It1"></div>
-			            <div class="post2 It4"></div>
+			            <a href="/syl/ec_list.do"><div class="post2 It4">Exercise</div></a>
 			            <div class="post2 It6"></div>
 			            <div class="post2 It7"></div>
 			            <div class="post2 It8"></div>
