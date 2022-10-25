@@ -32,12 +32,12 @@ public class DiaryController {
 	public String diaryList(Model model, HttpServletRequest request) {
 		
 		// 세션 아이디 받기
-//		HttpSession logOnSession = request.getSession();
-//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
-//		System.out.println("logOnSession : "+ sessionId);
+		HttpSession logOnSession = request.getSession();
+		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+		System.out.println("logOnSession : "+ sessionId);
 		
-//		List<DiaryDTO> list = diaryService.getDiaryList(sessionId);
-		List<DiaryDTO> list = diaryService.getDiaryList();
+		List<DiaryDTO> list = diaryService.getDiaryList(sessionId);
+//		List<DiaryDTO> list = diaryService.getDiaryList();
 
 		model.addAttribute("list", list);
 		
@@ -52,9 +52,9 @@ public class DiaryController {
 							HttpServletRequest request) throws Exception {
 		
 		// 세션 아이디 받기
-//		HttpSession logOnSession = request.getSession();
-//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
-//		System.out.println("logOnSession : "+ sessionId);
+		HttpSession logOnSession = request.getSession();
+		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+		System.out.println("logOnSession : "+ sessionId);
 		
 		System.out.println(">>> addDiary controller route");
 		System.out.println("addDiary : title : " + diaryDTO.getD_title());
@@ -82,9 +82,9 @@ public class DiaryController {
 							MultipartHttpServletRequest multipartRequest,
 							HttpServletRequest request) throws Exception {
 		
-//		HttpSession logOnSession = request.getSession();
-//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
-//		System.out.println("logOnSession : "+ sessionId);
+		HttpSession logOnSession = request.getSession();
+		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+		System.out.println("logOnSession : "+ sessionId);
 		
 		System.out.println(">>> updateDiary controller route");
 		System.out.println("updateDiary : title : " + diaryDTO.getD_title());
@@ -96,7 +96,7 @@ public class DiaryController {
 		String originalFileName = fileProcess(multipartRequest);
 		System.out.println("addDiary : 파일 이름 : [" + originalFileName +"]");
 				
-//		diaryDTO.setId(sessionId);
+		diaryDTO.setId(sessionId);
 		diaryDTO.setD_fileName(originalFileName);
 		
 		int result = diaryService.getUpdateDiary(diaryDTO);
@@ -114,15 +114,15 @@ public class DiaryController {
 							HttpServletRequest request) {
 		
 		// 세션 아이디 받기
-//		HttpSession logOnSession = request.getSession();
-//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
-//		System.out.println("logOnSession : "+ sessionId);
+		HttpSession logOnSession = request.getSession();
+		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+		System.out.println("logOnSession : "+ sessionId);
 		
 		System.out.println(">>> delDiary controller route");
 		System.out.println("delDiary : title : " + diaryDTO.getD_title());
 		System.out.println("delDiary : content : " + diaryDTO.getD_content());
 			
-//		diaryDTO.setId(sessionId);
+		diaryDTO.setId(sessionId);
 		int result = diaryService.getDelDiary(diaryDTO);
 //		System.out.println("controller : delete된 행 개수 : " + result);
 //		model.addAttribute("diaryDTO", diaryDTO);
@@ -138,14 +138,14 @@ public class DiaryController {
 							@ModelAttribute DiaryDTO diaryDTO,
 							HttpServletRequest request) {
 			
-//		HttpSession logOnSession = request.getSession();
-//		String sessionId = "" + logOnSession.getAttribute("logOn.id");
-//		System.out.println("logOnSession : "+ sessionId);
+		HttpSession logOnSession = request.getSession();
+		String sessionId = "" + logOnSession.getAttribute("logOn.id");
+		System.out.println("logOnSession : "+ sessionId);
 		
 		System.out.println(">>> searchDiary controller route");
 		System.out.println("searchDiary : title : " + diaryDTO.getD_title());
 			
-//		diaryDTO.setId(sessionId);
+		diaryDTO.setId(sessionId);
 		List<DiaryDTO> list = diaryService.getSearchDiary(diaryDTO);
 //		model.addAttribute("diaryDTO", diaryDTO);
 			

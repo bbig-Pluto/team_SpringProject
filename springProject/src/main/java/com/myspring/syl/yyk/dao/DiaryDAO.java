@@ -6,8 +6,8 @@ import com.myspring.syl.yyk.dto.DiaryDTO;
 
 public interface DiaryDAO {
 
-//	List<DiaryDTO> diaryList(String sessionId);
-	List<DiaryDTO> diaryList();
+	List<DiaryDTO> diaryList(String sessionId);
+//	List<DiaryDTO> diaryList();
 	
 	int addDiary(DiaryDTO dto); 
 	

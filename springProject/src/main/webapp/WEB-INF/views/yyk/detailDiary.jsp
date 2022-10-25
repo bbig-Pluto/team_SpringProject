@@ -1006,18 +1006,17 @@ footer {
 	<header>
          <div class="wrapper">
             <h1>
-<!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+               <a href="${ contextPath }/calendarM"><img class="headerLogo" src="${contextPath }/resources/photo/3syl.png"></a>
             </h1>
-            <nav>
-               <a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
-               <a href="${ contextPath }/story11.jsp" class="headersub">다이어리 구성 |</a> 
-               <a href="${ contextPath }/func.jsp" class="headersub">다이어리 기능 |</a> 
-               <a href="${ contextPath }/shot11.jsp"   class="headersub">다이어리 사용법 |</a> 
-               <a href="${ contextPath }/sdy/notice_show.jsp" class="headersub">고객의 소리</a>
+             <nav>
+               <a href="${ contextPath }/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="${ contextPath }/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="${ contextPath }/bar/func" class="headersub">다이어리 기능 |</a> 
+               <a href="${ contextPath }/bar/shot11"   class="headersub">다이어리 사용법 |</a> 
+               <a href="${ contextPath }/notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                  <a href="${ contextPath }/hunminjsp/mypage.jsp" class="headermypage">마이페이지</a>
-                  <a href="${ contextPath }/hunminjsp/signin.jsp" class="headerlogin">로그인</a>
+                  <a href="${ contextPath }/member/mypage" class="headermypage">마이페이지</a>
+                  <a href="${ contextPath }/member/login" class="headerlogin">로그인</a>
                   <a href="${ contextPath }/member/logout.do" class="headerloginout">로그아웃</a>
                </div>
             </nav>
@@ -1145,9 +1144,9 @@ footer {
 					
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
-						<a href='${ contextPath }/yyk/diaryList.jsp'><div class="post1 It2">Diary</div></a>
-			            <a href='${ contextPath }/Hanu/Diet_diary_EL_View.jsp'><div class="post1 It3">Diet</div></a>
-			            <a href='${ contextPath }/shy/mainwish.jsp'><div class="post1 It5">Wish</div></a>
+						<a href='${ contextPath }/diaryList'><div class="post1 It2">Diary</div></a>
+			            <a href='${ contextPath }/diet_1page.do'><div class="post1 It3">Diet</div></a>
+			            <a href='${ contextPath }/mainwish'><div class="post1 It5">Wish</div></a>
 					</div>
 					
 					<div class="rightLine2">

@@ -866,9 +866,8 @@ window.onload = function() {
 		}
 	
 	}
-	
-	
 %>
+
 	// 일기장 제목 여부 확인
 	// 회원 : 제목 입력 안하고 저장 시 경고창
 	// 비회원 : 저장 시 로그인 경고 문구
@@ -997,8 +996,8 @@ window.onload = function() {
 	<header>
          <div class="wrapper">
             <h1>
-<!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-               <a href="${ contextPath }/js/calendarM.jsp"><img class="headerLogo" src="/team_Project/photo/3syl.png"></a>
+               <a href="${ contextPath }/js/calendarM.jsp">
+               <img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
             </h1>
             <nav>
                <a href="${ contextPath }/intro.jsp" class="headersub">다이어리 소개 |</a> 
@@ -1132,9 +1131,9 @@ window.onload = function() {
 					
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
-						<a href='${ contextPath }/yyk/diaryList.jsp'><div class="post1 It2">Diary</div></a>
-			            <a href='${ contextPath }/Hanu/Diet_diary_EL_View.jsp'><div class="post1 It3">Diet</div></a>
-			            <a href='${ contextPath }/shy/mainwish.jsp'><div class="post1 It5">Wish</div></a>
+						<a href='${ contextPath }/diaryList'><div class="post1 It2">Diary</div></a>
+			            <a href='${ contextPath }/diet_1page.do'><div class="post1 It3">Diet</div></a>
+			            <a href='${ contextPath }/mainwish'><div class="post1 It5">Wish</div></a>
 					</div>
 					
 					<div class="rightLine2">
@@ -1163,7 +1162,7 @@ window.onload = function() {
 
 			<div class="left_logo">
 				<img class="left_logo1" src="https://ifh.cc/g/H618K6.png"> 
-				<img class="left_logo2" src="/team_Project/photo/3syl2.png">
+				<img class="left_logo2" src="${contextPath }/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">

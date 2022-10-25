@@ -5,17 +5,18 @@
 <mapper namespace="mapper.yyk">
 
 	<!-- 다이어리 조회 -->
-<!-- 	<select id="diaryList" resultType="diaryDTO"> -->
-<!-- 		SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum, id -->
-<!-- 		FROM diary  -->
-<!-- 		where id = 'test01'  -->
-<!-- 		order by d_createTime desc -->
-<!-- 	</select> -->
-		<select id="diaryList" resultType="diaryDTO">
-				SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum
-				FROM diary 
-				order by d_createTime desc
-		</select>
+	<select id="diaryList" resultType="diaryDTO">
+		SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum, id
+		FROM diary 
+		where id = #{id}
+		order by d_createTime desc
+	</select>
+	
+<!-- 		<select id="diaryList" resultType="diaryDTO"> -->
+<!-- 				SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum -->
+<!-- 				FROM diary  -->
+<!-- 				order by d_createTime desc -->
+<!-- 		</select> -->
 	
 	
 	<!-- 다이어리 추가 -->
@@ -48,30 +49,39 @@
 	<select id="searchDiary" resultType="diaryDTO">
 		SELECT d_title, d_content, d_createTime, diaryNum, id
 		FROM diary
-		where id = 'yyk'
+		where id = #{id}
 		and lower(d_title) Like '%' || lower(#{d_title}) || '%' order by d_createTime desc
 	</select>
 	
 	
-	<!-- 메모장 리스트 -->
-	<select id="memoList" resultType="memoDTO">
+	<!-- 메모장 내용 -->
+	<select id="memoList" resultType="String">
 		SELECT m_content
 		FROM memo 
+		where id = #{map.sessionId}
+	</select>
+	
+	<select id="idCheck" resultType="String">
+		SELECT NVL(count(*), 0) FROM (
+			select count(id) 
+			from memo 
+			WHERE id = #{sessionId} GROUP BY id
+			)
 	</select>
 	
 	
 	<!-- 메모장 추가 -->                                                    
-	<insert id="addMemo" parameterType="String">
+	<insert id="addMemo" parameterType="Hashmap">
 		insert into memo (m_content, id)
-		values (#{m_content}, 'yyk') 
+		values (#{m_content}, #{sessionId}) 
 	</insert>
 	
 	
 	<!-- 메모장 수정 -->
-	<update id="updateMemo" parameterType="String">
+	<update id="updateMemo" parameterType="Hashmap">
 		update memo
 		set m_content= #{m_content}
-		where id = 'yyk'
+		where id = #{sessionId}
 	</update>
 
 </mapper>

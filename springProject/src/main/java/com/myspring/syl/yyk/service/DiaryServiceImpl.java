@@ -16,16 +16,16 @@ public class DiaryServiceImpl implements DiaryService{
 
 	
 	// 일기장 조회
-//	@Override
-//	public List<DiaryDTO> getDiaryList(String sessionId) {
-//		List<DiaryDTO> list = diaryDAO.diaryList(sessionId);
-//		return list;
-//	}
 	@Override
-	public List<DiaryDTO> getDiaryList() {
-		List<DiaryDTO> list = diaryDAO.diaryList();
+	public List<DiaryDTO> getDiaryList(String sessionId) {
+		List<DiaryDTO> list = diaryDAO.diaryList(sessionId);
 		return list;
 	}
+//	@Override
+//	public List<DiaryDTO> getDiaryList() {
+//		List<DiaryDTO> list = diaryDAO.diaryList();
+//		return list;
+//	}
 
 	// 일기장 추가
 	@Override
