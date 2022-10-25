@@ -54,7 +54,7 @@ public class MyPageController {
 	 * @param telNum
 	 * @param nickName
 	 * @param emailAdd
-	 * @return
+	 * @return 마이페이지로 다시
 	 */
 	@RequestMapping("/member/modifyInfoSelf.do")
 	public String modifyInfoSelf(

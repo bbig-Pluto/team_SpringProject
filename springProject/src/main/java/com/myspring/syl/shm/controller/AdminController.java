@@ -3,6 +3,7 @@ package com.myspring.syl.shm.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,9 @@ public class AdminController {
 	@RequestMapping(value = "/member/memberslist.do", 
 					method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView listMembers(HttpServletRequest request) {
+		
 		ModelAndView mav = new ModelAndView();
+		
 		HttpSession logOnSession = request.getSession(false); // 현재 세션이 존재하면 기존 세션 리턴, 기존 세션이 없다면 null 값을 리턴
 
 		try {
@@ -48,7 +51,7 @@ public class AdminController {
 					return mav;
 				}
 			} else {
-				mav.setViewName("/sjs/calendarM"); // 세션이 없으므로(=첫 방문) 달력 페이지로
+				mav.setViewName("/syl/calendarM"); // 세션이 없으므로(=첫 방문) 달력 페이지로
 				return mav;
 			}
 		} catch (NullPointerException e) {
@@ -67,33 +70,46 @@ public class AdminController {
 	@RequestMapping(value = "/member/delMemberFromAdmin.do", method = RequestMethod.GET)
 	public String delMemFromAdmin(
 			Model model, 
+			HttpSession logOnSession,
+			HttpServletRequest request,
 			@RequestParam(value = "memberNum", required = true) String memberNum) {
-		int delResult = memberService.exeDelMemFromAdmin(memberNum);
-
-		if (delResult == 1) {
-			return "redirect:/member/memberslist.do";
+		
+		
+		if(((""+logOnSession.getAttribute("isLogon")).equals("super"))) {
+			int delResult = memberService.exeDelMemFromAdmin(memberNum);
+			
+			if (delResult == 1) {
+				return "redirect:/member/memberslist.do";
+			} else {
+				return "redirect:/member/rd/wrongapproach";
+			}
 		} else {
-			return "redirect:/member/rd/wrongapproach";
+			return "redierct:/member/rd/wrongapproach";
 		}
 	}
 
 	/**
 	 * 관리자 페이지에서 정보를 수정할 회원 특정, DB에서 수정할 정보 불러오기
-	 * 
 	 * @return viewName
 	 */
 	@RequestMapping(value = "/member/enquireMemberFromAdmin.do", method = RequestMethod.GET)
 	public String enquireMemberFromAdmin(
 			Model model, 
+			HttpSession logOnSession,
+			HttpServletRequest request,
 			@RequestParam("memberNum") String memberNum) {
-		MemberDTO dto = memberService.getMemberInfoForModify(memberNum);
-		model.addAttribute("memInfo", dto);
-		return "/shm/modifymemberform";
+		
+		if(((""+logOnSession.getAttribute("isLogon")).equals("super"))) {
+			MemberDTO dto = memberService.getMemberInfoForModify(memberNum);
+			model.addAttribute("memInfo", dto);
+			return "/shm/modifymemberform";
+		} else {
+			return "redierct:/member/rd/wrongapproach";
+		}
 	}
 
 	/**
 	 * 관리자가 수정한 회원정보 실제 계정에 반영(update)
-	 * 
 	 * @param model
 	 * @param modiNickname
 	 * @param modiEmailAdd
@@ -103,6 +119,8 @@ public class AdminController {
 	@RequestMapping(value = "/member/modifyingMemberInfo.do", method = RequestMethod.GET)
 	public String modifyingMemberInfo(
 			Model model, 
+			HttpSession logOnSession,
+			HttpServletRequest request,
 			@RequestParam("nickName") String modiNickname,
 			@RequestParam("emailAdd") String modiEmailAdd, 
 			@RequestParam("telNum") String modiTelNum,
@@ -113,10 +131,17 @@ public class AdminController {
 		dto.setTelNum(modiTelNum);
 		dto.setMemberNum(modiMemberNum);
 
-		int result = memberService.exeModifyMemberInfo(dto);
-
-		if (result == 1) {
-			return "redirect:/member/memberslist.do";
+		logOnSession = request.getSession();
+		
+		if(((""+logOnSession.getAttribute("isLogon")).equals("super"))) {
+			
+			int result = memberService.exeModifyMemberInfo(dto);
+	
+			if (result == 1) {
+				return "redirect:/member/memberslist.do";
+			} else {
+				return "redierct:/member/rd/wrongapproach";
+			}
 		} else {
 			return "redierct:/member/rd/wrongapproach";
 		}

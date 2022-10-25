@@ -27,11 +27,9 @@ public class SessionController {
 	
 	@Autowired
 	MemberService memberService;
-
 	
 	/**
 	 * 로그인 실행, 회원 유무 검증 성공 -> member 부여 실패 -> guest 부여
-	 * 
 	 * @param request
 	 * @param logOnSession
 	 * @param model
@@ -48,8 +46,6 @@ public class SessionController {
 			@RequestBody MemberDTO dto) {
 		logOnSession = request.getSession();
 		
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
 		String signin_id = dto.getId();
 		String signin_pwd = dto.getPwd();
@@ -59,6 +55,9 @@ public class SessionController {
 		
 		String logOnWhetherForSession = "";
 		String resultMessage = "";
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
 		// 로그인 성공(필요에 따라 memberDTO.getLoginWhether() 를 기준으로 (일반 or 관리자) 회원 로그인 분기 가능)
 		if (memberDTO.getLoginWhether() == 0 || memberDTO.getLoginWhether() == 1) {
@@ -73,6 +72,7 @@ public class SessionController {
 			resultMessage += "alert('일치하는 정보의 회원이 없습니다.');";
 			resultMessage += " document.querySelector(\"input[name='signin_id']\").focus()";
 			
+		// 로그인 에러 대응
 		} else {
 			logOnWhetherForSession = "guest";
 			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
@@ -90,7 +90,7 @@ public class SessionController {
 	 * @param logOnSession
 	 * @param model
 	 * @param dto
-	 * @return
+	 * @return ajax
 	 */
 	@RequestMapping(value = "/member/superAdminlogin.do",
 			method = RequestMethod.POST)
@@ -119,7 +119,7 @@ public class SessionController {
 		if (memberDTO.getLoginWhether() == 0 || memberDTO.getLoginWhether() == 1) {
 			logOnWhetherForSession = "member";
 			setSuccessSession(logOnSession, memberDTO, logOnWhetherForSession);
-			
+			logOnSession.setAttribute("isLogon", "super");
 			resultMessage = "location.href='/syl/member/memberslist.do'";
 			
 		// 로그인 실패
@@ -128,7 +128,8 @@ public class SessionController {
 			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);
 			resultMessage += "alert('일치하는 정보의 회원이 없습니다.');";
 			resultMessage += " document.querySelector(\"input[name='signin_id']\").focus()";
-			
+		
+		// 로그인 에러 대응
 		} else {
 			logOnWhetherForSession = "guest";
 			setFailSession(logOnSession, memberDTO, logOnWhetherForSession);

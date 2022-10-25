@@ -6,7 +6,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%
-request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
 %>
 
 <!DOCTYPE html>
@@ -17,6 +17,17 @@ request.setCharacterEncoding("UTF-8");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>관리자</title>
+
+	<%
+		HttpSession logOnSession = request.getSession();
+
+		if(logOnSession.isNew()){ // 처음 접속이라서 세션이 없다면 만들어주고서 페이지 로드
+			logOnSession.setAttribute("isLogon", "guest"); 
+		}	
+		if( ((""+logOnSession.getAttribute("isLogon")).equals("super")) ) { // 다른 곳에서 세션은 만들고 들어온 비회원
+			
+	%>
+
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
@@ -159,3 +170,9 @@ request.setCharacterEncoding("UTF-8");
 </body>
 
 </html>
+
+<%
+	} else { // 세션도 존재하고 로그인한 상태라면
+		response.sendRedirect("/syl/calendarM");
+	}
+%>

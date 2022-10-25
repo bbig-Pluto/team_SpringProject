@@ -122,9 +122,18 @@
 	
 	<!-- 마이페이지에서의 회원정보 수정을 위한 전시용 데이터 추출 -->
 	<select id="memberInfoForModify" resultType="memberDTO" parameterType="String">
-		select id, pwd, nickName, memberNum, emailAdd, telNum, joinDate 
-		from syl_member 
-		where memberNum=#{_parameter}
+<!-- 		select id, pwd, nickName, memberNum, emailAdd, telNum, memberclass, joinDate  -->
+<!-- 		from syl_member  -->
+<!-- 		where memberNum=#{_parameter} -->
+		
+		<![CDATA[
+			SELECT  
+			substr(id,1,1) || lpad('*',length(id)-2,'*') || substr(id, length(id), 1)id,
+			lpad('*', LENGTH(pwd), '*')pwd,
+			nickname, emailadd, telnum, membernum, memberclass, joindate
+	 		FROM syl_member
+			where memberNum=#{_parameter}
+		]]> --> -->
 	</select>
 	
 	<!-- 마이페이지에서 직접 회원정보 수정 반영 -->

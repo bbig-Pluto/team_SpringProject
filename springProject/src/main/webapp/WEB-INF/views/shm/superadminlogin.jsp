@@ -1086,7 +1086,7 @@ a {
 			logOnSession.invalidate();
 			response.sendRedirect("/syl/member/rd/login");
 		} else { // 세션도 존재하고 로그인한 상태라면
-			response.sendRedirect("/syl/js/calendarM.jsp");
+			response.sendRedirect("/syl/calendarM");
 		}
 	}
 %>

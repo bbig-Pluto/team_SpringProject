@@ -115,23 +115,28 @@
 
                     if (signUpMandatoryCount == 0) { // 가입 필수 입력 여부 필터링
                             if (document.querySelector("#select").checked) {
-                                console.log("관리자 추가");
-                                console.log("관리자 등급 rn_ForAdminAdd : ", document.querySelector("input[name='rn_ForAdminAdd']").value);
-                                let signup = { id : document.querySelector("input[name='id']").value,
-                                    pwd : document.querySelector("input[name='pwd']").value,
-                                    nickName : document.querySelector("input[name='nickName']").value,
-                                    emailAdd : document.querySelector("input[name='emailAdd']").value,
-                                    telNum : document.querySelector("input[name='telNum']").value,
-                                    rn_ForAdminAdd : document.querySelector("input[name='rn_ForAdminAdd']").value}
-                                $.ajax({
-                                    type: "post",
-                                    url: "${contextPath}/ajaxconn/signup.do",
-                                    contentType: "application/json",
-                                    data: JSON.stringify(signup),
-                                    success: function(data, textStatus){
-                                        eval(data);
-                                    }
-                                })
+                            	if ( !(document.querySelector("input[name='rn_ForAdminAdd']").value == '') ) {
+	                                
+	                                console.log("관리자 등급 rn_ForAdminAdd : ", document.querySelector("input[name='rn_ForAdminAdd']").value);
+	                                let signup = { id : document.querySelector("input[name='id']").value,
+	                                    pwd : document.querySelector("input[name='pwd']").value,
+	                                    nickName : document.querySelector("input[name='nickName']").value,
+	                                    emailAdd : document.querySelector("input[name='emailAdd']").value,
+	                                    telNum : document.querySelector("input[name='telNum']").value,
+	                                    rn_ForAdminAdd : document.querySelector("input[name='rn_ForAdminAdd']").value}
+	                                $.ajax({
+	                                    type: "post",
+	                                    url: "${contextPath}/ajaxconn/signup.do",
+	                                    contentType: "application/json",
+	                                    data: JSON.stringify(signup),
+	                                    success: function(data, textStatus){
+	                                        eval(data);
+	                                    }
+	                                })
+                            	} else {
+                            		alert("관리자 등록 코드를 입력해주세요.");
+                            		document.querySelector("input[name='rn_ForAdminAdd']").focus();
+                            	}
                             } else if (document.querySelector("#select2").checked) {
                                 console.log("일반회원 추가");
                                 document.querySelector('input[name="memberClass"]').value = 0;
