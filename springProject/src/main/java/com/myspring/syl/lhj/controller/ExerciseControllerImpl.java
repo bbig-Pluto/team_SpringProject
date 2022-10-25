@@ -140,7 +140,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 
 		exerciseservice.ec_insert(dto);
 		selectAllList(model); // ����Ʈ�� �ִ� �޼ҵ�
-		return "lhj/ec_list";
+		return "redirect:/ec_list.do";
 	}
 
 	@Override
@@ -153,9 +153,8 @@ public class ExerciseControllerImpl implements ExerciseController {
 		};
 
 		exerciseservice.ec_delete(seq_Exercise);
-		selectAllList(model); // ����Ʈ�� �ִ� �޼ҵ�
 
-		return "lhj/ec_list";
+		return "redirect:/ec_list.do";
 	}
 
 	@Override

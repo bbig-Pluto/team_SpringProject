@@ -4,12 +4,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
+<% HttpSession logOnSession = request.getSession(); %>
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title> 운동일지 </title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
 <link href="${path}/resources/lhj/Inbody.css" rel="stylesheet">
 <style>
 
@@ -21,6 +24,24 @@
 		// insert_bind_2();
 		one_check();
 		session();
+		
+		
+		// 마이페이지 세션
+		let popupWidth = 470;
+		let popupHeight = 140;
+		// 브라우저 기준 중앙 정렬			
+		let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+		let popupY = (window.screen.height / 2) - (popupHeight / 2);
+					
+		document.querySelector("#myPageLink").addEventListener("click", function(e) {
+			<% if ((""+logOnSession.getAttribute("isLogon")).equals("member")) { %>
+				window.open('${path}/member/rd/inputpwdformypage', '비밀번호 재확인', 'width=' + popupHeight + ', height=' + popupHeight + ', left='+ popupX + ', top=' + popupY + ', scrollbars=yes');
+			<% } else { %>
+				alert("로그인이 필요한 서비스입니다.");				
+			<% } %>
+		})
+		
+		
 	}
 
 
@@ -30,7 +51,7 @@
 
 			if (userInfo.isNew()) { // 세션도 없고 로그인도 없이 직접 주소창에 들어온 Case, 세션을 여기서 생성하고, 달력페이지로 튕겨냄
 				userInfo.setAttribute("isLogon", "guest");
-				response.sendRedirect("/team_Project/js/calendarM.jsp"); // 나중에 바꿀 내용
+				response.sendRedirect("/syl/calendarM"); // 세션 없고, 로그인 없이 들어오면 캘린더로 보냄
 				} else if (userInfo.getAttribute("logOn.id") == null) { // 세션은 만들었는데, 로그인은 안 한 케이스
 					isLogon = "guest";
 				} else { // 세션도 만들었고, 로그인도 하고 들어온 Case
@@ -174,24 +195,6 @@
 									sapn_button_box.innerHTML = html;
 
 
-
-
-									
-									// 이게 있으면.. 취소로 다시 돌아오고 없으면...  추가에 바인딩이 안됨
-									// 추가를 클릭 했을때 call_fn 여기까지 옴
-									// 취소를 클릭 했을때 insert_bind(); 를 거쳐서 다시 call_fn 끝까지 감
-									
-									// 1단계O session에서 member에 id가 있는 정상적인 회원이 들어옴
-									// 2단계O 추가를 클릭 했을때 추가가 remove되며 취소 버튼이 생김 call_fn를 함수를 진입 함 (아직 이벤트 전)
-									
-									// 3단계X call_fn 함수 안의 클릭 이벤트를 눌렀을 때 취소가 remove 되며 추가 버튼이 생김
-									// 문제 발생 = 취소를 눌렀을 때 아주 빠른 속도로 취소를 지우고 추가버튼을 만들고 다시 취소 버튼을 생성시킴
-									// 왜????.........왜....... 클릭 이벤트 이후여서 제한이 없으니까
-									// 해결방안 추가에 대한 함수호출(insert_bind) > 클릭 이벤트 > if(로그인x), else(로그인o 기능on) > 취소에 대한 함수호출(call_fn)
-
-									// 4단계 추가 버튼을 innerhtml로 생성 했으니 다시 insert_bide()로 바인딩 함
-									// 5단계 insert_bide 함수에 진입해서 클릭 이벤트를 기다려야 함
-
 									// 추가 버튼 do을 js 변수에 다시 초기화
 									let insert_button = document.querySelector(".insert_button");
 									insert_bind(); // 새롭게 생성된 버튼에 바인딩해서 이벤트를 기다리게 함
@@ -315,21 +318,29 @@
 
 <body>
 	<header>
-		<div class="wrapper">
-			<h1>
-				<!-- <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
-			</h1>
-			<nav>
-				<a href class="headersub">다이어리 소개 |</a> <a href class="headersub">다이어리
-					구성 |</a> <a href class="headersub">다이어리 기능 |</a> <a href
-					class="headersub">다이어리 사용법 |</a> <a href class="headersub">Q&A</a>
-				<div class="lgnbtn">
-					<!-- <a href class="headerlogin">로그인 /</a> -->
-					<a href class="headerloginout">로그아웃</a>
-				</div>
-			</nav>
-		</div>
-
+         <div class="wrapper">
+            <h1>
+               <a href="${ path }/calendarM"><img class="headerLogo" src="/resources/photo/3syl.png"></a>
+            </h1>
+            <nav>
+               <a href="${ path }/bar/intro" class="headersub">다이어리 소개 |</a> 
+               <a href="${ path }/bar/story11" class="headersub">다이어리 구성 |</a> 
+               <a href="${ path }/bar/func" class="headersub">다이어리 기능 |</a> 
+               <a href="${ path }/bar/shot11"   class="headersub">다이어리 사용법 |</a> 
+               <a href="${ path }/notice" class="headersub">고객의 소리</a>
+               <div class="lgnbtn">
+                  <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
+ 					<c:choose>
+	                  <c:when test="${empty sessionId }">
+		                  <a href="/syl/member/login" class="headerlogin">로그인</a>
+	                  </c:when>
+		                  <c:otherwise>
+			                  <a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
+		                  </c:otherwise>
+                  </c:choose>
+               </div>
+            </nav>
+         </div>
 	</header>
 
 	<main>
@@ -348,10 +359,12 @@
 						<!-- 탭 tab ec -->
 						<div class="tab_ec_box">
 							<div class="tab_ec_box1">
-								<button id="tab_ec_E" class="tab_ec_tab">E</button>
-								<button id="tab_ec_F" class="tab_ec_tab">F</button>
-								<button id="tab_ec_G" class="tab_ec_tab">바디 기록실</button>
-								<button id="tab_ec_H" class="tab_ec_tab">H</button>
+								<a href="/syl/ec_list.do" id="myPageLink" class="headermypage">
+								<button id="tab_ec_E" class="tab_ec_tab">운동일지 만들기</button>
+								</a>
+								<button id="tab_ec_F" class="tab_ec_tab">바디 기록실</button>
+<!-- 								<button id="tab_ec_G" class="tab_ec_tab">G</button> -->
+<!-- 								<button id="tab_ec_H" class="tab_ec_tab">H</button> -->
 							</div>
 
 							<!-- 안에 흰색 box -->
@@ -554,8 +567,31 @@
 					<div class="leftLine2"></div>
 					<div class="leftLine3"></div>
 					<!-- 오른쪽 직선 3개 -->
-					<div class="rightLine1"></div>
-					<div class="rightLine2"></div>
+					<div class="rightLine1">
+						<!--  여기 Index에 이동 a링크 구성하기 -->
+						<a href='${ path }/diaryList'>
+						<div class="post1 It2">Diary</div>
+						</a>
+						
+						<a href='${ path }/diet_1page.do'>
+						<div class="post1 It3">Diet</div>
+						</a>
+						
+
+						<a href='${ path }/mainwish'>
+						<div class="post1 It5">Wish</div>
+						</a>
+					</div>
+					<div class="rightLine2">
+						<div class="post2 It1"></div>
+						<a href='${ path }/ec_list.do'>
+						<div class="post2 It4">Exercise</div>
+						</a>
+
+						<div class="post2 It6"></div>
+						<div class="post2 It7"></div>
+						<div class="post2 It8"></div>
+					</div>
 					<div class="rightLine3"></div>
 
 					<!-- 책표지 부분 -->
@@ -574,8 +610,8 @@
 		<div class="footer_all">
 
 			<div class="left_logo">
-				<!-- 				<img class="left_logo1" src="./logo2.png"> -->
-				<!-- 				<img class="left_logo2" src="./3syl2.png"> -->
+				<img class="left_logo1" src="/syl/resources/photo/logo2.png">
+				<img class="left_logo2" src="/syl/resources/photo/3syl2.png">
 			</div>
 
 			<div class="rc2">
