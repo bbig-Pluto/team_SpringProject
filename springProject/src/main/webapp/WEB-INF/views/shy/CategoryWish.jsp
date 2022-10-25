@@ -458,10 +458,60 @@
             margin: 13px;
             margin-bottom: 0px;
             color: rgb(60, 60, 60);
+            padding-top: 0px;
+            height: 198px;
         }
         .list:hover {
             cursor: pointer;
             color:rgb(116, 116, 116);
+        }
+        .allselect {
+            position: absolute;
+            top: 155px;
+            display: none;
+        }
+        .all_chb {
+            zoom: 1.8;
+            accent-color: rgb(0, 105, 79);
+        }
+        .all_sel {
+            position: relative;
+            top: -30px;
+            left: 40px;
+            font-weight: 900;
+        }
+        .select_can {
+            position: relative;
+            top: -55px;
+            left: 355px;
+            border: none;
+            font-weight: 900;
+            width: 50px;
+            height: 30px;
+            color:rgb(145, 145, 145);
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .select_del {
+            position: relative;
+            top: -85px;
+            left: 400px;
+            border: none;
+            font-weight: 900;
+            width: 50px;
+            height: 30px;
+            color:rgb(255, 112, 124);
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .select_chb {
+			position: relative;
+			top: -195px;
+			display: none;
+        }
+        .del_chb {
+            zoom: 1.8;
+            accent-color: rgb(0, 105, 79);
         }
         .list_photo {
             width: 120px;
@@ -731,13 +781,24 @@
             background-color: #fffabb;
             border-left: none;
         }
-        .post2.It4 {
-
-            z-index: 2;
-            top: 240px;
-            border-radius: 0px 80px 80px 0px;
-            background-color: #DCEDCA;
-        }
+		.post2.It4 {
+		   width: 60px;
+		   height: 27px;
+		   position: absolute;
+		   font-size: 12px;
+		   font-weight: bold;
+		   font-style: italic;
+		   text-align: center;
+		   padding-top: 10px;
+		   color: rgba(104, 100, 100, 0.692);
+		   
+		
+		
+		   z-index: 2;
+		   top: 250px;
+		   border-radius: 0px 80px 80px 0px;
+		   background-color: #DCEDCA;
+		}
         .post1.It5 {
 
             z-index: 2;
@@ -772,24 +833,64 @@
         }
     </style>
     <script>
-        window.onload = function() {
-            upload();
+    window.onload = function() {
+        seldel();
+    }
+    
+    function seldel() {
+
+        let del = document.querySelector(".delete");
+        let chb = document.querySelectorAll(".select_chb")
+        let all = document.querySelector('.allselect');
+        let can = document.querySelector(".select_can");
+        let list = document.querySelector(".list_area");
+        let seldel = document.querySelector(".select_del");
+        let realdel = document.querySelector(".real_del");
+
+        for(let i=0; i<chb.length; i++) {
+            del.addEventListener("click", ()=> chb[i].style.display = "block");
+            can.addEventListener("click", ()=> chb[i].style.display = "none");
         }
-        
-        function getImageFiles(e) {
-            let files = e.currentTarget.files;
-            console.log(typeof files, files);
-        }
-        
-        function upload() {
+
+            del.addEventListener("click", ()=> all.style.display = "block");
+            del.addEventListener("click", ()=> list.style.marginTop = "50px");
             
-            let up = document.querySelector(".upload_photo");
-            let add = document.querySelector(".photo_add");
+            can.addEventListener("click", ()=> all.style.display = "none");
+            can.addEventListener("click", ()=> list.style.marginTop = "30px");
             
-            add.addEventListener("click", ()=> up.click());
-            up.addEventListener("change", getImageFiles);
-            
-        }
+            seldel.addEventListener("click", ()=> realdel.click());
+
+    }
+    
+    
+    function checkSelectAll()  {
+    	  // 전체 체크박스
+    	  const checkboxes 
+    	    = document.querySelectorAll('input[name="check"]');
+    	  // 선택된 체크박스
+    	  const checked 
+    	    = document.querySelectorAll('input[name="check"]:checked');
+    	  // select all 체크박스
+    	  const selectAll 
+    	    = document.querySelector('input[name="checkAll"]');
+    	  
+    	  if(checkboxes.length === checked.length)  {
+    	    selectAll.checked = true;
+    	  }else {
+    	    selectAll.checked = false;
+    	  }
+
+    	}
+
+    	function selectAll(selectAll)  {
+    	  const checkboxes 
+    	     = document.getElementsByName('check');
+    	  
+    	  checkboxes.forEach((checkbox) => {
+    	    checkbox.checked = selectAll.checked
+    	  })
+    	}
+    
     </script>
 </head>
 <body>
@@ -855,16 +956,32 @@
                     	</c:when>
                     	
                     	<c:when test="${!empty search }">
+                    	
+                    			<div class="allselect">
+	                                <input name="checkAll" class="all_chb" type="checkbox" onclick='selectAll(this)'>
+	                                <div class="all_sel">전체선택</div>
+	                                <div class="select_can">취소</div>
+	                                <div class="select_del">삭제</div>
+	                            </div>
+	                        
+	                        <form name="frm" action="${contextPath }/checkdel" method="post">
 	                    	<c:forEach var="sear" items="${search }">
 	                    		<a href="${contextPath }/pickwish?seqNum=${ sear.seqNum }">
 			                        <div class="list">
 			                            <img class="list_photo"
 			                            	src="${contextPath }/donwloadwishphoto?imageFileName=${sear.photo}">
 			                            <div class="list_name">${sear.name }</div>
+			                            <div class="select_chb">
+			                             	<input name="check" class="del_chb" type="checkbox" value="${wish.seqNum }" onclick='checkSelectAll(this)'>
+                                        </div>
 			                            <input type="hidden" name="seqNum" value="${ sear.seqNum }">
 			                        </div>
 			                    </a>
 	                        </c:forEach>
+	                        
+	                        	<input style="display: none;" type="submit" class="real_del">
+	                    	</form>
+	                    	
                         </c:when>
                     </c:choose>
                         
@@ -928,15 +1045,15 @@
 					<div class="leftLine3"></div>
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
-						<a href='${ contextPath }/yyk/diaryList.jsp'><div class="post1 It2">Diary</div></a>
-			            <a href='${ contextPath }/Hanu/Diet_diary_EL_View.jsp'><div class="post1 It3">Diet</div></a>
-			            <a href='${ contextPath }/shy/mainwish.jsp'><div class="post1 It5">Wish</div></a>
+						<a href='/syl/diaryList'><div class="post1 It2">Diary</div></a>
+			            <a href='/syl/diet_1page.do'><div class="post1 It3">Diet</div></a>
+			            <a href='/syl/mainwish'><div class="post1 It5">Wish</div></a>
+			            <a href='/ec_list.do'><div class="post2 It4">Exercise</div></a>
 					</div>
 			            
 						
 					<div class="rightLine2">
 			            <div class="post2 It1"></div>
-			            <div class="post2 It4"></div>
 			            <div class="post2 It6"></div>
 			            <div class="post2 It7"></div>
 			            <div class="post2 It8"></div>

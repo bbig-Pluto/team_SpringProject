@@ -5,11 +5,11 @@
 <mapper namespace="mapper.shy">
 
 	<!-- 최근순으로 전체 조회 -->
-	<select id="selectWishlist" resultType="wishlistDTO">
+	<select id="selectWishlist" resultType="wishlistDTO" parameterType="String">
 	
 		select * from wishlist
+		where id = #{_parameter}
 		ORDER BY seqNum desc
-	
 	</select>
 	
 	<!-- 상세 페이지 -->

@@ -852,13 +852,24 @@
             background-color: #fffabb;
             border-left: none;
         }
-        .post2.It4 {
-
-            z-index: 2;
-            top: 240px;
-            border-radius: 0px 80px 80px 0px;
-            background-color: #DCEDCA;
-        }
+		.post2.It4 {
+		   width: 60px;
+		   height: 27px;
+		   position: absolute;
+		   font-size: 12px;
+		   font-weight: bold;
+		   font-style: italic;
+		   text-align: center;
+		   padding-top: 10px;
+		   color: rgba(104, 100, 100, 0.692);
+		   
+		
+		
+		   z-index: 2;
+		   top: 250px;
+		   border-radius: 0px 80px 80px 0px;
+		   background-color: #DCEDCA;
+		}
         .post1.It5 {
 
             z-index: 2;
@@ -1185,15 +1196,15 @@
 					<div class="leftLine3"></div>
 					<!-- 오른쪽 직선 3개 -->
 					<div class="rightLine1">
-						<a href='${ contextPath }/yyk/diaryList.jsp'><div class="post1 It2">Diary</div></a>
-			            <a href='${ contextPath }/Hanu/Diet_diary_EL_View.jsp'><div class="post1 It3">Diet</div></a>
-			            <a href='${ contextPath }/shy/mainwish.jsp'><div class="post1 It5">Wish</div></a>
+						<a href='/syl/diaryList'><div class="post1 It2">Diary</div></a>
+			            <a href='/syl/diet_1page.do'><div class="post1 It3">Diet</div></a>
+			            <a href='/syl/mainwish'><div class="post1 It5">Wish</div></a>
+			            <a href='/ec_list.do'><div class="post2 It4">Exercise</div></a>
 					</div>
 			            
 						
 					<div class="rightLine2">
 			            <div class="post2 It1"></div>
-			            <div class="post2 It4"></div>
 			            <div class="post2 It6"></div>
 			            <div class="post2 It7"></div>
 			            <div class="post2 It8"></div>

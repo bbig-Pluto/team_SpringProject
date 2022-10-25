@@ -15,9 +15,9 @@ public class WishlistServiceImpl implements WishlistService {
 	WishlistDAO wishDAO;
 	
 	@Override
-	public List<WishlistDTO> getWishList() {
+	public List<WishlistDTO> getWishList(String sessionId) {
 		
-		return wishDAO.selectWish();
+		return wishDAO.selectWish(sessionId);
 	}
 
 	@Override

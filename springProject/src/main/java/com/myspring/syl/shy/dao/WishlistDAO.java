@@ -6,7 +6,7 @@ import com.myspring.syl.shy.dto.WishlistDTO;
 
 public interface WishlistDAO {
 	
-	public List selectWish();
+	public List selectWish(String sessionId);
 	
 	public WishlistDTO pickWish(int seqNum);
 	

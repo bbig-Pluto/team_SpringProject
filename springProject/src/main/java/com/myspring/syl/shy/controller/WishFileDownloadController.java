@@ -16,6 +16,7 @@ public class WishFileDownloadController {
 	
 	/* 파일 저장 위치 지정 */
 //	private static String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
+//	C:\workspace\teamproject\springProject\src\main\webapp\resources\wishimag
 	private static final String CURR_IMAGE_REPO_PATH = "\\syl\\src\\main\\webapp\\resources\\wishimage";
 	
 	/* 폴더에 썸네일 이미지 파일 생성 X */

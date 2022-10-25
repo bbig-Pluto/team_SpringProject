@@ -10,9 +10,10 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
+<% HttpSession getSession = request.getSession(); %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
+<c:set var="sessionId" value='<%=(String)getSession.getAttribute("logOn.id") %>'/>
+<c:set var="isLogon" value='<%=(String)getSession.getAttribute("isLogon") %>'/>
     
 <!DOCTYPE html>
 <html>
@@ -796,7 +797,7 @@
 		
 		
 		   z-index: 2;
-		   top: 240px;
+		   top: 250px;
 		   border-radius: 0px 80px 80px 0px;
 		   background-color: #DCEDCA;
 		}
@@ -921,12 +922,12 @@
                     
                     <!-- +(추가) 버튼을 누르면 카테고리 추가 페이지로 이동  -->
                     <c:choose>
-	                    <c:when test="${empty sessionId }">
+	                    <c:when test="${isLogon eq 'guest' }">
 	                    	<a href="${contextPath }/member/login">
 	                        	<input onclick="doDisplay()" class="add" type="submit" value="+">
 	                        </a>
 	                    </c:when>
-	                    <c:when test="${!empty sessionId }">
+	                    <c:when test="${isLogon eq 'member' }">
 		                    <a href="${contextPath }/insertwishpage">
 		                        <input onclick="doDisplay()" class="add" type="submit" value="+">
 		                    </a>
@@ -938,9 +939,8 @@
                     
                     <!-- 상품 카테고리 -->
                     <div class="category">
-                    	
                     	<c:choose>
-	                    	<c:when test="${empty sessionId }">
+	                    	<c:when test="${isLogon eq 'guest' }">
 	                    		<a href="${contextPath }/mainwish">
 				                    <input class="category_all" type="button" value="All">
 				                </a>
@@ -955,7 +955,7 @@
 									<input name="category" class="category_submit" type="submit" value="패션">
 									<input name="category" class="category_submit" type="submit" value="기타">
 	                    	</c:when>
-	                    	<c:when test="${!empty sessionId }">
+	                    	<c:when test="${isLogon eq 'member'}">
 								<form method="post" action="${contextPath }/searchcategory">
 		                    		<a href="${contextPath }/mainwish">
 				                    	<input class="category_all" type="button" value="All">
@@ -978,13 +978,12 @@
                     
                     <!-- 상품 목록 -->
                     <div class="list_area">
-                        
                     <c:choose>
-                    	<c:when test="${empty wishlist || empty sessionId || ! sessionId.equals('admin01')}">
+                    	<c:when test="${(empty wishlist) || (isLogon eq 'guest')}">
 							<div class="list_null">상품 목록이 없습니다</div>                    	
                     	</c:when>
                     	
-                    	<c:when test="${!empty wishlist && !empty sessionId || sessionId.equals('admin01')}">
+                    	<c:when test="${(!empty wishlist) && (isLogon eq 'member')}">
                     	
 		                    	<div class="allselect">
 	                                <input name="checkAll" class="all_chb" type="checkbox" onclick='selectAll(this)'>

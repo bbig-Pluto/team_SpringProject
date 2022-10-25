@@ -31,16 +31,32 @@ public class WishlistController {
 	@RequestMapping(value="/mainwish",
 					method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listWish(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			HttpSession loginSession
 			) {
 		
 		ModelAndView mav = new ModelAndView();
 		
-		List<WishlistDTO> list = wishService.getWishList();
+		String isLogon = "" + loginSession.getAttribute("isLogon");
 		
-		mav.addObject("wishlist", list);
-		mav.setViewName("/shy/MainWish");
+		if (isLogon.equals("guest")) {
+			System.out.println("/mainwish, member route");
+			mav.setViewName("/shy/MainWish");
+			return mav;
+		} else {
+			System.out.println("/mainwish, member route");
+			// where절에 넣을 id 를 세팅해줘야함(=parameter)
+			String sessionId = "" + loginSession.getAttribute("logOn.id");
+			System.out.println("/mainwish sessionId : " + sessionId);
+			List<WishlistDTO> list = wishService.getWishList(sessionId);
+			
+			mav.addObject("wishlist", list);
+			mav.setViewName("/shy/MainWish");
+			
+			return mav;
+		}
 		
-		return mav;
 	}
 	
 	/* 상세 페이지 */
@@ -49,10 +65,12 @@ public class WishlistController {
 	public String pickWish(
 			HttpServletRequest request,
 			HttpServletResponse response,
+			HttpSession loginSession,
 			@RequestParam("seqNum") int seqNum
 			) {
+		String sessionId = "" + loginSession.getAttribute("logOn.id");
 		
-		List<WishlistDTO> list = wishService.getWishList();
+		List<WishlistDTO> list = wishService.getWishList(sessionId);
 		request.setAttribute("wishlist", list);
 		
 		WishlistDTO pickwish = wishService.getPickWish(seqNum);
@@ -119,10 +137,11 @@ public class WishlistController {
 					method= {RequestMethod.GET, RequestMethod.POST})
 	public String insertWishPage(
 			HttpServletRequest request,
-			HttpServletResponse response
+			HttpServletResponse response,
+			HttpSession loginSession
 			) {
-		
-		List<WishlistDTO> list = wishService.getWishList();
+		String sessionId = "" + loginSession.getAttribute("logOn.id");
+		List<WishlistDTO> list = wishService.getWishList(sessionId);
 		request.setAttribute("wishlist", list);
 		
 		return "/shy/InsertWish";
@@ -134,10 +153,11 @@ public class WishlistController {
 	public String updateWishPage(
 			HttpServletRequest request,
 			HttpServletResponse response,
+			HttpSession loginSession,
 			@RequestParam("seqNum") int seqNum
 			) {
-		
-		List<WishlistDTO> list = wishService.getWishList();
+		String sessionId = "" + loginSession.getAttribute("logOn.id");
+		List<WishlistDTO> list = wishService.getWishList(sessionId);
 		request.setAttribute("wishlist", list);
 		
 		WishlistDTO updatepage = wishService.getPickWish(seqNum);
@@ -154,6 +174,7 @@ public class WishlistController {
 	public String updateWish(
 			HttpServletRequest request,
 			HttpServletResponse response,
+			HttpSession loginSession,
 			@RequestParam("seqNum") int seqNum,
 			@RequestParam("category") String category,
 			@RequestParam("name") String name,
@@ -166,8 +187,8 @@ public class WishlistController {
 		String originalFileName = fileProcess(multipartRequest);
 		
 		System.out.println("수정된 이미지 이름 : " + originalFileName );
-		
-		List<WishlistDTO> list = wishService.getWishList();
+		String sessionId = "" + loginSession.getAttribute("logOn.id");
+		List<WishlistDTO> list = wishService.getWishList(sessionId);
 		request.setAttribute("wishlist", list);
 		
 		WishlistDTO wishDTO = new WishlistDTO();

@@ -15,9 +15,9 @@ public class WishlistDAOImpl implements WishlistDAO {
 	SqlSession sqlSession;
 
 	@Override
-	public List selectWish() {
+	public List selectWish(String sessionId) {
 
-		List<WishlistDTO> list = sqlSession.selectList("mapper.shy.selectWishlist");
+		List<WishlistDTO> list = sqlSession.selectList("mapper.shy.selectWishlist", sessionId);
 		
 		return list;
 	}

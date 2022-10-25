@@ -6,7 +6,7 @@ import com.myspring.syl.shy.dto.WishlistDTO;
 
 public interface WishlistService {
 	
-	List<WishlistDTO> getWishList();
+	List<WishlistDTO> getWishList(String sessionId);
 	
 	WishlistDTO getPickWish(int seqNum);
 	
@@ -21,4 +21,5 @@ public interface WishlistService {
 	List<WishlistDTO> getSearchCategory(String category);
 	
 	public void getCheckDel(List seqNum);
+	
 }
