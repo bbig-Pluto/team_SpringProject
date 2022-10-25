@@ -79,6 +79,4 @@ public class MemberContorllerImpl {
 		return "forward:/member/rd/idfound";
 	}
 	
-	
-	
 }

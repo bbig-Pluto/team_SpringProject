@@ -34,7 +34,6 @@ public class FinderController {
 
 	/**
 	 * 아이디 찾기
-	 * 
 	 * @param model
 	 * @param idFindEmailAdd
 	 * @param idFindTelNum
@@ -47,8 +46,6 @@ public class FinderController {
 			HttpServletRequest request,
 			HttpServletResponse response,
 			@RequestBody MemberDTO dto
-//			@RequestParam(value = "idFindEmailAdd", required = true) String idFindEmailAdd,
-//			@RequestParam(value = "idFindTelNum", required = true) String idFindTelNum
 	) {
 
 		String idFindEmailAdd = dto.getEmailAdd();
@@ -69,7 +66,8 @@ public class FinderController {
 			idFindMap.put("telNum", idFindTelNum);
 
 			String foundId = memberService.idFinder(idFindMap);
-
+			
+			// 
 			if (!(foundId.equals("0"))) {
 				
 				return new ResponseEntity("location.href='/syl/member/idFoundBinder?id="+ foundId +"'", responseHeaders,HttpStatus.CREATED);
