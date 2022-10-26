@@ -695,7 +695,7 @@ footer {
 window.onload = function () {
 	chkUpdate();
 	selectAll();
-	 delHover();
+	/*  delHover(); */
 	<%
 	String isLogon = "guest";
 	HttpSession logOnSession = request.getSession();
@@ -969,7 +969,7 @@ window.onload = function () {
 			
 			
 	//x버튼에 마우스오버 시 텍스트 정보 나오고 마우스아웃 시 텍스트 정보 없어짐
-	function delHover(){
+	/* function delHover(){
 		let del_btn = document.querySelector(".del_btn");
 		let textInfo = document.querySelector(".textInfo");
 
@@ -983,7 +983,7 @@ window.onload = function () {
 				textInfo.style.opacity=0;
 			}
 		})
-	}
+	} */
 	//todo 입력 ajax
 		function bind(){
 				let todo = $(".text_input").val();//jquery로만 추출
