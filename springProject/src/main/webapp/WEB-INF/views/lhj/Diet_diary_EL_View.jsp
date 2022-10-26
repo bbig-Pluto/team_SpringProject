@@ -749,7 +749,7 @@ footer {
 .post1.It3 {
 	z-index: 2;
 	top: 200px;
-	left: -10px;
+	left: -16px;
 	border-radius: 0px 80px 80px 0px;
 	background-color: #fffabb;
 	border: 1px solid rgb(219, 219, 219);
