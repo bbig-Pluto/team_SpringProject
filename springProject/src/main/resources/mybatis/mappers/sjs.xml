@@ -48,7 +48,7 @@
 			resultType="CalendarDTO">
 				
 		 select  * from calendarM 
-<!-- 		 where calendarM_time = calendarM_time; -->
+		 
 	
 	</select>
 	
@@ -59,7 +59,6 @@
 			, calendarM_Title
 			, calendarM_Txt
 		)VALUES(
-<!-- 			,TO_DATE(#{calendarM_time}) -->
 			#{sdfDate}
 			,#{calendarM_Title}
 			, #{calendarM_Txt}
@@ -68,4 +67,18 @@
 	</insert>
 
 
+<select id="calendarM_Ajax_List" parameterType="java.util.HashMap"
+			resultType="calendarDTO">
+				
+		
+			SELECT 
+			*
+			FROM calendarM
+			WHERE 
+			extract (year from calendarM_time) = #{year_js} and
+			extract (month from calendarM_time) = #{month_js}
+			ORDER BY extract(day from calendarM_time)
+		
+	
+	</select>
 </mapper>

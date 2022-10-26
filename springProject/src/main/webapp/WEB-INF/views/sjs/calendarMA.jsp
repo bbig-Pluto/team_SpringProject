@@ -61,7 +61,6 @@
 				}
 
 				$(".year_month").text(showUpYear + "년 " + (showUpMonth + 1) + "월 ");
-// 				$(".year_month").text(showUpYear + "-" + (showUpMonth + 1));
 
 
 				for (i = 0; i < firstDay; i++) { //첫번째 줄 빈칸
@@ -72,7 +71,6 @@
 					if (plusDate == 0) {
 						$(".calendar tbody").append("<tr></tr>");
 					}
-					// $(".calendar tbody").append("<td class='date'><tr><td>"+ i+"</td><td>"+"</td></tr></td>");
 					$(".calendar tbody").append("<td class='date'><div>" + i + "</div><div class='aaa' id='data_" + i + "'>" + "</div></td>");
 				}
 				if ($(".calendar > tbody > td").length % 7 != 0) { //마지막 줄 빈칸
@@ -112,16 +110,13 @@
 
 		function selectDate() {
 
-			// let attt = document.querySelector(".year_month").innerHTML;
 			let clickDateBlank = document.querySelectorAll(".date");
-			// console.log(clickDateBlank);
 
 			for (let i = 0; i < clickDateBlank.length; i++) {
 				clickDateBlank[i].addEventListener("click", function (e) {
 
 					let attt = document.querySelector(".year_month").innerHTML;
 
-					// let attt2 = e.target.innerHTML;
 
 					let a222 = clickDateBlank[i].firstElementChild.innerHTML;
 
@@ -133,19 +128,12 @@
 					showPopUp.style.display = 'block';
 
 					//가져오려는 날짜를 변수로 지정
-// 					let showinCalDate = attt + "-" + a222;
+
 					let showinCalDate = attt + a222 + "일";
-					// let insertBlankTest = document.querySelector(".schedule_Popup_blank");
 
 
 					//날짜를 가져옴
 					let showDateInSchd = document.querySelector(".schedule_Popup_date").innerText = showinCalDate;
-					// $('.schedule_Popup_date:first-child').text = showinCalDate;
-					// console.log($('.schedule_Popup_date:first-child'));
-
-					// console.log(showDateInSchd);
-					// let chk_btn = document.querySelector(".schedule_Popup_chk");
-
 
 
 
@@ -1068,30 +1056,7 @@ input {
 			
 			<input id="tmt" type="text" name="todo_txt"> 
 			<input id="a" type="button" value="+"> 
-<!-- 			<input id="a" type="submit" value="+">  -->
 
-<%-- 			<% --%>
-
-
-<!-- //  	       		List<SetInputVO> todoList = dao.listTodo_M();   -->
-
-	        					
-<!-- //   	        	for(int i =0; i<todoList.size(); i++){   -->
- 	        						
-	        					
-<!-- //    	        	SetInputVO addVO= todoList.get(i);   -->
-<!-- //   	        	int todo_Num = addVO.getTodo_Num();   -->
-<!-- //   	        	String todo_txt = addVO.getTodo_txt();   -->
-	        						        					
-<%-- 	        	%>  --%>
-<!-- 			<input id="tmc" type="checkbox"> -->
-<%-- 			<%=todo_txt %> --%>
-<!-- 			<input type="submit" value="삭제">  -->
-<!-- 			<input type="hidden" name="command" value="delTodo">  -->
-<%-- 			<input type="hidden" name="del_todo_Num" value="<%=todo_Num %>"> <br> --%>
-<%-- 			<% 	 --%>
-<!-- //  	        	}  -->
-<%-- 	            %> --%>
 		</div>
 
 	</form>
@@ -1129,9 +1094,9 @@ input {
 	<div class="leftLine3"></div>
 	<!-- 오른쪽 직선 3개 -->
 	<div class="rightLine1">
-	 <a href='${ contextPath }/yyk/diaryList.jsp'><div class="post1 It2">Diary</div></a>
-            <a href='${ contextPath }/Hanu/Diet_diary_EL_View.jsp'><div class="post1 It3">Diet</div></a>
-            <a href='${ contextPath }/shy/mainwish.jsp'><div class="post1 It5">Wish</div></a>
+	 <a href='/syl/diaryList'><div class="post1 It2">Diary</div></a>
+            <a href='/syl/Hanu/Diet_diary_EL_View'><div class="post1 It3">Diet</div></a>
+            <a href='syl/mainwish'><div class="post1 It5">Wish</div></a>
 	
 	</div>
 	<div class="rightLine2">

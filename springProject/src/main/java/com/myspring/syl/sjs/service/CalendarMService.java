@@ -1,11 +1,13 @@
 package com.myspring.syl.sjs.service;
 
 
-//import java.sql.Date;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+//import java.sql.Date;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +68,7 @@ public class CalendarMService {
 	
 	public int insertCalendarM(CalendarDTO CalendarDTO) {
 		String date = CalendarDTO.getCalendarM_time();
-		Date dateAfter = getCalendarM_time(date);
+		Date dateAfter = (Date)getCalendarM_time(date);
 		CalendarDTO.setSdfDate(dateAfter);
 		
 		int result = calendarMDAO.insertCalendarM(CalendarDTO);
@@ -76,22 +78,48 @@ public class CalendarMService {
 	
 	
 	
-	public Date getCalendarM_time(String calendarM_time) {
+	public List getCalendarM_time(String calendarM_time) {
 		
+		System.out.println("calendarM_timecalendarM_timecalendarM_timecalendarM_time: " + calendarM_time) ;
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+		String[] total = calendarM_time.split(" ");
+		String year = total[0];
+		String month = total[1];
+
+		
+		String year_js = year.substring(0,year.length()-1);
+		String month_js = month.substring(0,month.length()-1);
+
+		
+		Map map = new HashMap();
+		map.put("year_js",year_js);
+		map.put("month_js",month_js);
+
+		
+		System.out.println("year___: "+year_js);
+		System.out.println("month___: "+month_js);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 ");
+		System.out.println("sdfsdfsdfsdfsdfsdfsdfsdfsdfsdf: "+sdf);
 
 		Date to = null;
 		try {
+			
+			
+			
 			to = (Date) sdf.parse(calendarM_time);
 			System.out.println("Date로 변환할 String Data: " + to);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		return to;
+		List list_Ajax = calendarMDAO.selectAjaxCalendarM(map);
+		
+		System.out.println("calendarMDAO.selectAjaxCalendarM(map)__________list_Ajax: "+list_Ajax);
+		
+		
+		return list_Ajax;
 		
 	}
 	
@@ -105,7 +133,6 @@ public class CalendarMService {
 			to = (Date) sdf.parse(calendarM_yyyyDD);
 			System.out.println("Date로 변환할 String Data: " + to);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -1,6 +1,7 @@
 package com.myspring.syl.sjs.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,10 +54,8 @@ public class CalendarMDAO {
 	
 	
 	public List<CalendarDTO> selectCalendarM() {
-		List<CalendarDTO> calendarM_list =sqlSession.selectList("mapper.sjs.calendarM_List");
-		
-		
-		return calendarM_list;
+		List<CalendarDTO> calendarM_List =sqlSession.selectList("mapper.sjs.calendarM_List");
+		return calendarM_List;
 	}
 	public int insertCalendarM(CalendarDTO CalendarDTO) {
 		
@@ -65,5 +64,29 @@ public class CalendarMDAO {
 		
 	
 	}
+	
+	
+	
+	public List<CalendarDTO> selectAjaxCalendarM(Map map) {
+
+		
+		List<CalendarDTO> calendarM_Ajax_List =sqlSession.selectList("mapper.sjs.calendarM_Ajax_List", map );
+		
+		
+
+		
+		return calendarM_Ajax_List;
+	}
+	
+//	public int insertAjaxCalendarM(CalendarDTO CalendarDTO) {
+//		int calendarM_Ajax_result = sqlSession.insert("mapper.sjs.calendarValueInsert", CalendarDTO);
+//		return calendarM_Ajax_result; 
+//		
+//		
+//	}
+	
+	
+	
+	
 
 }
