@@ -15,7 +15,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 		window.onload = function () {
-
 			let date = new Date();
 
 			$("input[name=previousMonth]").click(function () { // 이전달
@@ -63,8 +62,8 @@
 					lastDate[1] = 29;
 				}
 
-// 				$(".year_month").text(showUpYear + "-" + (showUpMonth + 1));
 				$(".year_month").text(showUpYear + "년 " + (showUpMonth + 1) + "월 ");
+				console.log(123)
 
 				for (i = 0; i < firstDay; i++) { //첫번째 줄 빈칸
 					$(".calendar tbody").append("<td></td>");
@@ -74,8 +73,20 @@
 					if (plusDate == 0) {
 						$(".calendar tbody").append("<tr></tr>");
 					}
+
+					
 					$(".calendar tbody").append("<td class='date'><div>" + i + "</div><div class='aaa' id='data_" + i + "'>" + "</div></td>");
+					
+					
+					
 				}
+				
+				
+				//아작스
+				
+				ajax_test();
+				
+				
 				if ($(".calendar > tbody > td").length % 7 != 0) { //마지막 줄 빈칸
 					for (i = 1; i <= $(".calendar > tbody > td").length % 7; i++) {
 						$(".calendar tbody").append("<td></td>");
@@ -110,44 +121,84 @@
 			
 
 		}
+		
+		
+		function ajax_test() {
+			let yyyydd = document.querySelector(".year_month").innerHTML;
+			let date = {
+					calendarM_time: yyyydd
+					}
+			
+			$.ajax({
+				//컨트롤러 주소
+				
+				// 컨틀롤러한테 10월 정보 보내고, sql에 보내고, 10월 정보만(where) 긁어와서 DTO에 담아서  
+				url:"/syl/ajax/test",
+				//가진고 오는 get, 입력post, update=put,삭제=delete 
+				type:"post",
+// 				type:"get",
+				contentType:"application/json",
+				//넘겨줄값
+				data:JSON.stringify(date),
+// 				data:date,
+						
+				success :function(data){
+					ajaxData = data;
+					console.log(data);
+					console.log(data[0].calendarM_time);
+					console.log("data.length : " , data.length);
+
+					//for문
+					for(let i=0; i<data.length; i++ ){
+							document.querySelector("#data_" + (parseInt((data[i].calendarM_time).substring(8,10))) + "").innerHTML += data[i].calendarM_Title;
+							
+
+						
+						
+						
+						
+						
+					}
+					
+						
+				},
+				error:function(){
+					alert("다시 입력해주세요")
+				}
+			});
+			
+			
+
+		}
 
 
 
 		function selectDate() {
 
-			// let attt = document.querySelector(".year_month").innerHTML;
 			let clickDateBlank = document.querySelectorAll(".date");
-			// console.log(clickDateBlank);
 
 			for (let i = 0; i < clickDateBlank.length; i++) {
 				clickDateBlank[i].addEventListener("click", function (e) {
 
 					let attt = document.querySelector(".year_month").innerHTML;
 
-					// let attt2 = e.target.innerHTML;
 
 					let a222 = clickDateBlank[i].firstElementChild.innerHTML;
 
 					console.log("a222:::" + a222);
 
 					//가져오려는 날짜를 변수로 지정
-// 					let showinCalDate = attt + "-" + a222;
 					let showinCalDate = attt + a222 + "일";
 
 					let showPopUp = document.querySelector(".schedule_Popup");
 					document.querySelector(".schedule_Popup #target").value = showinCalDate;
 					showPopUp.style.display = 'block';
 
-					// let insertBlankTest = document.querySelector(".schedule_Popup_blank");
 
 
 					//날짜를 가져옴
 					let showDateInSchd = document.querySelector(".schedule_Popup_date").innerText = showinCalDate;
-					// $('.schedule_Popup_date:first-child').text = showinCalDate;
-					// console.log($('.schedule_Popup_date:first-child'));
 
-					// console.log(showDateInSchd);
-					// let chk_btn = document.querySelector(".schedule_Popup_chk");
 
 
 
@@ -165,8 +216,7 @@
 				
 			}
 			
-// 			for (let i = 0; i < clickDateBlank.length; i++) {
-// 				clickDateBlank[i].addEventListener("click", function (e) {
+
 					let showPopUp = document.querySelector(".schedule_Popup");
 					
 					let chk_btn = document.querySelector(".schedule_Popup_chk");
@@ -177,7 +227,8 @@
 						let word = document.querySelector(".schedule_Popup_title").value;
 						
 						console.log("chk_btn.addEventListener(click) 의 word : " + word);
-						document.querySelector("#data_" + (targer_dy) + "").innerHTML = word;
+						let tesstt = document.querySelector("#data_" + (targer_dy) + "").innerHTML = word;
+										
 						
 						showPopUp.style.display = 'none';
 	
@@ -193,11 +244,9 @@
 			
 
 			let target_yyyyDD = document.querySelector(".year_month").innerHTML;
-// 			console.log(target_yyyyDD);
 
 			document.querySelectorAll("#target_yd")[0].value = target_yyyyDD;
 			document.querySelectorAll("#target_yd")[1].value = target_yyyyDD;
-// 			console.log(calendar_yyyyDD);
 
 		}
 
@@ -1009,10 +1058,7 @@ input {
 	<form action="/syl/calendarMA_todo" method=post>
 		<div class="todo_month">
 			<div class="m_do">이번달 할일</div>
-			<%-- 			<%HttpSession userInfo = request.getSession(); --%>
-			<!-- // 			String sessionId = "" + userInfo.getAttribute("logOn.id");  -->
-			<%-- 			%> --%>
-			<!-- 					<input type="hidden" name="sessionId"> -->
+
 
 			<input id="tmt" type="text" name="todo_txt"> 
 <!-- 			<input id="a" type="button" value="+"> -->
@@ -1098,13 +1144,12 @@ input {
 			<input type="text" class="schedule_Popup_content" name="calendarM_Txt" placeholder=" 당신의 여정에 필요한 사항을 입력해주세요.">
 			<div class="schedule_Popup_date"></div>
 			<input type="hidden" id="target" name="calendarM_time">
+			<input type="hidden" id="target_yd" name="calendarM_ajax_yyyyMM">
 			
-<%-- 			<c:forEach var="calendarM_List" items="${ calendarM_List }"> --%>
-<%-- 				${calendarM_List.calendarM_Title} --%>
-<%-- 			</c:forEach> --%>
 
 			
-			<button type="submit" class="schedule_Popup_chk">확인</button>
+			<button type="button" class="schedule_Popup_chk">확인</button>
+<!-- 			<button type="submit" class="schedule_Popup_chk">확인</button> -->
 			<!-- <button type="submit" class="schedule_Popup_del"> 삭제 </button> -->
 
 		</div>

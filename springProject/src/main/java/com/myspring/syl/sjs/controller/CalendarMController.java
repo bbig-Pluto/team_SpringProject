@@ -4,15 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.syl.shm.dto.MemberDTO;
 import com.myspring.syl.sjs.dto.CalendarDTO;
 import com.myspring.syl.sjs.dto.CalendarMDTO;
 import com.myspring.syl.sjs.dto.CalendarWDTO;
@@ -34,12 +37,12 @@ public class CalendarMController {
 		ModelAndView mav = 	new ModelAndView();
 		
 		List<CalendarMDTO> list = calendarMService.selectGoal();
-		List<CalendarDTO> calendarM_list = calendarMService.selectCalendarM();
+		List<CalendarDTO> calendarM_List = calendarMService.selectCalendarM();
 		List<CalendarWDTO> list2 = calendarMService.selectTodo();
 
 		
 		mav.addObject("goalList",list);
-		mav.addObject("calendarM_List",calendarM_list);
+		mav.addObject("calendarM_List",calendarM_List);
 		mav.addObject("todoList", list2);
 		
 		mav.setViewName("/sjs/calendarM");
@@ -97,6 +100,17 @@ public class CalendarMController {
 //		System.out.println("/bar/{uri} : " + uri);
 		return "/" + uri;
 	}
+	
+	
+	
+//	@RequestMapping(value = "/ajax/test", method = RequestMethod.POST)
+//	public void sendContent(@RequestBody String CalendarDTO) {
+//				
+//				System.out.println("CalendarDTO.getCalendarM_time() ___/ajax/test : " + CalendarDTO);
+//				
+//				
+//				
+//	}
 	
 	
 
