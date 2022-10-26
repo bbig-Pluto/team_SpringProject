@@ -26,7 +26,8 @@
 
 
 <meta charset="UTF-8">
-<title>전체 문의 게시판 부분</title>
+<title>다이어리</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
 <style>
 /* 헤더 */
 

@@ -16,7 +16,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>다이어리</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://ifh.cc/g/1lYMPW.png">
 </head>
 
 <style>
