@@ -342,12 +342,12 @@
 		display: inline-block;
 		text-decoration: none;
 		position: relative;
-	}
-		        
-	.headermypage:hover {
-		color: #108269;
-		font-weight: bold;
-	}
+		}
+			        
+		.headermypage:hover {
+			color: #108269;
+			font-weight: bold;
+		}
     </style>
     <script>
     window.onload=()=>{

@@ -1304,15 +1304,18 @@
 //                 		imgcf.addEventListener("click", ()=> imgntc.style.display = "none");
                 		
                 	} else {
+                		
             			ntc.style.display = "block";
             			can.addEventListener("click", ()=> ntc.style.display = "none");
-            			nd.addEventListener("click", ()=> real.click());
+            			nd.addEventListener("click", ()=> {
+            				update.method = "post";
+		            		update.action = "/syl/updatewish";
+		            		update.enctype = "multipart/form-data"
+		            		update.submit();
+            			});
             			
 	            		<% System.out.println("UpdateWish Submit Route"); %>
-	            		update.method = "post";
-	            		update.action = "/syl/updatewish";
-	            		update.enctype = "multipart/form-data"
-	            		update.submit();
+	            		
             	}
             })
 	    }
@@ -1705,8 +1708,8 @@
 						<a href='/syl/todo'><div class="postTodo It1">todo<br>memo</div></a>
 						<a href='/syl/diaryList'><div class="post1 It2">Diary</div></a>
 			            <a href='/syl/diet_1page.do'><div class="post1 It3">Diet</div></a>
+			            <a href='/syl/ec_list.do'><div class="post2 It4">Exercise</div></a>
 			            <a href='/syl/mainwish'><div class="post1 It5">Wish</div></a>
-			            <a href='/ec_list.do'><div class="post2 It4">Exercise</div></a>
 					</div>
 			            
 						
