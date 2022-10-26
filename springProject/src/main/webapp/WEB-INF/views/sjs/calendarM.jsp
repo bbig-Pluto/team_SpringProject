@@ -1032,7 +1032,7 @@ input {
 						<div class="lgnbtn">
 							<a href="#" id="myPageLink" class="headermypage">마이페이지</a>
 <!-- 							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a> -->
-							<a href="/syl/member/mypage" class="headerlogin">로그인</a>
+							<a href="/syl/member/login" class="headerlogin">로그인</a>
 							<a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
 						</div>
 					</nav>
