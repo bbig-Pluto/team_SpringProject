@@ -23,6 +23,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Noto+Sans+KR:wght@100;300;400&display=swap" rel="stylesheet">
+
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
 		function logout() {
@@ -87,6 +91,10 @@
 	</script>
 
 	<style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -129,7 +137,8 @@
 		}
 		
 		.btnBlueGreen {
-          background: #00AE68;
+          background: #0d8656;
+          border: none;
         }
 
         .btnFade.btnLightBlue:hover {
@@ -149,7 +158,17 @@
             color: #FFF;
             border-radius: 5px;
             transition: all 0.2s ;
-            position: absolute ;
+        }
+        .sessionid {
+            font-size: 25px;
+        }
+        .modi {
+            position: relative;
+            left: 250px;
+        }
+        .logoutBtn {
+            position: relative;
+            left: 30px;
         }
     </style>
     
@@ -162,19 +181,32 @@
                <tbody>
                     <tr class="firstRow">
                         <td style="width: 400px"><a href="${ contextPath }/calendarM"><img style="width: 200px" class="headerLogo" src="/syl/resources/photo/3syl.png"></a></td>
-                        <td colspan="2" style="text-align: center;">${ sessionId } 님의 MyPage 입니다.</td>
+                        <td class="sessionid" colspan="2" style="text-align: center;"><b>${ sessionId }</b> 님의 MyPage 입니다.</td>
                         <td><button class="button btnFade btnLightBlue btnBlueGreen" onclick="logout()" id="logoutBtn">로그아웃</button></td>
                     </tr>
                     <tr class="secondRow">
-                        <td style="width: 200px;">콘텐츠 비우기 영역</td>
-                        <td style="align: center;" colspan="2"><div style="display: inline-block; margin:0 auto;"><button class="button btnFade btnLightBlue btnBlueGreen" onclick="getMemberInfo()" id="modiInfoSelf">회원정보 수정</button></div>
+                        <td style="width: 200px;"></td>
+                        <td class="modi" style="align: center;" colspan="2"><div style="display: inline-block; margin:0 auto;"><button class="button btnFade btnLightBlue btnBlueGreen" onclick="getMemberInfo()" id="modiInfoSelf">회원정보 수정</button></div>
                         </td>
-                        <td>test</td>
+                        <td></td>
                     </tr>
                     <tr class="thirdRow">
-                        <td style="height: 290px;" rowspan="2">비울 콘텐츠 선택, 실행 영역</td>
-                        <td style="overflow:scroll; width: 400px;" id="inputModifyingInfoSelf" colspan="2" rowspan="2">회원정보 수정 실행 영역</td>
-                        <td>test</td>
+                        <td style="height: 290px;" rowspan="2"></td>
+                        <td width: 400px;" id="inputModifyingInfoSelf" colspan="2" rowspan="2">
+<!--                         	<div> -->
+<!-- 	                        	<div>아이디</div> -->
+<!-- 		                        <div>비밀번호</div> -->
+<!-- 		                        <div>전화번호</div> -->
+<!-- 		                        <div>닉네임</div> -->
+<!-- 		                        <div>이메일</div> -->
+<!-- 		                        <div>회원번호</div> -->
+<!-- 		                        <div>관리등급</div> -->
+<!-- 		                        <div>가입일</div> -->
+<!--                         	</div> -->
+<!--                         	<div> -->
+<%--                         		<div>${ memberInfo.id }</div> --%>
+<!--                         	</div> -->
+                        </td>
                     </tr>
                     <tr class="fourthRow">
                         <td><button class="button btnFade btnLightBlue btnBlueGreen"><a id="delAccountSelfBtn" href="${contextPath}/member/deleteAccount.do">회원탈퇴</button></td>
