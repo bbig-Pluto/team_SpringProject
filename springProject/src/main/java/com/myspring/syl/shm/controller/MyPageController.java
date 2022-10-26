@@ -41,8 +41,8 @@ public class MyPageController {
 		System.out.println("deleteAccount 실행 종료");
 		
 		logOnSession.invalidate();
-		return "redirect:/member/login";
-//		return "/sjs/calendar";
+		
+		return "redirect:/calendarM";
 	}
 
 	

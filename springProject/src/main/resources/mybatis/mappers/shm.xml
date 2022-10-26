@@ -112,7 +112,7 @@
 	
 	<delete id="deleteExerciseContents" parameterType="String">
 <!-- 		DELETE Exercise WHERE memberNum=#{_parameter} -->
-		ELETE delCtntTest2 WHERE id=#{_parameter}
+		DELETE delCtntTest2 WHERE id=#{_parameter}
 	</delete>
 	
 	<delete id="deleteWishListContents" parameterType="String">
