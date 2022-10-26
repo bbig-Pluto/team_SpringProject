@@ -917,7 +917,9 @@ window.onload = function () {
 													&content=${list.d_content }
 													&fileName=${list.d_fileName}
 													&weather=${list.d_weather}
-													&emotion=${list.d_emotion}">
+													&emotion=${list.d_emotion}
+													&id=${list.id }
+													">
 											${list.d_title }</a>
 										</div>
 										

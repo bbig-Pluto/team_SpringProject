@@ -67,6 +67,7 @@ public class DiaryController {
 		System.out.println("addDiary : 파일 이름 : " + originalFileName);
 		
 		diaryDTO.setD_fileName(originalFileName);
+		diaryDTO.setId(sessionId);
 		
 		diaryService.getAddDiary(diaryDTO);
 		
