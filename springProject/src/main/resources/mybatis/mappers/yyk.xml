@@ -22,7 +22,7 @@
 	<!-- 다이어리 추가 -->
 	<insert id="addDiary" parameterType="diaryDTO">
 		insert into diary(d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum, id)
-		values(#{d_title}, #{d_content}, #{d_fileName}, #{d_weather}, #{d_emotion}, sysdate, seq_diaryNum.nextval, 'yyk')
+		values(#{d_title}, #{d_content}, #{d_fileName}, #{d_weather}, #{d_emotion}, sysdate, seq_diaryNum.nextval, #{id})
 	</insert>
 	
 	
