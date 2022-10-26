@@ -104,18 +104,30 @@
 			days();
 
 
-// 			            document.querySelector(".headerloginout").addEventListener("click", function(e) {
-// 			                e.preventDefault();
-// 			                setTimeout(()=>{
-// 			                if (confirm("로그아웃 하시겠습니까?")) {
-// 			                   location.href = e.target.getAttribute("href");
-// 			                } else {
-// 			                }
-// 			                }, 10);
-// 			             })
 
 			selectDate();
 			yyyyDD();
+			
+			<%
+			HttpSession logOnSession = request.getSession();
+
+			if(logOnSession.isNew()){ // 처음 접속이라서 세션이 없다면 만들어주고서 페이지 로드
+				logOnSession.setAttribute("isLogon", "guest"); 
+			}
+			%>
+			let popupWidth = 470;
+			let popupHeight = 140;
+			// 브라우저 기준 중앙 정렬			
+			let popupX = (document.body.offsetWidth / 2) - (popupWidth / 2);
+			let popupY = (window.screen.height / 2) - (popupHeight / 2);
+						
+			document.querySelector("#myPageLink").addEventListener("click", function(e) {
+				<% if ((""+logOnSession.getAttribute("isLogon")).equals("member")) { %>
+					window.open('${contextPath}/member/rd/inputpwdformypage', '비밀번호 재확인', 'width=' + popupHeight + ', height=' + popupHeight + ', left='+ popupX + ', top=' + popupY + ', scrollbars=yes');
+				<% } else { %>
+					alert("로그인이 필요한 서비스입니다.");				
+				<% } %>
+			})
 
 			
 			
@@ -166,7 +178,6 @@
 					alert("다시 입력해주세요")
 				}
 			});
-			
 			
 
 		}
@@ -820,12 +831,33 @@ input {
 	position: absolute;
 }
 
-.post2.It1 {
-	z-index: 2;
-	top: 60px;
-	border-radius: 0px 80px 80px 0px;
-	background-color: #FF9A9A;
-}
+/* .post2.It1 { */
+/* 	z-index: 2; */
+/* 	top: 60px; */
+/* 	border-radius: 0px 80px 80px 0px; */
+/* 	background-color: #FF9A9A; */
+/* } */
+
+ .postTodo {
+					width: 60px;
+			height: 27px;
+			position: absolute;
+			font-size: 12px;
+			font-weight: bold;
+			font-style: italic;
+			text-align: center;
+			padding-top: 1px;
+			padding-bottom: 9px;
+			color: rgba(104, 100, 100, 0.692);
+		}
+		.postTodo.It1 {
+			z-index: 1;
+			top: 32px;
+			left: 10px;
+			border-radius: 0px 80px 80px 0px;
+			background-color: #FF9A9A;
+		}
+
 
 .post1.It2 {
 	z-index: 2;
@@ -967,6 +999,18 @@ input {
 			width: 300px;
 			display: inline-block;
 		}
+		
+.headermypage {
+ 	color: #223919;
+	display: inline-block;
+	text-decoration: none;
+	position: relative;
+}
+	        
+.headermypage:hover {
+	color: #108269;
+	font-weight: bold;
+}
 
 </style>
 </head>
@@ -986,7 +1030,8 @@ input {
 						<a href="/syl/bar/shot11"	class="headersub">다이어리 사용법 |</a> 
 						<a href="/syl//notice" class="headersub">고객의 소리</a>
 						<div class="lgnbtn">
-							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a>
+							<a href="#" id="myPageLink" class="headermypage">마이페이지</a>
+<!-- 							<a href="/syl/member/rd/mypage" class="headermypage">마이페이지</a> -->
 							<a href="/syl/member/mypage" class="headerlogin">로그인</a>
 							<a href="/syl/member/logout.do" class="headerloginout">로그아웃</a>
 						</div>
@@ -1119,7 +1164,7 @@ input {
 	</div>
 
 	<div class="rightLine2">
-		<div class="post2 It1"></div>
+		<a href="/syl/todo"><div class="postTodo It1">todo<br>memo</div></a>
 		<a href="/syl/ec_list.do"><div class="post2 It4">Exercise</div></a>
 		<div class="post2 It6"></div>
 		<div class="post2 It7"></div>
