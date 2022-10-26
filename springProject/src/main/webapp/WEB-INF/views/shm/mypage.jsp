@@ -149,6 +149,7 @@
             color: #FFF;
             border-radius: 5px;
             transition: all 0.2s ;
+            position: absolute ;
         }
     </style>
     
@@ -176,7 +177,7 @@
                         <td>test</td>
                     </tr>
                     <tr class="fourthRow">
-                        <td><a id="delAccountSelfBtn" href="${contextPath}/member/deleteAccount.do">회원탈퇴</td>
+                        <td><button class="button btnFade btnLightBlue btnBlueGreen"><a id="delAccountSelfBtn" href="${contextPath}/member/deleteAccount.do">회원탈퇴</button></td>
                     </tr>
                </tbody> 
             </table>
