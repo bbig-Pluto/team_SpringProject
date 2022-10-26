@@ -732,14 +732,16 @@ window.onload = function () {
 	addMemosbm.addEventListener("click", function(e){
 		e.preventDefault();
 		blank();	
-		
+		console.log('addMemosbm.addEventListener');
 		<% if(isLogon.equals("member")){ %>
 				addMemo.method = "get";
 				addMemo.action = "/syl/addMemo";
 				addMemo.submit();
 				alert("저장!")
+				console.log('addMemosbm member');
 		<% }else { %>
 				alert("로그인 후 이용해 주세요");
+				console.log('addMemosbm guest');
 		<% } %>
 	})
 }
