@@ -599,17 +599,17 @@ font-size:10px;
 	 	<%}%>   
 		<form method="post" action="/syl/ask">
 			<div class="ser">
-			<select name="q_head" onchange="classifyValue(this)">
-					<option value="중분류" selected>중분류</option>
-					<option value="문의">문의</option>
-					<option value="재문의">재문의</option>
-					<option value="제안">제안</option>
+			<select name="q_head">
+					<option value="중분류" <c:if test="${empty map.q_head }">selected</c:if>>중분류</option>
+					<option value="문의" <c:if test="${map.q_head  eq '문의'}">selected</c:if>>문의</option>
+					<option value="재문의" <c:if test="${map.q_head  eq '재문의'}">selected</c:if>>재문의</option>
+					<option value="제안" <c:if test="${map.q_head  eq '제안'}">selected</c:if>>제안</option>
 				</select>  
 		
-				<select name="ser_name" onchange="selectValue(this)">
-					<option value="소분류" selected>소분류</option>
-					<option value="글제목" name="title">글제목</option>
-					<option value="작성자" name="nick_name">작성자</option>
+				<select name="ser_name">
+					<option value="소분류" <c:if test="${empty map.ser_name}">selected</c:if>>소분류</option>
+					<option value="글제목" name="title" <c:if test="${map.ser_name eq '글제목'}">selected</c:if>>글제목</option>
+					<option value="작성자" name="nick_name" <c:if test="${map.ser_name eq '작성자'}">selected</c:if>>작성자</option>
 				</select> 
 				<input type="text" name="search" >
 				 <input type="submit" value="검색">
