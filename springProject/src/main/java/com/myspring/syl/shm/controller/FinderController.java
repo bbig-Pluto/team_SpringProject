@@ -56,6 +56,8 @@ public class FinderController {
 
 		idFindEmailAdd = idFindEmailAdd.replaceAll(" ", "");
 		idFindTelNum = idFindTelNum.replaceAll(" ", "");
+		
+		String idFoundResult = "";
 
 		// 공란 입력 방어
 		if ((idFindEmailAdd != null && !(idFindEmailAdd.isEmpty()))
@@ -67,26 +69,24 @@ public class FinderController {
 
 			String foundId = memberService.idFinder(idFindMap);
 			
-			// 
-			if (!(foundId.equals("0"))) {
+			// DB 조회 결과 해당 계정 존재 
+			if ( !(foundId.equals("0")) ) {
+				idFoundResult += "location.href='/syl/member/idFoundBinder?id="+ foundId +"'";
 				
-				return new ResponseEntity("location.href='/syl/member/idFoundBinder?id="+ foundId +"'", responseHeaders,HttpStatus.CREATED);
+			// DB 조회 결과 없음
 			} else {
-				// 조회결과 없음
-				String failRes = "";
-				failRes += "alert('일치하는 정보의 회원이 없습니다.');";
-				failRes += " document.querySelector(\"input[name='idFindEmailAdd']\").focus()";
-
-				return new ResponseEntity(failRes, responseHeaders, HttpStatus.CREATED);
+				idFoundResult += "alert('일치하는 정보의 회원이 없습니다.');";
+				idFoundResult += " document.querySelector(\"input[name='idFindEmailAdd']\").focus()";
 			}
+			
+		// 입력칸이 공란인 Case
 		} else {
-			// 입력칸이 공란, 나중에 자바스크립트로도 막기
-			String failRes = "";
-			failRes += "alert('일치하는 정보의 회원이 없습니다.');";
-			failRes += " document.querySelector(\"input[name='idFindEmailAdd']\").focus()";
+			idFoundResult += "alert('일치하는 정보의 회원이 없습니다.');";
+			idFoundResult += " document.querySelector(\"input[name='idFindEmailAdd']\").focus()";
 
-			return new ResponseEntity(failRes, responseHeaders, HttpStatus.CREATED);
 		}
+		
+		return new ResponseEntity(idFoundResult, responseHeaders,HttpStatus.CREATED);
 	}
 	
 
@@ -159,7 +159,8 @@ public class FinderController {
 				// 주소로 직접 접근 차단
 				response.sendRedirect("/syl/member/rd/wrongapproach");
 			}
-			// pwdRewritingDTO = null 일 때의 제출 차단
+			
+		// pwdRewritingDTO = null 일 때의 제출 차단
 		} catch (NullPointerException e) {
 			response.sendRedirect("/syl/member/rd/wrongapproach");
 		} finally {

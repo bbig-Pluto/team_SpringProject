@@ -20,6 +20,7 @@
 		WHERE id=#{id} AND pwd=#{pwd}
 	</select>
 	
+	<!-- 슈퍼어드민 전용 로그인 -->
 	<select id="superLogin" resultType="memberDTO" parameterType="MemberDTO">
 		SELECT id, memberNum, memberClass 
 		FROM syl_superAdmin

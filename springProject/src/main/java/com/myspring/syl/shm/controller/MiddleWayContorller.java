@@ -15,7 +15,7 @@ import com.myspring.syl.shm.service.MemberService;
 
 @Controller
 @RequestMapping
-public class MemberContorllerImpl {
+public class MiddleWayContorller {
 	
 	@Autowired
 	MemberService memberService;

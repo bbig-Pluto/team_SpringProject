@@ -133,15 +133,20 @@ public class AdminController {
 
 		logOnSession = request.getSession();
 		
+		// 슈퍼어드민의 액션이 맞는지 체크
 		if(((""+logOnSession.getAttribute("isLogon")).equals("super"))) {
 			
 			int result = memberService.exeModifyMemberInfo(dto);
-	
+			
+			// update 결과가 정상 실행인 경우
 			if (result == 1) {
 				return "redirect:/member/memberslist.do";
+			// update 결과가 비정상인 경우
 			} else {
 				return "redierct:/member/rd/wrongapproach";
 			}
+			
+		// 슈퍼어드민이 아닌 Case의 방어
 		} else {
 			return "redierct:/member/rd/wrongapproach";
 		}

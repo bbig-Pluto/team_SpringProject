@@ -38,6 +38,7 @@ public class MemberDAOImpl implements MemberDAO {
 		
 	}
 	
+	// 슈퍼어드민 전용 로그인 체크
 	public MemberDTO superLogin(String signin_id, String signin_pwd) {
 		MemberDTO dto = new MemberDTO();
 		dto.setId(signin_id);

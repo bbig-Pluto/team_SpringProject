@@ -18,11 +18,13 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDAO memberDAO;
 
+	// 회원정보 조회
 	@Override
 	public List<MemberDTO> getMemberList() {
 		return memberDAO.listMembers();
 	}
 
+	// 로그인 체크
 	@Override
 	public MemberDTO getLoginResult(String signin_id, String signin_pwd) {
 		MemberDTO dto = new MemberDTO();
@@ -46,6 +48,7 @@ public class MemberServiceImpl implements MemberService {
 		return dto;
 	}
 	
+	// 아이디 찾기
 	@Override
 	public String idFinder(Map idFindKey) {
 		String foundId;
@@ -54,6 +57,7 @@ public class MemberServiceImpl implements MemberService {
 		return foundId;
 	}
 	
+	// 회원가입
 	@Override
 	public int addMemberSvc(Map signUpMap) {
 		String signUpId = (String) signUpMap.get("id");
@@ -69,42 +73,49 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
+	// 비밀번호 찾기 전 계정 존재 조회
 	@Override
 	public String getEnquiryPwdRewriting(Map ctrlParams) {
 		String result = memberDAO.enquiryPwdRewriting(ctrlParams);
 		return result;
 	}
 	
+	// 비밀번호 재설정 반영
 	@Override
 	public int exePwdRewriting(Map ctrlParams) {
 		int result = memberDAO.pwdRewrting(ctrlParams);
 		return result;
 	}
 	
+	// 회원삭제
 	@Override
 	public int exeDelMemFromAdmin(String memberNum) {
 		int result = memberDAO.delMemFromAdmin(memberNum);
 		return result;
 	}
 	
+	// ajax 회원가입 직전 아이디 중복 체크 
 	private int idDupleCheck(String signUpId) {
 		int result = 1;
 		result = memberDAO.idDupleCheck(signUpId);
 		return result;
 	}
 	
+	// 슈퍼어드민 페이지에서 회원 정보 수정을 위해 전시할 DB 조회
 	@Override
 	public MemberDTO getMemberInfoForModify(String memberNum) {
 		MemberDTO dto = memberDAO.enquireMemberFromAdmin(memberNum);
 		return dto;
 	}
 	
+	// 슈퍼어드민 페이지에서 회원 정보 수정 반영
 	@Override
 	public int exeModifyMemberInfo(MemberDTO dto) {
 		int result = memberDAO.updateMemberInfo(dto);
 		return result;
 	}
 	
+	// 마이페이지 회원탈퇴
 	@Override
 	public int exeDeleteAccountSelf(String memberNum) {
 		int resultAccountInfoDel = memberDAO.deleteAccountInfo(memberNum);
@@ -120,30 +131,35 @@ public class MemberServiceImpl implements MemberService {
 //		return total;
 	}
 	
+	// 마이페이지 회원 정보 수정을 위해 전시할 DB 조회
 	@Override
 	public MemberDTO getMemberInfo(String memberNum) {
 		MemberDTO dto = memberDAO.memberInfoForModify(memberNum);
 		return dto;
 	}
 	
+	// 마이페이지에서 회원 정보 수정 반영
 	@Override
 	public int exeModifyInfoSelf(MemberDTO dto) {
 		int result = memberDAO.modifyMemberInfoSelf(dto);
 		return result;
 	}
 	
+	// 마이페이지 진입 전 비밀번호 입력 체크
 	@Override
 	public int getQueryResultForMyPage(MemberDTO dto) {
 		int result = memberDAO.queryResultForMyPage(dto);
 		return result;
 	}
 	
+	// 관리자 코드를 이용해서 관리자 가입시 부여될 관리자 등급 조회
 	@Override
 	public int getPermittingMemberClass(String rn_ForAdminSignUp) {
 		int result = memberDAO.enquiryPermittingMemberClass(rn_ForAdminSignUp);
 		return result;
 	}
 	
+	// 관리자 회원가입에서 관리자 코드 체크
 	@Override
 	public String setAdminClassGetSignUpCode(int adminClass) {
 		
@@ -157,6 +173,7 @@ public class MemberServiceImpl implements MemberService {
 		return signUpCode;
 	}
 	
+	// 슈퍼어드민 전용 로그인
 	public MemberDTO superLogin(String signin_id, String signin_pwd) {
 		MemberDTO dto = new MemberDTO();
 		try {

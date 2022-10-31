@@ -23,7 +23,7 @@ import com.myspring.syl.shm.service.MemberService;
 
 @RestController
 @RequestMapping
-public class SessionController {
+public class LoginController {
 	
 	@Autowired
 	MemberService memberService;

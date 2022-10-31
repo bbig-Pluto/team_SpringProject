@@ -25,7 +25,7 @@ public class MyPageController {
 	 * @param request
 	 * @param logOnSession
 	 * @param model
-	 * @return
+	 * @return 달력 페이지로
 	 */
 	@RequestMapping("/member/deleteAccount.do")
 	public String deleteAccountSelf(
@@ -35,11 +35,10 @@ public class MyPageController {
 		logOnSession = request.getSession();
 		
 		String memberNum = "" + logOnSession.getAttribute("logOn.memberNum");
-		System.out.println("/signout.do memberNum : " + memberNum);
 		
 		memberService.exeDeleteAccountSelf(memberNum);
-		System.out.println("deleteAccount 실행 종료");
 		
+		// 세션 초기화
 		logOnSession.invalidate();
 		
 		return "redirect:/calendarM";
