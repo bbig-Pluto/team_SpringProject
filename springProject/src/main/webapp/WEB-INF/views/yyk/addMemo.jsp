@@ -1165,17 +1165,12 @@ window.onload = function () {
 											   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
 												   <input type="checkbox" name="chk" id="heart-check[null]" class="heart_input" checked>
 												   <label for="heart-checkheart-check[null]" style="margin-top:-25px;" ></label>
-											  		 <div class="text">작살나게 밥먹기</div>
+											  		 <div class="text">일찍 일어나기</div>
 											   </div>
 											   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
 												   <input type="checkbox" name="chk" id="heart-check[null1]" class="heart_input" >
 												   <label for="heart-checkheart-check[null1]" style="margin-top:-25px;" ></label>
-											  		 <div class="text">간지나게 자기</div>
-											   </div>
-											   <div style="height: 50px; overflow: hidden; display: inline-block; margin-top: 20px;">
-												   <input type="checkbox" name="chk" id="heart-check[null2]" class="heart_input">
-												   <label for="heart-checkheart-check[null2]" style="margin-top:-25px;" ></label>
-											  		 <div class="text">끝장나게 숨귀기</div>
+											  		 <div class="text">물 마시기</div>
 											   </div>
 									   		 </c:if> 
 								   </div>
