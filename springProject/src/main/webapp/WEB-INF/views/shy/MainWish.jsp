@@ -1188,7 +1188,6 @@
 	                    	<c:when test="${isLogon eq 'guest' }">
 	                    		<a href="${contextPath }/mainwish">
 				                    <input class="category_all" type="button" value="All">
-				                </a>
 	                    			<input name="category" class="category_submit" type="submit" value="가전제품">
 									<input name="category" class="category_submit" type="submit" value="건강">
 									<input name="category" class="category_submit" type="submit" value="도서">
@@ -1199,6 +1198,7 @@
 									<input name="category" class="category_submit" type="submit" value="전자기기">
 									<input name="category" class="category_submit" type="submit" value="패션">
 									<input name="category" class="category_submit" type="submit" value="기타">
+				                </a>
 	                    	</c:when>
 	                    	<c:when test="${isLogon eq 'member'}">
 								<form method="post" action="${contextPath }/searchcategory">

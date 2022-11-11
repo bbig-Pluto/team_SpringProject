@@ -557,9 +557,9 @@
             width: 450px !important;
             height: 260px !important;
             margin: 20px 25px;
-            overflow-x: auto;
             background-color: rgb(255, 255, 255);
             border-radius: 8px;
+            overflow: hidden;
         }
         .view::-webkit-scrollbar {
             width: 0px;
