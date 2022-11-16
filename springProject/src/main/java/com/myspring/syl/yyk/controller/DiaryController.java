@@ -1,8 +1,10 @@
 package com.myspring.syl.yyk.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -36,10 +37,42 @@ public class DiaryController {
 		String sessionId = "" + logOnSession.getAttribute("logOn.id");
 		System.out.println("logOnSession : "+ sessionId);
 		
-		List<DiaryDTO> list = diaryService.getDiaryList(sessionId);
-//		List<DiaryDTO> list = diaryService.getDiaryList();
-
-		model.addAttribute("list", list);
+		// 기본값
+		int pageNum = 1;		// 현재 페이지
+		int countPerPage = 6;	// 한 페이지당 보여줄 글 개수
+		
+		String str_pageNum = request.getParameter("pageNum");
+		String str_countPerPage = request.getParameter("countPerPage");
+		
+		// 방어코딩 (null일 경우)
+		if(str_pageNum != null) {
+			pageNum = Integer.parseInt(str_pageNum);
+		}
+		if(str_countPerPage != null) {
+			countPerPage = Integer.parseInt(str_countPerPage);
+		}
+		
+		try {
+			pageNum = Integer.parseInt(str_pageNum);
+		} catch (NumberFormatException nfe) {}
+		
+		try {
+			countPerPage = Integer.parseInt(str_countPerPage);
+		} catch (NumberFormatException nfe) {
+		}
+		
+		Map map1 = new HashMap();
+		map1.put("pageNum", pageNum);
+		map1.put("countPerPage", countPerPage);
+		map1.put("sessionId", sessionId);
+		
+		Map map = diaryService.getDiaryList(map1);
+		
+		map.put("pageNum", pageNum);
+		map.put("countPerPage", countPerPage);
+		map.put("countPerPage", countPerPage);
+		
+		request.setAttribute("map", map);
 		
 		return "/yyk/diaryList";
 	}

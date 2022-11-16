@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     import="com.myspring.syl.yyk.dto.DiaryDTO"
+    import="java.util.*"
 %>
     
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="sessionId" value='<%=(String)session.getAttribute("logOn.id") %>'/>
@@ -582,7 +584,10 @@ main {
           margin-top: 10%;
      }
         
-
+    /*페이징*/
+	.paging {
+		text-align: center;
+	}
 
 
 
@@ -827,7 +832,7 @@ window.onload = function () {
     	System.out.println("diaryList.jsp isNew false route");
     }
     
-   	System.out.println("diaryList isLogon 아이디 : " + logOnSession.getAttribute("isLogon"));
+   	System.out.println("diaryList isLogon : " + logOnSession.getAttribute("isLogon"));
     %>
     
     
@@ -847,15 +852,57 @@ window.onload = function () {
 	})
 }
 
-
-
 </script>
 
 <body>
+<%
+	Map map = (Map)request.getAttribute("map");
+	int pageNum = (int)map.get("pageNum"); 
+	int countPerPage = (int)map.get("countPerPage"); 
+	int count = (int)map.get("count");	
+	
+	System.out.println("pageNum : " + pageNum); // 1
+	System.out.println("countPerPage : " + countPerPage); // 5
+	System.out.println("count : " + count); // 16
+	
+	// 마지막 페이지
+	int lastPage = (int)Math.ceil(((double)count / countPerPage));	// 올림;마지막 페이지 번호(5개씩 16개를 보여주면 4페이지가 필요하기 때문에 반올림 해줌)
+	System.out.println("jsp : lastPage : " + lastPage);
+
+	// 화면에 페이지 버튼 4개씩 보여주겠다
+	int section = 4; 
+	
+	// 1234,5678 (한 섹션당 4개의 페이지)
+	// 7page가 2번째 섹션에 있다는 것
+	int sec_position = (int)Math.ceil(((double)pageNum / section));
+	System.out.println("sec_position : " + sec_position);
+	
+	// 2번째 섹션에서 첫번째 페이지 구하기
+	int firstNo = ((sec_position-1) * section) + 1; 
+	System.out.println("firstNo : " + firstNo);
+	
+	// 2번째 섹션에서 마지막 페이지 구하기
+	int lastNo = firstNo + section - 1; 
+	System.out.println("lastNo : " + lastNo);
+	
+	System.out.println("sec_position : " + sec_position); // 1
+	System.out.println("firstNo : " + firstNo); // 1
+	System.out.println("lastNo : " + lastNo); // 4
+
+	// 페이지 개수만큼만 화면에 마지막 페이지 보여주기
+	if(lastNo > lastPage){ 
+		lastNo = lastPage; 
+	}
+%>
+
+<c:set var="lastPage" value="<%= lastPage %>" />
+총 개수 : ${ map.count } <br>
+현재 페이지 : ${ map.pageNum }<br>
+
+
 	<header>
          <div class="wrapper">
             <h1>
-<!--                <img class="headerLogo" src="./3syl.png"><a href=""></a> -->
                <a href="${ contextPath }/calendarM"><img class="headerLogo" src="/syl/resources/photo/3syl.png"></a>
             </h1>
             <nav>
@@ -865,7 +912,7 @@ window.onload = function () {
                <a href="${ contextPath }/bar/shot11"   class="headersub">다이어리 사용법 |</a> 
                <a href="${ contextPath }/notice" class="headersub">고객의 소리</a>
                <div class="lgnbtn">
-                   <a href="#" id="myPageLink" class="headermypage">마이페이지</a>
+               	<a href="#" id="myPageLink" class="headermypage">마이페이지</a>
                   <c:choose>
 	                  <c:when test="${empty sessionId }">
 		                  <a href="/syl/member/login " class="headerlogin">로그인</a>
@@ -889,7 +936,6 @@ window.onload = function () {
 							<div class="diaryList_headWrap">
 								<div class="diaryList_text">Diary</div>
 								
-								
 								<!-- 검색창 -->
 								<form name="search">
 									<div class="diaryList_search_container">
@@ -907,38 +953,63 @@ window.onload = function () {
 				            </div>
 							<div class="diaryList_boxWrap">
 								
-								<c:forEach var="list" items="${ list }">
-								
-									<div class="box ${list}">
+								<c:forEach var="list" items="${ map.list }">
+									<div class="box">
+									
 										<div class="diary_title">
-											<a href="detailDiary
-													?diaryNum=${list.diaryNum}
+											<a href="detailDiary?diaryNum=${list.diaryNum}
 													&title=${list.d_title}
 													&content=${list.d_content }
 													&fileName=${list.d_fileName}
 													&weather=${list.d_weather}
 													&emotion=${list.d_emotion}
-													&id=${list.id }
-													">
-											${list.d_title }</a>
+													&id=${list.id }"> ${list.d_title }</a>
 										</div>
-										
 										<div class="diary_creatTime">
 											작성날짜 : ${list.d_createTime }
 										</div>
 										<div class="diary_diaryNum">
 											${list.diaryNum }
 										</div>
+										
 									</div>
+								</c:forEach>
+								
+							</div>
+							
+							
+							<div class="paging">
+								<c:if test="<%=pageNum == 1%>">
+									<<&nbsp;
+								</c:if>
+								<c:if test="<%=pageNum != 1%>">
+									<a href="/syl/diaryList?pageNum=<%=pageNum-1 %>&countPerPage=6" style="font-weight:800;"> << </a>&nbsp;
+								</c:if>
+								
+								
+								<!-- 1~5 페이지 링크 -->
+								<c:forEach var="i" begin="<%=firstNo %>" end="<%=lastNo %>">
+								
+									<c:if test="${ map.pageNum eq i }">  <!-- 지금 내가 몇페이지에 있는가 -->
+										<a href="/syl/diaryList?pageNum=${i }&countPerPage=6" 
+											style="border:1px solid black; background-color: rgb(255 255 255 / 38%);padding: 5px 10px;font-weight:bold;">${i }</a>&nbsp;
+									</c:if>
+									<c:if test="${ not (map.pageNum eq i) }">
+										<a href="/syl/diaryList?pageNum=${i }&countPerPage=6" style="border:1px solid black;padding: 5px 10px;">${i }</a>&nbsp;
+									</c:if>
 									
 								</c:forEach>
 								
+								<c:if test="<%=pageNum == lastPage%>">
+									>>&nbsp;
+								</c:if>
+								<c:if test="<%=pageNum != lastPage%>">
+									<a href="/syl/diaryList?pageNum=<%=pageNum+1 %>&countPerPage=6" style="font-weight:800;"> >> </a>&nbsp;
+								</c:if>
 								
-								
-						
-				
-							</div>
-						</div>
+							</div> <!-- paging end -->
+							
+						</div> <!-- diaryWrap end -->
 					</div>
 
 					<!-- 위쪽 반원 -->

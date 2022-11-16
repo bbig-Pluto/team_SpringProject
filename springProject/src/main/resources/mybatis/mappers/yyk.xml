@@ -5,18 +5,25 @@
 <mapper namespace="mapper.yyk">
 
 	<!-- 다이어리 조회 -->
-	<select id="diaryList" resultType="diaryDTO">
-		SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum, id
-		FROM diary 
-		where id = #{id}
-		order by d_createTime desc
+	<select id="diaryList" resultType="diaryDTO" parameterType="java.util.Map">
+		SELECT * FROM (
+			SELECT rownum AS rnum, tmp.* FROM (
+				SELECT * FROM diary
+				where id = #{sessionId}
+				ORDER BY d_createTime desc
+			) tmp )
+	<![CDATA[
+		WHERE (#{start} <= rnum AND rnum <= #{end})
+	]]>  <!-- parameterType이 map이기 때문에 map에 넣어준 변수명 그대로 사용해야 함 -->
 	</select>
 	
-<!-- 		<select id="diaryList" resultType="diaryDTO"> -->
-<!-- 				SELECT d_title, d_content, d_fileName, d_weather, d_emotion, d_createTime, diaryNum -->
-<!-- 				FROM diary  -->
-<!-- 				order by d_createTime desc -->
-<!-- 		</select> -->
+	
+	<!-- 다이어리 전체 글 개수 -->
+	<select id="listCount" resultType="int" parameterType="java.util.Map">
+		select count(*) as cnt 
+		from diary 
+		where id = #{sessionId}
+	</select>
 	
 	
 	<!-- 다이어리 추가 -->
